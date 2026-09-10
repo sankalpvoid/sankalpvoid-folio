@@ -23,6 +23,11 @@ gramophoneStyles.rel = 'stylesheet';
 gramophoneStyles.href = 'gramophone.css';
 document.head.appendChild(gramophoneStyles);
 
+const aboutStyles = document.createElement('link');
+aboutStyles.rel = 'stylesheet';
+aboutStyles.href = 'about-polish.css';
+document.head.appendChild(aboutStyles);
+
 const sideBSection = document.getElementById('side-b');
 if (sideBSection) {
   const gramophone = document.createElement('div');
