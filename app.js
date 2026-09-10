@@ -8,6 +8,11 @@ workStyles.rel = 'stylesheet';
 workStyles.href = 'work-polish.css';
 document.head.appendChild(workStyles);
 
+const labStyles = document.createElement('link');
+labStyles.rel = 'stylesheet';
+labStyles.href = 'lab-polish.css';
+document.head.appendChild(labStyles);
+
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const reveals = [...document.querySelectorAll('.reveal')];
