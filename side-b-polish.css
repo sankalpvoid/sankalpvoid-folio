@@ -1,0 +1,36 @@
+.side-b{position:relative;overflow:hidden;min-height:860px;padding-top:150px;padding-bottom:150px;display:grid;grid-template-columns:1fr .9fr;gap:8vw;align-items:center;border-top:1px solid rgba(255,155,82,.08);border-bottom:1px solid rgba(255,155,82,.09);background:
+  radial-gradient(circle at 74% 47%,rgba(255,155,82,.11),transparent 25%),
+  radial-gradient(circle at 63% 50%,rgba(155,135,245,.05),transparent 36%),
+  linear-gradient(180deg,#080708 0%,#0b0807 48%,#070607 100%)}
+.side-b:before{content:"NOW PLAYING / SIGNAL B";position:absolute;right:var(--pad);top:95px;font:8px "JetBrains Mono",monospace;letter-spacing:.19em;color:#76543d}
+.side-b:after{content:"";position:absolute;left:-8%;right:-8%;bottom:16%;height:135px;pointer-events:none;background:
+  linear-gradient(90deg,transparent 0 2%,rgba(255,155,82,.18) 2.1% 2.25%,transparent 2.35% 5%,rgba(255,155,82,.08) 5.1% 5.25%,transparent 5.35% 8%,rgba(255,155,82,.12) 8.1% 8.2%,transparent 8.3% 11%,rgba(255,155,82,.06) 11.1% 11.25%,transparent 11.35% 14%,rgba(255,155,82,.14) 14.1% 14.2%,transparent 14.3% 17%,rgba(255,155,82,.08) 17.1% 17.2%,transparent 17.3% 20%,rgba(255,155,82,.18) 20.1% 20.25%,transparent 20.35% 23%,rgba(255,155,82,.07) 23.1% 23.2%,transparent 23.3% 26%,rgba(255,155,82,.11) 26.1% 26.2%,transparent 26.3% 29%,rgba(255,155,82,.17) 29.1% 29.25%,transparent 29.35% 32%,rgba(255,155,82,.07) 32.1% 32.2%,transparent 32.3% 35%,rgba(255,155,82,.14) 35.1% 35.2%,transparent 35.3% 38%,rgba(255,155,82,.09) 38.1% 38.2%,transparent 38.3% 41%,rgba(255,155,82,.16) 41.1% 41.2%,transparent 41.3% 44%,rgba(255,155,82,.06) 44.1% 44.2%,transparent 44.3% 47%,rgba(255,155,82,.13) 47.1% 47.2%,transparent 47.3% 50%,rgba(255,155,82,.18) 50.1% 50.25%,transparent 50.35% 53%,rgba(255,155,82,.08) 53.1% 53.2%,transparent 53.3% 56%,rgba(255,155,82,.12) 56.1% 56.2%,transparent 56.3% 59%,rgba(255,155,82,.07) 59.1% 59.2%,transparent 59.3% 62%,rgba(255,155,82,.15) 62.1% 62.2%,transparent 62.3% 65%,rgba(255,155,82,.09) 65.1% 65.2%,transparent 65.3% 68%,rgba(255,155,82,.17) 68.1% 68.2%,transparent 68.3% 71%,rgba(255,155,82,.07) 71.1% 71.2%,transparent 71.3% 74%,rgba(255,155,82,.14) 74.1% 74.2%,transparent 74.3% 77%,rgba(255,155,82,.08) 77.1% 77.2%,transparent 77.3% 80%,rgba(255,155,82,.18) 80.1% 80.2%,transparent 80.3% 83%,rgba(255,155,82,.06) 83.1% 83.2%,transparent 83.3% 86%,rgba(255,155,82,.13) 86.1% 86.2%,transparent 86.3% 89%,rgba(255,155,82,.09) 89.1% 89.2%,transparent 89.3% 92%,rgba(255,155,82,.16) 92.1% 92.2%,transparent 92.3% 95%,rgba(255,155,82,.07) 95.1% 95.2%,transparent 95.3%);
+  mask-image:linear-gradient(to bottom,transparent,black 38%,black 62%,transparent);opacity:.5;transform:skewY(-2deg)}
+.side-b-copy{position:relative;z-index:3}
+.side-b .eyebrow{color:#8e6243}
+.side-b h2{font-size:clamp(64px,8vw,118px);line-height:.84;margin:20px 0 28px;letter-spacing:-.065em}
+.side-b h2 em{color:var(--amber);text-shadow:0 0 42px rgba(255,155,82,.12)}
+.side-b-copy>p{max-width:520px;margin:0 0 38px;color:#a79b94;font-size:16px;line-height:1.7}
+.side-b-links{display:grid;gap:10px;max-width:540px}
+.side-b-links a{position:relative;display:flex;align-items:center;justify-content:space-between;padding:17px 0;border-top:1px solid rgba(255,155,82,.12);font-size:9px;letter-spacing:.16em;color:#b68f74;transition:color .25s,padding-left .25s,border-color .25s}
+.side-b-links a:last-child{border-bottom:1px solid rgba(255,155,82,.12)}
+.side-b-links a:before{content:"CH";font-size:7px;color:#654b3b;margin-right:20px}
+.side-b-links a:first-child:before{content:"A"}.side-b-links a:last-child:before{content:"B"}
+.side-b-links a:hover{color:#ffd0ac;padding-left:8px;border-color:rgba(255,155,82,.32)}
+.vinyl{position:relative;z-index:2;justify-self:center;width:min(37vw,470px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:
+  repeating-radial-gradient(circle,rgba(255,255,255,.055) 0 1px,transparent 1px 8px),
+  radial-gradient(circle at 36% 30%,rgba(255,155,82,.10),transparent 20%),
+  radial-gradient(circle,#161111 0 10%,#0b0909 11% 100%);border:1px solid rgba(255,155,82,.18);box-shadow:0 45px 90px rgba(0,0,0,.5),0 0 85px rgba(255,120,48,.08);animation:vinyl-spin 24s linear infinite}
+.vinyl:before{content:"";position:absolute;inset:-34px;border-radius:50%;border:1px solid rgba(255,155,82,.07);border-top-color:rgba(255,155,82,.26);border-right-color:rgba(155,135,245,.10)}
+.vinyl:after{content:"33⅓ / SIDE B";position:absolute;right:-34px;top:48%;font:7px "JetBrains Mono",monospace;letter-spacing:.18em;color:#6e5140;transform:rotate(90deg)}
+.vinyl>div{position:absolute;width:34%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#070607 0 10%,#e38747 11% 13%,#2b1810 14% 60%,#120e0b 61%);border:1px solid rgba(255,155,82,.22);box-shadow:0 0 30px rgba(255,155,82,.08)}
+.vinyl>span{position:relative;z-index:2;font:12px "JetBrains Mono",monospace;letter-spacing:.15em;color:#e8b185}
+.side-b-wave{position:absolute;inset:0;pointer-events:none;opacity:.38;background:
+  linear-gradient(90deg,transparent,rgba(255,155,82,.06),transparent) 0 57%/100% 1px no-repeat,
+  repeating-linear-gradient(90deg,transparent 0 19px,rgba(255,155,82,.025) 20px 21px) 0 0/100% 100%}
+.side-b-wave:before{content:"";position:absolute;left:5%;right:5%;top:58%;height:1px;background:linear-gradient(90deg,transparent,#ff9b52 20%,transparent 36%,#9b87f5 52%,transparent 68%,#ff9b52 84%,transparent);filter:drop-shadow(0 0 5px rgba(255,155,82,.25));animation:audio-shift 7s ease-in-out infinite alternate}
+@keyframes vinyl-spin{to{transform:rotate(360deg)}}
+@keyframes audio-shift{from{transform:scaleX(.94);opacity:.45}to{transform:scaleX(1.04);opacity:.9}}
+@media (max-width:900px){.side-b{grid-template-columns:1fr 1fr;gap:5vw}.vinyl{width:min(42vw,390px)}.side-b h2{font-size:clamp(56px,8vw,88px)}}
+@media (max-width:680px){.side-b{min-height:auto;padding-top:110px;padding-bottom:110px;grid-template-columns:1fr;gap:72px}.side-b:before{top:78px}.side-b:after{display:none}.side-b h2{font-size:clamp(58px,18vw,88px)}.side-b-copy>p{font-size:15px}.vinyl{width:min(78vw,340px)}.vinyl:after{display:none}.side-b-links a{font-size:8px}}
+@media (prefers-reduced-motion:reduce){.vinyl,.side-b-wave:before{animation:none}}
