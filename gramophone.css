@@ -1,0 +1,13 @@
+.gramophone{position:absolute;right:2.5vw;bottom:7%;width:250px;height:210px;z-index:1;opacity:.24;pointer-events:none;filter:drop-shadow(0 0 18px rgba(255,155,82,.08));transform:rotate(-2deg)}
+.gramophone:before{content:"ARCHIVE / ANALOG SIGNAL";position:absolute;right:0;bottom:-20px;font:7px "JetBrains Mono",monospace;letter-spacing:.18em;color:#805b42}
+.gramophone-horn{position:absolute;right:3px;top:5px;width:132px;height:112px;border:1px solid rgba(255,166,96,.66);border-left:0;border-radius:16% 88% 88% 18% / 48% 50% 50% 52%;transform:rotate(-8deg) skewX(-10deg);background:radial-gradient(ellipse at 88% 50%,rgba(255,155,82,.055),transparent 64%)}
+.gramophone-horn:before{content:"";position:absolute;right:10px;top:11px;width:83px;height:88px;border:1px solid rgba(255,166,96,.25);border-left:0;border-radius:20% 90% 90% 20% / 50%}
+.gramophone-horn:after{content:"";position:absolute;left:-20px;top:46px;width:28px;height:2px;background:rgba(255,166,96,.6);box-shadow:0 0 8px rgba(255,155,82,.16);transform:rotate(6deg)}
+.gramophone-neck{position:absolute;right:130px;top:56px;width:58px;height:70px;border-left:2px solid rgba(255,166,96,.52);border-bottom:2px solid rgba(255,166,96,.52);border-radius:0 0 0 42px;transform:rotate(8deg)}
+.gramophone-neck:after{content:"";position:absolute;left:-5px;bottom:-5px;width:9px;height:9px;border:1px solid rgba(255,166,96,.58);border-radius:50%;background:#0b0807}
+.gramophone-deck{position:absolute;left:19px;bottom:36px;width:155px;height:54px;border:1px solid rgba(255,166,96,.45);background:linear-gradient(180deg,rgba(255,155,82,.025),transparent);transform:skewX(-4deg)}
+.gramophone-deck:before{content:"";position:absolute;left:19px;top:-19px;width:86px;height:22px;border:1px solid rgba(255,166,96,.35);border-radius:50%;transform:scaleY(.34);background:rgba(8,7,8,.7)}
+.gramophone-deck:after{content:"";position:absolute;left:9px;right:9px;bottom:-17px;height:16px;border-left:1px solid rgba(255,166,96,.28);border-right:1px solid rgba(255,166,96,.28);border-bottom:1px solid rgba(255,166,96,.36);transform:skewX(7deg)}
+.gramophone-spindle{position:absolute;left:76px;bottom:82px;width:4px;height:4px;border-radius:50%;background:#ffad70;box-shadow:0 0 9px rgba(255,155,82,.4)}
+@media (max-width:1100px){.gramophone{right:-5vw;bottom:4%;transform:scale(.82) rotate(-2deg);transform-origin:right bottom;opacity:.18}}
+@media (max-width:680px){.gramophone{display:none}}
