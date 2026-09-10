@@ -1,0 +1,15 @@
+/* Keep the cursor visually consistent over non-interactive copy. */
+html, body, main, section, footer,
+h1, h2, h3, h4, h5, h6,
+p, span, strong, em, small, dt, dd,
+.mono, .eyebrow, .hero-note, .hero-coordinates,
+.project-description, .project-tagline, .project-topline,
+.tags, .project-link, .about-copy, .lab-list,
+.signal-status, .hero-meta {
+  cursor: default;
+}
+
+/* Preserve the expected pointer only for things that are actually clickable. */
+a, button, [role="button"], input[type="button"], input[type="submit"] {
+  cursor: pointer;
+}
