@@ -1,3 +1,8 @@
+const orbitStyles = document.createElement('link');
+orbitStyles.rel = 'stylesheet';
+orbitStyles.href = 'orbit-polish.css';
+document.head.appendChild(orbitStyles);
+
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const reveals = [...document.querySelectorAll('.reveal')];
