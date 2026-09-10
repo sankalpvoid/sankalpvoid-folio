@@ -1,0 +1,46 @@
+.hero{padding-top:116px;padding-bottom:44px}
+.hero-title-wrap{padding:8vh 0 2vh;transform:translateY(34px)}
+.hero h1{line-height:.69}
+.void-word{margin-top:-.01em}
+.hero-foot>p{font-size:clamp(17px,1.72vw,24px);line-height:1.3;color:#cfcdc8}
+.hero-meta{font-size:9px;color:#85858f}
+.hero-meta span{color:#8d8d98}
+.brand{font-size:18px}.brand b{font-size:10px}
+
+.hero:before{width:43vw;height:43vw;right:-2.2vw;top:16vh;background:
+  radial-gradient(circle at 31% 27%,rgba(118,224,255,.13),transparent 16%),
+  radial-gradient(circle at 45% 42%,rgba(155,135,245,.12),transparent 38%),
+  radial-gradient(circle at 62% 63%,rgba(35,45,60,.46),rgba(6,7,10,.92) 65%);
+  border:1px solid rgba(155,135,245,.18);
+  box-shadow:-2px -1px 0 rgba(155,135,245,.42),-7px -3px 25px rgba(119,230,255,.08),inset 22px 6px 80px rgba(119,230,255,.035),inset -50px -18px 100px rgba(0,0,0,.75);
+  filter:none;
+}
+.hero:after{content:"";position:absolute;width:43vw;height:43vw;right:-2.2vw;top:16vh;border-radius:50%;pointer-events:none;background:repeating-radial-gradient(circle at 48% 50%,rgba(255,255,255,.014) 0 1px,transparent 1px 4px);mix-blend-mode:screen;opacity:.42;mask-image:radial-gradient(circle,black 20%,transparent 72%)}
+.orbital-a{width:47vw;height:14vw;right:-3vw;top:37%;transform:rotate(-13deg);border-color:rgba(155,135,245,.30);box-shadow:0 0 12px rgba(155,135,245,.035)}
+.orbital-b{width:39vw;height:39vw;right:-.4vw;top:18%;border-color:rgba(119,230,255,.14)}
+.orbital-b:before{content:"";position:absolute;inset:16%;border:1px solid rgba(155,135,245,.10);border-radius:50%;transform:scaleY(.38) rotate(28deg)}
+
+.hero-coordinates{position:absolute;right:7.7vw;top:29%;z-index:4;font-size:8px;line-height:1.8;letter-spacing:.18em;color:#666674;text-align:right}
+.hero-coordinates strong{display:block;color:#9e92c7;font-weight:400}
+.hero-note{position:absolute;right:10.8vw;top:63%;z-index:4;font-size:11px;line-height:1.55;color:rgba(207,202,220,.38);font-style:italic;transform:rotate(-5deg);font-family:Georgia,serif;letter-spacing:.02em}
+.satellite-track{position:absolute;right:7.8vw;top:38%;width:31vw;height:11vw;border-radius:50%;transform:rotate(-13deg);z-index:5;pointer-events:none}
+.satellite-dot{position:absolute;left:2%;top:49%;width:5px;height:5px;border-radius:50%;background:#b5a3ff;box-shadow:0 0 0 3px rgba(155,135,245,.09),0 0 18px rgba(155,135,245,.85);animation:signal-drift 8s ease-in-out infinite alternate}
+.satellite-dot:after{content:"SIG / 001";position:absolute;left:12px;top:-5px;white-space:nowrap;font:7px "JetBrains Mono",monospace;letter-spacing:.16em;color:#726c83}
+@keyframes signal-drift{from{transform:translateX(0)}to{transform:translateX(21vw)}}
+
+.signal-status{color:#73737f}.signal-status i{background:#69ef96}
+
+@media (max-width:900px){
+  .hero-title-wrap{transform:translateY(16px);padding:7vh 0 4vh}
+  .hero:before,.hero:after{width:68vw;height:68vw;right:-30vw;top:21vh}
+  .orbital-a{width:70vw;height:22vw;right:-28vw;top:33%}
+  .orbital-b{width:59vw;height:59vw;right:-25vw;top:23%}
+  .hero-coordinates,.hero-note,.satellite-track{display:none}
+}
+@media (max-width:600px){
+  .hero{padding-top:96px;padding-bottom:30px}
+  .hero-title-wrap{transform:none;padding:12vh 0 7vh}
+  .hero-foot>p{font-size:17px}
+  .brand{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){.satellite-dot{animation:none}}
