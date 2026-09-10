@@ -3,6 +3,11 @@ orbitStyles.rel = 'stylesheet';
 orbitStyles.href = 'orbit-polish.css';
 document.head.appendChild(orbitStyles);
 
+const workStyles = document.createElement('link');
+workStyles.rel = 'stylesheet';
+workStyles.href = 'work-polish.css';
+document.head.appendChild(workStyles);
+
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const reveals = [...document.querySelectorAll('.reveal')];
@@ -50,6 +55,20 @@ if (!prefersReduced) {
       orbit.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
     });
   }
+
+  document.querySelectorAll('.project').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const rect = card.getBoundingClientRect();
+      const px = ((e.clientX - rect.left) / rect.width) * 100;
+      const py = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mx', `${px}%`);
+      card.style.setProperty('--my', `${py}%`);
+    });
+    card.addEventListener('pointerleave', () => {
+      card.style.setProperty('--mx', '50%');
+      card.style.setProperty('--my', '50%');
+    });
+  });
 
   const voidWord = document.querySelector('.void-word');
   window.addEventListener('scroll', () => {
