@@ -18,6 +18,20 @@ sideBStyles.rel = 'stylesheet';
 sideBStyles.href = 'side-b-polish.css';
 document.head.appendChild(sideBStyles);
 
+const gramophoneStyles = document.createElement('link');
+gramophoneStyles.rel = 'stylesheet';
+gramophoneStyles.href = 'gramophone.css';
+document.head.appendChild(gramophoneStyles);
+
+const sideBSection = document.getElementById('side-b');
+if (sideBSection) {
+  const gramophone = document.createElement('div');
+  gramophone.className = 'gramophone';
+  gramophone.setAttribute('aria-hidden', 'true');
+  gramophone.innerHTML = '<div class="gramophone-horn"></div><div class="gramophone-neck"></div><div class="gramophone-deck"></div><div class="gramophone-spindle"></div>';
+  sideBSection.appendChild(gramophone);
+}
+
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const reveals = [...document.querySelectorAll('.reveal')];
