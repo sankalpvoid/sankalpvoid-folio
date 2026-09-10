@@ -13,6 +13,11 @@ labStyles.rel = 'stylesheet';
 labStyles.href = 'lab-polish.css';
 document.head.appendChild(labStyles);
 
+const sideBStyles = document.createElement('link');
+sideBStyles.rel = 'stylesheet';
+sideBStyles.href = 'side-b-polish.css';
+document.head.appendChild(sideBStyles);
+
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const reveals = [...document.querySelectorAll('.reveal')];
