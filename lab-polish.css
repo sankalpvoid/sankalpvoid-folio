@@ -1,0 +1,28 @@
+.lab{position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.035);border-bottom:1px solid var(--line);background:radial-gradient(circle at 18% 20%,rgba(155,135,245,.045),transparent 28%),linear-gradient(180deg,rgba(255,255,255,.008),transparent 34%)}
+.lab:before{content:"ACTIVE INVESTIGATIONS / 04 THREADS";position:absolute;right:var(--pad);top:105px;font:8px "JetBrains Mono",monospace;letter-spacing:.19em;color:#41414a}
+.lab:after{content:"";position:absolute;right:-10%;bottom:-180px;width:520px;height:520px;border-radius:50%;border:1px solid rgba(155,135,245,.055);box-shadow:inset 0 0 80px rgba(155,135,245,.025);pointer-events:none}
+.lab-head{display:grid;grid-template-columns:1.2fr .8fr;gap:8vw;align-items:end;margin-bottom:64px}
+.lab-head h2{margin-bottom:0;max-width:720px}.lab-head>p{justify-self:end;margin:0 0 8px;max-width:390px;color:#85858f}
+.lab-list{border-top:1px solid rgba(255,255,255,.09)}
+.lab-list article{position:relative;display:grid;grid-template-columns:64px minmax(240px,1fr) 1.25fr auto;gap:28px;align-items:center;min-height:122px;border-bottom:1px solid rgba(255,255,255,.075);transition:background .35s,padding .35s,border-color .35s;overflow:hidden}
+.lab-list article:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(155,135,245,.055),transparent 28%);opacity:0;transition:opacity .35s}
+.lab-list article:after{content:"";position:absolute;left:0;bottom:-1px;width:0;height:1px;background:linear-gradient(90deg,#9b87f5,#77e6ff);transition:width .55s cubic-bezier(.2,.8,.2,1)}
+.lab-list article:hover{background:rgba(255,255,255,.012);padding-left:10px;border-color:rgba(255,255,255,.13)}
+.lab-list article:hover:before{opacity:1}.lab-list article:hover:after{width:100%}
+.lab-list article>span{position:relative;z-index:1;font-size:9px;color:#5d5d67;letter-spacing:.14em}
+.lab-list h3{position:relative;z-index:1;margin:0;font-size:clamp(22px,2.2vw,34px);font-weight:400;letter-spacing:-.035em;color:#ece9e3}
+.lab-list p{position:relative;z-index:1;margin:0;color:#777781;font-size:12px;letter-spacing:.01em}
+.lab-list b{position:relative;z-index:1;font:8px "JetBrains Mono",monospace;letter-spacing:.16em;font-weight:400;color:#777781;border:1px solid rgba(255,255,255,.09);border-radius:999px;padding:7px 10px;white-space:nowrap}
+.lab-list article:nth-child(1) h3{color:#a7f2ff}.lab-list article:nth-child(1):after{background:linear-gradient(90deg,#77e6ff,transparent)}
+.lab-list article:nth-child(2) h3{color:#c7b8ff}.lab-list article:nth-child(2):after{background:linear-gradient(90deg,#9b87f5,transparent)}
+.lab-list article:nth-child(3) h3{color:#f0edf7}.lab-list article:nth-child(3):after{background:linear-gradient(90deg,#f0edf7,transparent)}
+.lab-list article:nth-child(4) h3{color:#ffc18f}.lab-list article:nth-child(4):after{background:linear-gradient(90deg,#ff9b52,transparent)}
+.lab-list article:nth-child(1) b{color:#8be9fb;border-color:rgba(119,230,255,.18)}
+.lab-list article:nth-child(2) b{color:#b9aaff;border-color:rgba(155,135,245,.18)}
+.lab-list article:nth-child(3) b{color:#d8d5df;border-color:rgba(255,255,255,.14)}
+.lab-list article:nth-child(4) b{color:#ffb37c;border-color:rgba(255,155,82,.2)}
+.lab-list article b:before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:currentColor;margin-right:7px;box-shadow:0 0 10px currentColor;vertical-align:1px;animation:lab-pulse 2.4s ease-in-out infinite}
+@keyframes lab-pulse{0%,100%{opacity:.35;transform:scale(.78)}50%{opacity:1;transform:scale(1)}}
+@media (max-width:900px){.lab:before{display:none}.lab-head{grid-template-columns:1fr;gap:24px}.lab-head>p{justify-self:start;max-width:500px}.lab-list article{grid-template-columns:48px 1fr auto;gap:16px;padding:22px 0}.lab-list p{grid-column:2/4}.lab-list article:hover{padding-left:6px}}
+@media (max-width:600px){.lab-list article{grid-template-columns:36px 1fr;gap:10px 14px}.lab-list p{grid-column:2}.lab-list b{grid-column:2;justify-self:start}.lab-list article:hover{padding-left:0}.lab-list h3{font-size:24px}}
+@media (prefers-reduced-motion:reduce){.lab-list article b:before{animation:none}}
