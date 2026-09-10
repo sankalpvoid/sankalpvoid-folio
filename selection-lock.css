@@ -1,0 +1,15 @@
+/* Portfolio behaves like an interface, not a document: prevent accidental text highlighting. */
+html,
+body,
+body * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Preserve normal interaction semantics for controls/links. */
+a,
+button,
+[role="button"] {
+  cursor: pointer;
+}
