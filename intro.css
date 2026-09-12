@@ -1,0 +1,31 @@
+html.intro-active{scroll-behavior:auto}
+html.intro-active body{overflow:hidden}
+
+.intro-loader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:#050506;color:#f1efe8;transition:opacity .82s cubic-bezier(.2,.75,.2,1),transform .82s cubic-bezier(.2,.75,.2,1),filter .82s cubic-bezier(.2,.75,.2,1)}
+.intro-loader:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.026) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.026) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(circle at 50% 50%,black 0 35%,transparent 82%)}
+.intro-loader:after{content:"";position:absolute;width:min(62vw,860px);aspect-ratio:1;border:1px solid rgba(155,135,245,.18);border-radius:50%;right:-18vw;top:50%;transform:translateY(-50%);background:radial-gradient(circle at 38% 36%,rgba(119,230,255,.06),rgba(155,135,245,.07) 34%,transparent 70%);box-shadow:-1px 0 0 rgba(155,135,245,.28),inset 0 0 80px rgba(0,0,0,.6)}
+.intro-shell{position:relative;width:100%;height:100%;padding:clamp(24px,4vw,58px);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr auto;align-items:center;z-index:2}
+.intro-meta{font:9px "JetBrains Mono",monospace;letter-spacing:.18em;color:#6f6f79;text-transform:uppercase;line-height:1.75}
+.intro-meta strong{display:block;color:#9a8dc7;font-weight:400}
+.intro-meta-right{text-align:right;justify-self:end}
+.intro-center{grid-column:1/-1;align-self:center;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:clamp(18px,3vw,46px)}
+.intro-line{height:1px;background:linear-gradient(90deg,transparent,rgba(155,135,245,.26))}
+.intro-line:last-child{background:linear-gradient(90deg,rgba(119,230,255,.18),transparent)}
+.intro-count{font-family:"DM Sans",sans-serif;font-size:clamp(150px,31vw,520px);font-weight:400;line-height:.7;letter-spacing:-.095em;color:#f1efe8;text-shadow:0 0 60px rgba(155,135,245,.08);min-width:1.45em;text-align:center;transform-origin:center}
+.intro-count.tick{animation:intro-tick .42s cubic-bezier(.18,.75,.2,1)}
+.intro-count.locked{color:transparent;-webkit-text-stroke:1px rgba(180,165,255,.88);text-shadow:0 0 50px rgba(155,135,245,.16)}
+.intro-bottom{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:end}
+.intro-status{display:flex;align-items:center;gap:9px;font:8px "JetBrains Mono",monospace;letter-spacing:.16em;color:#7d7d87;white-space:nowrap}
+.intro-status i{width:5px;height:5px;border-radius:50%;background:#9b87f5;box-shadow:0 0 12px rgba(155,135,245,.8)}
+.intro-progress{height:1px;background:rgba(255,255,255,.07);overflow:hidden;align-self:center}
+.intro-progress span{display:block;height:100%;width:12%;background:linear-gradient(90deg,#9b87f5,#77e6ff);box-shadow:0 0 10px rgba(155,135,245,.35);transition:width .42s cubic-bezier(.2,.75,.2,1)}
+.intro-channel{font:8px "JetBrains Mono",monospace;letter-spacing:.16em;color:#666670;white-space:nowrap}
+
+html.intro-active .nav-shell,html.intro-active main{transform:scale(.885);filter:blur(9px);opacity:.45;transform-origin:center top;transition:transform 1s cubic-bezier(.16,.8,.2,1),filter 1s cubic-bezier(.16,.8,.2,1),opacity .75s ease}
+html.intro-reveal .nav-shell,html.intro-reveal main{transform:scale(1);filter:blur(0);opacity:1}
+.intro-loader.intro-exit{opacity:0;transform:scale(1.2);filter:blur(12px);pointer-events:none}
+
+@keyframes intro-tick{0%{opacity:.08;transform:scale(1.28);filter:blur(9px)}45%{opacity:1;filter:blur(0)}100%{opacity:1;transform:scale(1)}}
+
+@media(max-width:680px){.intro-shell{padding:24px 20px}.intro-loader:after{width:105vw;right:-62vw}.intro-center{gap:10px}.intro-count{font-size:clamp(125px,47vw,240px)}.intro-meta{font-size:7px}.intro-channel{display:none}.intro-bottom{grid-template-columns:auto 1fr}.intro-status{font-size:7px}}
+@media(prefers-reduced-motion:reduce){html.intro-active body{overflow:auto}.intro-loader{display:none}html.intro-active .nav-shell,html.intro-active main{transform:none;filter:none;opacity:1}}
