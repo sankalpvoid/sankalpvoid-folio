@@ -17,10 +17,16 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&text=RECLAIM&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&text=WEALTHISG&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&text=Sankalp%20%26Shristi%20Furnishers&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/scenes.css">
 <link rel="stylesheet" href="/assets/css/home.css">
-<link rel="preload" as="image" href="/assets/img/rc/light-home-390.jpg" imagesrcset="/assets/img/rc/light-home-390.jpg 390w, /assets/img/rc/light-home.jpg 780w" imagesizes="40vw" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/img/rc/bloom.webp" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/img/rc2/support-585.jpg" imagesrcset="/assets/img/rc2/support-585.jpg 585w, /assets/img/rc2/support.jpg 1170w" imagesizes="30vw">
 <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>
 <body data-tone="light">
@@ -41,68 +47,69 @@
   <section class="stage" id="stage" aria-roledescription="carousel" aria-label="Featured exhibitions">
 
     <!-- 01 RECLAIM -->
-    <article class="slide s-reclaim is-active" data-slug="reclaim" data-tone="light" aria-roledescription="slide" aria-label="1 of 4: Reclaim">
-      <div class="slide__bg" aria-hidden="true">
-        <div class="rc-phones" data-exhibit>
-          <div class="phone ph-a"><img src="/assets/img/rc/dark-craving-390.jpg" srcset="/assets/img/rc/dark-craving-390.jpg 390w, /assets/img/rc/dark-craving.jpg 780w" sizes="22vw" width="780" height="1688" alt="" decoding="async"></div>
-          <div class="phone ph-c"><img src="/assets/img/rc/dark-momentum-390.jpg" srcset="/assets/img/rc/dark-momentum-390.jpg 390w, /assets/img/rc/dark-momentum.jpg 780w" sizes="22vw" width="780" height="1688" alt="" decoding="async"></div>
-          <div class="phone ph-b"><img src="/assets/img/rc/light-home-390.jpg" srcset="/assets/img/rc/light-home-390.jpg 390w, /assets/img/rc/light-home.jpg 780w" sizes="26vw" width="780" height="1688" alt="" decoding="async" fetchpriority="high"></div>
-        </div>
+    <article class="slide s-rc is-active" data-slug="reclaim" data-tone="dark" aria-roledescription="slide" aria-label="1 of 4: Reclaim">
+      <div class="sc sc-rc" data-exhibit aria-hidden="true">
+        <img class="rc-art" src="/assets/img/rc/bloom.webp" width="720" height="592" alt="" decoding="async" fetchpriority="high">
+        <div class="rc-veil"></div>
+        <span class="rc-ring r3"></span><span class="rc-ring"></span><span class="rc-ring r2"></span>
+        <div class="rc-screen"><img src="/assets/img/rc2/support-585.jpg" srcset="/assets/img/rc2/support-585.jpg 585w, /assets/img/rc2/support.jpg 1170w" sizes="(min-width:821px) 30vw, 50vw" width="1170" height="2532" alt="" decoding="async"></div>
       </div>
-      <div class="slide__copy">
-        <p class="mono slide__kicker">Exhibition 01 · Product</p>
-        <h2 class="slide__title">Reclaim</h2>
-        <p class="slide__premise">A behaviour-change companion built for the hard moments of quitting smoking, not just the day count.</p>
-        <p class="slide__status mono">Live prototype</p>
+      <div class="sc-copy" data-copy="rc">
+        <span class="eyebrow mono">01 · Product</span>
+        <h2 class="t">Reclaim</h2>
+        <p class="premise">Support for the moment a craving arrives.</p>
+        <p class="status mono">Live prototype</p>
       </div>
       <a class="enter" href="/work/reclaim/" tabindex="-1"><span>Enter</span><i aria-hidden="true">↗</i><span class="sr-only"> the Reclaim exhibition</span></a>
     </article>
 
     <!-- 02 WEALTHWITHSG -->
     <article class="slide s-wsg" data-slug="wealthwithsg" data-tone="dark" aria-roledescription="slide" aria-label="2 of 4: WealthWithSG">
-      <div class="slide__bg" aria-hidden="true">
-        <div class="bg-img" data-exhibit><img data-src="/assets/img/wsg/hero-4.jpg" data-srcset="/assets/img/wsg/hero-4-720.jpg 720w, /assets/img/wsg/hero-4.jpg 1440w" sizes="100vw" width="1440" height="900" alt="" decoding="async"></div>
-        <span class="bg-shade"></span>
+      <div class="sc sc-wsg" data-exhibit aria-hidden="true">
+        <div class="grid"></div>
+        <div class="chart-env" data-chart-env><svg preserveAspectRatio="none"></svg></div>
+        <div class="shade"></div>
+        <span class="chart-cap">Illustrative data · not market data</span>
       </div>
-      <div class="slide__copy">
-        <p class="mono slide__kicker">Exhibition 02 · Website</p>
-        <h2 class="slide__title">WealthWithSG</h2>
-        <p class="slide__premise">Trading education that begins as noise and resolves, frame by frame, into structure.</p>
-        <p class="slide__status mono">Prototype · sample content</p>
+      <div class="sc-copy" data-copy="wsg">
+        <span class="eyebrow mono">02 · Website</span>
+        <h2 class="t">WEALTH<span>WITH</span>SG</h2>
+        <p class="premise">A chart that teaches before the lesson begins.</p>
+        <p class="status mono">Prototype · sample content</p>
       </div>
       <a class="enter" href="/work/wealthwithsg/" tabindex="-1"><span>Enter</span><i aria-hidden="true">↗</i><span class="sr-only"> the WealthWithSG exhibition</span></a>
     </article>
 
     <!-- 03 SANKALP & SHRISTI FURNISHERS -->
     <article class="slide s-ssf" data-slug="sankalp-shristi-furnishers" data-tone="light" aria-roledescription="slide" aria-label="3 of 4: Sankalp &amp; Shristi Furnishers">
-      <div class="slide__bg" aria-hidden="true">
-        <div class="bg-img" data-exhibit><img data-src="/assets/img/ssf/bed.webp" data-srcset="/assets/img/ssf/bed-sm.webp 800w, /assets/img/ssf/bed.webp 1500w" sizes="70vw" width="1500" height="1200" alt="" decoding="async"></div>
-        <span class="bg-shade"></span>
-        <span class="tag render-tag">Studio render · placeholder</span>
+      <div class="sc sc-ssf" data-exhibit aria-hidden="true">
+        <div class="ssf-arch"></div>
+        <div class="bed" data-bed><svg preserveAspectRatio="xMidYMid slice"></svg><img class="bed-fallback" data-src="/assets/img/ssf/bed.webp" width="1500" height="1200" alt=""></div>
+        <span class="tag">Studio render · placeholder</span>
       </div>
-      <div class="slide__copy">
-        <p class="mono slide__kicker">Exhibition 03 · Showroom concept</p>
-        <h2 class="slide__title long">Sankalp &amp; Shristi Furnishers</h2>
-        <p class="slide__premise">A furniture showroom site where a handful of lines slowly become a bed.</p>
-        <p class="slide__status mono">Demonstration build</p>
+      <div class="sc-copy" data-copy="ssf">
+        <span class="eyebrow mono">03 · Showroom</span>
+        <h2 class="t">Sankalp <em>&amp;</em> Shristi Furnishers</h2>
+        <p class="premise">Bringing the workshop’s craft into a digital showroom.</p>
+        <p class="status mono">Demonstration · studio renders</p>
       </div>
       <a class="enter" href="/work/sankalp-shristi-furnishers/" tabindex="-1"><span>Enter</span><i aria-hidden="true">↗</i><span class="sr-only"> the Sankalp &amp; Shristi Furnishers exhibition</span></a>
     </article>
 
     <!-- 04 EXPERIMENTS -->
     <article class="slide s-arch" data-slug="archive" data-tone="dark" aria-roledescription="slide" aria-label="4 of 4: Experiments">
-      <div class="slide__bg" aria-hidden="true">
-        <div class="specimens" data-exhibit>
-          <figure class="sp sp-1"><img data-src="/assets/img/exp/cyber-1-720.jpg" width="720" height="450" alt="" decoding="async"><figcaption class="mono">A · scroll → canvas</figcaption></figure>
-          <figure class="sp sp-2"><img data-src="/assets/img/exp/parallax-2-720.jpg" width="720" height="450" alt="" decoding="async"><figcaption class="mono">B · pointer → depth</figcaption></figure>
-          <figure class="sp sp-3"><img data-src="/assets/img/exp/gsap-1-720.jpg" width="720" height="450" alt="" decoding="async"><figcaption class="mono">C · timeline → rhythm</figcaption></figure>
+      <div class="sc sc-arch" data-exhibit aria-hidden="true">
+        <div class="strips">
+          <div class="strip s1"><img data-src="/assets/img/exp/cyber-1.jpg" data-srcset="/assets/img/exp/cyber-1-720.jpg 720w, /assets/img/exp/cyber-1.jpg 1440w" sizes="55vw" width="1440" height="900" alt=""><span class="cap">A · scroll → canvas</span></div>
+          <div class="strip s2"><img data-src="/assets/img/exp/parallax-1.jpg" data-srcset="/assets/img/exp/parallax-1-720.jpg 720w, /assets/img/exp/parallax-1.jpg 1440w" sizes="45vw" width="1440" height="900" alt=""><span class="cap">B · pointer → depth</span></div>
+          <div class="strip s3"><img data-src="/assets/img/exp/gsap-1.jpg" data-srcset="/assets/img/exp/gsap-1-720.jpg 720w, /assets/img/exp/gsap-1.jpg 1440w" sizes="35vw" width="1440" height="900" alt=""><span class="cap">C · timeline → rhythm</span></div>
         </div>
       </div>
-      <div class="slide__copy">
-        <p class="mono slide__kicker">Exhibition 04 · Archive</p>
-        <h2 class="slide__title">Experiments</h2>
-        <p class="slide__premise">Three small studies in scroll, depth and timing, each asking one question about motion.</p>
-        <p class="slide__status mono">3 live studies</p>
+      <div class="sc-copy" data-copy="arch">
+        <span class="eyebrow mono">04 · Archive</span>
+        <h2 class="t">Experiments</h2>
+        <p class="premise">Three questions about motion.</p>
+        <p class="status mono">3 live studies</p>
       </div>
       <a class="enter" href="/archive/" tabindex="-1"><span>Enter</span><i aria-hidden="true">↗</i><span class="sr-only"> the Experiments archive</span></a>
     </article>
@@ -143,6 +150,7 @@
 </footer>
 
 <script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/scenes.js" defer></script>
 <script src="/assets/js/home.js" defer></script>
 </body>
 </html>

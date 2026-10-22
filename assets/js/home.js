@@ -10,6 +10,33 @@
   const slugs = slides.map((s) => s.dataset.slug);
   let index = 0;
   let busy = false;
+  const reducedNow = () => reduce.matches;
+
+  /* ---- scenes: charts and the traced bed are built lazily, once per slide ---- */
+  const scenes = new Map();
+  const mountScene = (slide) => {
+    if (!slide || scenes.has(slide) || !window.SV) return;
+    const chartEl = slide.querySelector('[data-chart-env]');
+    const bedEl = slide.querySelector('[data-bed]');
+    if (chartEl) {
+      const c = window.SV.chart(chartEl, { start: 1 });
+      scenes.set(slide, { play: () => c.play(1, 2800, 0), settle: () => c.set(1) });
+    } else if (bedEl) {
+      const rec = { play: () => {}, settle: () => {}, ready: null };
+      scenes.set(slide, rec);
+      rec.ready = window.SV.bed(bedEl, { start: 1 }).then((b) => {
+        rec.play = () => b.play(1, 3000, 0);
+        rec.settle = () => b.set(1);
+        bedEl.classList.add('is-drawn');
+      }).catch(() => { bedEl.querySelector('.bed-fallback')?.setAttribute('data-failed', ''); });
+    }
+  };
+  const playScene = (slide) => {
+    const rec = scenes.get(slide);
+    if (!rec) return;
+    if (reducedNow()) { rec.settle(); return; }
+    if (rec.ready) rec.ready.then(() => rec.play()); else rec.play();
+  };
 
   /* ---- lazy media: only the neighbours of the visible slide are fetched ---- */
   const hydrate = (slide) => {
@@ -20,6 +47,7 @@
       img.removeAttribute('data-src');
       img.removeAttribute('data-srcset');
     });
+    mountScene(slide);
   };
   const hydrateAround = (i) => {
     const run = () => { hydrate(slides[(i + 1) % slides.length]); hydrate(slides[(i - 1 + slides.length) % slides.length]); };
@@ -38,6 +66,7 @@
     index = (next + slides.length) % slides.length;
     const slide = slides[index];
     hydrate(slide);
+    if (prev !== slide) playScene(slide);
     slides.forEach((s, i) => {
       s.classList.toggle('is-active', i === index);
       s.setAttribute('aria-hidden', i === index ? 'false' : 'true');
@@ -49,8 +78,7 @@
       slide.classList.add('is-entering');
       busy = true;
       const done = () => { prev.classList.remove('is-leaving'); slide.classList.remove('is-entering', 'rev'); busy = false; };
-      slide.addEventListener('animationend', (e) => { if (e.target === slide) done(); }, { once: true });
-      setTimeout(done, 1300);
+      setTimeout(done, 1500);
     }
     document.body.dataset.tone = slide.dataset.tone;
     ticks.forEach((t, i) => (i === index ? t.setAttribute('aria-current', 'true') : t.removeAttribute('aria-current')));
@@ -111,5 +139,7 @@
   document.body.dataset.tone = slides[0].dataset.tone;
   fromHash();
   nameActive();
+  hydrate(slides[index]);
+  if (index !== 0 || slugs[0] !== 'reclaim') playScene(slides[index]);
   hydrateAround(index);
 })();
