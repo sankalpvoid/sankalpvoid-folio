@@ -1,29 +1,54 @@
 # sankalpvoid-folio
 
-Personal portfolio for **Sankalp Kushwaha** — product, software, engineering, experiments and music.
+Portfolio of **Sankalp Kushwaha** (sankalpvoid), redesigned as a gallery: each project is an exhibition with its own art direction.
 
-## Current build
+Static site, no build step, no runtime dependencies. Fonts come from Google Fonts. The only JavaScript is first-party and progressive: every page works with JavaScript off.
 
-The first homepage is intentionally framework-light so the visual system and interaction language can be judged quickly before adding heavier motion.
+## Routes
 
-- dark editorial / cyber-minimal visual system
-- `SANKALP VOID` hero
-- current orbit across product, software, engineering, finance and music
-- selected work featuring Reclaim, CyberPunk, Parallax and GSAP Motion
-- The Lab for ongoing investigations
-- Side B for vocals, guitar and music production
-- responsive layouts and reduced-motion support
+| Route | What it is |
+|---|---|
+| `/` | Gallery entrance: four featured exhibitions, one at a time. Deep link with `/#wealthwithsg` etc. |
+| `/projects/` | Compact "All projects" overview (also opens as an overlay from any page) |
+| `/work/reclaim/` | Exhibition 01: Reclaim |
+| `/work/wealthwithsg/` | Exhibition 02: WealthWithSG |
+| `/work/sankalp-shristi-furnishers/` | Exhibition 03: Sankalp & Shristi Furnishers |
+| `/archive/` | Exhibition 04: Experiments (CyberPunk, Parallax, GSAP Motion) |
+| `/about/`, `/contact/` | About (with music) and contact |
 
 ## Run locally
 
-Serve the repository with any static web server, for example:
-
 ```sh
 python3 -m http.server 4173
+# open http://localhost:4173
 ```
 
-Then open `http://localhost:4173`.
+Any static server works. Use trailing-slash URLs (`/about/`), as Vercel does with the included `vercel.json`.
 
-## Deployment
+## Checks
 
-Designed for a zero-build static deployment on Vercel.
+The browser checks live in `scripts/` with their own `package.json`, so they never affect the deployed site.
+
+```sh
+cd scripts && npm install && npx playwright install chromium
+# in another terminal, serve the site on :4173 (see above), then:
+npm run verify   # routes × 3 viewports, console/network errors, overflow, images, keyboard, back/forward, reduced motion, no-JS, links
+npm run axe      # axe-core WCAG A/AA + best-practice on every route at 1440px and 390px
+```
+
+## Structure
+
+```
+index.html            gallery entrance
+projects/ about/ contact/ archive/ work/<slug>/index.html
+assets/css/           base.css (tokens, motion system, chrome, overlay) + one stylesheet per exhibition
+assets/js/            site.js (shared) + one small script per interactive page
+assets/img/           real media only: prototype captures, studio renders, experiment previews
+docs/DESIGN.md        creative direction, motion system, decisions
+docs/ASSETS-NEEDED.md missing assets and facts to confirm
+docs/screenshots/     reference screenshots
+```
+
+## Baseline
+
+The previous single-page site is preserved on `main` and tagged `baseline-pre-redesign`.

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WealthWithSG — Exhibition 02 · sankalpvoid</title>
+<meta name="description" content="A trading-education website concept that turns noise into structure. The idea behind the chart narrative, the interaction decisions and what is still sample content.">
+<link rel="canonical" href="https://sankalpvoid-folio.vercel.app/work/wealthwithsg/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sankalpvoid">
+<meta property="og:title" content="WealthWithSG — noise resolving into structure">
+<meta property="og:description" content="A scroll-driven chart narrative for a trading-education site, with sample content clearly labelled.">
+<meta property="og:url" content="https://sankalpvoid-folio.vercel.app/work/wealthwithsg/">
+<meta property="og:image" content="https://sankalpvoid-folio.vercel.app/assets/img/og-wealthwithsg.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08090b">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/wsg.css">
+<script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the story</a>
+<header class="chrome">
+  <a class="wordmark" href="/#wealthwithsg" aria-label="sankalpvoid — back to the gallery"><b>sankalpvoid</b><span>← Gallery</span></a>
+  <nav aria-label="Primary">
+    <a href="/projects/" data-open-index>Projects</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- 1 · INVITATION -->
+  <section class="hero" aria-labelledby="t">
+    <figure class="chart chart--hero" data-chart="hero" data-exhibit>
+      <svg viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative chart that begins as tangled noise and resolves into candlesticks with a moving average"></svg>
+      <figcaption class="mono">Illustrative data · not market data</figcaption>
+    </figure>
+    <div class="hero__copy">
+      <p class="mono kicker rv">Exhibition 02 · Website concept</p>
+      <h1 id="t" class="rv" style="--i:1">WEALTH<span>WITH</span>SG</h1>
+      <p class="lede rv" style="--i:2">Understand the market. Not just the movement. A trading-education site that begins as noise and resolves, frame by frame, into structure.</p>
+      <div class="actions rv" style="--i:3">
+        <a class="btn btn--solid" href="https://wealthwithsg.vercel.app/" target="_blank" rel="noreferrer">View live experience <span class="arr" aria-hidden="true">↗</span></a>
+        <a class="btn" href="#challenge">Read the story <span aria-hidden="true">↓</span></a>
+      </div>
+      <dl class="meta rv" style="--i:4">
+        <div><dt>My role</dt><dd>Concept, design and front-end build</dd></div>
+        <div><dt>Status</dt><dd>Prototype with sample content</dd></div>
+        <div><dt>Built with</dt><dd>Next.js 15, React 19, TypeScript</dd></div>
+        <div><dt>Source</dt><dd>Private repository</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div id="story"></div>
+
+  <!-- 2 · PREMISE -->
+  <section class="block" id="challenge" aria-labelledby="ch-h">
+    <p class="mono kicker rv">01 — The challenge</p>
+    <h2 id="ch-h" class="statement rv">A chart is just noise until someone teaches you what to look for.</h2>
+    <div class="cols">
+      <p class="rv">Market education usually starts with movement: a price, a pattern, a signal. The site’s line, written for the brand, points somewhere else: understand the market, not just the movement.</p>
+      <p class="rv" style="--i:1">The communication problem was how to make a beginner feel that difference before reading a single lesson, and to do it without implying that a pattern is a prediction.</p>
+      <p class="rv" style="--i:2">The learning problem is sequencing: noise first, then recognition, then structure, then the human judgement that structure never replaces.</p>
+    </div>
+  </section>
+
+  <!-- 3 · CONCEPT: scrubber -->
+  <section class="block concept" id="concept" aria-labelledby="co-h">
+    <p class="mono kicker rv">02 — The concept</p>
+    <h2 id="co-h" class="rv">Structure is something you add to noise.</h2>
+    <p class="rv lead">The same data, shown twice. Drag the control and watch tangled movement settle into candles and a moving average. This is my illustration of the idea behind the hero, drawn with generated, illustrative numbers.</p>
+    <div class="scrub" data-scrub>
+      <figure class="chart" data-chart="scrub">
+        <svg viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustrative chart controlled by the slider below"></svg>
+        <figcaption class="mono">Illustrative data · not market data</figcaption>
+      </figure>
+      <div class="scrub__ctl">
+        <label for="scrub-r" class="mono">Noise <span aria-hidden="true">←</span> <span aria-hidden="true">→</span> Structure</label>
+        <input id="scrub-r" type="range" min="0" max="100" value="0" step="1" aria-describedby="scrub-out">
+        <p id="scrub-out" class="scrub__out" aria-live="polite"><b>Noise.</b> Many lines, no meaning yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · THE JOURNEY (real frames) -->
+  <section class="block journey" id="journey" aria-labelledby="jo-h">
+    <p class="mono kicker rv">03 — How the live site tells it</p>
+    <h2 id="jo-h" class="rv">Six frames, one scroll.</h2>
+    <p class="rv lead">The homepage is a scroll-driven narrative with six frames. Each one changes what the chart is for. These are captures of the live prototype.</p>
+    <div class="frames" data-frames>
+      <div class="frames__stage">
+        <div class="media frames__img">
+          <img data-frame-img src="/assets/img/wsg/hero-1-720.jpg" srcset="/assets/img/wsg/hero-1-720.jpg 720w, /assets/img/wsg/hero-1.jpg 1440w" sizes="(min-width:900px) 62vw, 92vw" width="1440" height="900" alt="Frame 1: a single white line and a brass line rising across a dark field, with the WealthWithSG wordmark">
+        </div>
+        <p class="mono frames__tag">Live prototype capture</p>
+      </div>
+      <div class="frames__side">
+        <ol class="frames__list" role="list">
+          <li><button type="button" aria-current="true" data-i="0"><span class="mono">01</span>The Unknown</button></li>
+          <li><button type="button" data-i="1"><span class="mono">02</span>Recognition</button></li>
+          <li><button type="button" data-i="2"><span class="mono">03</span>Conflict</button></li>
+          <li><button type="button" data-i="3"><span class="mono">04</span>Breakdown</button></li>
+          <li><button type="button" data-i="4"><span class="mono">05</span>Human Meaning</button></li>
+          <li><button type="button" data-i="5"><span class="mono">06</span>Open Exploration</button></li>
+        </ol>
+        <p class="frames__note" data-frame-note aria-live="polite">Two lines move across an empty field. The promise is made before anything is explained.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · DECISIONS -->
+  <section class="block decisions" id="decisions" aria-labelledby="de-h">
+    <p class="mono kicker rv">04 — Decisions</p>
+    <h2 id="de-h" class="rv">What I chose, and why.</h2>
+    <ol class="dlist">
+      <li class="rv"><span class="mono">01</span><h3>SVG over WebGL</h3><p>The hero is hand-composed SVG driven by one scroll value. Layers fade and draw rather than render, so it stays light and sharp. It keeps separate compositions for desktop (64 small candles) and phones (26).</p></li>
+      <li class="rv"><span class="mono">02</span><h3>Colour never carries meaning alone</h3><p>Bullish candles are green outlines and bearish are red, and each is also labelled in text. Candles are hollow, so the marks stay readable without relying on a colour distinction.</p></li>
+      <li class="rv"><span class="mono">03</span><h3>Illustrative means labelled</h3><p>Every chart is stamped “Illustrative data · not market data”. There is no live feed and no implied signal, and a dedicated risk-disclaimer page exists.</p></li>
+      <li class="rv"><span class="mono">04</span><h3>A narrative with a way out</h3><p>The journey is long, so “Explore learning” is available from the first frame and the navigation never leaves. The story is an invitation, not a gate.</p></li>
+      <li class="rv"><span class="mono">05</span><h3>One real tool, not ten promises</h3><p>A risk-per-trade calculator is genuinely interactive: account size, risk percentage and stop distance become a position size. Pure arithmetic, nothing stored.</p></li>
+    </ol>
+  </section>
+
+  <!-- 6 · EXPERIENCE -->
+  <section class="block experience" id="experience" aria-labelledby="ex-h">
+    <p class="mono kicker rv">05 — The rest of the site</p>
+    <h2 id="ex-h" class="rv">Structured typography around the chart.</h2>
+    <div class="shots">
+      <figure class="rv shot shot--wide"><div class="media"><img src="/assets/img/wsg/learn-720.jpg" srcset="/assets/img/wsg/learn-720.jpg 720w, /assets/img/wsg/learn.jpg 1440w" sizes="(min-width:900px) 60vw, 92vw" width="1440" height="900" alt="Learn page listing five learning tracks, from Trading Fundamentals to Risk Management" loading="lazy"></div><figcaption><b>Learn.</b> Five tracks, numbered like chapters. All five are sample outlines.</figcaption></figure>
+      <figure class="rv shot" style="--i:1"><div class="media"><img src="/assets/img/wsg/risk-720.jpg" srcset="/assets/img/wsg/risk-720.jpg 720w, /assets/img/wsg/risk.jpg 1440w" sizes="(min-width:900px) 38vw, 92vw" width="1440" height="900" alt="Risk per trade calculator with inputs for account size, risk percentage, entry and stop" loading="lazy"></div><figcaption><b>Risk calculator.</b> The one fully working tool.</figcaption></figure>
+      <figure class="rv shot" style="--i:2"><div class="media"><img src="/assets/img/wsg/insights-720.jpg" srcset="/assets/img/wsg/insights-720.jpg 720w, /assets/img/wsg/insights.jpg 1440w" sizes="(min-width:900px) 38vw, 92vw" width="1440" height="900" alt="Market Insights page listing sample articles" loading="lazy"></div><figcaption><b>Insights.</b> Five sample articles; two are written, three say “coming soon”.</figcaption></figure>
+      <figure class="rv shot shot--phone" style="--i:3"><div class="media phone"><img src="/assets/img/wsg/m-1-390.jpg" srcset="/assets/img/wsg/m-1-390.jpg 390w, /assets/img/wsg/m-1.jpg 780w" sizes="240px" width="780" height="1688" alt="Phone view of the WealthWithSG hero chart" loading="lazy"></div><figcaption><b>On a phone.</b> A 26-candle composition, not a squeezed desktop one.</figcaption></figure>
+    </div>
+
+    <div class="status rv">
+      <h3 class="mono">What is real, what is sample</h3>
+      <table>
+        <thead><tr><th scope="col">Part</th><th scope="col">State</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Chart narrative and site design</th><td>Built and working in the prototype</td></tr>
+          <tr><th scope="row">Risk calculator, glossary</th><td>Working</td></tr>
+          <tr><th scope="row">Learning tracks (5)</th><td>Sample outlines, not a completed curriculum</td></tr>
+          <tr><th scope="row">Articles (5)</th><td>Sample; 2 written, 3 pending</td></tr>
+          <tr><th scope="row">Checklist, beginner guide, journal</th><td>Files not yet supplied</td></tr>
+          <tr><th scope="row">Social links, contact</th><td>Not connected, awaiting verified accounts</td></tr>
+          <tr><th scope="row">Market data</th><td>None. All charts are illustrative</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 7 · REFLECTION -->
+  <section class="block reflection" id="reflection" aria-labelledby="re-h">
+    <p class="mono kicker rv">06 — Reflection</p>
+    <h2 id="re-h" class="rv">What I’d carry forward.</h2>
+    <div class="cols">
+      <div class="rv"><h3 class="mono">What I built</h3><p>The visual system, the six-frame scroll narrative, the page templates and the interactive calculator, as a Next.js App Router project in TypeScript.</p></div>
+      <div class="rv" style="--i:1"><h3 class="mono">What remains</h3><p>Real lessons, real articles and verified channels, supplied by the brand owner. Until then, the prototype says “sample” out loud rather than pretending.</p></div>
+      <div class="rv" style="--i:2"><h3 class="mono">What I learned</h3><p>A long scroll story works when each frame changes the meaning of the same object. Honest labelling is part of the design, not a footnote to it.</p></div>
+    </div>
+  </section>
+
+  <!-- 8 · NEXT -->
+  <a class="next" data-chrome="light" href="/work/sankalp-shristi-furnishers/" aria-label="Next exhibition: Sankalp & Shristi Furnishers">
+    <img src="/assets/img/ssf/line-5-720.jpg" width="720" height="450" alt="" loading="lazy">
+    <span class="next__txt"><span class="mono">Next exhibition · 03</span><b>Sankalp &amp; Shristi Furnishers</b><em>Lines becoming a bed →</em></span>
+  </a>
+</main>
+
+<footer class="foot">
+  <p class="foot__cta">Questions about this one? <a href="/contact/">Ask me.</a></p>
+  <p class="foot__row"><a href="/#wealthwithsg">Gallery</a><a href="/projects/">All projects</a><a href="/about/">About</a><a href="mailto:sankalp.kushwaha.18@gmail.com">Email</a></p>
+  <p class="foot__fine"><span>© 2026 Sankalp Kushwaha</span><span>Educational prototype · nothing here is financial advice</span></p>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/wsg.js" defer></script>
+</body>
+</html>

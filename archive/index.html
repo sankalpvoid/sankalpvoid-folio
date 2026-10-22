@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Experiments — Exhibition 04 · sankalpvoid</title>
+<meta name="description" content="Three motion studies: CyberPunk (scroll to canvas), Parallax (pointer to depth) and GSAP Motion (timelines to rhythm). Real previews, what each investigates and what it taught me.">
+<link rel="canonical" href="https://sankalpvoid-folio.vercel.app/archive/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sankalpvoid">
+<meta property="og:title" content="Experiments — three studies in scroll, depth and timing">
+<meta property="og:description" content="CyberPunk, Parallax and GSAP Motion: small studies that each ask one question about motion.">
+<meta property="og:url" content="https://sankalpvoid-folio.vercel.app/archive/">
+<meta property="og:image" content="https://sankalpvoid-folio.vercel.app/assets/img/og-archive.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0e0e11">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/archive.css">
+<script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body>
+<a class="skip" href="#cyberpunk">Skip to the studies</a>
+<header class="chrome">
+  <a class="wordmark" href="/#archive" aria-label="sankalpvoid — back to the gallery"><b>sankalpvoid</b><span>← Gallery</span></a>
+  <nav aria-label="Primary">
+    <a href="/projects/" data-open-index>Projects</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="t">
+    <div data-exhibit class="hero__fig" aria-hidden="true">
+      <img class="h1" src="/assets/img/exp/cyber-1-720.jpg" width="720" height="450" alt="" fetchpriority="high">
+      <img class="h2" src="/assets/img/exp/parallax-2-720.jpg" width="720" height="450" alt="">
+      <img class="h3" src="/assets/img/exp/gsap-1-720.jpg" width="720" height="450" alt="">
+    </div>
+    <div class="hero__copy">
+      <p class="mono kicker rv">Exhibition 04 · Archive</p>
+      <h1 id="t" class="rv" style="--i:1">Experiments</h1>
+      <p class="lede rv" style="--i:2">Three small studies, each asking one question about motion. They are the practice behind the larger work above.</p>
+      <ol class="toc rv" style="--i:3">
+        <li><a href="#cyberpunk"><span class="mono">A</span>CyberPunk<em>Can scroll behave like a timeline?</em></a></li>
+        <li><a href="#parallax"><span class="mono">B</span>Parallax<em>How little does depth need?</em></a></li>
+        <li><a href="#gsap-motion"><span class="mono">C</span>GSAP Motion<em>What makes motion feel orchestrated?</em></a></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- A · CYBERPUNK -->
+  <article class="study s-a" id="cyberpunk" aria-labelledby="a-h">
+    <header class="study__head">
+      <p class="mono kicker rv">Study A · Scroll → canvas</p>
+      <h2 id="a-h" class="rv">CyberPunk</h2>
+      <p class="q rv">Can the page behave like a moving sequence instead of a document?</p>
+    </header>
+    <div class="strip rv">
+      <figure><div class="media"><img src="/assets/img/exp/cyber-1-720.jpg" width="720" height="450" alt="CyberPunk study at the top of the page: a pale 3D figure under large headline text" loading="lazy"></div><figcaption class="mono">scroll 0 px</figcaption></figure>
+      <figure><div class="media"><img src="/assets/img/exp/cyber-2-720.jpg" width="720" height="450" alt="CyberPunk study after scrolling: stacked statements on a pale ground" loading="lazy"></div><figcaption class="mono">scroll 1100 px</figcaption></figure>
+      <figure><div class="media"><img src="/assets/img/exp/cyber-3-720.jpg" width="720" height="450" alt="CyberPunk study further down the page with a column of small text" loading="lazy"></div><figcaption class="mono">scroll 2200 px</figcaption></figure>
+    </div>
+    <div class="study__body">
+      <div class="rv">
+        <h3 class="mono">What it investigates</h3>
+        <p>A 300-frame image sequence is drawn to a canvas and mapped to scroll progress. GSAP ScrollTrigger drives the pinned sections and Locomotive Scroll handles smooth scrolling, so the two have to stay in sync.</p>
+      </div>
+      <div class="rv" style="--i:1">
+        <h3 class="mono">What it taught me</h3>
+        <p>The hard part is not the effect but keeping a long frame sequence smooth while it shares a timeline with the rest of the page.</p>
+      </div>
+      <div class="rv" style="--i:2">
+        <h3 class="mono">Toolkit</h3>
+        <p>HTML, CSS, JavaScript, Canvas, GSAP, ScrollTrigger, Locomotive Scroll.</p>
+      </div>
+    </div>
+    <div class="study__act">
+      <button class="btn btn--solid" type="button" data-live="https://cyberpunk-seven-beta.vercel.app/" data-title="CyberPunk live study">Try it here</button>
+      <a class="btn" href="https://cyberpunk-seven-beta.vercel.app/" target="_blank" rel="noreferrer">View live experience <span class="arr" aria-hidden="true">↗</span></a>
+      <a class="btn" href="https://github.com/sankalpvoid/CyberPunk" target="_blank" rel="noreferrer">View source <span class="arr" aria-hidden="true">↗</span></a>
+    </div>
+    <div class="live" data-live-slot hidden></div>
+  </article>
+
+  <!-- B · PARALLAX -->
+  <article class="study s-b" id="parallax" aria-labelledby="b-h">
+    <header class="study__head">
+      <p class="mono kicker rv">Study B · Pointer → depth</p>
+      <h2 id="b-h" class="rv">Parallax</h2>
+      <p class="q rv">How little does a flat screen need to feel like a place?</p>
+    </header>
+    <div class="duo rv">
+      <figure><div class="media"><img src="/assets/img/exp/parallax-1-720.jpg" srcset="/assets/img/exp/parallax-1-720.jpg 720w, /assets/img/exp/parallax-1.jpg 1440w" sizes="(min-width:900px) 46vw, 92vw" width="1440" height="900" alt="Parallax study: layered mountains and fog with the title ‘China Zhangjiajie’" loading="lazy"></div><figcaption class="mono">pointer at rest</figcaption></figure>
+      <figure><div class="media"><img src="/assets/img/exp/parallax-2-720.jpg" srcset="/assets/img/exp/parallax-2-720.jpg 720w, /assets/img/exp/parallax-2.jpg 1440w" sizes="(min-width:900px) 46vw, 92vw" width="1440" height="900" alt="The same parallax scene with the pointer moved to the lower right and the layers shifted" loading="lazy"></div><figcaption class="mono">pointer lower right</figcaption></figure>
+    </div>
+    <div class="study__body">
+      <div class="rv">
+        <h3 class="mono">What it investigates</h3>
+        <p>Separate mountain, fog and light layers each move at their own speed and perspective depth, with subtle rotation derived from the pointer. GSAP choreographs the opening.</p>
+      </div>
+      <div class="rv" style="--i:1">
+        <h3 class="mono">What it taught me</h3>
+        <p>Depth cues and a clear motion hierarchy do most of the work. Simple transforms, no 3D engine, and the scene already feels physical.</p>
+      </div>
+      <div class="rv" style="--i:2">
+        <h3 class="mono">Toolkit</h3>
+        <p>HTML, CSS, JavaScript, GSAP, perspective and <code>translateZ</code>. Photography in the scene is stock material.</p>
+      </div>
+    </div>
+    <div class="study__act">
+      <button class="btn btn--solid" type="button" data-live="https://parallax-website-beta-pearl.vercel.app/" data-title="Parallax live study">Try it here</button>
+      <a class="btn" href="https://parallax-website-beta-pearl.vercel.app/" target="_blank" rel="noreferrer">View live experience <span class="arr" aria-hidden="true">↗</span></a>
+      <a class="btn" href="https://github.com/sankalpvoid/Parallax-Website" target="_blank" rel="noreferrer">View source <span class="arr" aria-hidden="true">↗</span></a>
+    </div>
+    <p class="touch">On a touch screen there is no hover: open the live version and drag to explore, or see it on a desktop.</p>
+    <div class="live" data-live-slot hidden></div>
+  </article>
+
+  <!-- C · GSAP -->
+  <article class="study s-c" id="gsap-motion" aria-labelledby="c-h">
+    <header class="study__head">
+      <p class="mono kicker rv">Study C · Timeline → rhythm</p>
+      <h2 id="c-h" class="rv">GSAP Motion</h2>
+      <p class="q rv">What makes a set of animations feel orchestrated instead of decorated?</p>
+    </header>
+    <div class="duo duo--light rv">
+      <figure><div class="media"><img src="/assets/img/exp/gsap-1-720.jpg" srcset="/assets/img/exp/gsap-1-720.jpg 720w, /assets/img/exp/gsap-1.jpg 1440w" sizes="(min-width:900px) 46vw, 92vw" width="1440" height="900" alt="GSAP motion study landing page with a headline, a megaphone illustration and brand logos" loading="lazy"></div><figcaption class="mono">opening sequence</figcaption></figure>
+      <figure><div class="media"><img src="/assets/img/exp/gsap-2-720.jpg" srcset="/assets/img/exp/gsap-2-720.jpg 720w, /assets/img/exp/gsap-2.jpg 1440w" sizes="(min-width:900px) 46vw, 92vw" width="1440" height="900" alt="The GSAP study 1.5 seconds after load: the headline is in place while the illustration’s icons fade in and the paragraph and button have not appeared yet" loading="lazy"></div><figcaption class="mono">1.5 s in · mid-sequence</figcaption></figure>
+    </div>
+    <div class="study__body">
+      <div class="rv">
+        <h3 class="mono">What it investigates</h3>
+        <p>GSAP timelines sequence the opening and ScrollTrigger drives section motion, with scrubbed animation tied to scroll and cards that enter from a direction.</p>
+      </div>
+      <div class="rv" style="--i:1">
+        <h3 class="mono">What it taught me</h3>
+        <p>Animation is a system of timing and hierarchy. Small changes in sequencing, overlap and easing change how the whole interface feels.</p>
+      </div>
+      <div class="rv" style="--i:2">
+        <h3 class="mono">Toolkit</h3>
+        <p>HTML, CSS, JavaScript, GSAP, ScrollTrigger. The brand and copy in the page are demo content.</p>
+      </div>
+    </div>
+    <div class="study__act">
+      <button class="btn btn--solid" type="button" data-live="https://gsap-motion.vercel.app/" data-title="GSAP Motion live study">Try it here</button>
+      <a class="btn" href="https://gsap-motion.vercel.app/" target="_blank" rel="noreferrer">View live experience <span class="arr" aria-hidden="true">↗</span></a>
+      <a class="btn" href="https://github.com/sankalpvoid/GSAP-Scroll_Trigger" target="_blank" rel="noreferrer">View source <span class="arr" aria-hidden="true">↗</span></a>
+    </div>
+    <div class="live" data-live-slot hidden></div>
+  </article>
+
+  <p class="note">Previews are screenshots of the live studies. “Try it here” loads the real page only when you ask, and unloads it when you close it.</p>
+
+  <a class="next" data-chrome="light" href="/about/" aria-label="Next: About">
+    <span class="next__txt"><span class="mono">Finally</span><b>About the maker</b><em>Engineering, product and music →</em></span>
+  </a>
+</main>
+
+<footer class="foot">
+  <p class="foot__cta">Got a motion problem? <a href="/contact/">Let’s talk.</a></p>
+  <p class="foot__row"><a href="/#archive">Gallery</a><a href="/projects/">All projects</a><a href="/about/">About</a><a href="mailto:sankalp.kushwaha.18@gmail.com">Email</a></p>
+  <p class="foot__fine"><span>© 2026 Sankalp Kushwaha</span><span>Studies, not products</span></p>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/archive.js" defer></script>
+</body>
+</html>

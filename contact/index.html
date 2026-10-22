@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact — sankalpvoid</title>
+<meta name="description" content="Get in touch with Sankalp Kushwaha: email, GitHub, Instagram and YouTube.">
+<link rel="canonical" href="https://sankalpvoid-folio.vercel.app/contact/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sankalpvoid">
+<meta property="og:title" content="Contact — sankalpvoid">
+<meta property="og:description" content="Email, GitHub, Instagram and YouTube.">
+<meta property="og:url" content="https://sankalpvoid-folio.vercel.app/contact/">
+<meta property="og:image" content="https://sankalpvoid-folio.vercel.app/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0d0d0f">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/pages.css">
+<script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body class="contact">
+<a class="skip" href="#main">Skip to content</a>
+<header class="chrome">
+  <a class="wordmark" href="/" aria-label="sankalpvoid — home"><b>sankalpvoid</b><span>Sankalp Kushwaha</span></a>
+  <nav aria-label="Primary"><a href="/projects/" data-open-index>Projects</a><a href="/about/">About</a><a href="/contact/" aria-current="page">Contact</a></nav>
+</header>
+<main id="main" class="pg">
+  <p class="mono kicker rv">Contact</p>
+  <h1 class="rv" style="--i:1">Building something? <em>Say hello.</em></h1>
+  <p class="lede rv" style="--i:2">Email is best. Tell me what you’re making and where I could help, or just which project caught your eye.</p>
+  <p class="rv" style="--i:3"><a class="mail" href="mailto:sankalp.kushwaha.18@gmail.com" data-mail>sankalp.kushwaha.18@gmail.com</a><button type="button" class="btn" data-copy hidden style="margin-left:16px;vertical-align:middle">Copy</button><span class="copied" role="status" data-copied></span></p>
+  <nav class="links rv" aria-label="Elsewhere">
+    <a href="https://github.com/sankalpvoid" target="_blank" rel="noreferrer"><span class="mono">Code</span><b>GitHub</b><span>@sankalpvoid ↗</span></a>
+    <a href="https://www.instagram.com/sankalp.singss/" target="_blank" rel="noreferrer"><span class="mono">Music</span><b>Instagram</b><span>@sankalp.singss ↗</span></a>
+    <a href="https://www.youtube.com/@sankalp.mussic" target="_blank" rel="noreferrer"><span class="mono">Music</span><b>YouTube</b><span>@sankalp.mussic ↗</span></a>
+  </nav>
+  <div class="pg-end"></div>
+</main>
+<footer class="foot">
+  <p class="foot__row"><a href="/">Gallery</a><a href="/projects/">All projects</a><a href="/about/">About</a></p>
+  <p class="foot__fine"><span>© 2026 Sankalp Kushwaha</span><span>Mumbai · IIT Bombay</span></p>
+</footer>
+<script src="/assets/js/site.js" defer></script>
+<script>
+(() => {
+  const b = document.querySelector('[data-copy]'), m = document.querySelector('[data-mail]'), s = document.querySelector('[data-copied]');
+  if (!b || !navigator.clipboard) return;
+  b.hidden = false;
+  b.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(m.textContent.trim()); s.textContent = 'Copied.'; } catch { s.textContent = 'Select the address and copy it manually.'; }
+    setTimeout(() => { s.textContent = ''; }, 2400);
+  });
+})();
+</script>
+</body>
+</html>

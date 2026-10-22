@@ -1,0 +1,11 @@
+{
+  "name": "sankalpvoid-folio-checks",
+  "private": true,
+  "description": "Browser checks for the portfolio. Dev-only; not part of the deployed site.",
+  "scripts": {
+    "serve": "cd .. && python3 -m http.server 4173",
+    "verify": "node verify.js",
+    "axe": "node axe.js"
+  },
+  "devDependencies": { "axe-core": "^4.10.0", "playwright": "^1.50.0" }
+}

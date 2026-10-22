@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reclaim — Exhibition 01 · sankalpvoid</title>
+<meta name="description" content="Reclaim is a behaviour-change companion for people trying to reduce or quit smoking. The product story, the decisions behind it and a walk through the real prototype screens.">
+<link rel="canonical" href="https://sankalpvoid-folio.vercel.app/work/reclaim/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sankalpvoid">
+<meta property="og:title" content="Reclaim — a companion for the hard moments of quitting">
+<meta property="og:description" content="A behaviour-change prototype built around cravings, imperfect days and honest data. Read the story and walk through the screens.">
+<meta property="og:url" content="https://sankalpvoid-folio.vercel.app/work/reclaim/">
+<meta property="og:image" content="https://sankalpvoid-folio.vercel.app/assets/img/og-reclaim.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f1ece2">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/reclaim.css">
+<script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the story</a>
+<header class="chrome">
+  <a class="wordmark" href="/#reclaim" aria-label="sankalpvoid — back to the gallery"><b>sankalpvoid</b><span>← Gallery</span></a>
+  <nav aria-label="Primary">
+    <a href="/projects/" data-open-index>Projects</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- 1 · INVITATION -->
+  <section class="hero" aria-labelledby="t">
+    <div class="hero__copy">
+      <p class="mono kicker rv">Exhibition 01 · Product</p>
+      <h1 id="t" class="rv" style="--i:1">Reclaim</h1>
+      <p class="lede rv" style="--i:2">A companion for the hard moments of quitting smoking, built around cravings, imperfect days and data that admits what it doesn’t know.</p>
+      <div class="actions rv" style="--i:3">
+        <a class="btn btn--solid" href="https://reclaim-app-tawny.vercel.app/" target="_blank" rel="noreferrer">View live prototype <span class="arr" aria-hidden="true">↗</span></a>
+        <a class="btn" href="#premise">Read the story <span aria-hidden="true">↓</span></a>
+        <a class="btn" href="https://github.com/sankalpvoid/reclaim-showcase" target="_blank" rel="noreferrer">Case-study repo <span class="arr" aria-hidden="true">↗</span></a>
+      </div>
+      <dl class="meta rv" style="--i:4">
+        <div><dt>My role</dt><dd>Designed and built it, from product logic to interface</dd></div>
+        <div><dt>Status</dt><dd>Live prototype, in active development</dd></div>
+        <div><dt>Built with</dt><dd>JavaScript, Supabase, Vercel</dd></div>
+      </dl>
+    </div>
+    <div class="hero__stage" data-exhibit>
+      <div class="dev d-a"><img src="/assets/img/rc/dark-craving-390.jpg" srcset="/assets/img/rc/dark-craving-390.jpg 390w, /assets/img/rc/dark-craving.jpg 780w" sizes="(min-width:900px) 18vw, 40vw" width="780" height="1688" alt="Reclaim craving support screen, listing box breathing, a five-minute countdown and a water reset" decoding="async"></div>
+      <div class="dev d-c"><img src="/assets/img/rc/dark-momentum-390.jpg" srcset="/assets/img/rc/dark-momentum-390.jpg 390w, /assets/img/rc/dark-momentum.jpg 780w" sizes="(min-width:900px) 18vw, 40vw" width="780" height="1688" alt="Reclaim momentum screen with the line ‘Keep returning.’" decoding="async"></div>
+      <div class="dev d-b"><img src="/assets/img/rc/light-home-390.jpg" srcset="/assets/img/rc/light-home-390.jpg 390w, /assets/img/rc/light-home.jpg 780w" sizes="(min-width:900px) 22vw, 50vw" width="780" height="1688" alt="Reclaim home screen in the light theme showing 14 days smoke-free and a ‘Get craving support’ button" decoding="async" fetchpriority="high"></div>
+    </div>
+    <p class="hero__note mono">Screens captured from the local prototype with sample data.</p>
+  </section>
+
+  <div id="story"></div>
+
+  <!-- 2 · PREMISE -->
+  <section class="block premise" id="premise" aria-labelledby="premise-h">
+    <p class="mono kicker rv">01 — Premise</p>
+    <h2 id="premise-h" class="statement rv">Quitting is not one decision. It is a sequence of difficult moments.</h2>
+    <div class="cols">
+      <div class="rv">
+        <h3 class="mono">The problem</h3>
+        <p>Most smoking trackers count days or cigarettes. That is useful, but it only describes what already happened. It says nothing to someone in the middle of an urge at nine in the evening.</p>
+      </div>
+      <div class="rv" style="--i:1">
+        <h3 class="mono">The situation I designed around</h3>
+        <p>The exact moment someone is struggling, then the days after it: motivation shifting, triggers repeating, wins that are small and bad days that happen anyway.</p>
+      </div>
+      <div class="rv" style="--i:2">
+        <h3 class="mono">The question</h3>
+        <p>What can the app do in that moment, and what can it learn from that moment afterwards? That turns a counter into a feedback loop.</p>
+      </div>
+    </div>
+    <ol class="loop rv" aria-label="The product loop">
+      <li><span class="mono">01</span>A hard moment</li>
+      <li><span class="mono">02</span>One small action</li>
+      <li><span class="mono">03</span>A record of it</li>
+      <li><span class="mono">04</span>A pattern, over time</li>
+      <li><span class="mono">05</span>A better next moment</li>
+    </ol>
+  </section>
+
+  <!-- 3 · EXPLORATION: three journeys -->
+  <section class="block journeys" id="journeys" aria-labelledby="journeys-h">
+    <div class="journeys__img rv">
+      <div class="dev"><img src="/assets/img/rc/landing-dark-390.jpg" srcset="/assets/img/rc/landing-dark-390.jpg 390w, /assets/img/rc/landing-dark.jpg 780w" sizes="(min-width:900px) 24vw, 60vw" width="780" height="1688" alt="Reclaim welcome screen reading ‘Room to grow’ with the three paths Quit, Reduce and Track" loading="lazy" decoding="async"></div>
+    </div>
+    <div class="journeys__copy">
+      <p class="mono kicker rv">02 — Exploration</p>
+      <h2 id="journeys-h" class="rv">Not everyone is ready for the same commitment.</h2>
+      <p class="rv">So Reclaim doesn’t ask for one. It starts with three paths, each with its own progress logic, and lets people change their pace later.</p>
+      <ul class="paths">
+        <li class="rv"><h3>Quit</h3><p>Time smoke-free, an evidence-informed recovery timeline and savings, shown as context rather than pressure.</p></li>
+        <li class="rv" style="--i:1"><h3>Reduce</h3><p>Targets, recorded days and periodic reviews. Cutting down is a legitimate route, not a failed attempt at quitting.</p></li>
+        <li class="rv" style="--i:2"><h3>Track</h3><p>Daily counts, spending and a weekly pattern, for people who want to understand the habit before changing it.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4 · DECISIONS -->
+  <section class="dark decisions" data-chrome="light" id="decisions" aria-labelledby="decisions-h">
+    <div class="wrap">
+      <p class="mono kicker rv">03 — Decisions</p>
+      <h2 id="decisions-h" class="rv">Four choices that shaped the product.</h2>
+      <div class="dec">
+        <div class="dec__sticky" aria-hidden="true">
+          <div class="dev"><div class="dec__stack">
+            <img class="on" data-for="1" src="/assets/img/rc/dark-home-390.jpg" srcset="/assets/img/rc/dark-home-390.jpg 390w, /assets/img/rc/dark-home.jpg 780w" sizes="320px" width="780" height="1688" alt="" loading="lazy">
+            <img data-for="2" src="/assets/img/rc/dark-momentum-390.jpg" srcset="/assets/img/rc/dark-momentum-390.jpg 390w, /assets/img/rc/dark-momentum.jpg 780w" sizes="320px" width="780" height="1688" alt="" loading="lazy">
+            <img data-for="3" src="/assets/img/rc/dark-craving-390.jpg" srcset="/assets/img/rc/dark-craving-390.jpg 390w, /assets/img/rc/dark-craving.jpg 780w" sizes="320px" width="780" height="1688" alt="" loading="lazy">
+            <img data-for="4" src="/assets/img/rc/light-home-390.jpg" srcset="/assets/img/rc/light-home-390.jpg 390w, /assets/img/rc/light-home.jpg 780w" sizes="320px" width="780" height="1688" alt="" loading="lazy">
+          </div></div>
+        </div>
+        <ol class="dec__list">
+          <li data-step="1">
+            <figure class="dec__m"><img src="/assets/img/rc/dark-home-390.jpg" width="390" height="844" alt="Reclaim home screen with the label ‘At your pace’" loading="lazy"></figure>
+            <span class="mono n">Decision 1</span>
+            <h3>Reduce is a route, not a failure.</h3>
+            <p>Reduction gets targets, recorded days and periodic reviews instead of being tucked behind a quit-only interface.</p>
+            <p class="cost"><b>The consequence:</b> each journey carries its own progress logic.</p>
+          </li>
+          <li data-step="2">
+            <figure class="dec__m"><img src="/assets/img/rc/dark-momentum-390.jpg" width="390" height="844" alt="Reclaim momentum screen reading ‘Momentum is not perfect’" loading="lazy"></figure>
+            <span class="mono n">Decision 2</span>
+            <h3>A half-recorded day is not a clean day.</h3>
+            <p>Reduction reviews separate confirmed days from incomplete or untracked ones, so the product never rewards or punishes someone on the strength of data that isn’t there.</p>
+            <p class="cost"><b>In the product:</b> reviews label days as confirmed, incomplete or untracked.</p>
+          </li>
+          <li data-step="3">
+            <figure class="dec__m"><img src="/assets/img/rc/dark-craving-390.jpg" width="390" height="844" alt="Reclaim craving support screen" loading="lazy"></figure>
+            <span class="mono n">Decision 3</span>
+            <h3>Treat cravings as data.</h3>
+            <p>A craving is something to get through, and over time a signal about timing, mood, trigger and which coping tool helped. The aim is insight from behaviour, not another motivational quote.</p>
+            <p class="cost"><b>Where it stands:</b> a direction, not a finished capability. The quality of the insights is still being improved.</p>
+          </li>
+          <li data-step="4">
+            <figure class="dec__m"><img src="/assets/img/rc/light-home-390.jpg" width="390" height="844" alt="Reclaim home screen with a notice that progress is saved on this device only" loading="lazy"></figure>
+            <span class="mono n">Decision 4</span>
+            <h3>Local first, synced when possible.</h3>
+            <p>Core interactions work on the device and supported records sync when an account and backend are available. Real life is rarely a perfect connection.</p>
+            <p class="cost"><b>The consequence:</b> progress lives on the device until someone logs in, so the home screen says so plainly.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · EXPERIENCE -->
+  <section class="block experience" id="experience" aria-labelledby="exp-h">
+    <p class="mono kicker rv">04 — Experience</p>
+    <h2 id="exp-h" class="rv">Walk through the prototype.</h2>
+    <div class="viewer" data-viewer>
+      <div class="viewer__ctrl">
+        <div role="tablist" aria-label="Screens" class="tabs">
+          <button role="tab" id="tab-home" aria-controls="viewer-panel" aria-selected="true" data-screen="home">Home</button>
+          <button role="tab" id="tab-craving" aria-controls="viewer-panel" aria-selected="false" tabindex="-1" data-screen="craving">Craving</button>
+          <button role="tab" id="tab-health" aria-controls="viewer-panel" aria-selected="false" tabindex="-1" data-screen="health">Health</button>
+          <button role="tab" id="tab-momentum" aria-controls="viewer-panel" aria-selected="false" tabindex="-1" data-screen="momentum">Momentum</button>
+          <button role="tab" id="tab-dreams" aria-controls="viewer-panel" aria-selected="false" tabindex="-1" data-screen="dreams">Dreams</button>
+        </div>
+        <div class="theme" role="group" aria-label="Appearance">
+          <button type="button" data-theme="dark" aria-pressed="true">Dark</button>
+          <button type="button" data-theme="light" aria-pressed="false">Light</button>
+        </div>
+      </div>
+      <div class="viewer__body" id="viewer-panel" role="tabpanel" aria-labelledby="tab-home" tabindex="0">
+        <div class="dev viewer__dev"><img data-screen-img src="/assets/img/rc/dark-home-390.jpg" srcset="/assets/img/rc/dark-home-390.jpg 390w, /assets/img/rc/dark-home.jpg 780w" sizes="340px" width="780" height="1688" alt="Reclaim home screen, dark theme"></div>
+        <div class="viewer__note" aria-live="polite">
+          <h3 data-note-title>Home</h3>
+          <p data-note-text>One question, one action. “What would help right now?” sits above the day count, with craving support a single tap away.</p>
+        </div>
+      </div>
+      <p class="fine">All screens come from the local prototype running with sample data (a profile called “Sample”, 14 days in). No real user data is shown.</p>
+    </div>
+    <noscript><p class="fine">Interactive viewer needs JavaScript. The screens are listed in the decisions section above.</p></noscript>
+  </section>
+
+  <!-- care -->
+  <section class="block care" id="care" aria-labelledby="care-h">
+    <p class="mono kicker rv">What this is, and isn’t</p>
+    <h2 id="care-h" class="rv">A support tool, not treatment.</h2>
+    <div class="cols cols--2">
+      <p class="rv">Reclaim supports behaviour change. It does not diagnose, treat or replace professional care, and the recovery timeline is general, evidence-informed guidance and estimates, not an individual medical claim.</p>
+      <p class="rv" style="--i:1">This page makes no claims about effectiveness, adoption or health outcomes, because none are documented. Privacy is handled with user-owned data access and row-level security, and the community features carry moderation controls.</p>
+    </div>
+  </section>
+
+  <!-- 6 · REFLECTION -->
+  <section class="block reflection" id="reflection" aria-labelledby="ref-h">
+    <p class="mono kicker rv">05 — Reflection</p>
+    <h2 id="ref-h" class="rv">What exists, what doesn’t, what I took from it.</h2>
+    <div class="cols">
+      <div class="rv">
+        <h3 class="mono">What I built</h3>
+        <ul class="plain">
+          <li>The product logic: three journeys, check-ins, craving toolkit, recovery milestones, savings goals</li>
+          <li>The interface, in dark and light themes</li>
+          <li>The front end, dependency-free JavaScript</li>
+          <li>Supabase auth, data and row-level security, plus analytics and regression tests (private repository)</li>
+        </ul>
+      </div>
+      <div class="rv" style="--i:1">
+        <h3 class="mono">Status, honestly</h3>
+        <ul class="plain">
+          <li><b>Working in the prototype:</b> core journeys, behavioural logging, recovery and progress surfaces, craving support, stage-based community circles</li>
+          <li><b>Still improving:</b> dashboard personalisation, insight quality, responsive consistency, accessibility, privacy UX</li>
+          <li><b>Not claimed:</b> a finished product, outcomes or users</li>
+        </ul>
+      </div>
+      <div class="rv" style="--i:2">
+        <h3 class="mono">What I learned</h3>
+        <ul class="plain">
+          <li>Design for the imperfect day; most of the real product lives there.</li>
+          <li>Say what the data can’t tell you. Partial records are a design problem, not an edge case.</li>
+          <li>Smarter and calmer beats more screens. The roadmap is mostly subtraction.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · NEXT -->
+  <a class="next" data-chrome="light" href="/work/wealthwithsg/" aria-label="Next exhibition: WealthWithSG">
+    <img src="/assets/img/wsg/hero-4-720.jpg" width="720" height="450" alt="" loading="lazy">
+    <span class="next__txt"><span class="mono">Next exhibition · 02</span><b>WealthWithSG</b><em>Noise resolving into structure →</em></span>
+  </a>
+</main>
+
+<footer class="foot">
+  <p class="foot__cta">Want the long version? <a href="/contact/">Let’s talk.</a></p>
+  <p class="foot__row"><a href="/#reclaim">Gallery</a><a href="/projects/">All projects</a><a href="/about/">About</a><a href="mailto:sankalp.kushwaha.18@gmail.com">Email</a></p>
+  <p class="foot__fine"><span>© 2026 Sankalp Kushwaha</span><span>Reclaim screens: local prototype, sample data</span></p>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/reclaim.js" defer></script>
+</body>
+</html>
