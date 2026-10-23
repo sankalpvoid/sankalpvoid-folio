@@ -10,6 +10,7 @@
   const slugs = slides.map((s) => s.dataset.slug);
   let index = 0;
   let busy = false;
+  let settle = null; /* finishes the in-flight transition immediately */
   const reducedNow = () => reduce.matches;
 
   /* ---- scenes: charts and the traced bed are built lazily, once per slide ---- */
@@ -77,8 +78,10 @@
       slide.classList.toggle('rev', dir < 0);
       slide.classList.add('is-entering');
       busy = true;
-      const done = () => { prev.classList.remove('is-leaving'); slide.classList.remove('is-entering', 'rev'); busy = false; };
-      setTimeout(done, 1500);
+      let timer = 0;
+      const done = () => { clearTimeout(timer); prev.classList.remove('is-leaving'); slide.classList.remove('is-entering', 'rev'); busy = false; settle = null; };
+      settle = done;
+      timer = setTimeout(done, 1500);
     }
     document.body.dataset.tone = slide.dataset.tone;
     ticks.forEach((t, i) => (i === index ? t.setAttribute('aria-current', 'true') : t.removeAttribute('aria-current')));
@@ -88,8 +91,8 @@
     try { history.replaceState(null, '', index === 0 ? location.pathname : '#' + slugs[index]); } catch {}
     hydrateAround(index);
   };
-  const go = (n, dir) => { if (!busy && n !== index) apply(n, dir ?? (n > index ? 1 : -1)); };
-  const step = (d) => { if (!busy) apply(index + d, d); };
+  const go = (n, dir) => { if (busy && settle) settle(); if (n !== index) apply(n, dir ?? (n > index ? 1 : -1)); };
+  const step = (d) => { if (busy && settle) settle(); apply(index + d, d); };
 
   stage.querySelector('[data-next]').addEventListener('click', () => step(1));
   stage.querySelector('[data-prev]').addEventListener('click', () => step(-1));

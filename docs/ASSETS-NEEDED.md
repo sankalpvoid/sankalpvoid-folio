@@ -5,7 +5,7 @@
 - **Music.** No audio or video of a performance was available in any repository, so the site has no embedded audio (and never autoplays). About links to the YouTube and Instagram channels. To add a listening moment: pick one recording you own, then add a click-to-load embed or a self-hosted `<audio controls preload="none">` to `about/index.html`.
 - **A portrait or studio photo** for About.
 - **Real photography** for Sankalp & Shristi Furnishers: showroom, workshop, products. Until then the site uses the repo's own studio renders, each labelled placeholder.
-- **A screen recording** of Reclaim (craving breathing exercise, check-in) would turn the Reclaim viewer from stills into a demonstration. Reclaim also has no capture of its Reduce/Track journeys or the insights and circles screens; screens shown are Home, Craving, Health, Momentum, Dreams.
+- **Reclaim:** the craving flow (support, box breathing, feedback, confirmation, later recommendation) was captured from the local prototype with sample data and backend requests blocked, so sign-in and Supabase sync are not shown. Not captured: the Reduce and Track journeys, insights and circles. The recording is WebM, which older Safari versions may not play; a poster image is shown instead.
 - **WealthWithSG:** real lessons, articles and verified social links come from the brand owner.
 
 ## Facts and wording to confirm before publishing
@@ -19,3 +19,10 @@
 ## Product issues noticed while capturing Reclaim
 
 - Light theme, Craving Support: the three coping-tool cards render with very low text contrast over their artwork. The site shows the dark version of that screen.
+
+## Provenance to confirm (second pass)
+
+- **Furnishers bed lines.** `assets/data/bed-trace.json` is the traced geometry from your hero prototype (`claude/hero-prototype`, `src/app/(site)/lab/hero/bed-trace.json`, room contours removed). It only fits that studio render. The before/after images are the repository's own `docs/design/before` and `after` captures.
+- **Reclaim artwork.** The flower and path images are the app's own assets from the local Reclaim repo.
+- **"Worked for you before".** The page describes it as a plain rule (three rated cravings, a tool used at least twice with a positive feedback score, best average first). I read this from `cravingRecommendation()` in the app; confirm it is still how the live build behaves.
+- **Reclaim sample data.** The "Sample" profile, 14-day run and four seeded cravings are test data I created for the captures, labelled as sample on the page.

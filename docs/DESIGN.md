@@ -4,16 +4,16 @@
 
 *Each project is an exhibition. Together, they reveal the person who made them.*
 
-The home page is a gallery entrance, not an introduction: it opens on a featured project with the maker's name kept small. Each exhibition then gets its own world, built from that project's real material.
+The home page is a gallery entrance, not an introduction: it opens on a featured project with the maker's name kept small. Pass 2 turned each slide into a full-viewport **scene** built from the project's own material, and the project page opens on the same scene (shared-element transition). The full per-exhibition spec is in `ART-DIRECTION.md`.
 
-| Exhibition | Ground | Type | What carries the story |
+| Exhibition | Scene | Signature | Story rhythm |
 |---|---|---|---|
-| 01 Reclaim | warm paper, one violet from the product | Instrument Serif + Inter Tight | real prototype screens, an interactive viewer, decisions beside a sticky phone |
-| 02 WealthWithSG | near-black, hairlines, one brass | Cormorant Garamond | an original SVG chart that settles from noise to structure; the live site's six frames |
-| 03 Sankalp & Shristi Furnishers | ivory, charcoal, brass | Fraunces | a scroll-linked sequence of the live hero prototype, lines to bed |
-| 04 Experiments | dark specimen sheet, mono labels | Instrument Serif + JetBrains Mono | real previews; live studies load only on request |
+| 01 Reclaim | the app's own glass-flower art, one large craving-support screen rising from the edge, rings breathing 4‑4‑4‑4 | a breathing orb you start yourself | one evening in five beats, from real screens and a real recording |
+| 02 WealthWithSG | a chart that fills the viewport behind the title | move across the chart (pointer or slider) from noise to structure | six real frames in a sideways strip, then three decisions |
+| 03 Furnishers | architectural hairlines and the bed render, registered to traced geometry | lines → slats → frame → render → room on one stable stage | transformation, materials, authentic before/after, configurators |
+| 04 Experiments | three tall strips of the real studies at different crops | strips drift at different rates with the pointer | three bands, each composed differently |
 
-Shared: the `sankalpvoid` wordmark top-left, `Projects / About / Contact` top-right, an orange signal dot as the only recurring accent, hairline rules, mono captions.
+Shared: the `sankalpvoid` wordmark top-left, `Projects / About / Contact` top-right, hairline rules, mono captions.
 
 References studied: edoardosmerilli.com (full-bleed project-led entrance, restrained corner navigation, circular enter action, "all projects" control) and the two project sites. Composition, type, palette, transition choreography and copy are original; nothing was reused from the reference.
 
@@ -27,7 +27,8 @@ One curve family and three tiers, defined as tokens in `assets/css/base.css`.
 | UI | `--t-ui` .34s, `--ease-out` | menus, tabs, reveals, underline draws |
 | Micro | `--t-micro` .16s | hover and press feedback |
 
-- **Page transitions:** CSS cross-document View Transitions. The active slide's composition and the project hero share `view-transition-name: exhibit`, so the gallery visibly expands into the project opening. Browsers without support navigate normally.
+- **Gallery transitions:** one per exhibition, made of what it reveals: an iris opening from the breathing rings (Reclaim), a brass time-cursor sweep (WealthWithSG), hairlines widening into the surface (Furnishers), three strips arriving at their own speeds (Experiments). The outgoing scene sinks and dims. Reduced motion switches slides instantly.
+- **Page transitions:** CSS cross-document View Transitions. The active slide's scene and the project hero share `view-transition-name: exhibit`, so the scene carries into the project opening. Browsers without support navigate normally.
 - **Pointer:** a few pixels of depth on the gallery (fine pointers only), underline and fill feedback on controls. Nothing follows the cursor.
 - **Touch:** swipe changes exhibitions; every hover-only reveal has a tap or focus equivalent.
 - **Scroll:** never hijacked. One sticky sequence (Furnishers) with a skip link; the Reclaim phone is `position: sticky`, not scroll-jacked.
@@ -40,7 +41,8 @@ One curve family and three tiers, defined as tokens in `assets/css/base.css`.
 - No framework, no animation library, no WebGL. Transforms and opacity only.
 - Only the first gallery slide's images are fetched eagerly; neighbours are hydrated when idle.
 - Responsive images (`srcset`) for captures; `width`/`height` on every image to avoid layout shift; lazy loading below the fold.
-- Live experiments (CyberPunk plays a 300-frame canvas) are screenshots until the visitor clicks "Try it here".
+- Live experiments (CyberPunk plays a 300-frame canvas) are screenshots until the visitor clicks "Try it here". The Reclaim recording is `preload="none"`, plays only while on screen, and pauses when scrolled away.
+- The Furnishers stage is native SVG (22 KB of traced paths) over one render, not a stack of screenshots.
 - Image assets are immutable-cached; CSS and JS revalidate (`vercel.json`).
 
 ## Honesty rules applied

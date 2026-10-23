@@ -41,10 +41,12 @@ npm run axe      # axe-core WCAG A/AA + best-practice on every route at 1440px a
 ```
 index.html            gallery entrance
 projects/ about/ contact/ archive/ work/<slug>/index.html
-assets/css/           base.css (tokens, motion system, chrome, overlay) + one stylesheet per exhibition
-assets/js/            site.js (shared) + one small script per interactive page
+assets/css/           base.css (tokens, motion system, chrome, overlay), scenes.css (the four full-viewport scenes shared by gallery and project heroes), one stylesheet per exhibition
+assets/js/            site.js (shared), scenes.js (SVG chart + traced-bed builders), home.js, one small script per exhibition
+assets/data/          bed-trace.json: traced bed geometry from the Furnishers hero prototype
 assets/img/           real media only: prototype captures, studio renders, experiment previews
 docs/DESIGN.md        creative direction, motion system, decisions
+docs/ART-DIRECTION.md per-exhibition art-direction spec (second pass)
 docs/ASSETS-NEEDED.md missing assets and facts to confirm
 docs/screenshots/     reference screenshots
 ```

@@ -119,7 +119,7 @@
     const id = 'b' + (uid++);
     const data = await loadTrace(opts.data || '/assets/data/bed-trace.json');
     const g = data.groups;
-    svg.setAttribute('viewBox', `0 0 ${data.w} ${data.h}`);
+    svg.setAttribute('viewBox', opts.viewBox || `0 0 ${data.w} ${data.h}`);
     svg.replaceChildren();
     const defs = el('defs', {}, svg);
     const clip = el('clipPath', { id: id + 'c' }, defs);
@@ -157,7 +157,7 @@
     let p = opts.start ?? 1;
     const draw = (t) => {
       hair.forEach((l, i) => {
-        const d = easeOut(clamp((t - i * 0.004) / 0.2));
+        const d = easeOut(clamp((t + 0.08 - i * 0.004) / 0.22));
         l.style.strokeDashoffset = (1 - d).toFixed(3);
         l.style.opacity = (0.5 * (1 - ease(clamp((t - 0.22) / 0.3)))).toFixed(3);
       });

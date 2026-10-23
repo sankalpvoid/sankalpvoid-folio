@@ -1,73 +1,46 @@
-/* Reclaim exhibition: decision stepper (sticky phone) + prototype viewer. */
+/* Reclaim exhibition: the recording plays only while visible; the orb is opt-in. */
 (() => {
-  /* ---- decisions: the sticky phone follows the decision nearest the viewport centre ---- */
-  const steps = [...document.querySelectorAll('.dec__list li')];
-  const imgs = [...document.querySelectorAll('.dec__stack img')];
-  if (steps.length && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        const n = e.target.dataset.step;
-        steps.forEach((s) => s.classList.toggle('is-current', s === e.target));
-        imgs.forEach((im) => im.classList.toggle('on', im.dataset.for === n));
-      });
-    }, { rootMargin: '-45% 0px -45% 0px' });
-    steps.forEach((s) => io.observe(s));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---- recording: starts when most of it is on screen, pauses when it leaves ---- */
+  const v = document.querySelector('[data-vid] video');
+  const btn = document.querySelector('[data-vid-btn]');
+  if (v && btn) {
+    let user = false; /* the visitor's explicit choice wins over visibility */
+    const label = () => { btn.textContent = v.paused ? 'Play recording' : 'Pause'; btn.setAttribute('aria-pressed', String(!v.paused)); };
+    const play = () => v.play().then(label).catch(label);
+    btn.addEventListener('click', () => { user = true; if (v.paused) play(); else { v.pause(); label(); } });
+    v.addEventListener('pause', label); v.addEventListener('play', label);
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { v.preload = 'auto'; if (!reduce.matches && !user) play(); }
+        else { v.pause(); }
+      }, { threshold: 0.55 });
+      io.observe(v);
+    }
+    label();
   }
 
-  /* ---- viewer ---- */
-  const root = document.querySelector('[data-viewer]');
-  if (!root) return;
-  const tabs = [...root.querySelectorAll('[role="tab"]')];
-  const themeBtns = [...root.querySelectorAll('[data-theme]')];
-  const dev = root.querySelector('.viewer__dev');
-  const img = root.querySelector('[data-screen-img]');
-  const panel = root.querySelector('[role="tabpanel"]');
-  const title = root.querySelector('[data-note-title]');
-  const text = root.querySelector('[data-note-text]');
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
-  const notes = {
-    home: ['Home', 'One question, one action. “What would help right now?” sits above the day count, with craving support a single tap away.'],
-    craving: ['Craving support', 'Small tools sized for an urge that passes: box breathing, a five-minute countdown and a one-minute water reset.'],
-    health: ['Health', 'An evidence-informed timeline keyed to time since the quit date. General guidance and estimates, not an individual medical claim.'],
-    momentum: ['Momentum', '“Momentum is not perfect. It is how quickly you choose again.” Resilience and achievements, without a streak that punishes a bad day.'],
-    dreams: ['Dreams', 'Savings goals funded by smoke-free days. Progress is shown against a target; the goal here is sample data.']
-  };
-  let screen = 'home', theme = 'dark';
-  const src = (s, t) => `/assets/img/rc/${t}-${s}`;
-
-  const render = () => {
-    const next = () => {
-      img.srcset = `${src(screen, theme)}-390.jpg 390w, ${src(screen, theme)}.jpg 780w`;
-      img.src = `${src(screen, theme)}-390.jpg`;
-      img.alt = `Reclaim ${notes[screen][0].toLowerCase()} screen, ${theme} theme`;
+  /* ---- the breathing orb: four seconds each, only when asked ---- */
+  const orb = document.querySelector('[data-orb]');
+  const obtn = document.querySelector('[data-orb-btn]');
+  if (orb && obtn) {
+    const lab = orb.querySelector('[data-orb-label]');
+    const live = document.querySelector('[data-orb-live]');
+    const steps = ['Inhale', 'Hold', 'Exhale', 'Hold'];
+    let timer = 0, i = 0, cycles = 0;
+    const tick = () => {
+      lab.textContent = steps[i % 4];
+      orb.classList.toggle('expand', i % 4 < 2);
+      if (live) live.textContent = steps[i % 4];
+      if (++i > 15) stop(); /* three full cycles, then rest */
     };
-    title.textContent = notes[screen][0];
-    text.textContent = notes[screen][1];
-    if (reduce.matches) return next();
-    dev.classList.add('swap');
-    setTimeout(() => { next(); img.addEventListener('load', () => dev.classList.remove('swap'), { once: true }); setTimeout(() => dev.classList.remove('swap'), 600); }, 180);
-  };
-  const select = (btn, focus) => {
-    screen = btn.dataset.screen;
-    tabs.forEach((t) => { const on = t === btn; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
-    panel.setAttribute('aria-labelledby', btn.id);
-    if (focus) btn.focus();
-    render();
-  };
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => select(t));
-    t.addEventListener('keydown', (e) => {
-      const k = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
-      if (k) { e.preventDefault(); select(tabs[(i + k + tabs.length) % tabs.length], true); }
-      if (e.key === 'Home') { e.preventDefault(); select(tabs[0], true); }
-      if (e.key === 'End') { e.preventDefault(); select(tabs[tabs.length - 1], true); }
+    const stop = () => { clearInterval(timer); timer = 0; i = 0; lab.textContent = 'Ready'; orb.classList.remove('expand'); obtn.textContent = 'Follow the rhythm'; obtn.setAttribute('aria-pressed', 'false'); if (live) live.textContent = '4 · 4 · 4 · 4 seconds'; };
+    obtn.addEventListener('click', () => {
+      if (timer) return stop();
+      obtn.textContent = 'Stop'; obtn.setAttribute('aria-pressed', 'true');
+      tick(); timer = setInterval(tick, 4000);
     });
-    t.addEventListener('pointerenter', () => { const p = new Image(); p.src = `${src(t.dataset.screen, theme)}-390.jpg`; }, { once: true });
-  });
-  themeBtns.forEach((b) => b.addEventListener('click', () => {
-    theme = b.dataset.theme;
-    themeBtns.forEach((x) => x.setAttribute('aria-pressed', x === b));
-    render();
-  }));
+    document.addEventListener('visibilitychange', () => { if (document.hidden && timer) stop(); });
+  }
 })();
