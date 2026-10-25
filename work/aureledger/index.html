@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aureledger — Exhibition 04 · sankalpvoid</title>
+<meta name="description" content="Aureledger is a personal-finance ledger that assembles itself from the bank, card and SIP alerts already in your inbox. See how one purchase becomes a month and a history, and the accounting rules behind it.">
+<link rel="canonical" href="https://sankalpvoid-folio.vercel.app/work/aureledger/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sankalpvoid">
+<meta property="og:title" content="Aureledger — a ledger that assembles itself">
+<meta property="og:description" content="Bank, card and SIP alerts become a private ledger. A scroll-driven intro, a synthetic demo, and rules that refuse to guess.">
+<meta property="og:url" content="https://sankalpvoid-folio.vercel.app/work/aureledger/">
+<meta property="og:image" content="https://sankalpvoid-folio.vercel.app/assets/img/og-aureledger.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#091521">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/scenes.css">
+<link rel="stylesheet" href="/assets/css/aureledger.css">
+<link rel="preload" as="image" href="/assets/img/al/receipt-crop-600.jpg" fetchpriority="high">
+<script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the story</a>
+<header class="chrome">
+  <a class="wordmark" href="/#aureledger" aria-label="sankalpvoid — back to the gallery"><b>sankalpvoid</b><span>← Gallery</span></a>
+  <nav aria-label="Primary">
+    <a href="/projects/" data-open-index>Projects</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="t">
+    <div class="sc sc-al" data-exhibit aria-hidden="true">
+      <div class="al-rules"></div>
+      <img class="al-receipt" src="/assets/img/al/receipt-crop-600.jpg" srcset="/assets/img/al/receipt-crop-600.jpg 600w, /assets/img/al/receipt-crop.jpg 840w" sizes="(min-width:821px) 58vw, 100vw" width="840" height="700" alt="" decoding="async" fetchpriority="high">
+      <span class="al-veil"></span>
+    </div>
+    <div class="sc-copy" data-copy="al">
+      <span class="eyebrow mono">Product · personal finance</span>
+      <h1 id="t" class="t">Aure<i>ledger</i></h1>
+      <p class="premise">A ledger that assembles itself from the alerts already in your inbox.</p>
+      <div class="actions">
+        <a class="btn btn--solid" href="https://aureledger.vercel.app/" target="_blank" rel="noreferrer">View live experience <span class="arr" aria-hidden="true">↗</span></a>
+        <a class="btn" href="https://aureledger.vercel.app/demo" target="_blank" rel="noreferrer">Try the demo <span class="arr" aria-hidden="true">↗</span></a>
+        <a class="btn" href="#story">Read the story <span aria-hidden="true">↓</span></a>
+      </div>
+      <p class="status mono">Working prototype · demo data is synthetic · private source</p>
+    </div>
+  </section>
+
+  <section class="story" id="story" aria-labelledby="st-h">
+    <header class="story__head">
+      <h2 id="st-h">From one purchase to the whole picture.</h2>
+      <p>The live intro is a single scroll-driven scene. These are captures of it, all on synthetic data.</p>
+    </header>
+    <div class="steps">
+      <div class="steps__stage" aria-hidden="true">
+        <div class="steps__frame">
+          <img class="on" data-for="1" src="/assets/img/al/receipt-720.jpg" srcset="/assets/img/al/receipt-720.jpg 720w, /assets/img/al/receipt.jpg 1440w" sizes="(min-width:900px) 56vw, 92vw" width="1440" height="900" alt="" loading="lazy">
+          <img data-for="2" src="/assets/img/al/strips-720.jpg" srcset="/assets/img/al/strips-720.jpg 720w, /assets/img/al/strips.jpg 1440w" sizes="(min-width:900px) 56vw, 92vw" width="1440" height="900" alt="" loading="lazy">
+          <img data-for="3" src="/assets/img/al/atlas-720.jpg" srcset="/assets/img/al/atlas-720.jpg 720w, /assets/img/al/atlas.jpg 1440w" sizes="(min-width:900px) 56vw, 92vw" width="1440" height="900" alt="" loading="lazy">
+          <img data-for="4" src="/assets/img/al/history-720.jpg" srcset="/assets/img/al/history-720.jpg 720w, /assets/img/al/history.jpg 1440w" sizes="(min-width:900px) 56vw, 92vw" width="1440" height="900" alt="" loading="lazy">
+        </div>
+        <p class="mono steps__tag">Synthetic data · captured from the live intro</p>
+      </div>
+      <ol class="steps__list">
+        <li data-step="1">
+          <figure class="steps__m"><img src="/assets/img/al/receipt-720.jpg" width="720" height="450" alt="A printed receipt for a ₹315 coffee purchase on a navy ground" loading="lazy"></figure>
+          <span class="mono n">01</span><h3>One purchase.</h3>
+          <p>The intro opens on a single transaction, printed as a receipt. The copper figure is the only highlighted amount in the whole scene.</p>
+        </li>
+        <li data-step="2">
+          <figure class="steps__m"><img src="/assets/img/al/strips-720.jpg" width="720" height="450" alt="The purchase narrowed to one copper strip among many" loading="lazy"></figure>
+          <span class="mono n">02</span><h3>It joins the rest.</h3>
+          <p>The bill narrows into one strip and the month’s other transactions appear around it. It is the same object, now one among many.</p>
+        </li>
+        <li data-step="3">
+          <figure class="steps__m"><img src="/assets/img/al/atlas-720.jpg" width="720" height="450" alt="A fan-shaped atlas of one month's spending in layered bands, labelled by category" loading="lazy"></figure>
+          <span class="mono n">03</span><h3>One month.</h3>
+          <p>Every transaction is a ribbon. Along one edge they sit in date order; along the other, grouped by category. Thickness is the amount in both.</p>
+        </li>
+        <li data-step="4">
+          <figure class="steps__m"><img src="/assets/img/al/m-history-390.jpg" width="390" height="600" alt="Stacked area chart of two years of spending by category with the copper purchase marked" loading="lazy"></figure>
+          <span class="mono n">04</span><h3>The bigger picture.</h3>
+          <p>The month opens out into a history of stacked categories on a zero-based axis. The copper purchase stays marked, so you can find it again.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="rules" id="rules" aria-labelledby="ru-h">
+    <header>
+      <h2 id="ru-h">Does it count as spending?</h2>
+      <p>The ledger follows accounting rules rather than the order mail arrives. Make a call on each, then see what it does. Amounts are illustrative.</p>
+    </header>
+    <ul class="quiz" data-quiz>
+      <li data-ans="counts">
+        <p class="quiz__q"><b>A card purchase</b><span>₹1,200 at a restaurant, on the credit card</span></p>
+        <div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div>
+        <p class="quiz__a" hidden><strong>Counts, on the day it happens.</strong> Cash only moves when the bill is paid, so the overview shows card spending hatched, as real spending whose bill is still to come.</p>
+      </li>
+      <li data-ans="no">
+        <p class="quiz__q"><b>Paying the card bill</b><span>₹12,000 from the bank account</span></p>
+        <div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div>
+        <p class="quiz__a" hidden><strong>Doesn’t count.</strong> It settles purchases already counted. Counting it again would double the expense, so it is shown as a card bill paid.</p>
+      </li>
+      <li data-ans="no">
+        <p class="quiz__q"><b>Moving money between your own accounts</b><span>₹20,000, savings to current</span></p>
+        <div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div>
+        <p class="quiz__a" hidden><strong>Doesn’t count.</strong> Own-account transfers, investments and income are not consumption.</p>
+      </li>
+      <li data-ans="no">
+        <p class="quiz__q"><b>A reminder that a SIP is due in two days</b><span>₹5,000 instalment</span></p>
+        <div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div>
+        <p class="quiz__a" hidden><strong>Not yet.</strong> A scheduled SIP is a commitment, and it counts only once money has moved. The reminder, the bank debit and the allocation stay linked but each keeps its own amount, so 5,000 and 4,999.75 are shown as they are, not smoothed.</p>
+      </li>
+    </ul>
+    <p class="quiz__score mono" data-quiz-score role="status"></p>
+  </section>
+
+  <section class="decisions" aria-labelledby="dc-h">
+    <h2 id="dc-h">Three decisions.</h2>
+    <div class="dlist">
+      <details><summary>Fixed parsers, not an LLM.</summary><p>The alert formats are known and fixed, so each one has a deterministic parser. Nothing is sent to an AI provider and results are reproducible. A message that doesn’t match is marked unreadable and put in front of you for review. Nothing is guessed.</p></details>
+      <details><summary>Say what’s missing.</summary><p>The ledger is only as complete as the mail it received, so the import start date and per-source coverage are shown. A portfolio value needs a real holding and an exact fund mapping, and otherwise reads “Unavailable” with the reason. Credit score is “not connected”.</p></details>
+      <details><summary>Verify the sender before reading.</summary><p>Messages are read only from allow-listed senders with a passing authentication result. A forged “dkim=pass” header placed below Gmail’s own failing one is rejected, and this is covered by tests. Message bodies are discarded after parsing and only redacted text of recognised alerts is kept.</p></details>
+    </div>
+  </section>
+
+  <section class="state" aria-labelledby="sx-h">
+    <h2 id="sx-h" class="sr-only">Status</h2>
+    <div class="state__cols">
+      <p><b>Where it stands.</b> Concept, design and build. The public intro and a synthetic demo are live; the private workspace sits behind Google sign-in with per-user row-level security on Postgres. At the last verification report the automated suite had 71 tests, and a deployed-app concurrency run had checked isolation between users with no cross-user rows.</p>
+      <p><b>Not verified.</b> Gmail sync has only run against a simulated Gmail API. No real mailbox has been imported yet, so parsing of real bank, card and SIP alerts is untested. Safari, Firefox and phones were not tested. The source is private and every figure on this page is synthetic.</p>
+    </div>
+  </section>
+
+  <a class="next" data-chrome="light" href="/archive/" aria-label="Next exhibition: Experiments">
+    <img src="/assets/img/exp/parallax-1-720.jpg" width="720" height="450" alt="" loading="lazy">
+    <span class="next__txt"><span class="mono">Next · 05</span><b>Experiments</b><em>Three questions about motion →</em></span>
+  </a>
+</main>
+
+<footer class="foot">
+  <p class="foot__cta">Want the details? <a href="/contact/">Get in touch.</a></p>
+  <p class="foot__row"><a href="/#aureledger">Gallery</a><a href="/projects/">All projects</a><a href="/about/">About</a><a href="mailto:sankalp.kushwaha.18@gmail.com">Email</a></p>
+  <p class="foot__fine"><span>© 2026 Sankalp Kushwaha</span><span>Aureledger screens: synthetic demo data</span></p>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/aureledger.js" defer></script>
+</body>
+</html>

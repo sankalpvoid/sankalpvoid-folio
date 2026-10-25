@@ -1,6 +1,6 @@
 const {chromium}=require('playwright');
 const BASE=process.env.BASE||'http://localhost:4173';
-const routes=['/','/projects/','/work/reclaim/','/work/wealthwithsg/','/work/sankalp-shristi-furnishers/','/archive/','/about/','/contact/'];
+const routes=['/','/projects/','/work/reclaim/','/work/wealthwithsg/','/work/sankalp-shristi-furnishers/','/work/aureledger/','/archive/','/about/','/contact/'];
 const out=[];const ok=(c,m)=>{out.push((c?'PASS ':'FAIL ')+m);};
 (async()=>{
  const b=await chromium.launch();
@@ -39,7 +39,8 @@ const out=[];const ok=(c,m)=>{out.push((c?'PASS ':'FAIL ')+m);};
   ok((await p.evaluate(()=>location.hash))==='#wealthwithsg','hash updates for sharing');
   await p.keyboard.press('ArrowLeft');await p.waitForTimeout(1300);ok(await slug()==='reclaim','ArrowLeft → Reclaim');
   await p.click('[data-next]');await p.waitForTimeout(1300);await p.click('[data-next]');await p.waitForTimeout(1300);ok(await slug()==='sankalp-shristi-furnishers','Next button twice → Furnishers');
-  await p.click('[data-go="3"]');await p.waitForTimeout(1300);ok(await slug()==='archive','tick button → Archive');
+  await p.click('[data-next]');await p.waitForTimeout(1300);ok(await slug()==='aureledger','Next → Aureledger');
+  await p.click('[data-go="4"]');await p.waitForTimeout(1300);ok(await slug()==='archive','tick button → Archive');
   await p.keyboard.press('ArrowRight');await p.waitForTimeout(1300);ok(await slug()==='reclaim','wraps to Reclaim');
   // enter project, back/forward
   await p.click('.slide.is-active .enter');await p.waitForURL('**/work/reclaim/');await p.waitForTimeout(600);
@@ -54,7 +55,7 @@ const out=[];const ok=(c,m)=>{out.push((c?'PASS ':'FAIL ')+m);};
   // overlay
   await p.goto(BASE+'/');await p.waitForTimeout(600);
   await p.click('.controls .all');await p.waitForSelector('dialog.index[open]');ok(true,'All projects overlay opens');
-  const items=await p.$$eval('dialog.index .index__item',e=>e.length);ok(items===4,`overlay lists 4 exhibitions (${items})`);
+  const items=await p.$$eval('dialog.index .index__item',e=>e.length);ok(items===5,`overlay lists 5 exhibitions (${items})`);
   await p.keyboard.press('Escape');await p.waitForTimeout(500);ok(!(await p.$('dialog.index[open]')),'Esc closes overlay');
   const focused=await p.evaluate(()=>document.activeElement?.getAttribute('data-open-index')!==null);ok(focused,'focus returns to trigger');
   await p.keyboard.press('p');await p.waitForSelector('dialog.index[open]');ok(true,'"P" shortcut opens overlay');
@@ -108,6 +109,19 @@ const out=[];const ok=(c,m)=>{out.push((c?'PASS ':'FAIL ')+m);};
   await p.evaluate(()=>document.querySelector('[data-cmp]').scrollIntoView({block:'center'}));await p.fill('[data-cmp-in]','20');
   ok((await p.$eval('[data-cmp]',e=>e.style.getPropertyValue('--pos')))==='20%','SSF: before/after slider moves');
   ok(await p.evaluate(()=>[...document.querySelectorAll('.tag')].every(t=>/render|placeholder/i.test(t.textContent))),'SSF: every render tag is labelled');
+  await p.goto(BASE+'/work/aureledger/');await p.waitForTimeout(900);
+  ok((await p.$$('.quiz li')).length===4,'Aureledger: four accounting-rule questions');
+  await p.evaluate(()=>document.querySelector('[data-quiz]').scrollIntoView());
+  await p.click('.quiz li:nth-child(2) [data-guess="no"]');
+  ok(await p.$eval('.quiz li:nth-child(2) .quiz__a',e=>!e.hidden&&/Doesn.t count/.test(e.textContent))&&(await p.$eval('.quiz li:nth-child(2)',e=>e.dataset.right))==='1','Aureledger: card-bill payment answered correctly, reason revealed');
+  await p.click('.quiz li:nth-child(1) [data-guess="no"]');
+  ok((await p.$eval('.quiz li:nth-child(1)',e=>e.dataset.right))==='0'&&/Counts, on the day/.test(await p.$eval('.quiz li:nth-child(1) .quiz__a',e=>e.textContent)),'Aureledger: wrong answer is marked and still explained');
+  await p.click('.quiz li:nth-child(1) [data-guess="counts"]',{force:true,timeout:1500}).catch(()=>{});
+  ok((await p.$eval('.quiz li:nth-child(1)',e=>e.dataset.right))==='0','Aureledger: an answer cannot be changed afterwards');
+  const alText=await p.evaluate(()=>document.body.innerText);
+  ok(/synthetic/i.test(alText)&&/simulated Gmail API/.test(alText)&&/No real mailbox/.test(alText),'Aureledger: synthetic-data and not-verified Gmail caveats present');
+  ok(!/canara|icici|groww|@gmail|supabase.co|token/i.test(alText.replace(/Gmail/g,'')),'Aureledger: page names no bank, card issuer, endpoint or credential');
+  ok(await p.evaluate(()=>[...document.querySelectorAll('a[href]')].every(a=>!/github\.com\/sankalpvoid\/aureledger/i.test(a.href))),'Aureledger: no link to the private repository');
   await p.goto(BASE+'/archive/');await p.click('#parallax [data-live]');await p.waitForSelector('#parallax iframe');ok(true,'Archive: "Try it here" loads the iframe on demand');
   const before=await p.$$eval('iframe',e=>e.length);await p.keyboard.press('Escape');await p.waitForTimeout(300);ok(before===1&&(await p.$$eval('iframe',e=>e.length))===0,'Archive: Esc unloads the iframe');
   ok((await p.$$eval('iframe',e=>e.length))===0,'Archive: no live study is loaded by default');
@@ -129,7 +143,7 @@ const out=[];const ok=(c,m)=>{out.push((c?'PASS ':'FAIL ')+m);};
   await ctx.close();}
  // 5. JS disabled
  {const ctx=await b.newContext({viewport:{width:1440,height:900},javaScriptEnabled:false});const p=await ctx.newPage();
-  for(const r of ['/','/work/reclaim/','/work/wealthwithsg/','/work/sankalp-shristi-furnishers/','/archive/','/about/']){await p.goto(BASE+r);
+  for(const r of ['/','/work/reclaim/','/work/wealthwithsg/','/work/sankalp-shristi-furnishers/','/work/aureledger/','/archive/','/about/']){await p.goto(BASE+r);
    const t=await p.evaluate(()=>({h1:document.querySelector('h1')?.innerText?.slice(0,30),vis:[...document.querySelectorAll('.rv')].filter(e=>getComputedStyle(e).opacity==='0').length}));
    ok(t.h1&&t.vis===0,`no-JS ${r}: content visible (h1="${t.h1}", hidden reveals ${t.vis})`);}
   await ctx.close();}

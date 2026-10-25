@@ -26,3 +26,13 @@
 - **Reclaim artwork.** The flower and path images are the app's own assets from the local Reclaim repo.
 - **"Worked for you before".** The page describes it as a plain rule (three rated cravings, a tool used at least twice with a positive feedback score, best average first). I read this from `cravingRecommendation()` in the app; confirm it is still how the live build behaves.
 - **Reclaim sample data.** The "Sample" profile, 14-day run and four seeded cravings are test data I created for the captures, labelled as sample on the page.
+
+## Aureledger (added after pass 2)
+
+- **Sources.** Facts come from the local repo's README, `docs/MOTION.md`, `docs/VERIFICATION.md` and `docs/SECURITY.md`. Screens are captures of the public landing intro at https://aureledger.vercel.app (synthetic data only). The private workspace, real mail and real figures are not shown.
+- **Banks and card names.** The page says "bank, card and SIP alerts" and never names the issuers, to avoid publishing which accounts you use. The live demo itself does name them in small text (for example in its Wealth and Cards views). Those views are not used here.
+- **Status wording.** "71 tests at the last verification report" and the deployed concurrency result come from `docs/VERIFICATION.md`. Re-check the figure after the recent atlas and workspace commits. The repo also has uncommitted changes and sits one commit behind its remote, so the live site may not match the latest local code.
+- **Not verified, as in the repo's own report.** Gmail has only run against a simulated API; nothing has been imported from a real mailbox; Safari, Firefox and physical phones were not tested. If that has changed, update the Status section.
+- **Role.** The page says "Concept, design and build". Confirm, and decide whether to mention AI assistance.
+- **Source link.** The repository is private, so there is no "View source" action. The live-site links are the landing page and the synthetic demo.
+- **Quiz amounts** (₹1,200, ₹12,000, ₹20,000) are illustrative. The SIP 5,000 / 4,999.75 example is the repo's own.

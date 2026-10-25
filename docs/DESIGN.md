@@ -11,7 +11,8 @@ The home page is a gallery entrance, not an introduction: it opens on a featured
 | 01 Reclaim | the app's own glass-flower art, one large craving-support screen rising from the edge, rings breathing 4‑4‑4‑4 | a breathing orb you start yourself | one evening in five beats, from real screens and a real recording |
 | 02 WealthWithSG | a chart that fills the viewport behind the title | move across the chart (pointer or slider) from noise to structure | six real frames in a sideways strip, then three decisions |
 | 03 Furnishers | architectural hairlines and the bed render, registered to traced geometry | lines → slats → frame → render → room on one stable stage | transformation, materials, authentic before/after, configurators |
-| 04 Experiments | three tall strips of the real studies at different crops | strips drift at different rates with the pointer | three bands, each composed differently |
+| 04 Aureledger | the real receipt from the live intro, bleeding off the right edge, on ink navy with copper only for the selected purchase | paper feeds up into the slide; a "does it count as spending?" quiz on the app's actual accounting rules | one sticky frame beside four steps (purchase, strip, month, history), the quiz, three decisions |
+| 05 Experiments | three tall strips of the real studies at different crops | strips drift at different rates with the pointer | three bands, each composed differently |
 
 Shared: the `sankalpvoid` wordmark top-left, `Projects / About / Contact` top-right, hairline rules, mono captions.
 

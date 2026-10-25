@@ -4,7 +4,7 @@ body[data-tone="dark"]{--chrome:#f4f0e8;--chrome-dim:rgba(244,240,232,.66)}
 
 .stage{position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden;background:#050507;touch-action:pan-y;--px:0;--py:0}
 .slide{position:absolute;inset:0;visibility:hidden;overflow:hidden;color:var(--fg);background:var(--bg)}
-.s-rc{--bg:#050507;--fg:#f3eeff}.s-wsg{--bg:#08090b;--fg:#f1ece0}.s-ssf{--bg:#efe8da;--fg:#1c1711}.s-arch{--bg:#0e0e11;--fg:#efeae0}
+.s-rc{--bg:#050507;--fg:#f3eeff}.s-wsg{--bg:#08090b;--fg:#f1ece0}.s-ssf{--bg:#efe8da;--fg:#1c1711}.s-al{--bg:#091521;--fg:#f1e8dc}.s-arch{--bg:#0e0e11;--fg:#efeae0}
 .slide.is-active{visibility:visible;z-index:3}
 .slide.is-leaving{visibility:visible;z-index:2;animation:sink 1.15s var(--ease-io) both}
 .slide.is-leaving::before{content:"";position:absolute;inset:0;z-index:9;background:#000;opacity:0;animation:dim 1.15s var(--ease-io) both;pointer-events:none}
@@ -30,6 +30,11 @@ body[data-tone="dark"]{--chrome:#f4f0e8;--chrome-dim:rgba(244,240,232,.66)}
 @property --c{syntax:'<percentage>';inherits:false;initial-value:0%}
 .s-ssf.is-entering{-webkit-mask-image:repeating-linear-gradient(90deg,#000 0,#000 var(--c),transparent var(--c),transparent 6.25%);mask-image:repeating-linear-gradient(90deg,#000 0,#000 var(--c),transparent var(--c),transparent 6.25%);animation:lines 1.25s var(--ease-io) both}
 @keyframes lines{from{--c:.12%}to{--c:6.3%}}
+/* Aureledger: paper feeds up from the bottom edge, like the receipt it shows. */
+.s-al.is-entering{animation:feed 1.15s var(--ease-io) both}
+@keyframes feed{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+.s-al.is-entering .al-receipt{animation:feed-r 1.3s var(--ease-out) .1s both}
+@keyframes feed-r{from{transform:translateY(34%)}to{transform:translateY(0)}}
 /* Experiments: the three studies slide in at their own speeds. */
 .s-arch.is-entering,.s-arch.is-entering .sc-arch,.s-arch.is-entering .strips{background:transparent}
 .s-arch.is-entering .strip{animation:strip-in 1s var(--ease-out) both}
@@ -37,7 +42,7 @@ body[data-tone="dark"]{--chrome:#f4f0e8;--chrome-dim:rgba(244,240,232,.66)}
 .s-arch.is-entering .s2{--from:100%;animation-delay:.14s}
 .s-arch.is-entering .s3{--from:-100%;animation-delay:.28s}
 @keyframes strip-in{from{transform:translateY(var(--from))}to{transform:none}}
-.s-arch.is-entering .sc-copy>*,.s-ssf.is-entering .sc-copy>*,.s-wsg.is-entering .sc-copy>*,.s-rc.is-entering .sc-copy>*{animation:rise .8s var(--ease-out) both;animation-delay:calc(.45s + var(--k,0) * 70ms)}
+.s-al.is-entering .sc-copy>*,.s-arch.is-entering .sc-copy>*,.s-ssf.is-entering .sc-copy>*,.s-wsg.is-entering .sc-copy>*,.s-rc.is-entering .sc-copy>*{animation:rise .8s var(--ease-out) both;animation-delay:calc(.45s + var(--k,0) * 70ms)}
 @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .sc-copy>:nth-child(1){--k:0}.sc-copy>:nth-child(2){--k:1}.sc-copy>:nth-child(3){--k:2}.sc-copy>:nth-child(4){--k:3}
 
@@ -94,6 +99,6 @@ body[data-tone="light"] .ctl:hover{color:#efeae0}
   @keyframes strip-in-x{from{transform:translateX(var(--from))}to{transform:none}}
 }
 @media (prefers-reduced-motion:reduce){
-  .slide.is-leaving,.slide.is-leaving::before,.slide.is-entering,.slide.is-entering::after,.slide.is-entering .strip,.slide.is-entering .sc-copy>*,.slide.is-entering .rc-screen{animation:none!important}
+  .slide.is-leaving,.slide.is-leaving::before,.slide.is-entering,.slide.is-entering::after,.slide.is-entering .strip,.slide.is-entering .sc-copy>*,.slide.is-entering .rc-screen,.slide.is-entering .al-receipt{animation:none!important}
   .s-ssf.is-entering{-webkit-mask-image:none;mask-image:none}
 }

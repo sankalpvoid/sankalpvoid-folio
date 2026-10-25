@@ -1,5 +1,5 @@
 const {chromium}=require('playwright');const axe=require('fs').readFileSync(require.resolve('axe-core/axe.min.js'),'utf8');
-const routes=['/','/projects/','/work/reclaim/','/work/wealthwithsg/','/work/sankalp-shristi-furnishers/','/archive/','/about/','/contact/'];
+const routes=['/','/projects/','/work/reclaim/','/work/wealthwithsg/','/work/sankalp-shristi-furnishers/','/work/aureledger/','/archive/','/about/','/contact/'];
 (async()=>{const b=await chromium.launch();
 for(const [w,h] of [[1440,900],[390,844]]){const ctx=await b.newContext({viewport:{width:w,height:h}});
  for(const r of routes){const p=await ctx.newPage();await p.goto((process.env.BASE||'http://localhost:4173')+r);await p.waitForTimeout(1200);

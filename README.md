@@ -13,7 +13,8 @@ Static site, no build step, no runtime dependencies. Fonts come from Google Font
 | `/work/reclaim/` | Exhibition 01: Reclaim |
 | `/work/wealthwithsg/` | Exhibition 02: WealthWithSG |
 | `/work/sankalp-shristi-furnishers/` | Exhibition 03: Sankalp & Shristi Furnishers |
-| `/archive/` | Exhibition 04: Experiments (CyberPunk, Parallax, GSAP Motion) |
+| `/work/aureledger/` | Exhibition 04: Aureledger |
+| `/archive/` | Exhibition 05: Experiments (CyberPunk, Parallax, GSAP Motion) |
 | `/about/`, `/contact/` | About (with music) and contact |
 
 ## Run locally
