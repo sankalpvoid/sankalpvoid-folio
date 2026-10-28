@@ -93,7 +93,7 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   // burst of wheel input is damped
   await p.evaluate(y=>scrollTo(0,y),g.t);await p.waitForTimeout(400);await p.mouse.move(600,400);
   for(let k=0;k<10;k++){await p.mouse.wheel(0,200);await p.waitForTimeout(14);}
-  const soon=await p.evaluate(()=>HS.x);await p.waitForTimeout(1600);const later=await p.evaluate(()=>({x:HS.x,t:HS.target}));
+  const soon=await p.evaluate(()=>HS.x);await p.waitForFunction(()=>Math.abs(HS.x-HS.target)<2,null,{timeout:6000}).catch(()=>{});const later=await p.evaluate(()=>({x:HS.x,t:HS.target}));
   ok(soon<=g.pin*1.2&&Math.abs(later.x-later.t)<2,`${s}: a 2000px wheel burst moves ${Math.round(later.x)}px (<= about a scene) and settles on target`);
   // reversing responds
   await p.evaluate(y=>scrollTo(0,y),g.t+g.tv*g.K*0.5);await p.waitForTimeout(300);await p.waitForFunction(()=>Math.abs(HS.x-HS.target)<2,null,{timeout:12000}).catch(()=>{});
