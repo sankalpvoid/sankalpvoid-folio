@@ -20,6 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/scenes.css">
+<link rel="stylesheet" href="/assets/css/story.css">
 <link rel="stylesheet" href="/assets/css/aureledger.css">
 <link rel="preload" as="image" href="/assets/img/al/note-curl.jpg" fetchpriority="high">
 <script>document.documentElement.classList.replace('no-js','js')</script>
@@ -65,81 +66,60 @@
     </div>
   </section>
 
-  <section class="seq" id="story" aria-labelledby="sq-h" data-seq>
-    <div class="seq__pin">
-      <div class="seq__head">
-        <h2 id="sq-h">From a wallet to a month.</h2>
-        <a class="tlink skiplink" href="#rules">Skip the sequence ↓</a>
-      </div>
-      <div class="seq__body">
-        <div class="seq__stage" data-stage>
-          <img data-stage-img src="/assets/img/al/seq/d-00.jpg" width="1000" height="625" alt="The intro at the scrubbed position: a leather wallet on a dark ground">
-          <p class="seq__tag mono">Example data · captured from the live intro</p>
+  <section class="hs" id="story" data-hs aria-label="The story, in chapters">
+    <div class="hs__pin"><div class="hs__track" data-track>
+
+      <section class="hs__p" id="c-premise" data-title="Premise" aria-labelledby="a0">
+        <div class="pn-txt" style="width:min(42rem,48vw)">
+          <span class="pn-k mono">The idea</span>
+          <h2 class="pn-big pn-big--s" id="a0">A wallet opens. A note becomes <em>lines.</em> The lines become a month.</h2>
+          <p class="pn-p" style="margin-top:20px">Aureledger is a private ledger that assembles itself from the bank, card and SIP alerts already in Gmail. Its public introduction tells the whole idea as one scroll. Scrub through it here.</p>
         </div>
-        <div class="seq__rail">
-          <ol class="seq__chapters" aria-label="Chapters of the introduction"><li><button type="button" data-ch="0" aria-current="true"><span class="mono">01</span>Wallet</button></li><li><button type="button" data-ch="1"><span class="mono">02</span>Note</button></li><li><button type="button" data-ch="2"><span class="mono">03</span>Records</button></li><li><button type="button" data-ch="3"><span class="mono">04</span>Strands</button></li><li><button type="button" data-ch="4"><span class="mono">05</span>Graph</button></li><li><button type="button" data-ch="5"><span class="mono">06</span>Cards</button></li><li><button type="button" data-ch="6"><span class="mono">07</span>Workspace</button></li></ol>
-          <div class="seq__cap" aria-live="polite">
-            <h3 data-cap-title>Your money, at a glance.</h3>
-            <p data-cap-text>A leather wallet opens. The balance comes first, with when it was last reported: “Not a live balance.”</p>
+      </section>
+
+      <section class="hs__p" id="c-intro" data-title="The introduction" data-span="3.4" aria-labelledby="sq-h" data-seq>
+        <div class="hold"><div class="al-hold">
+          <div class="seq__txt">
+            <span class="pn-k mono">Captured from the live intro</span>
+            <h2 class="pn-h" id="sq-h">From a wallet to a month.</h2>
+            <ol class="seq__chapters" aria-label="Chapters of the introduction"><li><button type="button" data-ch="0" aria-current="true"><span class="mono">01</span>Wallet</button></li><li><button type="button" data-ch="1"><span class="mono">02</span>Note</button></li><li><button type="button" data-ch="2"><span class="mono">03</span>Records</button></li><li><button type="button" data-ch="3"><span class="mono">04</span>Strands</button></li><li><button type="button" data-ch="4"><span class="mono">05</span>Graph</button></li><li><button type="button" data-ch="5"><span class="mono">06</span>Cards</button></li><li><button type="button" data-ch="6"><span class="mono">07</span>Workspace</button></li></ol>
+            <div class="seq__cap" aria-live="polite"><h3 data-cap-title>Your money, at a glance.</h3><p data-cap-text>A leather wallet opens. The balance comes first, with when it was last reported: “Not a live balance.”</p></div>
+            <label class="seq__ctl"><span class="mono">Scrub</span><input type="range" min="0" max="100" value="0" step="1" data-scrub aria-label="Scrub through the introduction, from wallet to workspace"></label>
           </div>
-          <label class="seq__ctl"><span class="mono">Scrub</span><input type="range" min="0" max="100" value="0" step="1" data-scrub aria-label="Scrub through the introduction, from wallet to workspace"></label>
+          <div class="seq__stage"><img data-stage-img src="/assets/img/al/seq/d-00.jpg" width="1000" height="625" alt="The introduction at the scrubbed position: a leather wallet on a dark ground"><p class="seq__tag mono">Example data · captured from the live intro</p></div>
+        </div></div>
+        <ol class="seq-static" aria-label="The introduction in seven stages"><li><figure><div class="media"><img src="/assets/img/al/seq/d-03.jpg" width="1000" height="625" alt="Wallet stage of the intro: Your money, at a glance" loading="lazy"></div><figcaption><span class="mono">01 · Wallet</span><b>Your money, at a glance.</b><span>A leather wallet opens. The balance comes first, with when it was last reported: “Not a live balance.”</span></figcaption></figure></li><li><figure><div class="media"><img src="/assets/img/al/seq/d-07.jpg" width="1000" height="625" alt="Note stage of the intro: This month so far" loading="lazy"></div><figcaption><span class="mono">02 · Note</span><b>This month so far.</b><span>A note leaves the sleeve. Net spending is shown, and a comparison with last month only when last month is covered.</span></figcaption></figure></li><li><figure><div class="media"><img src="/assets/img/al/seq/d-12.jpg" width="1000" height="625" alt="Records stage of the intro: From alerts to records" loading="lazy"></div><figcaption><span class="mono">03 · Records</span><b>From alerts to records.</b><span>The note’s own artwork is traced into about 80,000 contour points. A line says how many records stand behind the figures, and since when.</span></figcaption></figure></li><li><figure><div class="media"><img src="/assets/img/al/seq/d-18.jpg" width="1000" height="625" alt="Strands stage of the intro: Where it went" loading="lazy"></div><figcaption><span class="mono">04 · Strands</span><b>Where it went.</b><span>The contours release into five strands, one for each leading category, each carrying its total.</span></figcaption></figure></li><li><figure><div class="media"><img src="/assets/img/al/seq/d-22.jpg" width="1000" height="625" alt="Graph stage of the intro: Spending over time" loading="lazy"></div><figcaption><span class="mono">05 · Graph</span><b>Spending over time.</b><span>The strands settle into a graph on one shared scale, so a taller curve is always a larger amount.</span></figcaption></figure></li><li><figure><div class="media"><img src="/assets/img/al/seq/d-25.jpg" width="1000" height="625" alt="Cards stage of the intro: What’s next" loading="lazy"></div><figcaption><span class="mono">06 · Cards</span><b>What’s next.</b><span>Two cards: what is still due on the latest card statement, and what has been put into funds this month.</span></figcaption></figure></li><li><figure><div class="media"><img src="/assets/img/al/seq/d-31.jpg" width="1000" height="625" alt="Workspace stage of the intro: Everything, in your pocket" loading="lazy"></div><figcaption><span class="mono">07 · Workspace</span><b>Everything, in your pocket.</b><span>The real demo workspace rises over the chart.</span></figcaption></figure></li></ol>
+      </section>
+
+      <section class="hs__p" id="c-rules" data-title="Does it count?" aria-labelledby="a2">
+        <div class="pn-txt" style="width:min(20rem,24vw)"><span class="pn-k mono">The rules</span><h2 class="pn-h" id="a2">Does it count as spending?</h2><p class="pn-p">The ledger follows accounting rules rather than the order mail arrives. Make a call on each. Amounts are illustrative.</p><p class="quiz__score mono" data-quiz-score role="status" style="align-self:flex-start"></p></div>
+        <ul class="qz" data-quiz><li data-ans="counts"><p class="quiz__q"><b>A card purchase</b><span>₹1,200 at a restaurant, on the credit card</span></p><div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div><p class="quiz__a" hidden><strong>Counts, on the day it happens.</strong> Cash only moves when the bill is paid, so card spending is shown as real spending whose bill is still to come.</p></li><li data-ans="no"><p class="quiz__q"><b>Paying the card bill</b><span>₹12,000 from the bank account</span></p><div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div><p class="quiz__a" hidden><strong>Doesn’t count.</strong> It settles purchases already counted. Counting it again would double the expense, so it is shown as a card bill paid.</p></li><li data-ans="no"><p class="quiz__q"><b>Moving money between your own accounts</b><span>₹20,000, savings to current</span></p><div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div><p class="quiz__a" hidden><strong>Doesn’t count.</strong> Own-account transfers, investments and income are not consumption.</p></li><li data-ans="no"><p class="quiz__q"><b>A reminder that a SIP is due in two days</b><span>₹5,000 instalment</span></p><div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div><p class="quiz__a" hidden><strong>Not yet.</strong> A scheduled SIP is a commitment, and it counts only once money has moved. The reminder, the bank debit and the allocation stay linked but each keeps its own amount, so 5,000 and 4,999.75 are shown as they are, not smoothed.</p></li></ul>
+      </section>
+
+      <section class="hs__p" id="c-decisions" data-title="Decisions" aria-labelledby="a3">
+        <div class="pn-txt" style="width:min(16rem,20vw)"><span class="pn-k mono">Three decisions</span><h2 class="pn-h" id="a3">What it refuses to guess.</h2></div>
+        <div class="pn-cols">
+          <div class="pn-col"><span class="n">01</span><h3>Say how old a number is.</h3><p>The balance is the last one observed, labelled with its date and “Not a live balance”. A card’s amount due is not card spending, and a fund contribution is not portfolio value. Partial months are drawn hollow, and months before the ledger began are left out rather than shown as zero.</p></div>
+          <div class="pn-col"><span class="n">02</span><h3>One scale for every category.</h3><p>The graph uses a single shared scale, so a taller curve always means a larger amount. Categories are never rescaled to fill the space. With fewer than five categories, only the real ones are drawn.</p></div>
+          <div class="pn-col"><span class="n">03</span><h3>Fixed parsers, not an LLM.</h3><p>The alert formats are known and fixed, so each has a deterministic parser. Nothing is sent to an AI provider and results are reproducible. A message that doesn’t match is marked unreadable and put in front of you for review.</p></div>
         </div>
-      </div>
-    </div>
-    <ol class="seq-static" aria-label="The introduction in seven stages"><li><figure><div class="media"><img src="/assets/img/al/seq/d-03.jpg" width="1000" height="625" alt="Wallet stage of the intro: Your money, at a glance" loading="lazy"></div><figcaption><span class="mono">01 · Wallet</span><b>Your money, at a glance.</b><span>A leather wallet opens. The balance comes first, with when it was last reported: “Not a live balance.”</span></figcaption></figure></li><li><figure><div class="media"><img src="/assets/img/al/seq/d-07.jpg" width="1000" height="625" alt="Note stage of the intro: This month so far" loading="lazy"></div><figcaption><span class="mono">02 · Note</span><b>This month so far.</b><span>A note leaves the sleeve. Net spending is shown, and a comparison with last month only when last month is covered.</span></figcaption></figure></li><li><figure><div class="media"><img src="/assets/img/al/seq/d-12.jpg" width="1000" height="625" alt="Records stage of the intro: From alerts to records" loading="lazy"></div><figcaption><span class="mono">03 · Records</span><b>From alerts to records.</b><span>The note’s own artwork is traced into about 80,000 contour points. A line says how many records stand behind the figures, and since when.</span></figcaption></figure></li><li><figure><div class="media"><img src="/assets/img/al/seq/d-18.jpg" width="1000" height="625" alt="Strands stage of the intro: Where it went" loading="lazy"></div><figcaption><span class="mono">04 · Strands</span><b>Where it went.</b><span>The contours release into five strands, one for each leading category, each carrying its total.</span></figcaption></figure></li><li><figure><div class="media"><img src="/assets/img/al/seq/d-22.jpg" width="1000" height="625" alt="Graph stage of the intro: Spending over time" loading="lazy"></div><figcaption><span class="mono">05 · Graph</span><b>Spending over time.</b><span>The strands settle into a graph on one shared scale, so a taller curve is always a larger amount.</span></figcaption></figure></li><li><figure><div class="media"><img src="/assets/img/al/seq/d-25.jpg" width="1000" height="625" alt="Cards stage of the intro: What’s next" loading="lazy"></div><figcaption><span class="mono">06 · Cards</span><b>What’s next.</b><span>Two cards: what is still due on the latest card statement, and what has been put into funds this month.</span></figcaption></figure></li><li><figure><div class="media"><img src="/assets/img/al/seq/d-31.jpg" width="1000" height="625" alt="Workspace stage of the intro: Everything, in your pocket" loading="lazy"></div><figcaption><span class="mono">07 · Workspace</span><b>Everything, in your pocket.</b><span>The real demo workspace rises over the chart.</span></figcaption></figure></li></ol>
-  </section>
+      </section>
 
-  <section class="rules" id="rules" aria-labelledby="ru-h">
-    <header>
-      <h2 id="ru-h">Does it count as spending?</h2>
-      <p>The ledger follows accounting rules rather than the order mail arrives. Make a call on each, then see what it does. Amounts are illustrative.</p>
-    </header>
-    <ul class="quiz" data-quiz>
-      <li data-ans="counts">
-        <p class="quiz__q"><b>A card purchase</b><span>₹1,200 at a restaurant, on the credit card</span></p>
-        <div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div>
-        <p class="quiz__a" hidden><strong>Counts, on the day it happens.</strong> Cash only moves when the bill is paid, so card spending is shown as real spending whose bill is still to come.</p>
-      </li>
-      <li data-ans="no">
-        <p class="quiz__q"><b>Paying the card bill</b><span>₹12,000 from the bank account</span></p>
-        <div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div>
-        <p class="quiz__a" hidden><strong>Doesn’t count.</strong> It settles purchases already counted. Counting it again would double the expense, so it is shown as a card bill paid.</p>
-      </li>
-      <li data-ans="no">
-        <p class="quiz__q"><b>Moving money between your own accounts</b><span>₹20,000, savings to current</span></p>
-        <div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div>
-        <p class="quiz__a" hidden><strong>Doesn’t count.</strong> Own-account transfers, investments and income are not consumption.</p>
-      </li>
-      <li data-ans="no">
-        <p class="quiz__q"><b>A reminder that a SIP is due in two days</b><span>₹5,000 instalment</span></p>
-        <div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div>
-        <p class="quiz__a" hidden><strong>Not yet.</strong> A scheduled SIP is a commitment, and it counts only once money has moved. The reminder, the bank debit and the allocation stay linked but each keeps its own amount, so 5,000 and 4,999.75 are shown as they are, not smoothed.</p>
-      </li>
-    </ul>
-    <p class="quiz__score mono" data-quiz-score role="status"></p>
-  </section>
+      <section class="hs__p" id="c-status" data-title="Status" aria-labelledby="a4">
+        <div class="pn-txt" style="width:min(32rem,36vw)"><span class="pn-k mono">Status</span><h2 class="pn-h" id="a4">Where it stands.</h2>
+          <p class="pn-p"><b>Concept, design and build.</b> The introduction and a synthetic demo are public; the private workspace sits behind Google sign-in with per-user row-level security on Postgres. At the last release report (26 Oct) there were 170 tests, scrolling the intro forward and in reverse gave identical frames, and reduced motion, WebGL off and JavaScript off each get a static version of the same story.</p>
+          <p class="pn-p"><b>Not verified.</b> That report lists a real GPU, Safari, Firefox, physical phones, screen readers, and Google sign-in with Gmail sync end to end as not tested. The introduction is built with Three.js and this page shows captures of it, not the live scene. The source is private and every figure here is example data.</p>
+          <div class="pn-links"><a class="pn-pill pn-pill--solid" href="https://aureledger.vercel.app/" target="_blank" rel="noreferrer">View live experience ↗</a><a class="pn-pill" href="https://aureledger.vercel.app/demo" target="_blank" rel="noreferrer">Try the demo ↗</a></div></div>
+      </section>
 
-  <section class="decisions" aria-labelledby="dc-h">
-    <h2 id="dc-h">Three decisions.</h2>
-    <div class="dlist">
-      <details><summary>Say how old a number is.</summary><p>The balance is the last one observed, labelled with its date and “Not a live balance”. A card’s amount due is not card spending, and a fund contribution is not portfolio value. Partial months are drawn hollow, and months before the ledger began are left out rather than shown as zero. Signed out, every stage carries an “Example data” tag.</p></details>
-      <details><summary>One scale for every category.</summary><p>The graph uses a single shared scale, so a taller curve always means a larger amount. Categories are never rescaled to fill the space. With fewer than five categories, only the real ones are drawn.</p></details>
-      <details><summary>Fixed parsers, not an LLM.</summary><p>The alert formats are known and fixed, so each has a deterministic parser. Nothing is sent to an AI provider and results are reproducible. A message that doesn’t match is marked unreadable and put in front of you for review.</p></details>
-    </div>
-  </section>
+      <section class="hs__p" id="c-next" data-title="Next" aria-label="Next exhibition">
+        <a class="pn-next" data-next-unroll data-bg="/assets/img/idx/experiments.jpg" data-name="Experiments" href="/work/experiments/" style="background-image:url(/assets/img/idx/experiments.jpg)">
+          <span class="mono">Next · 05</span><b>Experiments</b><span class="go">Open <i aria-hidden="true">↗</i></span><span class="hint" aria-hidden="true">← Press and drag to unroll</span>
+        </a>
+      </section>
 
-  <section class="state" aria-labelledby="sx-h">
-    <h2 id="sx-h" class="sr-only">Status</h2>
-    <div class="state__cols">
-      <p><b>Where it stands.</b> Concept, design and build. The introduction and a synthetic demo are public; the private workspace sits behind Google sign-in with per-user row-level security on Postgres. At the last release report (26 Oct) there were 170 tests, scrolling the intro forward and in reverse gave identical frames, and reduced motion, WebGL off and JavaScript off each get a static version of the same story.</p>
-      <p><b>Not verified.</b> That report lists a real GPU, Safari, Firefox, physical phones, screen readers, and Google sign-in with Gmail sync end to end as not tested. The introduction is built with Three.js and this page shows captures of it, not the live scene. The source is private and every figure here is example data.</p>
-    </div>
+    </div></div>
   </section>
-
-  <a class="next" data-chrome="light" href="/work/experiments/" aria-label="Next exhibition: Experiments">
-    <img src="/assets/img/exp/parallax-1-720.jpg" width="720" height="450" alt="" loading="lazy">
-    <span class="next__txt"><span class="mono">Next · 05</span><b>Experiments</b><em>Three questions about motion →</em></span>
-  </a>
 </main>
 
 <footer class="foot">
@@ -150,6 +130,9 @@
 
 <script src="/assets/js/site.js" defer></script>
 <script src="/assets/js/scenes.js" defer></script>
+<script src="/assets/js/unroll.js" defer></script>
+<script src="/assets/js/story.js" defer></script>
+<script src="/assets/js/story-next.js" defer></script>
 <script src="/assets/js/aureledger.js" defer></script>
 </body>
 </html>

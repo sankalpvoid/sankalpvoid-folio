@@ -20,11 +20,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/scenes.css">
+<link rel="stylesheet" href="/assets/css/story.css">
 <link rel="stylesheet" href="/assets/css/ssf.css">
 <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>
 <body>
-<a class="skip" href="#draw">Skip to the story</a>
+<a class="skip" href="#story">Skip to the story</a>
 <header class="chrome">
   <a class="wordmark" href="/#sankalp-shristi-furnishers" aria-label="sankalpvoid — back to the gallery"><b>sankalpvoid</b><span>← Gallery</span></a>
   <nav aria-label="Primary">
@@ -48,78 +49,84 @@
       <p class="premise">Bringing the workshop’s craft into a digital showroom.</p>
       <div class="actions">
         <a class="btn btn--solid" href="https://sankalp-shristi-furnishers-git-claude-hero-p-2877d3-sankalpvoid.vercel.app/lab/hero" target="_blank" rel="noreferrer">View hero prototype <span class="arr" aria-hidden="true">↗</span></a>
-        <a class="btn" href="#draw">Read the story <span aria-hidden="true">↓</span></a>
+        <a class="btn" href="#story">Read the story <span aria-hidden="true">↓</span></a>
         <a class="btn" href="https://github.com/sankalpvoid/Sankalp-and-Shristi-Furnishers-Web-Claude" target="_blank" rel="noreferrer">View source <span class="arr" aria-hidden="true">↗</span></a>
       </div>
       <p class="status mono">Demonstration · studio renders · not the showroom’s live site</p>
     </div>
   </section>
 
-  <!-- the transformation: one stage, one progress value -->
-  <section class="draw" id="draw" aria-labelledby="dr-h" data-draw>
-    <div class="draw__pin">
-      <div class="draw__head">
-        <h2 id="dr-h">Drawn, then built.</h2>
-        <a class="tlink skiplink" href="#materials">Skip the sequence ↓</a>
-      </div>
-      <div class="draw__stage">
-        <div class="bed bed--stage" data-bed-stage><svg></svg><img class="bed-fallback" src="/assets/img/ssf/bed.webp" srcset="/assets/img/ssf/bed-sm.webp 800w, /assets/img/ssf/bed.webp 1500w" sizes="90vw" width="1500" height="1200" alt="Studio render of a slatted-headboard teak bed in a warm room"></div>
-        <p class="tag draw__tag">Studio render · placeholder</p>
-      </div>
-      <div class="draw__cap">
-        <p class="draw__step mono" data-step>01 / 06</p>
-        <p class="draw__text" data-text>Hairlines on a blank page. Nothing is a bed yet; it is only measurement.</p>
-        <label class="draw__ctl"><span class="mono">Scrub</span><input type="range" min="0" max="100" value="0" step="1" data-scrub aria-label="Scrub the drawing from lines to finished render"></label>
-      </div>
-    </div>
-    <div class="draw__static" data-static hidden></div>
-  </section>
+  <section class="hs" id="story" data-hs aria-label="The story, in chapters">
+    <div class="hs__pin"><div class="hs__track" data-track>
 
-  <section class="materials" id="materials" aria-labelledby="mt-h">
-    <header><h2 id="mt-h">Material, for now in placeholder.</h2><p>The site tells its making story in four stages. Until the workshop is photographed, they are studio renders.</p></header>
-    <ul class="mk">
-      <li><div class="media"><img src="/assets/img/ssf/making-cut-sm.webp" srcset="/assets/img/ssf/making-cut-sm.webp 800w, /assets/img/ssf/making-cut.webp 1600w" sizes="(min-width:900px) 25vw, 46vw" width="1600" height="1000" alt="Studio render of timber being cut" loading="lazy"></div><span class="mono">Cut</span></li>
-      <li><div class="media"><img src="/assets/img/ssf/making-wood-sm.webp" srcset="/assets/img/ssf/making-wood-sm.webp 800w, /assets/img/ssf/making-wood.webp 1600w" sizes="(min-width:900px) 25vw, 46vw" width="1600" height="1000" alt="Studio render of teak planks" loading="lazy"></div><span class="mono">Wood</span></li>
-      <li><div class="media"><img src="/assets/img/ssf/making-build-sm.webp" srcset="/assets/img/ssf/making-build-sm.webp 800w, /assets/img/ssf/making-build.webp 1600w" sizes="(min-width:900px) 25vw, 46vw" width="1600" height="1000" alt="Studio render of a frame being assembled" loading="lazy"></div><span class="mono">Build</span></li>
-      <li><div class="media"><img src="/assets/img/ssf/making-finish-sm.webp" srcset="/assets/img/ssf/making-finish-sm.webp 800w, /assets/img/ssf/making-finish.webp 1600w" sizes="(min-width:900px) 25vw, 46vw" width="1600" height="1000" alt="Studio render of a finished teak surface" loading="lazy"></div><span class="mono">Finish</span></li>
-    </ul>
-  </section>
+      <section class="hs__p" id="c-premise" data-title="Premise" aria-labelledby="s0">
+        <div class="pn-txt" style="width:min(40rem,46vw)">
+          <span class="pn-k mono">The challenge</span>
+          <h2 class="pn-big pn-big--s" id="s0">Furniture is made to order. A website has to show what doesn’t <em>exist yet.</em></h2>
+          <p class="pn-p" style="margin-top:20px">The showroom makes custom teak furniture and sells Sleepwell mattresses in Lucknow. So the hero begins where craft begins, with measurement and line, and lets the object arrive.</p>
+        </div>
+      </section>
 
-  <section class="ba" aria-labelledby="ba-h">
-    <header><h2 id="ba-h">Same page, before and after.</h2><p>The repository’s own design pass on the homepage: a flat illustration became a studio render. Both are stand-ins for photography.</p></header>
-    <div class="cmp" data-cmp style="--pos:50%">
-      <div class="cmp__img"><img src="/assets/img/ssf/before-home-720.jpg" srcset="/assets/img/ssf/before-home-720.jpg 720w, /assets/img/ssf/before-home.jpg 1440w" sizes="(min-width:1000px) 1100px, 94vw" width="1440" height="700" alt="Homepage before the design pass: a flat illustration of a sofa inside an arch" loading="lazy"></div>
-      <div class="cmp__img cmp__img--after"><img src="/assets/img/ssf/after-home-720.jpg" srcset="/assets/img/ssf/after-home-720.jpg 720w, /assets/img/ssf/after-home.jpg 1440w" sizes="(min-width:1000px) 1100px, 94vw" width="1440" height="700" alt="The same homepage after: a studio render of a sofa in a lit room" loading="lazy"></div>
-      <span class="cmp__l mono">Before · flat illustration</span><span class="cmp__r mono">After · studio render</span>
-      <span class="cmp__bar" aria-hidden="true"></span>
-      <input type="range" min="0" max="100" value="50" aria-label="Compare before and after" data-cmp-in>
-    </div>
-  </section>
+      <section class="hs__p" id="c-draw" data-title="Drawn, then built" data-span="2.4" aria-labelledby="dr-h" data-draw>
+        <div class="hold">
+          <div class="draw__txt">
+            <span class="pn-k mono">The transformation</span>
+            <h2 class="pn-h" id="dr-h">Drawn, then built.</h2>
+            <p class="draw__step mono" data-step>01 / 06</p>
+            <p class="draw__text" data-text>Hairlines on a blank page. Nothing is a bed yet; it is only measurement.</p>
+            <label class="draw__ctl"><span class="mono">Scrub</span><input type="range" min="0" max="100" value="0" step="1" data-scrub aria-label="Scrub the drawing from lines to finished render"></label>
+          </div>
+          <div class="draw__stage">
+            <div class="bed bed--stage" data-bed-stage><svg></svg><img class="bed-fallback" src="/assets/img/ssf/bed.webp" srcset="/assets/img/ssf/bed-sm.webp 800w, /assets/img/ssf/bed.webp 1500w" sizes="60vw" width="1500" height="1200" alt="Studio render of a slatted-headboard teak bed in a warm room"></div>
+            <p class="tag draw__tag">Studio render · placeholder</p>
+          </div>
+        </div>
+        <div class="draw__static" data-static hidden></div>
+      </section>
 
-  <section class="cfg" aria-labelledby="cf-h">
-    <div class="cfg__shots">
-      <figure><div class="media"><img src="/assets/img/ssf/cfg-bed-720.jpg" srcset="/assets/img/ssf/cfg-bed-720.jpg 720w, /assets/img/ssf/cfg-bed.jpg 1440w" sizes="(min-width:900px) 48vw, 92vw" width="1440" height="900" alt="Bed configurator with option groups and a live preview" loading="lazy"></div><figcaption>Design your bed: size, headboard, wood finish.</figcaption></figure>
-      <figure class="ph"><div class="media"><img src="/assets/img/ssf/cfg-sofa-m.jpg" width="390" height="844" alt="Sofa configurator on a phone" loading="lazy"></div></figure>
-    </div>
-    <div class="cfg__txt">
-      <h2 id="cf-h">Three decisions.</h2>
-      <div class="dlist">
-        <details open><summary>Design your own, with a reference number.</summary><p>Four configurators (bed, sofa, sofa-cum-bed, dining table) save a design under a reference such as <code>SSFI-BED-AB12CD</code> and a share link that restores it. Saved designs never contain contact details.</p></details>
-        <details><summary>A labelled drawing, not a fake 3D model.</summary><p>An earlier prototype had a rotatable 3D sofa concept. The current preview is a layered SVG that reacts to every option and is labelled “not 3D, not a photograph”. A slot for a real model is reserved.</p></details>
-        <details><summary>No price, no stock claim, no checkout.</summary><p>Starter products are marked “sample design”, so they can’t show a price or “in stock”. The route is an enquiry (exploring, quotation, visit, ready to order), and a private admin lets the owner replace every render with photography.</p></details>
-      </div>
-    </div>
-  </section>
+      <section class="hs__p" id="c-materials" data-title="Material" aria-labelledby="s2">
+        <div class="pn-txt" style="width:min(20rem,24vw)"><span class="pn-k mono">Craft, for now in placeholder</span><h2 class="pn-h" id="s2">The making is still imagined.</h2><p class="pn-p">The site tells its making story in four stages. Until the workshop is photographed, they are studio renders.</p></div>
+        <div class="mk"><figure><div class="media"><img src="/assets/img/ssf/making-cut-sm.webp" srcset="/assets/img/ssf/making-cut-sm.webp 800w, /assets/img/ssf/making-cut.webp 1600w" sizes="(min-width:861px) 21vw, 46vw" width="1600" height="1000" alt="Studio render: timber being cut" loading="lazy"></div><figcaption class="mono">Cut</figcaption></figure><figure><div class="media"><img src="/assets/img/ssf/making-wood-sm.webp" srcset="/assets/img/ssf/making-wood-sm.webp 800w, /assets/img/ssf/making-wood.webp 1600w" sizes="(min-width:861px) 21vw, 46vw" width="1600" height="1000" alt="Studio render: teak planks" loading="lazy"></div><figcaption class="mono">Wood</figcaption></figure><figure><div class="media"><img src="/assets/img/ssf/making-build-sm.webp" srcset="/assets/img/ssf/making-build-sm.webp 800w, /assets/img/ssf/making-build.webp 1600w" sizes="(min-width:861px) 21vw, 46vw" width="1600" height="1000" alt="Studio render: a frame being assembled" loading="lazy"></div><figcaption class="mono">Build</figcaption></figure><figure><div class="media"><img src="/assets/img/ssf/making-finish-sm.webp" srcset="/assets/img/ssf/making-finish-sm.webp 800w, /assets/img/ssf/making-finish.webp 1600w" sizes="(min-width:861px) 21vw, 46vw" width="1600" height="1000" alt="Studio render: a finished teak surface" loading="lazy"></div><figcaption class="mono">Finish</figcaption></figure></div>
+      </section>
 
-  <section class="state" aria-labelledby="st-h">
-    <h2 id="st-h" class="sr-only">Status</h2>
-    <p><b>Status.</b> A working demonstration: storefront, four configurators, enquiry flow and admin, built with Next.js 16, TypeScript and SQLite. Enquiries and saved designs are kept only temporarily. No inventory export existed, so products, prices, stock, photography and policies all await the owner. The bed lines come from the prototype’s own traced geometry, registered to the render.</p>
-  </section>
+      <section class="hs__p" id="c-compare" data-title="Before / after" aria-labelledby="s3">
+        <div class="pn-txt" style="width:min(18rem,22vw)"><span class="pn-k mono">Same page</span><h2 class="pn-h" id="s3">Before and after.</h2><p class="pn-p">The repository’s own design pass: a flat illustration became a studio render. Both are stand-ins for photography.</p></div>
+        <div class="cmp" data-cmp style="--pos:50%">
+          <div class="cmp__img"><img src="/assets/img/ssf/before-home-720.jpg" srcset="/assets/img/ssf/before-home-720.jpg 720w, /assets/img/ssf/before-home.jpg 1440w" sizes="(min-width:861px) 60vw, 94vw" width="1440" height="700" alt="Homepage before the design pass: a flat illustration of a sofa inside an arch" loading="lazy"></div>
+          <div class="cmp__img cmp__img--after"><img src="/assets/img/ssf/after-home-720.jpg" srcset="/assets/img/ssf/after-home-720.jpg 720w, /assets/img/ssf/after-home.jpg 1440w" sizes="(min-width:861px) 60vw, 94vw" width="1440" height="700" alt="The same homepage after: a studio render of a sofa in a lit room" loading="lazy"></div>
+          <span class="cmp__l mono">Before · flat illustration</span><span class="cmp__r mono">After · studio render</span>
+          <span class="cmp__bar" aria-hidden="true"></span>
+          <input type="range" min="0" max="100" value="50" aria-label="Compare before and after" data-cmp-in>
+        </div>
+      </section>
 
-  <a class="next" data-chrome="light" href="/work/aureledger/" aria-label="Next exhibition: Aureledger">
-    <img src="/assets/img/al/note-curl-640.jpg" width="640" height="382" alt="" loading="lazy">
-    <span class="next__txt"><span class="mono">Next · 04</span><b>Aureledger</b><em>A ledger that assembles itself →</em></span>
-  </a>
+      <section class="hs__p" id="c-decisions" data-title="Decisions" aria-labelledby="s4">
+        <div class="pn-txt" style="width:min(16rem,20vw)"><span class="pn-k mono">Three decisions</span><h2 class="pn-h" id="s4">Keeping it honest.</h2></div>
+        <div class="cfgs">
+          <figure class="c1"><div class="media"><img src="/assets/img/ssf/cfg-bed-720.jpg" srcset="/assets/img/ssf/cfg-bed-720.jpg 720w, /assets/img/ssf/cfg-bed.jpg 1440w" sizes="(min-width:861px) 34vw, 92vw" width="1440" height="900" alt="Bed configurator with option groups and a live preview" loading="lazy"></div><figcaption>Design your bed: size, headboard, wood finish.</figcaption></figure>
+          <figure class="ph"><div class="media"><img src="/assets/img/ssf/cfg-sofa-m.jpg" width="390" height="844" alt="Sofa configurator on a phone" loading="lazy"></div></figure>
+        </div>
+        <div class="pn-cols">
+          <div class="pn-col"><span class="n">01</span><h3>A reference number for every design.</h3><p>Four configurators (bed, sofa, sofa-cum-bed, dining table) save a design under a reference such as <code>SSFI-BED-AB12CD</code> and a share link that restores it. Saved designs never contain contact details.</p></div>
+          <div class="pn-col"><span class="n">02</span><h3>A labelled drawing, not a fake 3D model.</h3><p>An earlier prototype had a rotatable 3D sofa concept. The current preview is a layered SVG that reacts to every option and is labelled “not 3D, not a photograph”. A slot for a real model is reserved.</p></div>
+          <div class="pn-col"><span class="n">03</span><h3>No price, no stock claim, no checkout.</h3><p>Starter products are marked “sample design”, so they can’t show a price or “in stock”. The route is an enquiry, and a private admin lets the owner replace every render with photography.</p></div>
+        </div>
+      </section>
+
+      <section class="hs__p" id="c-status" data-title="Status" aria-labelledby="s5">
+        <div class="pn-txt" style="width:min(30rem,34vw)"><span class="pn-k mono">Status</span><h2 class="pn-h" id="s5">Where it stands.</h2>
+          <p class="pn-p">A working demonstration: storefront, four configurators, enquiry flow and admin, built with Next.js 16, TypeScript and SQLite. It is not the showroom’s live site, and enquiries and saved designs are kept only temporarily. No inventory export existed, so products, prices, stock, photography and policies all await the owner. The bed lines come from the prototype’s own traced geometry, registered to the render.</p>
+          <div class="pn-links"><a class="pn-pill pn-pill--solid" href="https://sankalp-shristi-furnishers-git-claude-hero-p-2877d3-sankalpvoid.vercel.app/lab/hero" target="_blank" rel="noreferrer">View hero prototype ↗</a><a class="pn-pill" href="https://github.com/sankalpvoid/Sankalp-and-Shristi-Furnishers-Web-Claude" target="_blank" rel="noreferrer">View source ↗</a></div></div>
+      </section>
+
+      <section class="hs__p" id="c-next" data-title="Next" aria-label="Next exhibition">
+        <a class="pn-next" data-next-unroll data-bg="/assets/img/idx/aureledger.jpg" data-name="Aureledger" href="/work/aureledger/" style="background-image:url(/assets/img/idx/aureledger.jpg)">
+          <span class="mono">Next · 04</span><b>Aureledger</b><span class="go">Open <i aria-hidden="true">↗</i></span><span class="hint" aria-hidden="true">← Press and drag to unroll</span>
+        </a>
+      </section>
+
+    </div></div>
+  </section>
 </main>
 
 <footer class="foot">
@@ -130,6 +137,9 @@
 
 <script src="/assets/js/site.js" defer></script>
 <script src="/assets/js/scenes.js" defer></script>
+<script src="/assets/js/unroll.js" defer></script>
+<script src="/assets/js/story.js" defer></script>
+<script src="/assets/js/story-next.js" defer></script>
 <script src="/assets/js/ssf.js" defer></script>
 </body>
 </html>

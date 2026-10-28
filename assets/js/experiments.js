@@ -4,14 +4,15 @@
   const close = (rec, restore = true) => {
     if (!rec) return;
     rec.slot.hidden = true;
-    rec.slot.replaceChildren();           /* removes the iframe: stops its scripts, timers and media */
+    rec.slot.replaceChildren();
+    document.documentElement.classList.remove('is-locked');           /* removes the iframe: stops its scripts, timers and media */
     if (restore) rec.btn.focus({ preventScroll: true });
     rec.btn.setAttribute('aria-expanded', 'false');
     rec.btn.textContent = 'Try it here';
     if (open === rec) open = null;
   };
   document.querySelectorAll('[data-live]').forEach((btn) => {
-    const slot = btn.closest('.study').querySelector('[data-live-slot]');
+    const slot = document.querySelector('[data-live-slot]');
     btn.setAttribute('aria-expanded', 'false');
     btn.addEventListener('click', () => {
       if (open && open.btn === btn) return close(open);
@@ -31,7 +32,7 @@
       btn.setAttribute('aria-expanded', 'true');
       btn.textContent = 'Close preview';
       open = rec;
-      slot.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      document.documentElement.classList.add('is-locked');
     });
   });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && open) close(open); });

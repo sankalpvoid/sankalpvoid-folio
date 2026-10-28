@@ -1,0 +1,26 @@
+/* Experiments: three motion studies as a horizontal story. */
+:root{--page-bg:#0e0e11;--page-fg:#efeae0;--chrome:#efeae0;--chrome-dim:rgba(239,234,224,.68);--chrome-bg:#0e0e11;--rule:rgba(239,234,224,.2);--focus:#ff8a63}
+.hs{--hs-bg:#0e0e11;--hs-fg:#efeae0;--hs-ac:#ff8a63;--hs-mute:#b9b2a3;--hs-rule:rgba(239,234,224,.22);--hs-font:"Instrument Serif",Georgia,serif}
+.hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;--fg:#efeae0}
+.hero .jump{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px}
+.hero .jump a{display:inline-flex;gap:8px;align-items:baseline;min-height:44px;align-items:center}
+.exp__q{font-family:var(--hs-font);font-size:1.5rem;line-height:1.1;max-width:22ch;opacity:1}
+.exp__f{flex:none}
+.exp__f img{height:min(58vh,560px);width:auto;border:1px solid var(--hs-rule);background:#000}
+.pn-pill--solid{background:#ff8a63;border-color:#ff8a63;color:#14130f}
+.pn-pill--solid:hover{background:transparent;color:#ff8a63}
+button.pn-pill{font:inherit;cursor:pointer}
+.live{position:fixed;inset:max(72px,10vh) var(--gutter) var(--gutter);z-index:60;display:flex;flex-direction:column;border:1px solid var(--rule);background:#000}
+.live[hidden]{display:none}
+.live__bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid var(--rule)}
+.live__bar .mono{opacity:.7}
+.live__bar button{font-size:.84rem;font-weight:500;border:1px solid var(--rule);border-radius:999px;padding:8px 16px;min-height:40px}
+.live__bar button:hover{background:var(--page-fg);color:var(--page-bg)}
+.live__box{position:relative;flex:1;min-height:0}
+.live__box iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.live__load{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+@media (max-width:860px),(prefers-reduced-motion:reduce){
+  .exp__f img{height:auto;width:100%;max-width:100%}
+  .exp__f{margin-top:20px;max-width:34rem}
+  .exp__q{max-width:none}
+}

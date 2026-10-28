@@ -40,28 +40,24 @@
       SV.bed(f.querySelector('.bed'), { start: p }).catch(() => {});
     });
     SV.bed(stageEl, { start: 1, viewBox: STAGE_VB }).then(() => stageEl.querySelector('.bed-fallback')?.remove()).catch(() => {});
+    sec.querySelector('.draw__ctl').hidden = true;
   };
 
-  if (reduce.matches) { staticMode(); return; }
-
-  let bed = null;
-  SV.bed(stageEl, { start: 0, viewBox: STAGE_VB }).then((b) => { bed = b; stageEl.querySelector('.bed-fallback')?.remove(); apply(current()); }).catch(() => { staticMode(); });
-  const fb = stageEl.querySelector('.bed-fallback'); if (fb) fb.style.opacity = 0;
-
-  const current = () => {
-    const r = sec.getBoundingClientRect();
-    return Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
-  };
-  const apply = (p) => { if (bed) bed.set(p); caption(p); scrub.value = Math.round(p * 100); };
-  let ticking = false;
-  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; apply(current()); }); } };
-  const io = new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) { addEventListener('scroll', onScroll, { passive: true }); onScroll(); }
-    else removeEventListener('scroll', onScroll);
-  }, { rootMargin: '20% 0px' });
-  io.observe(sec);
-  scrub.addEventListener('input', () => { if (bed) bed.set(+scrub.value / 100); caption(+scrub.value / 100); });
-  addEventListener('resize', onScroll);
+  if (reduce.matches) staticMode();
+  else {
+    const pinned = () => !!(window.HS && HS.active);
+    let bed = null;
+    const start = pinned() ? 0 : 1;                         /* in the flat layout the stage rests on the finished render and the slider scrubs it */
+    SV.bed(stageEl, { start, viewBox: STAGE_VB }).then((b) => { bed = b; stageEl.querySelector('.bed-fallback')?.remove(); caption(start); scrub.value = start * 100; }).catch(() => staticMode());
+    const fb = stageEl.querySelector('.bed-fallback'); if (fb) fb.style.opacity = 0;
+    /* one source of progress: the horizontal travel across this chapter; the slider moves the scroll position */
+    if (window.HS) HS.on(sec, (p) => { if (!pinned()) return; if (bed) bed.set(p); caption(p); scrub.value = Math.round(p * 100); });
+    scrub.addEventListener('input', () => {
+      const p = +scrub.value / 100;
+      if (pinned()) HS.scrollToPanelProgress(sec, p);
+      else { if (bed) bed.set(p); caption(p); }
+    });
+  }
 
   /* before / after comparison */
   const cmp = document.querySelector('[data-cmp]');

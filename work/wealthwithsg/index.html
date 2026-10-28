@@ -20,11 +20,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/scenes.css">
+<link rel="stylesheet" href="/assets/css/story.css">
 <link rel="stylesheet" href="/assets/css/wsg.css">
 <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>
 <body>
-<a class="skip" href="#frames">Skip to the story</a>
+<a class="skip" href="#story">Skip to the story</a>
 <header class="chrome">
   <a class="wordmark" href="/#wealthwithsg" aria-label="sankalpvoid — back to the gallery"><b>sankalpvoid</b><span>← Gallery</span></a>
   <nav aria-label="Primary">
@@ -49,7 +50,7 @@
       <p class="premise">Can a chart teach before a lesson does?</p>
       <div class="actions">
         <a class="btn btn--solid" href="https://wealthwithsg.vercel.app/" target="_blank" rel="noreferrer">View live experience <span class="arr" aria-hidden="true">↗</span></a>
-        <a class="btn" href="#frames">Read the story <span aria-hidden="true">↓</span></a>
+        <a class="btn" href="#story">Read the story <span aria-hidden="true">↓</span></a>
       </div>
       <p class="status mono">Prototype · sample content · private source</p>
     </div>
@@ -61,47 +62,54 @@
     </div>
   </section>
 
-  <section class="frames" id="frames" aria-labelledby="fr-h">
-    <header>
-      <h2 id="fr-h">Six frames, one scroll.</h2>
-      <p>The live homepage is a scroll-driven narrative. Each frame changes what the same chart is for. Captures of the prototype, side-scrolling.</p>
-    </header>
-    <ol class="strip" tabindex="0" aria-label="The six frames of the live homepage, scroll sideways">
-      <li><figure><div class="media"><img src="/assets/img/wsg/hero-1-720.jpg" srcset="/assets/img/wsg/hero-1-720.jpg 720w, /assets/img/wsg/hero-1.jpg 1440w" sizes="(min-width:900px) 40vw, 82vw" width="1440" height="900" alt="Frame 1: two lines rising across a dark field with the WealthWithSG wordmark" loading="lazy"></div><figcaption><span class="mono">01 · The Unknown</span><q>Understand the market. Not just the movement.</q></figcaption></figure></li>
-      <li><figure><div class="media"><img src="/assets/img/wsg/hero-2-720.jpg" srcset="/assets/img/wsg/hero-2-720.jpg 720w, /assets/img/wsg/hero-2.jpg 1440w" sizes="(min-width:900px) 40vw, 82vw" width="1440" height="900" alt="Frame 2: small candles appear under the line" loading="lazy"></div><figcaption><span class="mono">02 · Recognition</span><q>Shapes begin to repeat.</q></figcaption></figure></li>
-      <li><figure><div class="media"><img src="/assets/img/wsg/hero-3-720.jpg" srcset="/assets/img/wsg/hero-3-720.jpg 720w, /assets/img/wsg/hero-3.jpg 1440w" sizes="(min-width:900px) 40vw, 82vw" width="1440" height="900" alt="Frame 3: dense candlesticks crossed by faint noise lines" loading="lazy"></div><figcaption><span class="mono">03 · Conflict</span><q>Up close, noise and information look exactly alike.</q></figcaption></figure></li>
-      <li><figure><div class="media"><img src="/assets/img/wsg/hero-4-720.jpg" srcset="/assets/img/wsg/hero-4-720.jpg 720w, /assets/img/wsg/hero-4.jpg 1440w" sizes="(min-width:900px) 40vw, 82vw" width="1440" height="900" alt="Frame 4: the noise has faded and clean candles remain" loading="lazy"></div><figcaption><span class="mono">04 · Breakdown</span><q>Strip the noise away and structure is what remains.</q></figcaption></figure></li>
-      <li><figure><div class="media"><img src="/assets/img/wsg/hero-5-720.jpg" srcset="/assets/img/wsg/hero-5-720.jpg 720w, /assets/img/wsg/hero-5.jpg 1440w" sizes="(min-width:900px) 40vw, 82vw" width="1440" height="900" alt="Frame 5: large candles beside a placeholder panel for a portrait of the founder" loading="lazy"></div><figcaption><span class="mono">05 · Human Meaning</span><q>Shailesh Gour, the disciplined mind. <small>Portrait is a placeholder.</small></q></figcaption></figure></li>
-      <li><figure><div class="media"><img src="/assets/img/wsg/hero-6-720.jpg" srcset="/assets/img/wsg/hero-6-720.jpg 720w, /assets/img/wsg/hero-6.jpg 1440w" sizes="(min-width:900px) 40vw, 82vw" width="1440" height="900" alt="Frame 6: a branching diagram leading to Learning, Explore, Analysis and Discover SG" loading="lazy"></div><figcaption><span class="mono">06 · Open Exploration</span><q>Learning · Explore · Analysis · Discover SG.</q></figcaption></figure></li>
-    </ol>
-  </section>
+  <section class="hs" id="story" data-hs aria-label="The story, in chapters">
+    <div class="hs__pin"><div class="hs__track" data-track>
 
-  <section class="decisions" aria-labelledby="de-h">
-    <h2 id="de-h">Three decisions.</h2>
-    <div class="dlist">
-      <details open><summary>SVG, not WebGL.</summary><p>The hero is hand-composed SVG driven by one scroll value, so it stays sharp and light. It has separate compositions for desktop (64 small candles) and phones (26). The chart above rebuilds itself to the viewport the same way.</p></details>
-      <details><summary>Colour never carries meaning alone.</summary><p>Candles are hollow outlines, green for up and red for down, and each is also labelled in text. Every chart is stamped “Illustrative data · not market data”, and a risk-disclaimer page exists.</p></details>
-      <details><summary>A story with a way out.</summary><p>The journey is long, so “Explore learning” is available from the first frame and the navigation never leaves. One tool is genuinely interactive: a risk-per-trade calculator that turns account size, risk and stop distance into a position size.</p></details>
-    </div>
-  </section>
+      <section class="hs__p" id="c-premise" data-title="Premise" aria-labelledby="w0">
+        <div class="pn-txt" style="width:min(46rem,52vw)">
+          <span class="pn-k mono">The idea</span>
+          <h2 class="pn-big pn-big--s" id="w0">A chart is <em>noise</em> until someone shows you what to look for.</h2>
+          <p class="pn-p" style="margin-top:20px">WealthWithSG is a trading-education concept whose live homepage tells that story as six frames. I designed it and built the prototype in Next.js, with sample content throughout.</p>
+        </div>
+      </section>
 
-  <section class="evidence" aria-labelledby="ev-h">
-    <h2 id="ev-h" class="sr-only">The rest of the site</h2>
-    <div class="mosaic">
-      <figure><div class="media"><img src="/assets/img/wsg/learn-720.jpg" srcset="/assets/img/wsg/learn-720.jpg 720w, /assets/img/wsg/learn.jpg 1440w" sizes="(min-width:900px) 46vw, 92vw" width="1440" height="900" alt="Learn page listing five learning tracks" loading="lazy"></div><figcaption>Five tracks, numbered like chapters. Sample outlines.</figcaption></figure>
-      <figure><div class="media"><img src="/assets/img/wsg/risk-720.jpg" srcset="/assets/img/wsg/risk-720.jpg 720w, /assets/img/wsg/risk.jpg 1440w" sizes="(min-width:900px) 30vw, 92vw" width="1440" height="900" alt="Risk per trade calculator" loading="lazy"></div><figcaption>The one fully working tool. Nothing is stored.</figcaption></figure>
-      <figure class="ph"><div class="media"><img src="/assets/img/wsg/m-1-390.jpg" srcset="/assets/img/wsg/m-1-390.jpg 390w, /assets/img/wsg/m-1.jpg 780w" sizes="220px" width="780" height="1688" alt="Phone view of the hero chart" loading="lazy"></div><figcaption>On a phone: a 26-candle composition.</figcaption></figure>
-    </div>
-    <div class="state">
-      <h3 class="mono">Status</h3>
-      <p>A working prototype built in Next.js 15, React 19 and TypeScript. The chart narrative, calculator and glossary work. Learning tracks, articles, the checklist and guides are sample or pending, and social links aren’t connected. There is no market data: every chart is illustrative.</p>
-    </div>
-  </section>
+      <section class="hs__p" id="c-frames" data-title="Six frames" aria-labelledby="w1">
+        <div class="pn-txt" style="width:min(20rem,24vw)"><span class="pn-k mono">The live homepage</span><h2 class="pn-h" id="w1">Six frames, one scroll.</h2><p class="pn-p">Each frame changes what the same chart is for. Captures of the prototype.</p></div>
+        <div class="wf" role="list" aria-label="The six frames"><figure><div class="media"><img src="/assets/img/wsg/hero-1-720.jpg" srcset="/assets/img/wsg/hero-1-720.jpg 720w, /assets/img/wsg/hero-1.jpg 1440w" sizes="(min-width:861px) 40vw, 92vw" width="1440" height="900" alt="Frame 1: two lines rising across a dark field with the WealthWithSG wordmark" loading="lazy"></div><figcaption><span class="mono">01 · The Unknown</span><q>Understand the market. Not just the movement.</q></figcaption></figure><figure><div class="media"><img src="/assets/img/wsg/hero-2-720.jpg" srcset="/assets/img/wsg/hero-2-720.jpg 720w, /assets/img/wsg/hero-2.jpg 1440w" sizes="(min-width:861px) 40vw, 92vw" width="1440" height="900" alt="Frame 2: small candles appear under the line" loading="lazy"></div><figcaption><span class="mono">02 · Recognition</span><q>Shapes begin to repeat.</q></figcaption></figure><figure><div class="media"><img src="/assets/img/wsg/hero-3-720.jpg" srcset="/assets/img/wsg/hero-3-720.jpg 720w, /assets/img/wsg/hero-3.jpg 1440w" sizes="(min-width:861px) 40vw, 92vw" width="1440" height="900" alt="Frame 3: dense candlesticks crossed by faint noise lines" loading="lazy"></div><figcaption><span class="mono">03 · Conflict</span><q>Up close, noise and information look exactly alike.</q></figcaption></figure><figure><div class="media"><img src="/assets/img/wsg/hero-4-720.jpg" srcset="/assets/img/wsg/hero-4-720.jpg 720w, /assets/img/wsg/hero-4.jpg 1440w" sizes="(min-width:861px) 40vw, 92vw" width="1440" height="900" alt="Frame 4: the noise has faded and clean candles remain" loading="lazy"></div><figcaption><span class="mono">04 · Breakdown</span><q>Strip the noise away and structure is what remains.</q></figcaption></figure><figure><div class="media"><img src="/assets/img/wsg/hero-5-720.jpg" srcset="/assets/img/wsg/hero-5-720.jpg 720w, /assets/img/wsg/hero-5.jpg 1440w" sizes="(min-width:861px) 40vw, 92vw" width="1440" height="900" alt="Frame 5: large candles beside a placeholder panel for a portrait of the founder" loading="lazy"></div><figcaption><span class="mono">05 · Human Meaning</span><q>Shailesh Gour, the disciplined mind. <small>Portrait is a placeholder.</small></q></figcaption></figure><figure><div class="media"><img src="/assets/img/wsg/hero-6-720.jpg" srcset="/assets/img/wsg/hero-6-720.jpg 720w, /assets/img/wsg/hero-6.jpg 1440w" sizes="(min-width:861px) 40vw, 92vw" width="1440" height="900" alt="Frame 6: a branching diagram leading to Learning, Explore, Analysis and Discover SG" loading="lazy"></div><figcaption><span class="mono">06 · Open Exploration</span><q>Learning · Explore · Analysis · Discover SG.</q></figcaption></figure></div>
+      </section>
 
-  <a class="next" data-chrome="light" href="/work/sankalp-shristi-furnishers/" aria-label="Next exhibition: Sankalp & Shristi Furnishers">
-    <img src="/assets/img/ssf/bed-sm.webp" width="800" height="640" alt="" loading="lazy">
-    <span class="next__txt"><span class="mono">Next · 03</span><b>Sankalp &amp; Shristi Furnishers</b><em>Bringing the workshop’s craft into a digital showroom →</em></span>
-  </a>
+      <section class="hs__p" id="c-decisions" data-title="Decisions" aria-labelledby="w2">
+        <div class="pn-txt" style="width:min(18rem,22vw)"><span class="pn-k mono">Three decisions</span><h2 class="pn-h" id="w2">What I chose.</h2></div>
+        <div class="pn-cols">
+          <div class="pn-col"><span class="n">01</span><h3>SVG, not WebGL.</h3><p>The hero is hand-composed SVG driven by one scroll value, so it stays sharp and light. It has separate compositions for desktop (64 small candles) and phones (26). The chart on this page rebuilds itself to the viewport the same way.</p></div>
+          <div class="pn-col"><span class="n">02</span><h3>Colour never carries meaning alone.</h3><p>Candles are hollow outlines, green for up and red for down, and each is also labelled in text. Every chart is stamped “Illustrative data · not market data”, and a risk-disclaimer page exists.</p></div>
+          <div class="pn-col"><span class="n">03</span><h3>A story with a way out.</h3><p>The journey is long, so “Explore learning” is available from the first frame and the navigation never leaves. One tool is genuinely interactive: a risk-per-trade calculator that turns account size, risk and stop distance into a position size.</p></div>
+        </div>
+      </section>
+
+      <section class="hs__p" id="c-site" data-title="The rest of the site" aria-labelledby="w3">
+        <div class="pn-txt" style="width:min(18rem,22vw)"><span class="pn-k mono">Around the chart</span><h2 class="pn-h" id="w3">Structured type, around the chart.</h2></div>
+        <div class="we">
+          <figure class="w1"><div class="media"><img src="/assets/img/wsg/learn-720.jpg" srcset="/assets/img/wsg/learn-720.jpg 720w, /assets/img/wsg/learn.jpg 1440w" sizes="(min-width:861px) 36vw, 92vw" width="1440" height="900" alt="Learn page listing five learning tracks" loading="lazy"></div><figcaption>Five tracks, numbered like chapters. Sample outlines.</figcaption></figure>
+          <figure class="w2"><div class="media"><img src="/assets/img/wsg/risk-720.jpg" srcset="/assets/img/wsg/risk-720.jpg 720w, /assets/img/wsg/risk.jpg 1440w" sizes="(min-width:861px) 30vw, 92vw" width="1440" height="900" alt="Risk per trade calculator" loading="lazy"></div><figcaption>The one fully working tool. Nothing is stored.</figcaption></figure>
+          <figure class="ph"><div class="media"><img src="/assets/img/wsg/m-1-390.jpg" srcset="/assets/img/wsg/m-1-390.jpg 390w, /assets/img/wsg/m-1.jpg 780w" sizes="240px" width="780" height="1688" alt="Phone view of the hero chart" loading="lazy"></div><figcaption>On a phone: a 26-candle composition.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="hs__p" id="c-status" data-title="Status" aria-labelledby="w4">
+        <div class="pn-txt" style="width:min(30rem,34vw)"><span class="pn-k mono">Status</span><h2 class="pn-h" id="w4">Where it stands.</h2>
+          <p class="pn-p">A working prototype built in Next.js 15, React 19 and TypeScript. The chart narrative, calculator and glossary work. Learning tracks, articles, the checklist and guides are sample or pending, and social links aren’t connected. There is no market data: every chart is illustrative. Nothing here is financial advice. The source is private.</p>
+          <div class="pn-links"><a class="pn-pill pn-pill--solid" href="https://wealthwithsg.vercel.app/" target="_blank" rel="noreferrer">View live experience ↗</a></div></div>
+      </section>
+
+      <section class="hs__p" id="c-next" data-title="Next" aria-label="Next exhibition">
+        <a class="pn-next" data-next-unroll data-bg="/assets/img/idx/sankalp-shristi-furnishers.jpg" data-name="Sankalp &amp; Shristi Furnishers" href="/work/sankalp-shristi-furnishers/" style="background-image:url(/assets/img/idx/sankalp-shristi-furnishers.jpg)">
+          <span class="mono">Next · 03</span><b>Sankalp &amp; Shristi Furnishers</b><span class="go">Open <i aria-hidden="true">↗</i></span><span class="hint" aria-hidden="true">← Press and drag to unroll</span>
+        </a>
+      </section>
+
+    </div></div>
+  </section>
 </main>
 
 <footer class="foot">
@@ -112,6 +120,9 @@
 
 <script src="/assets/js/site.js" defer></script>
 <script src="/assets/js/scenes.js" defer></script>
+<script src="/assets/js/unroll.js" defer></script>
+<script src="/assets/js/story.js" defer></script>
+<script src="/assets/js/story-next.js" defer></script>
 <script src="/assets/js/wsg.js" defer></script>
 </body>
 </html>
