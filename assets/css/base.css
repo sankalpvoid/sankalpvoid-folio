@@ -88,20 +88,20 @@ dialog.idx::backdrop{background:#000}
 dialog .idx__bgs{position:fixed}
 .idx__bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.05);transition:opacity .6s var(--ease-out),transform 1.4s var(--ease-out)}
 .idx__bg.is-on{opacity:1;transform:none}
-.idx__scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,12,.82) 0%,rgba(11,11,12,.5) 55%,rgba(11,11,12,.62) 100%),linear-gradient(0deg,rgba(11,11,12,.8),rgba(11,11,12,0) 38%),linear-gradient(180deg,rgba(11,11,12,.7),rgba(11,11,12,0) 22%)}
+.idx__scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,12,.82) 0%,rgba(11,11,12,.72) 55%,rgba(11,11,12,.76) 100%),linear-gradient(0deg,rgba(11,11,12,.8),rgba(11,11,12,0) 38%),linear-gradient(180deg,rgba(11,11,12,.7),rgba(11,11,12,0) 22%)}
 .idx__top{position:fixed;top:0;left:0;right:0;z-index:3;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:18px var(--gutter);color:#f4f0e8}
 .idx__top nav{display:flex;gap:clamp(8px,2.2vw,28px)}
 .idx__top nav a{font-size:.82rem;font-weight:500;text-decoration:none;padding:13px 4px;margin:-5px 0}
 .idx__top nav a:hover{text-decoration:underline;text-underline-offset:.22em}
 .idx__label{position:fixed;left:var(--gutter);top:76px;z-index:3;opacity:.7;font-size:.66rem}
 .idx__list{position:relative;display:grid;align-content:center;min-height:100vh;min-height:100svh;padding:clamp(120px,16vh,170px) var(--gutter) clamp(100px,14vh,140px) clamp(var(--gutter),22vw,360px);gap:clamp(2px,1vh,10px)}
-.idx__a{display:grid;grid-template-columns:3.2rem 1fr;gap:0 16px;align-items:baseline;text-decoration:none;padding:clamp(2px,.8vh,8px) 0;color:rgba(243,238,227,.5)}
+.idx__a{display:grid;grid-template-columns:3.2rem 1fr;gap:0 16px;align-items:baseline;text-decoration:none;padding:clamp(2px,.8vh,8px) 0;color:rgba(243,238,227,.72)}
 .idx__t{grid-column:2;font-family:var(--f-display);font-size:clamp(2.7rem,7.4vw,7.2rem);line-height:.95;letter-spacing:-.02em;text-shadow:0 2px 30px rgba(0,0,0,.55);transition:color .35s var(--ease-out),transform .5s var(--ease-out)}
-.idx__n{grid-column:1;grid-row:1;color:inherit;opacity:.8}
-.idx__c{grid-column:2;grid-row:2;font-size:.66rem;opacity:.85;margin-top:2px;text-shadow:0 1px 12px rgba(0,0,0,.7)}
+.idx__n{grid-column:1;grid-row:1;color:#e5dfd4}
+.idx__c{grid-column:2;grid-row:2;font-size:.66rem;color:#e5dfd4;margin-top:2px;text-shadow:0 1px 12px rgba(0,0,0,.7)}
 .idx__item.is-active .idx__a,.idx__a:hover,.idx__a:focus-visible{color:#fff;text-shadow:0 2px 40px rgba(0,0,0,.55)}
 .idx__item.is-active .idx__t{transform:translateX(clamp(8px,1.4vw,22px))}
-.idx__item.is-active .idx__n{color:var(--sig)}
+.idx__item.is-active .idx__n{color:#fff}
 .idx__a:focus-visible{outline:2px solid var(--focus);outline-offset:6px}
 .idx__close{position:fixed;left:var(--gutter);bottom:clamp(18px,3vh,32px);z-index:4;display:inline-flex;align-items:center;gap:12px;font-weight:500;font-size:.9rem;min-height:44px;padding:0 6px 0 0;color:#f4f0e8}
 .idx__ring{width:30px;height:30px;border-radius:50%;border:1.5px solid currentColor;display:inline-block;transition:transform var(--t-ui) var(--ease-out)}
@@ -157,16 +157,20 @@ dialog .idx__bgs{position:fixed}
    Display type, gesture surfaces, media and controls are not selectable; inputs, the contact address (.sel) and long-form
    reading copy (.sel) stay selectable. During a custom gesture html.is-gesturing blocks selection everywhere. */
 .chrome,.slide,.sc,.sc-copy,.controls,.hs__pin,.hs__nav,.hero,.idx,.ar,.pf__pin,.rail,.peel,.peel-h,.enter,.pn-big,.pn-h,.pn-k,.pn-next,.pn-pill,button,figure,img,video,svg,h1,h2,h3{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-.sel,.sel *,input,textarea,select,[contenteditable="true"],.pn-p,.pn-note,.pn-col p,.dec p,.seq__cap p,.quiz__a,.sn-frame__s,.sn-list span,.pf__p,.pf__note{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+/* Explicit descendants matter in WebKit: selectable children can reopen a selection across a nonselectable heading. */
+.hs__pin *,.hero *,.slide *,.idx *,.ar *,.pf__pin *,.rail *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.sel,.sel *,input,textarea,select,[contenteditable="true"],[contenteditable="true"] *{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
 img,svg,video,a{-webkit-user-drag:none}
 html.is-gesturing,html.is-gesturing *{-webkit-user-select:none!important;user-select:none!important;cursor:grabbing!important}
 html.is-gesturing iframe{pointer-events:none}
 
 /* ---------- Project rail (right edge of every dedicated project story) ---------- */
-:root{--rail:68px}
-body.has-rail{padding-right:var(--rail)}
-body.has-rail .chrome{right:var(--rail)}
-.rail{--rail-rule:color-mix(in srgb,var(--rail-fg,var(--page-fg)) 24%,transparent);position:fixed;top:0;right:0;bottom:0;width:var(--rail);z-index:55;display:flex;flex-direction:column;align-items:stretch;background:var(--rail-bg,var(--page-bg));color:var(--rail-fg,var(--page-fg));border-left:1px solid var(--rail-rule)}
+:root{--rail:68px;--rail-edge:16px}
+/* Safari/WebKit overlay scrollbars intercept presses in the outer ~16px
+   while scrolling. Reserve that native lane instead of covering the handle. */
+body.has-rail{padding-right:calc(var(--rail) + var(--rail-edge))}
+body.has-rail .chrome{right:calc(var(--rail) + var(--rail-edge))}
+.rail{--rail-rule:color-mix(in srgb,var(--rail-fg,var(--page-fg)) 24%,transparent);position:fixed;top:0;right:var(--rail-edge);bottom:0;width:var(--rail);z-index:55;display:flex;flex-direction:column;align-items:stretch;background:var(--rail-bg,var(--page-bg));color:var(--rail-fg,var(--page-fg));border-left:1px solid var(--rail-rule)}
 .rail__cell{display:grid;place-items:center;border-bottom:1px solid var(--rail-rule);text-decoration:none;position:relative;color:inherit;min-height:var(--rail)}
 .rail__close{height:var(--rail);font-size:1.35rem;line-height:1;transition:background var(--t-micro),color var(--t-micro)}
 .rail__close:hover,.rail__act:hover{background:var(--rail-fg,var(--page-fg));color:var(--rail-bg,var(--page-bg))}
@@ -182,6 +186,8 @@ body.has-rail .chrome{right:var(--rail)}
 .rail a:focus-visible,.rail button:focus-visible{outline-offset:-4px}
 /* next project: the corner handle. Press and drag it up and to the left, or click / press Enter. */
 .peel-h{position:relative;display:block;flex:none;width:var(--rail);min-height:200px;margin:0;text-decoration:none;color:inherit;cursor:grab;touch-action:none;overflow:hidden;background:none;border:0;padding:0;font:inherit}
+/* Keep decorative labels and the corner under one stable pointer target. */
+.peel-h>*{pointer-events:none}
 .rail .peel-h{border-top:0}
 .peel-h__lab{position:absolute;left:0;right:0;top:12px;display:grid;justify-items:center;gap:8px}
 .peel-h__lab .mono{font-size:.54rem;letter-spacing:.14em;opacity:.7}
@@ -189,7 +195,7 @@ body.has-rail .chrome{right:var(--rail)}
 .peel-h__tri{position:absolute;right:0;bottom:0;width:34px;height:34px;background:linear-gradient(135deg,transparent 50%,var(--rail-fg,#f4f0e8) 50%);opacity:.9;transition:width var(--t-ui) var(--ease-out),height var(--t-ui) var(--ease-out)}
 .peel-h:hover .peel-h__tri,.peel-h:focus-visible .peel-h__tri{width:46px;height:46px}
 @media (max-width:860px){
-  :root{--rail:0px}
+  :root{--rail:0px;--rail-edge:0px}
   body.has-rail{padding-right:0;padding-bottom:58px}
   body.has-rail .chrome{right:0}
   .rail{top:auto;left:0;width:auto;height:58px;flex-direction:row;border-left:0;border-top:1px solid var(--rail-rule);padding-bottom:env(safe-area-inset-bottom);height:calc(58px + env(safe-area-inset-bottom))}

@@ -4,6 +4,37 @@
   const root = document.documentElement;
   root.classList.remove('no-js');
 
+  /* WebKit can retain a native range begun at a text node across nonselectable
+     display content. Cancel selection itself, not ordinary pointer input:
+     sliders, buttons, links and editable/copyable content retain their defaults. */
+  const selectable = (node) => {
+    const el = node instanceof Element ? node : node && node.parentElement;
+    return !!(el && el.closest('input,textarea,select,[contenteditable="true"],.sel'));
+  };
+  document.addEventListener('mousedown', (e) => {
+    if (e.button !== 0 || selectable(e.target)) return;
+    const el = e.target instanceof Element ? e.target : e.target.parentElement;
+    // Cancel native text-selection initiation before WebKit enters its drag
+    // tracking mode; interactive elements keep native focus and activation.
+    if (!el.closest('a,button,input,textarea,select,summary,[role="button"],[tabindex]')) e.preventDefault();
+  }, true);
+  document.addEventListener('selectstart', (e) => {
+    if (!selectable(e.target)) e.preventDefault();
+  }, true);
+  document.addEventListener('dragstart', (e) => {
+    if (!selectable(e.target)) e.preventDefault();
+  }, true);
+  const clearDisplaySelection = (e) => {
+    if (selectable(e.target)) return;
+    const selection = getSelection();
+    if (selection && selection.rangeCount) selection.removeAllRanges();
+  };
+  document.addEventListener('pointerup', clearDisplaySelection, true);
+  document.addEventListener('pointercancel', clearDisplaySelection, true);
+  document.querySelectorAll('img,a').forEach((el) => {
+    if (!selectable(el)) el.setAttribute('draggable', 'false');
+  });
+
   /* ---- reveals: opt in only once the observer exists; always fail open ---- */
   if ('IntersectionObserver' in window && !reduce.matches) {
     root.classList.add('js-motion');

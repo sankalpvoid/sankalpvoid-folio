@@ -1,6 +1,6 @@
 /* axe-core on every route at 1440 and 390, plus: each story scene, the project-index overlay, the archive list view, Profile scenes. */
 const {chromium}=require('playwright');const axe=require('fs').readFileSync(require.resolve('axe-core/axe.min.js'),'utf8');
-const BASE=process.env.BASE||'http://localhost:4195';const SHARE=process.env.SHARE_QS||'';
+const BASE=process.env.BASE||'http://127.0.0.1:4195';const SHARE=process.env.SHARE_QS||'';
 const U=(p)=>BASE+p+SHARE;
 const routes=['/','/projects/','/work/reclaim/','/work/wealthwithsg/','/work/sankalp-shristi-furnishers/','/work/aureledger/','/work/experiments/','/archive/','/profile/','/contact/'];
 const fmt=(res)=>res.violations.map(v=>`${v.id}(${v.nodes.length}${v.nodes[0]?' e.g. '+v.nodes[0].target.join(' ').slice(0,60):''})`).join(' | ')||'none';
@@ -20,4 +20,4 @@ for(const [w,h] of [[1440,900],[390,844]]){const ctx=await b.newContext({viewpor
 const p=await (await b.newContext({viewport:{width:1440,height:900}})).newPage();await p.goto(U('/work/experiments/'));
 for(const id of ['cyberpunk','parallax','gsap-motion']){await p.evaluate(id=>HS.scrollToX(document.getElementById(id).offsetLeft,false),id);await p.waitForTimeout(500);await p.click(`#${id} [data-live]`);await p.waitForTimeout(4500);
  const f=p.frames().find(x=>x!==p.mainFrame());const t=f?await f.title().catch(()=>'ERR'):'no frame';console.log('iframe',id,'->',t);await p.keyboard.press('Escape');await p.waitForTimeout(300);}
-console.log('\nAXE groups with violations:',bad);await b.close()})();
+console.log('\nAXE groups with violations:',bad);await b.close();process.exitCode=bad?1:0})().catch(e=>{console.error(e);process.exitCode=1});

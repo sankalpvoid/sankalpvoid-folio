@@ -142,3 +142,15 @@ html:not(.js) .hs__nav{display:none!important}
 .cmp--lg{width:min(54vw,calc(var(--hsw,100vw) - 30rem))}
 html:not(.js) .pn-next{width:auto}
 html:not(.js) .sn-stack{width:auto}
+
+/* Desktop-authored inline column widths must not survive the flat reading mode.
+   Keep the same comfortable measure on phones, reduced motion and no-JS. */
+@media (max-width:860px),(prefers-reduced-motion:reduce){
+  .hs__p .pn-txt{width:100%!important;max-width:36rem}
+  .hs__p .pn-col{width:100%!important;max-width:36rem}
+  .hs__p>.pn-fig,.hs__p>.swap{margin-top:28px}
+  .pn-fig img,.pn-fig video{max-width:100%}
+}
+html:not(.js) .hs__p .pn-txt,html:not(.js) .hs__p .pn-col{width:100%!important;max-width:36rem}
+html:not(.js) .pn-cols{display:block}
+html:not(.js) .pn-fig img,html:not(.js) .pn-fig video{max-width:100%}

@@ -55,7 +55,7 @@
       const l = limits();
       if (Math.abs(tgt.x) > l.x) { tgt.x = clamp(tgt.x, -l.x, l.x); vel.x = 0; }
       if (Math.abs(tgt.y) > l.y) { tgt.y = clamp(tgt.y, -l.y, l.y); vel.y = 0; }
-      if (Math.hypot(vel.x, vel.y) < 10) coasting = false;
+      if (Math.hypot(vel.x, vel.y) < 10) { coasting = false; vel.x = vel.y = 0; }
     }
     const k = 1 - Math.exp(-dt / (dragging ? 0.065 : 0.13));
     cur.x += (tgt.x - cur.x) * k; cur.y += (tgt.y - cur.y) * k;
@@ -64,8 +64,11 @@
     tilt.ry += (clamp(rvx * 0.0022, -5, 5) - tilt.ry) * kt;
     tilt.rx += (clamp(-rvy * 0.0018, -4, 4) - tilt.rx) * kt;
     tilt.sk += (clamp(rvx * 0.0010, -2, 2) - tilt.sk) * kt;
-    const still = !dragging && !coasting && Math.hypot(tgt.x - cur.x, tgt.y - cur.y) < 0.15 && Math.abs(tilt.rx) + Math.abs(tilt.ry) + Math.abs(tilt.sk) < 0.02;
-    if (still) { cur.x = tgt.x; cur.y = tgt.y; tilt.rx = tilt.ry = tilt.sk = 0; paint(); return; }
+    /* Stop once the remaining movement is subpixel and rendered speed is
+       imperceptible. Do not wait for a tilt accumulator driven by that same
+       residual velocity to independently converge (frame cadence varies). */
+    const still = !dragging && !coasting && Math.hypot(tgt.x - cur.x, tgt.y - cur.y) < 0.15 && Math.hypot(rvx, rvy) < 2;
+    if (still) { cur.x = tgt.x; cur.y = tgt.y; prev = { x: cur.x, y: cur.y }; vel.x = vel.y = 0; tilt.rx = tilt.ry = tilt.sk = 0; paint(); return; }
     paint();
     raf = requestAnimationFrame(frame);
   };
@@ -102,7 +105,12 @@
   });
   const release = (e, cancelled) => {
     if (!down || (e && e.pointerId !== down.id)) return;
-    const was = dragging; down = null; dragging = false; view.classList.remove('is-drag');
+    const pointerId = down.id;
+    const was = dragging; down = null; dragging = false;
+    // A release outside the window may be inferred from buttons===0 instead of
+    // pointerup. Explicitly relinquish capture before the next control press.
+    try { if (view.hasPointerCapture(pointerId)) view.releasePointerCapture(pointerId); } catch {}
+    view.classList.remove('is-drag');
     document.documentElement.classList.remove('is-gesturing');
     if (!was) return;
     swallow = true; setTimeout(() => { swallow = false; }, 60);
@@ -112,6 +120,9 @@
     coasting = Math.hypot(vel.x, vel.y) > 60; go();
   };
   addEventListener('blur', () => release(null, true));
+  addEventListener('pointerdown', (e) => {
+    if (down && !view.contains(e.target)) release(null, true);
+  }, true);
   view.addEventListener('pointerup', (e) => release(e, false));
   view.addEventListener('pointercancel', (e) => release(e, true));
   view.addEventListener('lostpointercapture', (e) => release(e, true));

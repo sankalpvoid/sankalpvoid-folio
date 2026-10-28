@@ -1,15 +1,15 @@
 /* Verification: routes x viewports, peel, rail, selection, archive field, story pace, profile, index, fallbacks, links.
-   Usage: BASE=http://localhost:4195 ENGINE=chromium|firefox|webkit node scripts/verify.js
+   Usage: BASE=http://127.0.0.1:4195 ENGINE=chromium|firefox|webkit node scripts/verify.js
    Chromium-only checks (CDP touch) are skipped on the other engines and reported as SKIP. */
 const pw=require('playwright');
 const ENGINE=process.env.ENGINE||'chromium';
-const BASE=process.env.BASE||'http://localhost:4195';
+const BASE=process.env.BASE||'http://127.0.0.1:4195';
 const SHARE=process.env.SHARE_QS||'';           /* "?_vercel_share=..." when run against a protected preview */
 const U=(p)=>BASE+p+(SHARE&&!p.includes('?')?SHARE:'');
 const ORDER=['reclaim','wealthwithsg','sankalp-shristi-furnishers','aureledger','experiments'];
 const STORIES=ORDER.map(s=>`/work/${s}/`);
 const routes=['/','/projects/',...STORIES,'/archive/','/profile/','/about/','/contact/'];
-const out=[];const ok=(c,m)=>{out.push((c?'PASS ':'FAIL ')+m);};const skip=(m)=>out.push('SKIP '+m);
+const out=[];const ok=(c,m)=>{const line=(c?'PASS ':'FAIL ')+m;out.push(line);console.log(line);};const skip=(m)=>out.push('SKIP '+m);
 const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-track]')).transform).m41;
 (async()=>{
  const b=await pw[ENGINE].launch();
@@ -20,12 +20,21 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
    const p=await ctx.newPage();const errs=[];
    p.on('console',m=>m.type()==='error'&&errs.push(m.text()));p.on('pageerror',e=>errs.push('pageerror '+e.message));
    p.on('response',res=>{if(res.status()>=400)errs.push(res.status()+' '+res.url())});
-   const resp=await p.goto(U(r),{waitUntil:'load'});await p.waitForTimeout(700);
+   const resp=await p.goto(U(r),{waitUntil:'load'});
+   // /about/ has both meta and JS redirects on a plain static server; Firefox
+   // may finish that navigation without a Response. Verify the destination's
+   // actual HTTP response separately rather than dereferencing null or passing it.
+   let status=resp?.status();
+   if(r==='/about/'){
+    await p.waitForURL('**/profile/');
+    if(status==null)status=(await ctx.request.get(U('/profile/'))).status();
+   }
+   await p.waitForTimeout(700);
    const H=await p.evaluate(()=>document.documentElement.scrollHeight);
    for(let y=0;y<Math.min(H,30000);y+=h*.7){await p.evaluate(y=>scrollTo(0,y),y);await p.waitForTimeout(50);}
    await p.waitForTimeout(400);
    const info=await p.evaluate(()=>({sw:document.documentElement.scrollWidth,title:document.title,h1:document.querySelectorAll('h1').length,og:!!document.querySelector('meta[property="og:image"]'),broken:[...document.images].filter(i=>i.complete&&i.naturalWidth===0&&i.currentSrc).length,noalt:[...document.images].filter(i=>!i.hasAttribute('alt')).length}));
-   ok(resp.status()===200&&errs.length===0,`${ENGINE} ${w}px ${r} status=${resp.status()} errors=${JSON.stringify(errs)}`);
+   ok(status===200&&errs.length===0,`${ENGINE} ${w}px ${r} status=${status ?? "no document response"} errors=${JSON.stringify(errs)}`);
    ok(info.sw<=w+1,`${w}px ${r} no horizontal overflow (${info.sw}/${w})`);
    ok(info.broken===0&&info.noalt===0,`${w}px ${r} images ok`);
    if(w===1440&&r!=='/about/')ok(info.title.length>5&&info.og&&info.h1>=1,`${r} meta ok`);
@@ -50,6 +59,7 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   ok(mid.sel===0&&mid.g,'peel: selection suppressed while the gesture is active');
   await p.mouse.up();await p.waitForTimeout(1200);
   ok(await slug()==='reclaim'&&(await p.evaluate(()=>history.length))===hist0&&new URL(p.url()).pathname==='/','peel: cancelled gesture returns to the current project, no history entry');
+  await p.waitForFunction(()=>!document.querySelector('.peel.is-on'),null,{timeout:6000}).catch(()=>{});
   ok(await p.evaluate(()=>!document.querySelector('.peel.is-on')),'peel: layer removed after cancel');
   await p.mouse.move(x,y);await p.mouse.down();for(let i=1;i<=40;i++){await p.mouse.move(Math.max(5,x-i*40),Math.max(5,y-i*26));await p.waitForTimeout(12);}await p.mouse.up();await p.waitForTimeout(1500);
   ok(await slug()==='wealthwithsg'&&new URL(p.url()).pathname==='/','peel: completed drag brings in the NEXT project (WealthWithSG), not the current project\'s page');
@@ -99,13 +109,12 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await p.waitForTimeout(100);
   const hl=await p.evaluate(()=>{const r=getSelection();const els=[...document.querySelectorAll('.hs h1,.hs h2,.hs h3,.pn-big,.pn-h,.rc-title,.hs img,.rail *,.chrome *')];return els.filter(e=>r.rangeCount&&!r.isCollapsed&&r.containsNode(e,true)).length});
   ok(hl===0,`${s}: dragging leaves no headings, images or controls highlighted (${hl})`);
-  ok(await p.evaluate(()=>[...document.querySelectorAll('.hs img')].every(i=>i.getAttribute('draggable')==='false'||getComputedStyle(i).webkitUserDrag==='none'||true)),`${s}: images are not natively draggable`);
-  // rail peel -> next project (fresh load: after an unrelated content drag, Playwright-WebKit's emulated mouse does not deliver the next press's moves; not reproduced in Chromium/Firefox)
-  await p.reload();await p.waitForTimeout(1200);
+  ok(await p.evaluate(()=>[...document.querySelectorAll('.hs img')].every(i=>i.getAttribute('draggable')==='false'||getComputedStyle(i).webkitUserDrag==='none')),`${s}: images are not natively draggable`);
+  // Regression: the rail must work immediately after an unrelated content drag, without reloading.
   const hbx=await (await p.$('.rail [data-peel]')).boundingBox();const hx=hbx.x+hbx.width-12,hy=hbx.y+hbx.height-12;
   const url0=p.url();
   await p.mouse.move(hx,hy);await p.mouse.down();for(let k=1;k<=7;k++){await p.mouse.move(hx-k*30,hy-k*22);await p.waitForTimeout(14);}
-  const clipA=await p.evaluate(()=>getComputedStyle(document.querySelector('.peel__under')).clipPath);await p.mouse.up();await p.waitForTimeout(1300);
+  const clipA=await p.evaluate(()=>{const e=document.querySelector('.peel__under');return e?getComputedStyle(e).clipPath:''});await p.mouse.up();await p.waitForFunction(()=>!document.querySelector('.peel.is-on'),null,{timeout:6000}).catch(()=>{});
   ok(/polygon/.test(clipA)&&p.url()===url0,`${s}: cancelled peel stays on the current project (${new URL(p.url()).pathname})`);
   await p.mouse.move(hx,hy);await p.mouse.down();for(let k=1;k<=40;k++){await p.mouse.move(Math.max(5,hx-k*40),Math.max(5,hy-k*26));await p.waitForTimeout(10);}await p.mouse.up();
   await p.waitForURL(`**/work/${nx}/`,{timeout:6000}).catch(()=>{});
@@ -131,13 +140,13 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   ok(Math.abs(mid.st.rx)<=4.01&&Math.abs(mid.st.ry)<=5.01,'archive: tilt stays within its bounds');
   const lx=mid.lay.map(parseFloat);ok(new Set(lx.map(v=>v.toFixed(0))).size===3,`archive: three depth layers pan at different rates (${lx.map(v=>Math.round(v))})`);
   ok(mid.sel===0,'archive: no text selected while dragging');
-  await p.mouse.up();await p.waitForTimeout(250);const co=await p.evaluate(()=>__arState());await p.waitForTimeout(2600);const rest=await p.evaluate(()=>({st:__arState(),n:document.querySelector('[data-rot=near]').style.transform}));
+  await p.mouse.up();await p.waitForTimeout(250);const co=await p.evaluate(()=>__arState());await p.waitForFunction(()=>{const s=__arState();return s.rx===0&&s.ry===0&&document.querySelector('[data-rot=near]').style.transform===''},null,{timeout:6000}).catch(()=>{});const rest=await p.evaluate(()=>({st:__arState(),n:document.querySelector('[data-rot=near]').style.transform}));
   ok(Math.hypot(co.px-mid.st.px,co.py-mid.st.py)>5,'archive: release continues with inertia');
   ok(rest.st.rx===0&&rest.st.ry===0&&rest.n==='','archive: at rest the tilt is exactly zero and transforms are removed (sharp)');
   ok(new URL(p.url()).pathname==='/archive/','archive: a drag does not open a project');
   for(let i=0;i<8;i++){await p.mouse.move(700,450);await p.mouse.down();await p.mouse.move(-400,-400,{steps:4});await p.mouse.up();}
   await p.waitForTimeout(2800);const far=await p.evaluate(()=>__arState());ok(Math.abs(far.px)<=2200&&Math.abs(far.py)<=1500,`archive: panning is bounded (${Math.round(far.px)},${Math.round(far.py)})`);
-  await p.click('[data-reset]');await p.waitForTimeout(2200);const rs=await p.evaluate(()=>__arState());ok(Math.hypot(rs.px,rs.py)<4,'archive: recentre returns to the start');
+  await p.click('[data-reset]');await p.waitForFunction(()=>{const s=__arState();return Math.hypot(s.px,s.py)<4},null,{timeout:6000}).catch(()=>{});const rs=await p.evaluate(()=>__arState());ok(Math.hypot(rs.px,rs.py)<4,'archive: recentre returns to the start');
   await p.click('[data-listbtn]');await p.waitForTimeout(300);ok(await p.evaluate(()=>__arState().list)&&(await p.$$eval('[data-list] a',a=>a.length))>=20,'archive: accessible list view lists every fragment');
   await p.click('[data-listbtn]');await p.waitForTimeout(200);
   await p.focus('[data-view]');const a0=await p.evaluate(()=>__arState().px);await p.keyboard.press('ArrowLeft');await p.waitForTimeout(900);ok((await p.evaluate(()=>__arState().px))!==a0,'archive: arrow keys pan the field');
@@ -166,7 +175,7 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await p.evaluate(()=>scrollTo(0,0));await p.waitForTimeout(3600);
   const back=await p.evaluate(()=>getComputedStyle(document.querySelector('.pf__portrait')).visibility);ok(back==='hidden','profile: scrolling back to the top returns to zero portrait width');
   await p.reload();await p.waitForTimeout(1200);ok((await p.evaluate(()=>getComputedStyle(document.querySelector('.pf__portrait')).visibility))==='hidden','profile: reload at the top starts with no portrait');
-  await p.goto(U('/archive/'));await p.goBack();await p.waitForTimeout(1200);ok((await p.evaluate(()=>scrollY))<5||true,'profile: navigating back works');
+  await p.goto(U('/archive/'));await p.goBack();await p.waitForTimeout(1200);ok(new URL(p.url()).pathname==='/profile/'&&await p.evaluate(()=>getComputedStyle(document.querySelector('.pf__portrait')).visibility==='hidden'),'profile: navigating back to the top preserves the hidden portrait');
   ok(!await p.evaluate(()=>[...document.querySelectorAll('audio,video')].some(m=>!m.paused||m.autoplay)),'profile: no autoplay media');
   ok(await p.evaluate(()=>document.querySelectorAll('a[href*="youtube"],a[href*="instagram"]').length>=2),'profile: music channel links present');
   await ctx.close();
@@ -200,7 +209,7 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await p.goto(U('/'));await p.waitForTimeout(900);await p.mouse.move(60,300);await p.mouse.down();await p.mouse.move(1300,600,{steps:10});await p.mouse.up();
   ok((await p.evaluate(()=>getSelection().toString().length))===0,'gallery: dragging across the hero highlights nothing');
   await p.goto(U('/projects/'));await p.waitForTimeout(700);await p.mouse.move(40,200);await p.mouse.down();await p.mouse.move(900,700,{steps:10});await p.mouse.up();ok((await p.evaluate(()=>getSelection().toString().length))===0,'index: dragging across the titles highlights nothing');
-  await p.goto(U('/contact/'));ok(await p.evaluate(()=>{const m=document.querySelector('[data-mail]');return getComputedStyle(m).userSelect!=='none'||m.closest('.sel')!==null||true}),'contact: the address stays copyable (Copy button + selectable)');
+  await p.goto(U('/contact/'));ok(await p.evaluate(()=>{const m=document.querySelector('[data-mail]');return getComputedStyle(m).userSelect!=='none'||m.closest('.sel')!==null}),'contact: the address stays copyable (Copy button + selectable)');
   await ctx.close();}
  // 9. links
  {const ctx=await b.newContext();const p=await ctx.newPage();const set=new Map();
@@ -213,5 +222,5 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await p.evaluate(()=>document.querySelector('[data-live]').click());await p.waitForSelector('iframe');ok(true,'experiments: Try it here loads on demand');
   await p.keyboard.press('Escape');await p.waitForTimeout(300);ok((await p.$$('iframe')).length===0,'experiments: Escape unloads it');
   await p.evaluate(()=>document.querySelector('[data-swap-to="1"]').click());ok(await p.evaluate(()=>!document.querySelector('.swap__i:nth-child(2)').hidden),'experiments: state buttons swap the study image');await ctx.close();}
- console.log(out.join('\n'));console.log('\nSUMMARY engine='+ENGINE+' pass='+out.filter(l=>l.startsWith('PASS')).length+' fail='+out.filter(l=>l.startsWith('FAIL')).length+' skip='+out.filter(l=>l.startsWith('SKIP')).length);
- await b.close();})();
+ console.log('\nSUMMARY engine='+ENGINE+' pass='+out.filter(l=>l.startsWith('PASS')).length+' fail='+out.filter(l=>l.startsWith('FAIL')).length+' skip='+out.filter(l=>l.startsWith('SKIP')).length);
+ await b.close();process.exitCode=out.some(l=>l.startsWith('FAIL'))?1:0;})().catch(e=>{console.error(e);process.exitCode=1;});
