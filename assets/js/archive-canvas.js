@@ -85,6 +85,7 @@
   });
   view.addEventListener('pointermove', (e) => {
     if (!down || e.pointerId !== down.id) return;
+    if (e.pointerType === 'mouse' && e.buttons === 0) { release(e, false); return; }   /* the release happened outside the window */
     const dx = e.clientX - down.x, dy = e.clientY - down.y;
     if (!dragging) {
       if (Math.hypot(dx, dy) < 6) return;
@@ -110,6 +111,7 @@
     vel.x = clamp((b.x - a.x) / dt, -3200, 3200); vel.y = clamp((b.y - a.y) / dt, -3200, 3200);
     coasting = Math.hypot(vel.x, vel.y) > 60; go();
   };
+  addEventListener('blur', () => release(null, true));
   view.addEventListener('pointerup', (e) => release(e, false));
   view.addEventListener('pointercancel', (e) => release(e, true));
   view.addEventListener('lostpointercapture', (e) => release(e, true));

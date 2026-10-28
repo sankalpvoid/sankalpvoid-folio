@@ -197,7 +197,8 @@ body.has-rail .chrome{right:var(--rail)}
   .rail__close{width:58px}
   .rail__name{flex:1;padding:0 12px;justify-items:start;min-height:0}
   .rail__v{writing-mode:horizontal-tb;transform:none}
-  .rail__no,.rail__prog{display:none}
+  .rail__no,.rail__prog,.rail__name,.peel-h__lab .mono{display:none}
+  .rail__act{flex:1;justify-content:center}
   .rail__act{min-height:0;padding:0 14px;height:58px}
   .rail__act .rail__v{font-size:.66rem}
   .peel-h{width:auto;min-height:0;height:58px;padding:0 44px 0 14px}

@@ -46,7 +46,8 @@
 
   const measure = () => {
     if (!active) return;
-    const frac = travel ? x / travel : 0;
+    const frac = travel ? target / travel : 0;      /* the user's place (the scroll position), not the lagging rendered one */
+    const oldTravel = travel;
     vw = pin.clientWidth; vh = innerHeight;
     hs.style.setProperty('--hsw', vw + 'px');
     track.style.transform = 'none';
@@ -55,7 +56,7 @@
     hs.style.setProperty('--hs-travel', travel + 'px');
     panels.forEach((p) => { p.__start = p.offsetLeft; p.__w = p.offsetWidth; });
     /* keep the same place in the story through resizes and font/image loads */
-    if (frac && !measure.first) scrollTo({ top: yOf(frac * travel), behavior: 'auto' });
+    if (frac && !measure.first && Math.abs(travel - oldTravel) > 1) scrollTo({ top: yOf(frac * travel), behavior: 'auto' });
     measure.first = false;
     target = readTarget(); x = clamp(x, 0, travel);
     render();

@@ -130,7 +130,9 @@ html:not(.js) .hs__nav{display:none!important}
   .hs__p.sn-frame{padding:0!important;position:relative}
   .sn-frame__img{position:relative;inset:auto;aspect-ratio:16/10}
   .sn-frame::after{display:none}
-  .sn-frame__cap{position:static;padding:20px var(--gutter) 40px;max-width:none}
+  .sn-frame__cap{position:static;padding:20px var(--gutter) 40px;max-width:none;color:var(--hs-fg)}
+  .sn-frame__cap--tag{text-align:left}
+  .sn-frame__cap--tag .pn-k{background:none;padding:0}
   .wsg-big img{height:auto;width:100%}
 }
 

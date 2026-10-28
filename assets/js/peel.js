@@ -53,14 +53,14 @@
   };
   const stopLoop = () => { cancelAnimationFrame(raf); raf = 0; };
   /* spring toward a goal; resolves when settled */
-  const spring = (goal, { k = 150, c = 17, v0 = 0 } = {}) => new Promise((res) => {
+  const spring = (goal, { k = 190, c = 21, v0 = 0 } = {}) => new Promise((res) => {
     stopLoop();
     if (reduce()) { paint(goal); res(); return; }
     let v = v0, last = performance.now();
     const step = (now) => {
       const dt = Math.min(0.032, (now - last) / 1000); last = now;
       v += (-k * (p - goal) - c * v) * dt; paint(p + v * dt);
-      if (Math.abs(p - goal) < 0.0008 && Math.abs(v) < 0.01) { paint(goal); raf = 0; res(); return; }
+      if (Math.abs(p - goal) < 0.002 && Math.abs(v) < 0.03) { paint(goal); raf = 0; res(); return; }
       raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
@@ -127,6 +127,7 @@
       if (e.button > 0 || !e.isPrimary) return;
       if (busy && state !== 'cancelling') { if (p > 0.5) return; }
       e.preventDefault();
+      try { getSelection().removeAllRanges(); } catch {}
       stopLoop(); busy = false;
       id = e.pointerId; drag = false; moved = false; vel = 0;
       const r = handle.getBoundingClientRect();
@@ -137,6 +138,7 @@
     });
     if (opts.drag !== false) handle.addEventListener('pointermove', (e) => {
       if (id === null || e.pointerId !== id) return;
+      if (e.pointerType === 'mouse' && e.buttons === 0) { finishDrag(false); return; }
       const s = handle.__start;
       const dx = e.clientX - s.x, dy = e.clientY - s.y;
       if (!drag) {
