@@ -31,7 +31,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 h1,h2,h3,h4,p,ul,ol,figure,dl,dd{margin:0}
 ul,ol{padding:0;list-style:none}
 :focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px}
-::selection{background:var(--sig);color:#fff}
+::selection{background:#d8d2c4;color:#0d0d0f}
 .mono{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .skip{position:fixed;left:12px;top:-60px;z-index:200;background:#fff;color:#000;padding:10px 14px;border-radius:4px;font-size:.9rem;transition:top var(--t-ui) var(--ease-out)}
@@ -99,7 +99,7 @@ dialog .idx__bgs{position:fixed}
 .idx__t{grid-column:2;font-family:var(--f-display);font-size:clamp(2.7rem,7.4vw,7.2rem);line-height:.95;letter-spacing:-.02em;text-shadow:0 2px 30px rgba(0,0,0,.55);transition:color .35s var(--ease-out),transform .5s var(--ease-out)}
 .idx__n{grid-column:1;grid-row:1;color:inherit;opacity:.8}
 .idx__c{grid-column:2;grid-row:2;font-size:.66rem;opacity:.85;margin-top:2px;text-shadow:0 1px 12px rgba(0,0,0,.7)}
-.idx__item.is-active .idx__a,.idx__a:hover,.idx__a:focus-visible{color:#fff}
+.idx__item.is-active .idx__a,.idx__a:hover,.idx__a:focus-visible{color:#fff;text-shadow:0 2px 40px rgba(0,0,0,.55)}
 .idx__item.is-active .idx__t{transform:translateX(clamp(8px,1.4vw,22px))}
 .idx__item.is-active .idx__n{color:var(--sig)}
 .idx__a:focus-visible{outline:2px solid var(--focus);outline-offset:6px}
@@ -108,7 +108,11 @@ dialog .idx__bgs{position:fixed}
 .idx__close:hover .idx__ring{transform:scale(1.15)}
 .idx__enter{position:fixed;left:50%;bottom:clamp(16px,3vh,30px);transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:12px;background:#f4f0e8;color:#0b0b0c;border-radius:999px;padding:6px 8px 6px 18px}
 .idx__enter[hidden]{display:none}
-.idx__enter .mono{opacity:.6;font-size:.6rem}
+.idx__enter .mono{opacity:.6;font-size:.6rem;display:none}
+.idx__go{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px 0 10px;text-decoration:none;font-weight:500}
+.idx__go b{font-family:var(--f-display);font-weight:400;font-size:1.35rem}
+.idx__enter{padding:4px}
+@media (hover:none),(pointer:coarse){.idx__label{display:none}}
 .idx__go{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;background:#0b0b0c;color:#f4f0e8;text-decoration:none;font-weight:500}
 .idx__go b{font-weight:500;max-width:46vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .idx__go i{font-style:normal}
@@ -148,3 +152,67 @@ dialog .idx__bgs{position:fixed}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .js-motion .rv{opacity:1;transform:none}
 }
+
+/* ---------- No accidental selection or ghost-dragging in the exhibition interface ----------
+   Display type, gesture surfaces, media and controls are not selectable; inputs, the contact address (.sel) and long-form
+   reading copy (.sel) stay selectable. During a custom gesture html.is-gesturing blocks selection everywhere. */
+.chrome,.slide,.sc,.sc-copy,.controls,.hs__pin,.hs__nav,.hero,.idx,.ar,.pf__pin,.rail,.peel,.peel-h,.enter,.pn-big,.pn-h,.pn-k,.pn-next,.pn-pill,button,figure,img,video,svg,h1,h2,h3{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.sel,.sel *,input,textarea,select,[contenteditable="true"],.pn-p,.pn-note,.pn-col p,.dec p,.seq__cap p,.quiz__a,.sn-frame__s,.sn-list span,.pf__p,.pf__note{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+img,svg,video,a{-webkit-user-drag:none}
+html.is-gesturing,html.is-gesturing *{-webkit-user-select:none!important;user-select:none!important;cursor:grabbing!important}
+html.is-gesturing iframe{pointer-events:none}
+
+/* ---------- Project rail (right edge of every dedicated project story) ---------- */
+:root{--rail:68px}
+body.has-rail{padding-right:var(--rail)}
+body.has-rail .chrome{right:var(--rail)}
+.rail{--rail-rule:color-mix(in srgb,var(--rail-fg,var(--page-fg)) 24%,transparent);position:fixed;top:0;right:0;bottom:0;width:var(--rail);z-index:55;display:flex;flex-direction:column;align-items:stretch;background:var(--rail-bg,var(--page-bg));color:var(--rail-fg,var(--page-fg));border-left:1px solid var(--rail-rule)}
+.rail__cell{display:grid;place-items:center;border-bottom:1px solid var(--rail-rule);text-decoration:none;position:relative;color:inherit;min-height:var(--rail)}
+.rail__close{height:var(--rail);font-size:1.35rem;line-height:1;transition:background var(--t-micro),color var(--t-micro)}
+.rail__close:hover,.rail__act:hover{background:var(--rail-fg,var(--page-fg));color:var(--rail-bg,var(--page-bg))}
+.rail__name{flex:1;min-height:120px;padding:18px 0}
+.rail__v{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;font-family:var(--f-display);font-size:1.25rem;letter-spacing:.01em;line-height:1}
+.rail__no{display:block;margin-bottom:10px;font-family:var(--f-mono);font-size:.58rem;letter-spacing:.12em;opacity:.7;text-align:center}
+.rail__act{padding:16px 0;min-height:132px;transition:background var(--t-micro),color var(--t-micro)}
+.rail__act .rail__v{font-family:var(--f-ui);font-size:.72rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.rail__prog{height:84px;position:relative}
+.rail__prog i{position:absolute;left:50%;top:14px;bottom:14px;width:2px;transform:translateX(-50%);background:var(--rail-rule)}
+.rail__prog b{position:absolute;left:50%;top:14px;bottom:14px;width:2px;transform:translateX(-50%) scaleY(var(--hsp,0));transform-origin:top;background:var(--rail-ac,var(--page-fg))}
+.rail__prog span{position:absolute;bottom:-1px;left:0;right:0;text-align:center;font-family:var(--f-mono);font-size:.54rem;opacity:.7}
+.rail a:focus-visible,.rail button:focus-visible{outline-offset:-4px}
+/* next project: the corner handle. Press and drag it up and to the left, or click / press Enter. */
+.peel-h{position:relative;display:block;flex:none;width:var(--rail);min-height:200px;margin:0;text-decoration:none;color:inherit;cursor:grab;touch-action:none;overflow:hidden;background:none;border:0;padding:0;font:inherit}
+.rail .peel-h{border-top:0}
+.peel-h__lab{position:absolute;left:0;right:0;top:12px;display:grid;justify-items:center;gap:8px}
+.peel-h__lab .mono{font-size:.54rem;letter-spacing:.14em;opacity:.7}
+.peel-h__lab b{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--f-display);font-weight:400;font-size:1.1rem;line-height:1;white-space:nowrap}
+.peel-h__tri{position:absolute;right:0;bottom:0;width:34px;height:34px;background:linear-gradient(135deg,transparent 50%,var(--rail-fg,#f4f0e8) 50%);opacity:.9;transition:width var(--t-ui) var(--ease-out),height var(--t-ui) var(--ease-out)}
+.peel-h:hover .peel-h__tri,.peel-h:focus-visible .peel-h__tri{width:46px;height:46px}
+@media (max-width:860px){
+  :root{--rail:0px}
+  body.has-rail{padding-right:0;padding-bottom:58px}
+  body.has-rail .chrome{right:0}
+  .rail{top:auto;left:0;width:auto;height:58px;flex-direction:row;border-left:0;border-top:1px solid var(--rail-rule);padding-bottom:env(safe-area-inset-bottom);height:calc(58px + env(safe-area-inset-bottom))}
+  .rail__cell{border-bottom:0;border-right:1px solid var(--rail-rule);min-height:0;height:58px}
+  .rail__close{width:58px}
+  .rail__name{flex:1;padding:0 12px;justify-items:start;min-height:0}
+  .rail__v{writing-mode:horizontal-tb;transform:none}
+  .rail__no,.rail__prog{display:none}
+  .rail__act{min-height:0;padding:0 14px;height:58px}
+  .rail__act .rail__v{font-size:.66rem}
+  .peel-h{width:auto;min-height:0;height:58px;padding:0 44px 0 14px}
+  .peel-h__lab{position:static;display:flex;align-items:baseline;gap:8px;height:100%;align-items:center}
+  .peel-h__lab b{writing-mode:horizontal-tb;transform:none;font-size:1rem}
+  .peel-h__tri{width:26px;height:26px}
+}
+
+/* ---------- Diagonal peel: next project revealed under a travelling fold (see peel.js) ---------- */
+.peel{position:fixed;inset:0;z-index:90;pointer-events:none;visibility:hidden;overflow:hidden;contain:strict}
+.peel.is-on{visibility:visible}
+.peel__under{position:absolute;inset:0;background:#0b0b0c center/cover no-repeat;will-change:clip-path}
+.peel__under::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,8,10,.72),rgba(8,8,10,.1) 60%)}
+.peel__lab{position:absolute;left:clamp(24px,5vw,80px);bottom:clamp(36px,9vh,90px);z-index:2;display:grid;gap:8px;color:#f4f0e8}
+.peel__lab b{font-family:var(--f-display);font-weight:400;font-size:clamp(3rem,9vw,8.4rem);line-height:.9;letter-spacing:-.025em}
+.peel__shade{position:absolute;inset:0;will-change:clip-path}
+.peel__flap{position:absolute;inset:0;will-change:clip-path;background:linear-gradient(135deg,#2a2a2f,#17171a 45%,#2e2e33)}
+@media (prefers-reduced-motion:reduce){.peel{display:none}}

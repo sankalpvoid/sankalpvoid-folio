@@ -67,7 +67,7 @@
     if (el) el.style.viewTransitionName = 'exhibit';
   };
 
-  const apply = (next, dir) => {
+  const apply = (next, dir, instant) => {
     const prev = slides[index];
     index = (next + slides.length) % slides.length;
     const slide = slides[index];
@@ -78,7 +78,7 @@
       s.setAttribute('aria-hidden', i === index ? 'false' : 'true');
       s.querySelector('.enter').tabIndex = i === index ? 0 : -1;
     });
-    if (prev !== slide && !reduce.matches) {
+    if (prev !== slide && !reduce.matches && !instant) {
       prev.classList.add('is-leaving');
       slide.classList.toggle('rev', dir < 0);
       slide.classList.add('is-entering');
@@ -93,17 +93,25 @@
     if (cur) cur.textContent = String(index + 1).padStart(2, '0');
     if (live) live.textContent = slide.getAttribute('aria-label');
     nameActive();
+    labelPeel();
     try { history.replaceState(null, '', index === 0 ? location.pathname : '#' + slugs[index]); } catch {}
     hydrateAround(index);
   };
   const go = (n, dir) => { if (busy && settle) settle(); if (n !== index) apply(n, dir ?? (n > index ? 1 : -1)); };
-  const step = (d) => { if (busy && settle) settle(); apply(index + d, d); };
+  const step = (d, instant) => { if (busy && settle) settle(); apply(index + d, d, instant); };
 
-  /* the Enter handle can be pressed and dragged: the destination unrolls under the finger (see unroll.js) */
-  if (window.SVUnroll) slides.forEach((s) => {
-    const slug = s.dataset.slug === 'archive' ? 'experiments' : s.dataset.slug;
-    SVUnroll.attach(s.querySelector('.enter'), { bg: `/assets/img/idx/${slug}.jpg`, name: () => s.querySelector('.t').textContent.replace(/\s+/g, ' ').trim() });
-  });
+  /* the corner handle moves to the NEXT exhibition (shared order in projects.js; wraps after the last). "Enter project" is a separate action. */
+  const peelBtn = stage.querySelector('[data-peel]');
+  const nextOf = () => window.SVProjects.next(slugs[index]);
+  const labelPeel = () => { if (!peelBtn || !window.SVProjects) return; const n = nextOf(); peelBtn.querySelector('b').textContent = n.name; peelBtn.setAttribute('aria-label', `Next exhibition: ${n.name}. Drag up and to the left, or press, to bring it in.`); };
+  if (peelBtn && window.SVPeel && window.SVProjects) {
+    SVPeel.attach(peelBtn, {
+      target: () => { const n = nextOf(); return { name: n.name, art: n.art, href: n.href }; },
+      page: () => slides[index],
+      commit: () => { step(1, true); }
+    });
+    labelPeel();
+  }
 
   stage.querySelector('[data-next]').addEventListener('click', () => step(1));
   stage.querySelector('[data-prev]').addEventListener('click', () => step(-1));

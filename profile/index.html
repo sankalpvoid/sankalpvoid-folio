@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://sankalpvoid-folio.vercel.app/profile/">
 <meta property="og:image" content="https://sankalpvoid-folio.vercel.app/assets/img/og-profile.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0d0d0f">
+<meta name="theme-color" content="#0e0e0f">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,7 @@
 <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>
 <body class="profile">
-<a class="skip" href="#phrases">Skip to the story</a>
+<a class="skip" href="#pf-end">Skip to the end</a>
 <header class="chrome">
   <a class="wordmark" href="/" aria-label="sankalpvoid — gallery"><b>sankalpvoid</b><span>← Gallery</span></a>
   <nav aria-label="Primary">
@@ -35,66 +35,56 @@
 </header>
 
 <main id="main">
-  <!-- one pinned stage; document scroll is the only input -->
+  <!-- one pinned stage; document scroll is the only input. Four scenes: identity, building, the thread, music. -->
   <section class="pf" data-pf aria-labelledby="t">
-    <div class="pf__pin">
-      <p class="pf__name mono" aria-hidden="true">Sankalp Kushwaha <span>· sankalpvoid · Mumbai</span></p>
+    <div class="pf__pin" data-pin>
+      <p class="pf__id mono">Sankalp Kushwaha <span>· Mumbai · IIT Bombay</span></p>
 
-      <figure class="pf__portrait" data-portrait data-photo="">
-        <div class="pf__frame">
-          <svg class="pf__sketch" viewBox="0 0 400 500" role="img" aria-label="Illustrative portrait study: an abstract head-and-shoulders outline inside rippling contour lines" focusable="false">
-            <defs>
-              <path id="p-open" d="M30 500C30 410 62 372 128 346C150 338 156 326 156 300C118 292 108 250 114 205C120 140 156 96 200 96C244 96 280 140 286 205C292 250 282 292 244 300C244 326 250 338 272 346C338 372 370 410 370 500"/>
-              <pattern id="p-hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(38)"><line x1="0" y1="0" x2="0" y2="7" stroke="currentColor" stroke-width="1"/></pattern>
-              <clipPath id="p-clip"><path d="M30 500C30 410 62 372 128 346C150 338 156 326 156 300C118 292 108 250 114 205C120 140 156 96 200 96C244 96 280 140 286 205C292 250 282 292 244 300C244 326 250 338 272 346C338 372 370 410 370 500Z"/></clipPath>
-              <clipPath id="p-ringclip"><rect x="-300" y="-80" width="1000" height="580"/></clipPath>
-            </defs>
-            <g clip-path="url(#p-ringclip)"><use href="#p-open" class="p-ring" style="--o:0.62" transform="translate(200 340) scale(1.100) translate(-200 -340)"/><use href="#p-open" class="p-ring" style="--o:0.56" transform="translate(200 340) scale(1.175) translate(-200 -340)"/><use href="#p-open" class="p-ring" style="--o:0.50" transform="translate(200 340) scale(1.250) translate(-200 -340)"/><use href="#p-open" class="p-ring" style="--o:0.45" transform="translate(200 340) scale(1.325) translate(-200 -340)"/><use href="#p-open" class="p-ring" style="--o:0.39" transform="translate(200 340) scale(1.400) translate(-200 -340)"/><use href="#p-open" class="p-ring" style="--o:0.33" transform="translate(200 340) scale(1.475) translate(-200 -340)"/><use href="#p-open" class="p-ring" style="--o:0.27" transform="translate(200 340) scale(1.550) translate(-200 -340)"/><use href="#p-open" class="p-ring" style="--o:0.21" transform="translate(200 340) scale(1.625) translate(-200 -340)"/></g>
-            <path d="M30 500C30 410 62 372 128 346C150 338 156 326 156 300C118 292 108 250 114 205C120 140 156 96 200 96C244 96 280 140 286 205C292 250 282 292 244 300C244 326 250 338 272 346C338 372 370 410 370 500Z" fill="#0d0d0f"/>
-            <rect class="p-hatch" x="0" y="80" width="400" height="430" fill="url(#p-hatch)" clip-path="url(#p-clip)"/>
-            <use href="#p-open" class="p-main"/>
-            <g transform="rotate(-16 200 250)"><ellipse class="p-orbit" cx="200" cy="250" rx="228" ry="74" fill="none"/><circle class="p-dot" cx="396" cy="288" r="7"/></g>
-          </svg>
-          <img class="pf__photo" alt="Sankalp Kushwaha" width="1200" height="1500" decoding="async">
+      <div class="pf__a" data-sa>
+        <h1 id="t"><span class="pf__l pf__l1" data-l1>Curious across disciplines.</span> <span class="pf__l pf__l2" data-l2>Building across them.</span></h1>
+        <p class="pf__hint mono" aria-hidden="true" data-hint>Scroll</p>
+      </div>
+
+      <figure class="pf__portrait" data-portrait>
+        <div class="pf__mask" data-mask>
+          <img class="pf__img" data-img src="/assets/img/portrait/sankalp-1122.webp" srcset="/assets/img/portrait/sankalp-420.webp 420w, /assets/img/portrait/sankalp-720.webp 720w, /assets/img/portrait/sankalp-1122.webp 1122w" sizes="(max-width:820px) 90vw, 50vw" width="1122" height="1402" alt="Portrait of Sankalp Kushwaha: a young man with dark wavy hair, smiling, in black and white against a dark background" decoding="async" fetchpriority="high" draggable="false">
         </div>
       </figure>
 
-      <div class="pf__open">
-        <h1 id="t"><span class="pf__l1" data-l1>Curious across<br class="pf__br"> disciplines.</span><span class="pf__l2" data-l2><em>Building across them.</em></span></h1>
-        <p class="pf__scroll mono" aria-hidden="true" data-scrollhint>Scroll</p>
-      </div>
+      <section class="pf__s pf__b" data-sb aria-labelledby="pb-h">
+        <p class="pf__k mono">02 · Engineering, and building</p>
+        <h2 id="pb-h">I study <em>Environmental Sciences &amp; Engineering</em> at IIT Bombay.</h2>
+        <p class="pf__p">Alongside it I design and build software: a quitting-support app, a private ledger, a trading-education site, a furniture showroom.</p>
+      </section>
 
-      <ol class="pf__phrases" id="phrases" aria-label="Who I am, in seven lines">
-        <li class="pf__ph" data-i="0" style="--ind:0"><span class="mono pf__tag">01 · Engineering</span><p>I study <em>Environmental Sciences &amp; Engineering</em> at IIT Bombay, in Mumbai.</p></li>
-        <li class="pf__ph" data-i="1" style="--ind:8vw"><span class="mono pf__tag">02 · Product</span><p>I build products. <em>Reclaim</em> asks what an app can do in the moment a craving arrives.</p><a class="pf__see" href="/work/reclaim/">Reclaim <i aria-hidden="true">→</i></a></li>
-        <li class="pf__ph" data-i="2" style="--ind:2vw"><span class="mono pf__tag">03 · Money</span><p>I make interfaces that explain money: <em>Aureledger</em> reads it from your own mail, <em>WealthWithSG</em> teaches it with a chart.</p><a class="pf__see" href="/work/aureledger/">Aureledger <i aria-hidden="true">→</i></a></li>
-        <li class="pf__ph" data-i="3" style="--ind:12vw"><span class="mono pf__tag">04 · Craft</span><p>I translate craft: a showroom whose bed is <em>drawn line by line</em> before it is built.</p><a class="pf__see" href="/work/sankalp-shristi-furnishers/">The showroom <i aria-hidden="true">→</i></a></li>
-        <li class="pf__ph" data-i="4" style="--ind:5vw"><span class="mono pf__tag">05 · Interaction</span><p>I run small experiments in <em>scroll, depth and timing</em>.</p><a class="pf__see" href="/work/experiments/">The experiments <i aria-hidden="true">→</i></a></li>
-        <li class="pf__ph" data-i="5" style="--ind:0"><span class="mono pf__tag">06 · The thread</span><p>Different disciplines, same impulse: <em>understand the system, find the interesting edge, build something from it.</em></p></li>
-        <li class="pf__ph" data-i="6" style="--ind:9vw"><span class="mono pf__tag">07 · Side B</span><p>And when I’m not building, <em>I sing and play guitar.</em></p></li>
-      </ol>
+      <section class="pf__s pf__c" data-sc aria-labelledby="pc-h">
+        <p class="pf__k mono">03 · The thread</p>
+        <h2 id="pc-h">Different fields, <em>one habit.</em></h2>
+        <p class="pf__p">Find the system underneath. Make it legible. Build something from it.</p>
+        <ul class="pf__proj" aria-label="The work">
+          <li><a href="/work/reclaim/">Reclaim</a></li><li><a href="/work/wealthwithsg/">WealthWithSG</a></li><li><a href="/work/sankalp-shristi-furnishers/">Furnishers</a></li><li><a href="/work/aureledger/">Aureledger</a></li><li><a href="/work/experiments/">Experiments</a></li>
+        </ul>
+      </section>
 
-      <div class="pf__string" aria-hidden="true">
-        <svg viewBox="0 0 1000 200" preserveAspectRatio="none" focusable="false"><path data-string d="M0 100 H1000"/></svg>
-      </div>
+      <div class="pf__string" aria-hidden="true"><svg viewBox="0 0 1000 200" preserveAspectRatio="none" focusable="false"><path data-string d="M0 100 H1000"/></svg></div>
 
-      <section class="pf__music" id="music" aria-labelledby="sb-h">
-        <p class="mono pf__eyebrow">Side B</p>
-        <h2 id="sb-h"><span class="pf__w" data-w>Vocals.</span> <span class="pf__w" data-w>Guitar.</span> <span class="pf__w pf__w--em" data-w>Noise.</span></h2>
-        <p class="pf__mline">Turning questionable ideas into slightly less questionable sounds.</p>
+      <section class="pf__s pf__d" id="music" data-sd aria-labelledby="sb-h">
+        <p class="pf__k mono">04 · Music</p>
+        <h2 id="sb-h"><span class="pf__w" data-w>Vocals.</span> <span class="pf__w" data-w>Guitar.</span> <span class="pf__w" data-w>Timing.</span></h2>
+        <p class="pf__p">A song and an interface both depend on timing.</p>
         <ul class="pf__ch">
           <li><a href="https://www.youtube.com/@sankalp.mussic" target="_blank" rel="noreferrer"><span class="mono">YouTube</span><b>@sankalp.mussic</b><i aria-hidden="true">↗</i></a></li>
           <li><a href="https://www.instagram.com/sankalp.singss/" target="_blank" rel="noreferrer"><span class="mono">Instagram</span><b>@sankalp.singss</b><i aria-hidden="true">↗</i></a></li>
         </ul>
-        <p class="pf__note">The recordings live on those channels. Nothing on this site plays by itself, and the moving line above is only a drawing.</p>
+        <p class="pf__note">The recordings live on those channels. Nothing on this site plays by itself, and the moving line is only a drawing.</p>
         <!-- Recording slot: add a labelled <audio controls preload="none"> card here when a recording is approved (docs/MUSIC.md). Until then there is deliberately no player. -->
       </section>
     </div>
   </section>
 
-  <section class="pf__end" aria-labelledby="hello-h">
-    <h2 id="hello-h">Make something <em>interesting?</em></h2>
-    <p class="pf__mail"><a href="mailto:sankalp.kushwaha.18@gmail.com">sankalp.kushwaha.18@gmail.com</a></p>
+  <section class="pf__end" id="pf-end" aria-labelledby="hello-h">
+    <h2 id="hello-h">Make something <em>together?</em></h2>
+    <p class="pf__mail sel"><a href="mailto:sankalp.kushwaha.18@gmail.com">sankalp.kushwaha.18@gmail.com</a></p>
     <ul class="pf__go">
       <li><a href="/projects/"><span class="mono">The work</span><b>All projects</b><i aria-hidden="true">→</i></a></li>
       <li><a href="/archive/"><span class="mono">Explore</span><b>The archive</b><i aria-hidden="true">→</i></a></li>

@@ -76,9 +76,9 @@
         img.alt = `The introduction at stage ${c + 1} of 7: ${texts[c].t.replace(/\.$/, '')}`;
       }
     };
-    if (window.HS) HS.on(sec, (p) => { show(Math.min(N - 1, Math.round(p * (N - 1)))); scrub.value = Math.round(p * 100); });
+    if (window.HS) HS.on(sec, (p) => { show(Math.min(N - 1, Math.round(p * (N - 1)))); if (document.activeElement !== scrub) scrub.value = Math.round(p * 100); });
     chips.forEach((b, k) => b.addEventListener('click', () => HS.scrollToPanelProgress(sec, (starts[k] + 0.01) / (N - 1), true)));
-    scrub.addEventListener('input', () => HS.scrollToPanelProgress(sec, +scrub.value / 100));
+    scrub.addEventListener('input', () => HS.scrollToPanelProgress(sec, +scrub.value / 100, true));
     const near = new IntersectionObserver(([e]) => { if (e.isIntersecting) preload(); }, { rootMargin: '0px 120% 0px 120%' });
     near.observe(sec);
     show(0, true);

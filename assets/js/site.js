@@ -38,7 +38,7 @@
      One implementation for the /projects/ page and the overlay opened from any page.
      - hover (mouse) or keyboard focus previews a project as the full-viewport background
      - previews are race-safe: only the latest request may paint, so rapid movement never shows a stale image
-     - touch: tapping a title previews it; a separate "Enter" control opens it (no double-tap) */
+     - touch: tapping a title only selects and previews it; a visible "Open <project>" button always shows what will open (no hidden double-tap) */
   const mountIndex = (host) => {
     const items = [...host.querySelectorAll('.idx__item')];
     const layers = [...host.querySelectorAll('.idx__bg')];
@@ -57,7 +57,7 @@
       items.forEach((x) => x.classList.toggle('is-active', x === li));
       if (enter) {
         const a = li.querySelector('.idx__a');
-        enter.querySelector('[data-idx-name]').textContent = li.querySelector('.idx__t').textContent;
+        enter.querySelector('[data-idx-name]').textContent = li.querySelector('.idx__t').textContent.replace('Sankalp & Shristi ', '');
         enter.querySelector('a').href = a.href;
       }
       load(li.dataset.bg).then(() => {
@@ -74,7 +74,7 @@
       const a = li.querySelector('.idx__a');
       on(li, 'pointerenter', (e) => { if (e.pointerType === 'mouse') activate(li); });
       on(a, 'focus', () => activate(li));
-      on(a, 'click', (e) => { if (coarse.matches) { e.preventDefault(); activate(li); } });
+      on(a, 'click', (e) => { if (coarse.matches) { e.preventDefault(); activate(li); a.focus({ preventScroll: true }); } });
       on(a, 'keydown', (e) => {
         const d = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0;
         if (!d) return;
@@ -109,8 +109,8 @@
       dlg.innerHTML =
         '<div class="idx__bgs" aria-hidden="true"><span class="idx__bg is-on" data-layer="a"></span><span class="idx__bg" data-layer="b"></span><span class="idx__scrim"></span></div>' +
         '<div class="idx__top"><a class="wordmark" href="/" aria-label="sankalpvoid — gallery"><b>sankalpvoid</b><span>← Gallery</span></a><nav aria-label="More"><a href="/archive/">Archive</a><a href="/profile/">Profile</a><a href="/contact/">Contact</a></nav></div>' +
-        '<p class="idx__label mono">All projects · hover, or focus with the keyboard</p>' +
-        '<p class="idx__enter" data-idx-enter hidden><span class="mono">Selected</span><a href="#" class="idx__go"><b data-idx-name></b> <i aria-hidden="true">↗</i></a></p>' +
+        '<p class="idx__label mono">All projects · hover or focus a title to preview it</p>' +
+        '<p class="idx__enter" data-idx-enter hidden><span class="mono">Tap a title to preview it</span><a href="#" class="idx__go"><span>Open</span> <b data-idx-name></b> <i aria-hidden="true">↗</i></a></p>' +
         '<button class="idx__close" type="button"><span class="idx__ring" aria-hidden="true"></span>Close<span class="sr-only"> project index</span></button>';
       dlg.insertBefore(list.cloneNode(true), dlg.querySelector('.idx__enter'));
       document.body.appendChild(dlg);

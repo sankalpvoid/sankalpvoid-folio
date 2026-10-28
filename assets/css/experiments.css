@@ -24,3 +24,15 @@ button.pn-pill{font:inherit;cursor:pointer}
   .exp__f{margin-top:20px;max-width:34rem}
   .exp__q{max-width:none}
 }
+
+/* one study, one primary image; the states are swapped by the buttons under it */
+.hs.is-hs .exp{gap:clamp(28px,5vw,80px)}
+.swap{margin:0;flex:none;display:grid;gap:12px;justify-items:start}
+.swap__s{position:relative;border:1px solid var(--hs-rule);background:#000}
+.swap__i{display:block;height:min(48vh,460px);width:auto;max-width:none}
+.swap__i[hidden]{display:none}
+.swap__t{display:flex;gap:8px;flex-wrap:wrap}
+.swap__b{min-height:44px;padding:0 16px;border:1px solid var(--hs-rule);border-radius:999px;font-size:.78rem;font-family:var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--hs-mute);transition:background var(--t-micro),color var(--t-micro),border-color var(--t-micro)}
+.swap__b:hover{border-color:var(--hs-fg);color:var(--hs-fg)}
+.swap__b[aria-pressed="true"]{background:var(--hs-fg);color:var(--hs-bg);border-color:var(--hs-fg)}
+@media (max-width:860px),(prefers-reduced-motion:reduce){.swap__i{height:auto;width:100%}.swap{width:100%}.swap__s{width:100%}}

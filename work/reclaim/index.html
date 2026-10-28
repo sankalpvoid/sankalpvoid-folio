@@ -25,7 +25,7 @@
 <link rel="preload" as="image" href="/assets/img/rc/bloom.webp" fetchpriority="high">
 <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>
-<body>
+<body class="has-rail" data-project="reclaim">
 <a class="skip" href="#story">Skip to the story</a>
 <header class="chrome">
   <a class="wordmark" href="/#reclaim" aria-label="sankalpvoid — back to the gallery"><b>sankalpvoid</b><span>← Gallery</span></a>
@@ -36,6 +36,13 @@
     <a href="/contact/">Contact</a>
   </nav>
 </header>
+<aside class="rail" aria-label="Project controls">
+  <a class="rail__cell rail__close" href="/#reclaim" aria-label="Close Reclaim and return to the gallery"><span aria-hidden="true">×</span></a>
+  <div class="rail__cell rail__name"><span class="rail__no" aria-hidden="true">01</span><span class="rail__v">Reclaim</span></div>
+  <a class="rail__cell rail__act" href="https://reclaim-app-tawny.vercel.app/" target="_blank" rel="noreferrer"><span class="rail__v">View live prototype ↗</span></a>
+  <div class="rail__cell rail__prog" aria-hidden="true"><i></i><b></b><span data-rail-count>01</span></div>
+  <a class="peel-h" data-peel href="/work/wealthwithsg/" aria-label="Next project: WealthWithSG. Drag up and to the left, or press, to open it."><span class="peel-h__lab"><span class="mono">Drag to</span><b>WealthWithSG</b></span><span class="peel-h__tri" aria-hidden="true"></span></a>
+</aside>
 
 <main id="main">
   <section class="hero" aria-labelledby="t">
@@ -61,64 +68,64 @@
   <section class="hs" id="story" data-hs aria-label="One evening, in chapters">
     <div class="hs__pin"><div class="hs__track" data-track>
 
-      <section class="hs__p" id="c-premise" data-title="Premise" aria-labelledby="p0">
-        <div class="pn-txt" style="width:min(38rem,44vw)">
+      <section class="hs__p sn-type" id="c-premise" data-title="Premise" aria-labelledby="p0">
+        <div class="sn-type__in">
           <span class="pn-k mono">One evening</span>
-          <h2 class="rc-title" id="p0">Five moments.</h2>
-          <p class="pn-p" style="margin-top:18px">What can a quitting app do in the moment a craving arrives? These are the real prototype screens running locally with sample data. Scroll sideways through one evening.</p>
+          <h2 class="rc-title" id="p0">A craving arrives.</h2>
+          <p class="pn-p" style="margin-top:22px;max-width:34ch">What can a quitting app do in that moment? Five scenes from the real prototype, running locally with sample data.</p>
         </div>
       </section>
 
       <section class="hs__p" id="c-urge" data-title="An urge" aria-labelledby="p1">
-        <div class="pn-txt"><span class="pn-k mono">01</span><h2 class="pn-h" id="p1">An urge arrives.</h2><p class="pn-p">The home screen leads with one question and one button, ahead of any counter.</p></div>
-        <figure class="pn-fig"><div class="shot"><img src="/assets/img/rc2/home-585.jpg" srcset="/assets/img/rc2/home-585.jpg 585w, /assets/img/rc2/home.jpg 1170w" sizes="(min-width:861px) 300px, 70vw" width="1170" height="2532" alt="Reclaim home screen: ‘One small shift’, the question ‘What would help right now?’ and a ‘Get craving support’ button" loading="lazy">
+        <div class="pn-txt" style="width:min(26rem,34%)"><span class="pn-k mono">01</span><h2 class="pn-h" id="p1">An urge arrives.</h2><p class="pn-p">The home screen leads with one question and one button, ahead of any counter.</p></div>
+        <figure class="pn-fig sn-big"><div class="shot"><img src="/assets/img/rc2/home.jpg" width="1170" height="2532" alt="Reclaim home screen: ‘One small shift’, the question ‘What would help right now?’ and a ‘Get craving support’ button" loading="lazy">
           <span class="pin" style="--x:50%;--y:41%"><i></i><em>One tap to support</em></span>
           <span class="pin pin--l" style="--x:30%;--y:20%"><i></i><em>The question comes first</em></span></div></figure>
       </section>
 
       <section class="hs__p" id="c-support" data-title="Support" aria-labelledby="p2">
-        <div class="pn-txt"><span class="pn-k mono">02</span><h2 class="pn-h" id="p2">Support is one tap away.</h2><p class="pn-p">Four small actions, no decision tree: box breathing, a five-minute wave, a water reset, a short walk. Or log the craving without an exercise.</p></div>
-        <figure class="pn-fig"><div class="shot"><img src="/assets/img/rc2/support-585.jpg" srcset="/assets/img/rc2/support-585.jpg 585w, /assets/img/rc2/support.jpg 1170w" sizes="(min-width:861px) 300px, 70vw" width="1170" height="2532" alt="Reclaim craving support: ‘One urge. One small step.’ with cards for box breathing, ride the wave and water reset" loading="lazy">
+        <figure class="pn-fig sn-crop"><div class="shot"><img src="/assets/img/rc2/support.jpg" width="1170" height="2532" alt="Reclaim craving support: ‘One urge. One small step.’ with cards for box breathing, ride the wave and water reset" loading="lazy">
           <span class="pin pin--l" style="--x:78%;--y:56%"><i></i><em>1 to 5 minutes each</em></span></div></figure>
+        <div class="pn-txt" style="width:min(28rem,36%)"><span class="pn-k mono">02</span><h2 class="pn-h" id="p2">Support is one tap away.</h2><p class="pn-p">Four small actions, no decision tree: box breathing, a five-minute wave, a water reset, a short walk. Or log the craving without an exercise.</p></div>
       </section>
 
       <section class="hs__p" id="c-action" data-title="A small action" aria-labelledby="p3">
-        <div class="pn-txt"><span class="pn-k mono">03</span><h2 class="pn-h" id="p3">A small action.</h2><p class="pn-p">Box breathing: inhale, hold, exhale, hold, four seconds each, with a paced orb. The recording is the prototype.</p></div>
+        <div class="pn-txt" style="width:min(24rem,30%)"><span class="pn-k mono">03</span><h2 class="pn-h" id="p3">A small action.</h2><p class="pn-p">Box breathing: inhale, hold, exhale, hold, four seconds each, with a paced orb. The recording is the prototype itself.</p></div>
         <div class="rc-vid" data-vid>
           <video muted playsinline loop preload="none" poster="/assets/img/rc2/poster.jpg" width="390" height="844" aria-label="Screen recording of the box-breathing exercise in the Reclaim prototype"><source src="/assets/video/reclaim-craving.webm" type="video/webm"></video>
           <button type="button" class="vid__btn" data-vid-btn aria-pressed="false">Play recording</button>
-        </div>
-        <div class="phases" aria-label="The four-second phases">
-          <figure><div class="shot"><img src="/assets/img/rc2/inhale-585.jpg" width="585" height="1266" alt="Breathing orb at the start of the inhale phase" loading="lazy"></div><figcaption class="mono">Inhale</figcaption></figure>
-          <figure><div class="shot"><img src="/assets/img/rc2/hold-585.jpg" width="585" height="1266" alt="Breathing orb labelled HOLD" loading="lazy"></div><figcaption class="mono">Hold</figcaption></figure>
-          <figure><div class="shot"><img src="/assets/img/rc2/exhale-585.jpg" width="585" height="1266" alt="Smaller breathing orb labelled EXHALE" loading="lazy"></div><figcaption class="mono">Exhale</figcaption></figure>
         </div>
         <div class="orb-demo"><div class="orb" data-orb aria-hidden="true"><span data-orb-label>Ready</span></div><button type="button" class="pn-pill" data-orb-btn aria-pressed="false">Follow the rhythm</button><p class="mono" data-orb-live role="status">4 · 4 · 4 · 4 seconds</p></div>
       </section>
 
       <section class="hs__p" id="c-recorded" data-title="Recorded" aria-labelledby="p4">
-        <div class="pn-txt"><span class="pn-k mono">04</span><h2 class="pn-h" id="p4">It’s recorded.</h2><p class="pn-p">Finishing logs the craving with the tool used. A one-tap “Did that help?” is optional and skippable. Everything is saved on the device and synced when you’re signed in.</p><p class="pn-note">Shown here: the on-device behaviour. Sign-in and sync run on Supabase in the private app and aren’t demonstrated on this page.</p></div>
-        <div class="pair">
-          <figure class="pn-fig"><div class="shot shot--modal"><img src="/assets/img/rc2/feedback-585.jpg" srcset="/assets/img/rc2/feedback-585.jpg 585w, /assets/img/rc2/feedback.jpg 1170w" sizes="(min-width:861px) 300px, 70vw" width="1170" height="2532" alt="Prompt ‘Did that help?’ with Yes, A little and Not really buttons and a Skip link" loading="lazy"></div><figcaption class="mono">Optional feedback</figcaption></figure>
-          <figure class="pn-fig"><div class="shot shot--toast"><img src="/assets/img/rc2/confirmed-585.jpg" srcset="/assets/img/rc2/confirmed-585.jpg 585w, /assets/img/rc2/confirmed.jpg 1170w" sizes="(min-width:861px) 300px, 70vw" width="1170" height="2532" alt="Home screen with the message ‘Craving passed. That choice is logged.’" loading="lazy"></div><figcaption class="mono">Confirmation</figcaption></figure>
+        <div class="pn-txt" style="width:min(30rem,40%)"><span class="pn-k mono">04</span><h2 class="pn-h" id="p4">It’s recorded.</h2><p class="pn-p">Finishing logs the craving with the tool used. A one-tap “Did that help?” is optional and skippable. Everything is saved on the device and synced when you’re signed in.</p><p class="pn-note">Shown here: the on-device behaviour. Sign-in and sync run on Supabase in the private app and aren’t demonstrated on this page.</p></div>
+        <figure class="pn-fig"><div class="shot shot--modal shot--lg"><img src="/assets/img/rc2/feedback.jpg" width="1170" height="2532" alt="Prompt ‘Did that help?’ with Yes, A little and Not really buttons and a Skip link" loading="lazy"></div><figcaption class="mono">Optional feedback</figcaption></figure>
+      </section>
+
+      <section class="hs__p sn-type" id="c-return" data-title="You come back" aria-labelledby="p5">
+        <div class="sn-type__in">
+          <span class="pn-k mono">05</span>
+          <h2 class="pn-big" id="p5" style="max-width:12ch">You come <em>back.</em></h2>
+          <p class="pn-p" style="margin-top:22px;max-width:46ch">After a few rated cravings, a tool can be marked <em style="font-style:normal;color:var(--peach)">Worked for you before</em>. It is a plain rule over the feedback you gave: once three cravings are rated, the tool with the best average feedback (and at least two uses) moves to the top and gets the label. Not a validated or intelligent model.</p>
+          <p class="pn-note">Sample data: four seeded cravings.</p>
+        </div>
+        <figure class="pn-fig sn-crop sn-crop--s"><div class="shot"><img src="/assets/img/rc2/support-later.jpg" width="1170" height="2532" alt="Craving support screen where the Box breathing card is labelled ‘Worked for you before’" loading="lazy"></div></figure>
+      </section>
+
+      <section class="hs__p sn-type" id="c-context" data-title="Context" aria-labelledby="p6">
+        <div class="sn-type__in">
+          <span class="pn-k mono">Progress, as context</span>
+          <h2 class="pn-h" id="p6" style="max-width:14ch;font-size:clamp(2.6rem,5.4vw,5.6rem)">Beyond the moment.</h2>
+          <ul class="sn-list">
+            <li><b>Recovery timeline</b><span>General guidance and estimates, keyed to time since the quit date.</span></li>
+            <li><b>Momentum</b><span>“Not perfect. How quickly you choose again.”</span></li>
+            <li><b>Dreams</b><span>Savings goals funded by smoke-free days.</span></li>
+          </ul>
         </div>
       </section>
 
-      <section class="hs__p" id="c-return" data-title="You come back" aria-labelledby="p5">
-        <div class="pn-txt"><span class="pn-k mono">05</span><h2 class="pn-h" id="p5">You come back.</h2><p class="pn-p">After a few rated cravings, a tool can be marked <em style="font-style:normal;color:var(--peach)">Worked for you before</em>. It is a plain rule over the feedback you gave: once three cravings are rated, the tool with the best average feedback (and at least two uses) moves to the top and gets the label. Not a validated or intelligent model.</p><p class="pn-note">Sample data: four seeded cravings.</p></div>
-        <figure class="pn-fig"><div class="shot"><img src="/assets/img/rc2/support-later-585.jpg" srcset="/assets/img/rc2/support-later-585.jpg 585w, /assets/img/rc2/support-later.jpg 1170w" sizes="(min-width:861px) 300px, 70vw" width="1170" height="2532" alt="Craving support screen where the Box breathing card is labelled ‘Worked for you before’" loading="lazy"></div></figure>
-      </section>
-
-      <section class="hs__p" id="c-context" data-title="Context" aria-labelledby="p6">
-        <div class="pn-txt" style="width:min(18rem,22vw)"><span class="pn-k mono">Progress, as context</span><h2 class="pn-h" id="p6">Beyond the moment.</h2></div>
-        <div class="ctx">
-          <figure class="pn-fig"><div class="shot"><img src="/assets/img/rc2/health-585.jpg" srcset="/assets/img/rc2/health-585.jpg 585w, /assets/img/rc2/health.jpg 1170w" sizes="(min-width:861px) 300px, 70vw" width="1170" height="2532" alt="Health recovery screen with an evidence-informed timeline" loading="lazy"></div><figcaption>Recovery timeline: general guidance and estimates, keyed to time since the quit date.</figcaption></figure>
-          <figure class="pn-fig"><div class="shot"><img src="/assets/img/rc2/momentum-585.jpg" srcset="/assets/img/rc2/momentum-585.jpg 585w, /assets/img/rc2/momentum.jpg 1170w" sizes="(min-width:861px) 300px, 70vw" width="1170" height="2532" alt="Momentum screen reading ‘Keep returning’" loading="lazy"></div><figcaption>Momentum: “Not perfect. How quickly you choose again.”</figcaption></figure>
-          <figure class="pn-fig"><div class="shot"><img src="/assets/img/rc2/dreams-585.jpg" srcset="/assets/img/rc2/dreams-585.jpg 585w, /assets/img/rc2/dreams.jpg 1170w" sizes="(min-width:861px) 300px, 70vw" width="1170" height="2532" alt="Savings goal tracker" loading="lazy"></div><figcaption>Savings goals funded by smoke-free days.</figcaption></figure>
-        </div>
-      </section>
-
-      <section class="hs__p" id="c-decisions" data-title="Decisions" aria-labelledby="p7">
+      <section class="hs__p sn-stack" id="c-decisions" data-title="Decisions" aria-labelledby="p7">
         <div class="pn-txt" style="width:min(18rem,22vw)"><span class="pn-k mono">Three decisions</span><h2 class="pn-h" id="p7">What shaped it.</h2></div>
         <div class="decs">
           <div class="dec"><span class="n">01</span><h3>Reduce is a route, not a failed quit.</h3><p>Reduction has its own targets, recorded days and periodic reviews, so people who aren’t ready to quit aren’t pushed through a quit-only interface. The consequence: each journey carries its own progress logic.</p></div>
@@ -134,9 +141,9 @@
           <div class="pn-links"><a class="pn-pill pn-pill--solid" href="https://reclaim-app-tawny.vercel.app/" target="_blank" rel="noreferrer">View live prototype ↗</a><a class="pn-pill" href="https://github.com/sankalpvoid/reclaim-showcase" target="_blank" rel="noreferrer">Case-study repo ↗</a></div></div>
       </section>
 
-      <section class="hs__p" id="c-next" data-title="Next" aria-label="Next exhibition">
-        <a class="pn-next" data-next-unroll data-bg="/assets/img/idx/wealthwithsg.jpg" data-name="WealthWithSG" href="/work/wealthwithsg/" style="background-image:url(/assets/img/idx/wealthwithsg.jpg)">
-          <span class="mono">Next · 02</span><b>WealthWithSG</b><span class="go">Open <i aria-hidden="true">↗</i></span><span class="hint" aria-hidden="true">← Press and drag to unroll</span>
+      <section class="hs__p" id="c-next" data-title="Next project" aria-label="Next project">
+        <a class="pn-next" data-peel-next href="/work/wealthwithsg/" style="background-image:url(/assets/img/idx/wealthwithsg.jpg)">
+          <span class="mono">Next project · 02</span><b>WealthWithSG</b><span class="go">Open WealthWithSG <i aria-hidden="true">↗</i></span><span class="hint" aria-hidden="true">Drag the corner handle, or press, to bring it in</span>
         </a>
       </section>
 
@@ -151,9 +158,10 @@
 </footer>
 
 <script src="/assets/js/site.js" defer></script>
-<script src="/assets/js/unroll.js" defer></script>
+<script src="/assets/js/projects.js" defer></script>
+<script src="/assets/js/peel.js" defer></script>
+<script src="/assets/js/rail.js" defer></script>
 <script src="/assets/js/story.js" defer></script>
-<script src="/assets/js/story-next.js" defer></script>
 <script src="/assets/js/reclaim.js" defer></script>
 </body>
 </html>

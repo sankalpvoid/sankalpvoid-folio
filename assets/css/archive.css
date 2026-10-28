@@ -1,18 +1,24 @@
-/* Archive: a bounded, draggable canvas of real fragments. */
-body.ar-page{--page-bg:#0b0b0c;--page-fg:#efeae0;--chrome:#efeae0;--chrome-dim:rgba(239,234,224,.68);--chrome-bg:#0b0b0c;--rule:rgba(239,234,224,.2);--focus:#ff8a63;overflow:hidden;height:100vh;height:100dvh}
+/* Archive: fixed chrome and title, a draggable field of real fragments on three depth layers behind them. */
+body.ar-page{--page-bg:#0b0b0c;--page-fg:#efeae0;--chrome:#efeae0;--chrome-dim:rgba(239,234,224,.68);--chrome-bg:#0b0b0c;--rule:rgba(239,234,224,.2);--focus:#d9d4c7;overflow:hidden;height:100vh;height:100dvh}
 .ar{position:fixed;inset:0;overflow:hidden;background:#0b0b0c}
-.ar__view{position:absolute;inset:0;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;outline-offset:-3px}
+.ar__view{position:absolute;inset:0;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;outline-offset:-3px;overflow:hidden}
 .ar__view.is-drag{cursor:grabbing}
-.ar__canvas{position:absolute;left:0;top:0;width:3600px;height:2500px;transform-origin:0 0;transform:translate3d(var(--tx,0px),var(--ty,0px),0) scale(var(--s,1));will-change:transform}
-.ar__title{position:absolute;left:1800px;top:1250px;transform:translate(-50%,-50%);text-align:center;display:grid;gap:10px;pointer-events:none;color:#f4f0e8}
-.ar__title b{font-family:var(--f-display);font-weight:400;font-size:230px;line-height:.82;letter-spacing:-.03em}
-.ar__title .mono{font-size:16px;letter-spacing:.5em;opacity:.8}
-.ar__t{position:absolute;left:var(--x);top:var(--y);width:var(--w);display:block;background:#000;text-decoration:none;color:inherit;transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out)}
-.ar__t img{display:block;width:100%;height:auto;pointer-events:none}
-.ar__t:hover,.ar__t:focus-visible{transform:scale(1.045);box-shadow:0 30px 70px -30px #000;z-index:2}
-.ar__t:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+/* each depth gets its own perspective wrapper (tilt/shear from velocity) and a layer that carries the pan */
+.ar__rot{position:absolute;inset:0;transform-origin:50% 50%;pointer-events:none}
+.ar__layer{position:absolute;left:0;top:0;width:3600px;height:2500px;transform-origin:0 0;transform:translate3d(var(--lx,0px),var(--ly,0px),0) scale(var(--s,1));will-change:transform}
+.ar__t{pointer-events:auto}
+/* the title never moves with the field and never blocks a fragment */
+.ar__title{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;text-align:center;display:grid;gap:10px;pointer-events:none;color:#fff;mix-blend-mode:difference;white-space:nowrap}
+.ar__title b{font-family:var(--f-display);font-weight:400;font-size:clamp(4.6rem,15vw,15rem);line-height:.82;letter-spacing:-.03em}
+.ar__title .mono{font-size:clamp(.6rem,1vw,.9rem);letter-spacing:.5em}
+.ar__t{position:absolute;left:var(--x);top:var(--y);width:var(--w);display:block;background:#000;text-decoration:none;color:inherit;transition:box-shadow .5s var(--ease-out)}
+.ar__t img{display:block;width:100%;height:auto;pointer-events:none;-webkit-user-drag:none}
+.ar__t:hover,.ar__t:focus-visible{box-shadow:0 30px 70px -30px #000;z-index:2;outline:none}
+.ar__t::after{content:"";position:absolute;inset:0;border:1px solid transparent;transition:border-color .3s}
+.ar__t:hover::after,.ar__t:focus-visible::after{border-color:rgba(239,234,224,.8)}
+.ar__t:focus-visible{outline:2px solid #efeae0;outline-offset:5px}
 .ar__cap{position:absolute;left:0;bottom:-34px;white-space:nowrap;font-size:12px;opacity:0;transition:opacity .3s;pointer-events:none;color:#efeae0}
-.ar__cap b{font-weight:400;color:#ff8a63;margin-right:8px}
+.ar__cap b{font-weight:400;opacity:.6;margin-right:8px}
 .ar__t:hover .ar__cap,.ar__t:focus-visible .ar__cap{opacity:1}
 .ar__cue{position:fixed;left:50%;bottom:clamp(76px,12vh,120px);transform:translateX(-50%);z-index:5;font-size:.66rem;letter-spacing:.2em;display:inline-flex;align-items:center;gap:12px;background:rgba(11,11,12,.72);padding:10px 16px;border-radius:999px;border:1px solid rgba(239,234,224,.3);transition:opacity .6s var(--ease-out);pointer-events:none}
 .ar__cue i{width:22px;height:1px;background:currentColor;position:relative;animation:cue 2.2s var(--ease-io) infinite}
@@ -27,10 +33,11 @@ body.ar-page{--page-bg:#0b0b0c;--page-fg:#efeae0;--chrome:#efeae0;--chrome-dim:r
 .ar__count{font-size:.62rem;opacity:.7;margin:0}
 .ar__btns{display:flex;gap:8px}
 .ar__btn{min-height:44px;padding:0 18px;border:1px solid rgba(239,234,224,.45);border-radius:999px;font-weight:500;font-size:.86rem;background:rgba(11,11,12,.55);transition:background var(--t-micro),color var(--t-micro)}
+.ar__btn--quiet{border-color:rgba(239,234,224,.28);font-size:.8rem}
 .ar__btn:hover,.ar__btn[aria-pressed="true"]{background:#efeae0;color:#0b0b0c}
 
-/* list alternative: replaces the canvas when chosen, and is the whole page without JavaScript */
-.ar__list{position:absolute;inset:0;z-index:4;overflow:auto;background:#0b0b0c;padding:clamp(110px,16vh,150px) var(--gutter) 120px;display:none}
+/* list alternative: replaces the field when chosen, and is the whole page without JavaScript */
+.ar__list{position:absolute;inset:0;z-index:5;overflow:auto;background:#0b0b0c;padding:clamp(110px,16vh,150px) var(--gutter) 120px;display:none}
 .ar__list h2{font-family:var(--f-display);font-weight:400;font-size:clamp(2.2rem,5vw,4.4rem);line-height:1;margin:0 0 28px}
 .ar__groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:30px 40px;margin:0;padding:0;list-style:none;max-width:1300px}
 .ar__groups h3{font-family:var(--f-display);font-weight:400;font-size:1.9rem;margin:0 0 8px;border-bottom:1px solid var(--rule);padding-bottom:8px}
@@ -40,11 +47,11 @@ body.ar-page{--page-bg:#0b0b0c;--page-fg:#efeae0;--chrome:#efeae0;--chrome-dim:r
 .ar__ex{margin-top:34px}
 .ar__ex a{text-decoration:underline;text-underline-offset:.22em}
 .ar.is-list .ar__list{display:block}
-.ar.is-list .ar__view,.ar.is-list .ar__cue{visibility:hidden}
+.ar.is-list .ar__view,.ar.is-list .ar__cue,.ar.is-list .ar__title{visibility:hidden}
 html:not(.js) body.ar-page{overflow:auto;height:auto}
 html:not(.js) .ar{position:static}
-html:not(.js) .ar__view,html:not(.js) .ar__cue,html:not(.js) .ar__btns{display:none}
+html:not(.js) .ar__view,html:not(.js) .ar__cue,html:not(.js) .ar__btns,html:not(.js) .ar__title{display:none}
 html:not(.js) .ar__list{display:block;position:static}
 @media (max-width:640px){.ar__count{display:none}.ar__btn{padding:0 14px}.ar__ui{padding-bottom:max(14px,env(safe-area-inset-bottom))}}
-@media (prefers-reduced-motion:reduce){.ar__cue i{animation:none}.ar__t{transition:none}}
+@media (prefers-reduced-motion:reduce){.ar__cue i{animation:none}}
 .ar__ui::before{content:"";position:fixed;left:0;right:0;bottom:0;height:120px;background:linear-gradient(0deg,rgba(11,11,12,.92),rgba(11,11,12,0));z-index:-1;pointer-events:none}

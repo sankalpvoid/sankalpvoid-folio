@@ -38,3 +38,13 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && open) close(open); });
   addEventListener('pagehide', () => close(open, false));
 })();
+
+/* state swap under each study image */
+document.querySelectorAll('[data-swap]').forEach((fig) => {
+  const imgs = [...fig.querySelectorAll('.swap__i')], btns = [...fig.querySelectorAll('[data-swap-to]')];
+  btns.forEach((b) => b.addEventListener('click', () => {
+    const k = +b.dataset.swapTo;
+    imgs.forEach((im, i) => { im.hidden = i !== k; });
+    btns.forEach((x, i) => x.setAttribute('aria-pressed', String(i === k)));
+  }));
+});

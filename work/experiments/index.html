@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="/assets/css/experiments.css">
 <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>
-<body>
+<body class="has-rail" data-project="experiments">
 <a class="skip" href="#cyberpunk-story">Skip to the studies</a>
 <header class="chrome">
   <a class="wordmark" href="/#archive" aria-label="sankalpvoid — back to the gallery"><b>sankalpvoid</b><span>← Gallery</span></a>
@@ -35,6 +35,13 @@
     <a href="/contact/">Contact</a>
   </nav>
 </header>
+<aside class="rail" aria-label="Project controls">
+  <a class="rail__cell rail__close" href="/#archive" aria-label="Close Experiments and return to the gallery"><span aria-hidden="true">×</span></a>
+  <div class="rail__cell rail__name"><span class="rail__no" aria-hidden="true">05</span><span class="rail__v">Experiments</span></div>
+  <a class="rail__cell rail__act" href="#cyberpunk"><span class="rail__v">Try a study</span></a>
+  <div class="rail__cell rail__prog" aria-hidden="true"><i></i><b></b><span data-rail-count>01</span></div>
+  <a class="peel-h" data-peel href="/work/reclaim/" aria-label="Next project: Reclaim. Drag up and to the left, or press, to open it."><span class="peel-h__lab"><span class="mono">Drag to</span><b>Reclaim</b></span><span class="peel-h__tri" aria-hidden="true"></span></a>
+</aside>
 
 <main id="main">
   <section class="hero" aria-labelledby="t" data-hero>
@@ -70,7 +77,7 @@
       </section>
 
       <section class="hs__p exp" id="cyberpunk" data-title="CyberPunk" aria-labelledby="a-h">
-        <div class="pn-txt" style="width:min(27rem,32vw)">
+        <div class="pn-txt" style="width:min(23rem,28%)">
           <span class="pn-k mono">A · scroll → canvas</span>
           <h2 class="pn-h" id="a-h">CyberPunk</h2>
           <p class="pn-p exp__q">Can the page behave like a moving sequence instead of a document?</p>
@@ -81,14 +88,11 @@
             <a class="pn-pill" href="https://github.com/sankalpvoid/CyberPunk" target="_blank" rel="noreferrer">Source ↗</a>
           </div>
         </div>
-        <figure class="pn-fig exp__f"><img src="/assets/img/exp/cyber-1.jpg" width="1440" height="900" alt="CyberPunk study: a pale 3D figure under large headline text" loading="lazy"><figcaption><span class="mono">scroll 0</span></figcaption></figure>
-        <figure class="pn-fig exp__f"><img src="/assets/img/exp/cyber-2-720.jpg" width="1440" height="900" alt="CyberPunk study after scrolling: stacked statements" loading="lazy"><figcaption><span class="mono">1,100 px</span></figcaption></figure>
-        <figure class="pn-fig exp__f"><img src="/assets/img/exp/cyber-3-720.jpg" width="1440" height="900" alt="CyberPunk study further down: a column of small text" loading="lazy"><figcaption><span class="mono">2,200 px</span></figcaption></figure>
-
+        <figure class="exp__f swap" data-swap><div class="swap__s"><img class="swap__i" src="/assets/img/exp/cyber-1.jpg" width="1440" height="900" alt="CyberPunk study: a pale 3D figure under large headline text" loading="lazy"><img class="swap__i" src="/assets/img/exp/cyber-2.jpg" width="1440" height="900" alt="CyberPunk study after scrolling: stacked statements" loading="lazy" hidden><img class="swap__i" src="/assets/img/exp/cyber-3.jpg" width="1440" height="900" alt="CyberPunk study further down: a column of small text" loading="lazy" hidden></div><div class="swap__t" role="group" aria-label="CyberPunk states"><button type="button" class="swap__b" data-swap-to="0" aria-pressed="true">Top</button><button type="button" class="swap__b" data-swap-to="1" aria-pressed="false">1,100 px</button><button type="button" class="swap__b" data-swap-to="2" aria-pressed="false">2,200 px</button></div></figure>
       </section>
 
       <section class="hs__p exp" id="parallax" data-title="Parallax" aria-labelledby="b-h">
-        <div class="pn-txt" style="width:min(27rem,32vw)">
+        <div class="pn-txt" style="width:min(23rem,28%)">
           <span class="pn-k mono">B · pointer → depth</span>
           <h2 class="pn-h" id="b-h">Parallax</h2>
           <p class="pn-p exp__q">How little does a flat screen need to feel like a place?</p>
@@ -100,13 +104,11 @@
           </div>
           <p class="pn-note">No hover on touch: open the live version to explore.</p>
         </div>
-        <figure class="pn-fig exp__f"><img src="/assets/img/exp/parallax-1.jpg" width="1440" height="900" alt="Parallax study with the pointer at rest: layered mountains and fog" loading="lazy"><figcaption><span class="mono">pointer at rest</span></figcaption></figure>
-        <figure class="pn-fig exp__f"><img src="/assets/img/exp/parallax-2.jpg" width="1440" height="900" alt="The same scene with the pointer moved to the lower right and the layers shifted" loading="lazy"><figcaption><span class="mono">pointer lower right</span></figcaption></figure>
-
+        <figure class="exp__f swap" data-swap><div class="swap__s"><img class="swap__i" src="/assets/img/exp/parallax-1.jpg" width="1440" height="900" alt="Parallax study with the pointer at rest: layered mountains and fog" loading="lazy"><img class="swap__i" src="/assets/img/exp/parallax-2.jpg" width="1440" height="900" alt="The same scene with the pointer moved to the lower right and the layers shifted" loading="lazy" hidden></div><div class="swap__t" role="group" aria-label="Parallax states"><button type="button" class="swap__b" data-swap-to="0" aria-pressed="true">Pointer at rest</button><button type="button" class="swap__b" data-swap-to="1" aria-pressed="false">Pointer lower right</button></div></figure>
       </section>
 
       <section class="hs__p exp" id="gsap-motion" data-title="GSAP Motion" aria-labelledby="c-h">
-        <div class="pn-txt" style="width:min(27rem,32vw)">
+        <div class="pn-txt" style="width:min(23rem,28%)">
           <span class="pn-k mono">C · timeline → rhythm</span>
           <h2 class="pn-h" id="c-h">GSAP Motion</h2>
           <p class="pn-p exp__q">What makes animations feel orchestrated instead of decorated?</p>
@@ -117,13 +119,12 @@
             <a class="pn-pill" href="https://github.com/sankalpvoid/GSAP-Scroll_Trigger" target="_blank" rel="noreferrer">Source ↗</a>
           </div>
         </div>
-        <figure class="pn-fig exp__f"><img src="/assets/img/exp/gsap-2.jpg" width="1440" height="900" alt="The GSAP study 1.5 seconds after load: the headline is in place while the illustration's icons fade in" loading="lazy"><figcaption><span class="mono">1.5 s in · mid-sequence</span></figcaption></figure>
-
+        <figure class="exp__f swap" data-swap><div class="swap__s"><img class="swap__i" src="/assets/img/exp/gsap-2.jpg" width="1440" height="900" alt="The GSAP study 1.5 seconds after load: the headline is in place while the illustration’s icons fade in" loading="lazy"><img class="swap__i" src="/assets/img/exp/gsap-1.jpg" width="1440" height="900" alt="The GSAP study landing page" loading="lazy" hidden></div><div class="swap__t" role="group" aria-label="GSAP Motion states"><button type="button" class="swap__b" data-swap-to="0" aria-pressed="true">1.5 s in</button><button type="button" class="swap__b" data-swap-to="1" aria-pressed="false">Landing</button></div></figure>
       </section>
 
-      <section class="hs__p" id="c-next" data-title="Next" aria-label="Next page">
-        <a class="pn-next" data-next-unroll data-bg="/assets/img/idx/profile.jpg" data-name="Profile" href="/profile/" style="background-image:url(/assets/img/idx/profile.jpg)">
-          <span class="mono">Finally</span><b>Profile</b><span class="go">The person behind them <i aria-hidden="true">→</i></span><span class="hint" aria-hidden="true">← Press and drag to unroll</span>
+      <section class="hs__p" id="c-next" data-title="Next project" aria-label="Next project">
+        <a class="pn-next" data-peel-next href="/work/reclaim/" style="background-image:url(/assets/img/idx/reclaim.jpg)">
+          <span class="mono">Next project · 01</span><b>Reclaim</b><span class="go">Open Reclaim <i aria-hidden="true">↗</i></span><span class="hint" aria-hidden="true">Drag the corner handle, or press, to bring it in</span>
         </a>
       </section>
 
@@ -139,9 +140,10 @@
 </footer>
 
 <script src="/assets/js/site.js" defer></script>
-<script src="/assets/js/unroll.js" defer></script>
+<script src="/assets/js/projects.js" defer></script>
+<script src="/assets/js/peel.js" defer></script>
+<script src="/assets/js/rail.js" defer></script>
 <script src="/assets/js/story.js" defer></script>
-<script src="/assets/js/story-next.js" defer></script>
 <script src="/assets/js/experiments.js" defer></script>
 </body>
 </html>

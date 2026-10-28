@@ -51,7 +51,7 @@
     SV.bed(stageEl, { start, viewBox: STAGE_VB }).then((b) => { bed = b; stageEl.querySelector('.bed-fallback')?.remove(); caption(start); scrub.value = start * 100; }).catch(() => staticMode());
     const fb = stageEl.querySelector('.bed-fallback'); if (fb) fb.style.opacity = 0;
     /* one source of progress: the horizontal travel across this chapter; the slider moves the scroll position */
-    if (window.HS) HS.on(sec, (p) => { if (!pinned()) return; if (bed) bed.set(p); caption(p); scrub.value = Math.round(p * 100); });
+    if (window.HS) HS.on(sec, (p) => { if (!pinned()) return; if (bed) bed.set(p); caption(p); if (document.activeElement !== scrub) scrub.value = Math.round(p * 100); });
     scrub.addEventListener('input', () => {
       const p = +scrub.value / 100;
       if (pinned()) HS.scrollToPanelProgress(sec, p);

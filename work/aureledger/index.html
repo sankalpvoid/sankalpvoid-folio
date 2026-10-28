@@ -25,7 +25,7 @@
 <link rel="preload" as="image" href="/assets/img/al/note-curl.jpg" fetchpriority="high">
 <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>
-<body>
+<body class="has-rail" data-project="aureledger">
 <a class="skip" href="#story">Skip to the story</a>
 <header class="chrome">
   <a class="wordmark" href="/#aureledger" aria-label="sankalpvoid — back to the gallery"><b>sankalpvoid</b><span>← Gallery</span></a>
@@ -36,6 +36,13 @@
     <a href="/contact/">Contact</a>
   </nav>
 </header>
+<aside class="rail" aria-label="Project controls">
+  <a class="rail__cell rail__close" href="/#aureledger" aria-label="Close Aureledger and return to the gallery"><span aria-hidden="true">×</span></a>
+  <div class="rail__cell rail__name"><span class="rail__no" aria-hidden="true">04</span><span class="rail__v">Aureledger</span></div>
+  <a class="rail__cell rail__act" href="https://aureledger.vercel.app/" target="_blank" rel="noreferrer"><span class="rail__v">View live experience ↗</span></a>
+  <div class="rail__cell rail__prog" aria-hidden="true"><i></i><b></b><span data-rail-count>01</span></div>
+  <a class="peel-h" data-peel href="/work/experiments/" aria-label="Next project: Experiments. Drag up and to the left, or press, to open it."><span class="peel-h__lab"><span class="mono">Drag to</span><b>Experiments</b></span><span class="peel-h__tri" aria-hidden="true"></span></a>
+</aside>
 
 <main id="main">
   <section class="hero" aria-labelledby="t" data-hero>
@@ -96,7 +103,7 @@
         <ul class="qz" data-quiz><li data-ans="counts"><p class="quiz__q"><b>A card purchase</b><span>₹1,200 at a restaurant, on the credit card</span></p><div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div><p class="quiz__a" hidden><strong>Counts, on the day it happens.</strong> Cash only moves when the bill is paid, so card spending is shown as real spending whose bill is still to come.</p></li><li data-ans="no"><p class="quiz__q"><b>Paying the card bill</b><span>₹12,000 from the bank account</span></p><div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div><p class="quiz__a" hidden><strong>Doesn’t count.</strong> It settles purchases already counted. Counting it again would double the expense, so it is shown as a card bill paid.</p></li><li data-ans="no"><p class="quiz__q"><b>Moving money between your own accounts</b><span>₹20,000, savings to current</span></p><div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div><p class="quiz__a" hidden><strong>Doesn’t count.</strong> Own-account transfers, investments and income are not consumption.</p></li><li data-ans="no"><p class="quiz__q"><b>A reminder that a SIP is due in two days</b><span>₹5,000 instalment</span></p><div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div><p class="quiz__a" hidden><strong>Not yet.</strong> A scheduled SIP is a commitment, and it counts only once money has moved. The reminder, the bank debit and the allocation stay linked but each keeps its own amount, so 5,000 and 4,999.75 are shown as they are, not smoothed.</p></li></ul>
       </section>
 
-      <section class="hs__p" id="c-decisions" data-title="Decisions" aria-labelledby="a3">
+      <section class="hs__p sn-stack" id="c-decisions" data-title="Decisions" aria-labelledby="a3">
         <div class="pn-txt" style="width:min(16rem,20vw)"><span class="pn-k mono">Three decisions</span><h2 class="pn-h" id="a3">What it refuses to guess.</h2></div>
         <div class="pn-cols">
           <div class="pn-col"><span class="n">01</span><h3>Say how old a number is.</h3><p>The balance is the last one observed, labelled with its date and “Not a live balance”. A card’s amount due is not card spending, and a fund contribution is not portfolio value. Partial months are drawn hollow, and months before the ledger began are left out rather than shown as zero.</p></div>
@@ -112,9 +119,9 @@
           <div class="pn-links"><a class="pn-pill pn-pill--solid" href="https://aureledger.vercel.app/" target="_blank" rel="noreferrer">View live experience ↗</a><a class="pn-pill" href="https://aureledger.vercel.app/demo" target="_blank" rel="noreferrer">Try the demo ↗</a></div></div>
       </section>
 
-      <section class="hs__p" id="c-next" data-title="Next" aria-label="Next exhibition">
-        <a class="pn-next" data-next-unroll data-bg="/assets/img/idx/experiments.jpg" data-name="Experiments" href="/work/experiments/" style="background-image:url(/assets/img/idx/experiments.jpg)">
-          <span class="mono">Next · 05</span><b>Experiments</b><span class="go">Open <i aria-hidden="true">↗</i></span><span class="hint" aria-hidden="true">← Press and drag to unroll</span>
+      <section class="hs__p" id="c-next" data-title="Next project" aria-label="Next project">
+        <a class="pn-next" data-peel-next href="/work/experiments/" style="background-image:url(/assets/img/idx/experiments.jpg)">
+          <span class="mono">Next project · 05</span><b>Experiments</b><span class="go">Open Experiments <i aria-hidden="true">↗</i></span><span class="hint" aria-hidden="true">Drag the corner handle, or press, to bring it in</span>
         </a>
       </section>
 
@@ -130,9 +137,10 @@
 
 <script src="/assets/js/site.js" defer></script>
 <script src="/assets/js/scenes.js" defer></script>
-<script src="/assets/js/unroll.js" defer></script>
+<script src="/assets/js/projects.js" defer></script>
+<script src="/assets/js/peel.js" defer></script>
+<script src="/assets/js/rail.js" defer></script>
 <script src="/assets/js/story.js" defer></script>
-<script src="/assets/js/story-next.js" defer></script>
 <script src="/assets/js/aureledger.js" defer></script>
 </body>
 </html>
