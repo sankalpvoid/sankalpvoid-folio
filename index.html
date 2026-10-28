@@ -23,10 +23,11 @@
 <link rel="stylesheet" href="/assets/css/foyer.css">
 <link rel="preload" as="image" href="/assets/img/rc2/support-585.jpg" imagesrcset="/assets/img/rc2/support-585.jpg 585w" imagesizes="30vw">
 <script>
-/* Old gallery links (/#reclaim and friends) and old section anchors land where they used to point, not on the wrong page. */
-(function(){var h=location.hash.slice(1);if(!h)return;var ex={reclaim:1,wealthwithsg:1,'sankalp-shristi-furnishers':1,aureledger:1,archive:1};
-if(ex[h]){location.replace('/projects/#'+h);return}
-var o={about:'/about/',lab:'/about/#now'};if(o[h])location.replace(o[h])})();
+/* Old gallery links (/#reclaim and friends) and old section anchors land where they used to point, not on the wrong page.
+   Runs on load and whenever the hash changes while the homepage is already open. */
+(function(){var ex={reclaim:1,wealthwithsg:1,'sankalp-shristi-furnishers':1,aureledger:1,archive:1},o={about:'/about/',lab:'/about/#now'};
+function go(){var h=location.hash.slice(1);if(!h)return;if(ex[h]){location.replace('/projects/#'+h);return}if(o[h])location.replace(o[h])}
+go();addEventListener('hashchange',go)})();
 </script>
 <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>

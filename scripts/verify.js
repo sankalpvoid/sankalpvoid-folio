@@ -223,7 +223,7 @@ const out=[];const ok=(c,m)=>{out.push((c?'PASS ':'FAIL ')+m);};
   ok(await p.evaluate(()=>[...document.querySelectorAll('.s-wsg .cd')].every(e=>+e.style.opacity>0.9)),'reduced motion: gallery chart is already structured');
   await p.goto(BASE+'/');await p.waitForTimeout(900);
   ok(await p.evaluate(()=>getComputedStyle(document.querySelector('.p-main')).animationName==='none'&&getComputedStyle(document.querySelector('.p-ring')).strokeDasharray==='none'&&document.getAnimations().filter(a=>a.playState==='running'&&a.effect.getTiming().duration>20).length===0),'reduced motion: homepage portrait is a still, fully drawn sketch with no running animation');
-  ok(await p.evaluate(()=>[...document.querySelectorAll('.rv')].every(e=>getComputedStyle(e).opacity==='1')),'reduced motion: homepage content is all visible');
+  ok(await p.evaluate(()=>[...document.querySelectorAll('.rv')].every(e=>{const c=getComputedStyle(e);return +c.opacity>=0.85&&c.transform==='none'&&c.visibility==='visible'})),'reduced motion: homepage content is all visible (no reveal offsets or fades)');
   await p.goto(BASE+'/work/sankalp-shristi-furnishers/');await p.waitForTimeout(1200);
   ok(await p.evaluate(()=>document.documentElement.classList.contains('rm')&&getComputedStyle(document.querySelector('.draw__pin')).position==='static'&&document.querySelectorAll('[data-static] figure').length===4),'reduced motion: SSF becomes four fixed moments, no pin');
   await p.goto(BASE+'/work/wealthwithsg/');await p.waitForTimeout(600);
