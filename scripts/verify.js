@@ -16,9 +16,23 @@ const out=[];const ok=(c,m)=>{const line=(c?'PASS ':'FAIL ')+m;out.push(line);co
 const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-track]')).transform).m41;
 (async()=>{
  const b=await pw[ENGINE].launch();
+ // Keep authorized preview access across internal links even where an engine
+ // does not retain Vercel's bypass cookie. Never send the share to other hosts.
+ const context=async options=>{
+  const ctx=await b.newContext(options);
+  if(SHARE) await ctx.route(BASE+'/**',async route=>{
+   const req=route.request();const url=new URL(req.url());
+   if(req.isNavigationRequest()&&url.origin===new URL(BASE).origin&&!url.searchParams.has('_vercel_share')){
+    for(const [key,value] of new URLSearchParams(SHARE.replace(/^\?/,'')))url.searchParams.set(key,value);
+    return route.continue({url:url.href});
+   }
+   return route.continue();
+  });
+  return ctx;
+ };
  // 1. routes x 3 viewports
  for(const [w,h] of [[390,844],[768,1024],[1440,900]]){
-  const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:w<800,...(ENGINE==='chromium'?{isMobile:w<700}:{})});
+  const ctx=await context({viewport:{width:w,height:h},hasTouch:w<800,...(ENGINE==='chromium'?{isMobile:w<700}:{})});
   for(const r of routes){
    const p=await ctx.newPage();const errs=[];
    p.on('console',m=>m.type()==='error'&&errs.push(m.text()));p.on('pageerror',e=>errs.push('pageerror '+e.message));
@@ -45,7 +59,7 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
    await p.close();}
   await ctx.close();}
  // 2. gallery: next-project peel vs Enter project
- {const ctx=await b.newContext({viewport:{width:1440,height:900}});const p=await ctx.newPage();
+ {const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();
   await p.goto(U('/'));await p.waitForTimeout(900);
   const slug=()=>p.evaluate(()=>document.querySelector('.slide.is-active').dataset.slug);
   ok(await slug()==='reclaim','root opens on the Reclaim gallery scene');
@@ -80,7 +94,7 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await ctx.close();}
  // 3. project pages: rail, peel to next project, never an internal section
  for(const [i,s] of ORDER.entries()){
-  const ctx=await b.newContext({viewport:{width:1440,height:900}});const p=await ctx.newPage();
+  const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();
   await p.goto(U(`/work/${s}/`));await p.waitForTimeout(1200);
   const rail=await p.evaluate(()=>{const r=document.querySelector('.rail');const rr=r.getBoundingClientRect();const hero=document.querySelector('.hero').getBoundingClientRect();const pin=document.querySelector('.hs__pin').getBoundingClientRect();return {pos:getComputedStyle(r).position,left:rr.left,w:rr.width,pinR:pin.right,heroR:hero.right,close:r.querySelector('.rail__close').getAttribute('href'),name:r.querySelector('.rail__name').textContent,act:r.querySelector('.rail__act').textContent.trim(),next:r.querySelector('[data-peel]').getAttribute('href'),lab:r.querySelector('.peel-h__lab b').textContent}});
   const nx=ORDER[(i+1)%5];
@@ -127,13 +141,13 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await ctx.close();}
  // 4. flat fallbacks
  for(const [name,opt] of [['reduced motion',{viewport:{width:1440,height:900},reducedMotion:'reduce'}],['phone',{viewport:{width:390,height:844},hasTouch:true}],['no JS',{viewport:{width:1440,height:900},javaScriptEnabled:false}]]){
-  const ctx=await b.newContext(opt);const p=await ctx.newPage();
+  const ctx=await context(opt);const p=await ctx.newPage();
   for(const r of STORIES){await p.goto(U(r));await p.waitForTimeout(500);
    const f=await p.evaluate(()=>{const hs=document.querySelector('.hs');const pin=hs.querySelector('.hs__pin');return {pos:getComputedStyle(pin).position,sw:document.documentElement.scrollWidth,iw:document.documentElement.clientWidth,tx:getComputedStyle(hs.querySelector('[data-track]')).transform};});
    ok(f.pos==='static'&&f.sw<=f.iw+1&&(f.tx==='none'||f.tx==='matrix(1, 0, 0, 1, 0, 0)'),`${name}: ${r} is a flat vertical document`);}
   ctx.close&&await ctx.close();}
  // 5. archive field
- {const ctx=await b.newContext({viewport:{width:1440,height:900}});const p=await ctx.newPage();
+ {const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();
   await p.goto(U('/archive/'));await p.waitForTimeout(1200);
   const s0=await p.evaluate(()=>__arState());
   await p.mouse.move(700,450);await p.mouse.down();for(let i=1;i<=14;i++){await p.mouse.move(700-i*20,450-i*8);await p.waitForTimeout(14);}
@@ -155,15 +169,15 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await p.click('[data-listbtn]');await p.waitForTimeout(200);
   await p.focus('[data-view]');const a0=await p.evaluate(()=>__arState().px);await p.keyboard.press('ArrowLeft');await p.waitForTimeout(900);ok((await p.evaluate(()=>__arState().px))!==a0,'archive: arrow keys pan the field');
   await ctx.close();
-  const rm=await b.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'});const q=await rm.newPage();await q.goto(U('/archive/'));await q.waitForTimeout(800);
+  const rm=await context({viewport:{width:1440,height:900},reducedMotion:'reduce'});const q=await rm.newPage();await q.goto(U('/archive/'));await q.waitForTimeout(800);
   await q.mouse.move(700,450);await q.mouse.down();for(let i=1;i<=10;i++){await q.mouse.move(700-i*30,450);await q.waitForTimeout(14);}const r1=await q.evaluate(()=>({n:document.querySelector('[data-rot=near]').style.transform,st:__arState()}));await q.mouse.up();
   ok(r1.n===''&&r1.st.rx===0&&Math.abs(r1.st.px)>100,'archive: reduced motion pans directly with no warping');await rm.close();
-  if(ENGINE==='chromium'){const t=await b.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});const q2=await t.newPage();await q2.goto(U('/archive/'));await q2.waitForTimeout(1200);
+  if(ENGINE==='chromium'){const t=await context({viewport:{width:390,height:844},isMobile:true,hasTouch:true});const q2=await t.newPage();await q2.goto(U('/archive/'));await q2.waitForTimeout(1200);
    const cdp=await t.newCDPSession(q2);const a=await q2.evaluate(()=>__arState());
    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:300,y:500}]});for(let i=1;i<=10;i++){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:300-i*14,y:500-i*10}]});await q2.waitForTimeout(16);}await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await q2.waitForTimeout(900);
    const a1=await q2.evaluate(()=>__arState());ok(Math.hypot(a1.px-a.px,a1.py-a.py)>80,'archive: touch drag pans the field');await t.close();}else skip('archive touch drag (CDP, chromium only)');}
  // 6. profile
- {const ctx=await b.newContext({viewport:{width:1440,height:900}});const p=await ctx.newPage();
+ {const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();
   await p.goto(U('/profile/'));await p.waitForTimeout(1000);
   const z=await p.evaluate(()=>{const e=document.querySelector('.pf__portrait');const m=document.querySelector('.pf__mask');const cs=getComputedStyle(m);return {vis:getComputedStyle(e).visibility,clip:cs.clipPath,sy:scrollY,w:m.getBoundingClientRect().width,img:document.querySelector('.pf__img').currentSrc.split('/').pop()}});
   ok(z.vis==='hidden'&&/inset\(0px 50%\)/.test(z.clip),`profile: portrait has zero reveal width and is not rendered at the first frame (${z.vis}, ${z.clip})`);
@@ -183,10 +197,10 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   ok(!await p.evaluate(()=>[...document.querySelectorAll('audio,video')].some(m=>!m.paused||m.autoplay)),'profile: no autoplay media');
   ok(await p.evaluate(()=>document.querySelectorAll('a[href*="youtube"],a[href*="instagram"]').length>=2),'profile: music channel links present');
   await ctx.close();
-  const rm=await b.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'});const q=await rm.newPage();await q.goto(U('/profile/'));await q.waitForTimeout(600);
+  const rm=await context({viewport:{width:1440,height:900},reducedMotion:'reduce'});const q=await rm.newPage();await q.goto(U('/profile/'));await q.waitForTimeout(600);
   ok(await q.evaluate(()=>getComputedStyle(document.querySelector('.pf__portrait')).visibility==='visible'&&document.documentElement.classList.contains('rm')&&getComputedStyle(document.querySelector('.pf__pin')).position==='static'),'profile: reduced motion shows the portrait and a flat reading order');await rm.close();}
  // 7. project index: hover, focus, rapid switching, explicit touch Open
- {const ctx=await b.newContext({viewport:{width:1440,height:900}});const p=await ctx.newPage();
+ {const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();
   await p.goto(U('/work/reclaim/'));await p.waitForTimeout(600);
   await p.click('[data-open-index]');await p.waitForSelector('dialog[open]');
   ok((await p.$$eval('dialog[open] .idx__item',e=>e.length))===5,'index overlay lists 5 projects');
@@ -199,7 +213,7 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   ok((await p.evaluate(()=>[...document.querySelectorAll('dialog[open] .idx__bg')].filter(e=>getComputedStyle(e).opacity>0.5).length))===1&&/wealth/.test(await bgOf()),'index: rapid switching settles on the last hover with one background');
   await p.keyboard.press('Escape');await p.waitForTimeout(400);ok(!(await p.$('dialog[open]'))&&await p.evaluate(()=>!document.documentElement.classList.contains('is-locked')),'index: Escape closes and unlocks scroll');
   await ctx.close();
-  const t=await b.newContext({viewport:{width:390,height:844},hasTouch:true,...(ENGINE==='chromium'?{isMobile:true}:{})});const q=await t.newPage();
+  const t=await context({viewport:{width:390,height:844},hasTouch:true,...(ENGINE==='chromium'?{isMobile:true}:{})});const q=await t.newPage();
   await q.goto(U('/projects/'));await q.waitForTimeout(900);
   const bar0=await q.evaluate(()=>{const e=document.querySelector('[data-idx-enter]');return {hidden:e.hidden,txt:e.textContent.replace(/\s+/g,' ').trim()}});
   ok(!bar0.hidden&&/Open\s+Reclaim/.test(bar0.txt),`touch: an explicit "Open Reclaim" action is visible before any tap (${bar0.txt})`);
@@ -209,19 +223,19 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await q.tap('[data-idx-enter] a');await q.waitForURL('**/work/wealthwithsg/').catch(()=>{});ok(new URL(q.url()).pathname==='/work/wealthwithsg/','touch: the Open button navigates');
   await t.close();}
  // 8. selection and ghost-drag on gallery / index
- {const ctx=await b.newContext({viewport:{width:1440,height:900}});const p=await ctx.newPage();
+ {const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();
   await p.goto(U('/'));await p.waitForTimeout(900);await p.mouse.move(60,300);await p.mouse.down();await p.mouse.move(1300,600,{steps:10});await p.mouse.up();
   ok((await p.evaluate(()=>getSelection().toString().length))===0,'gallery: dragging across the hero highlights nothing');
   await p.goto(U('/projects/'));await p.waitForTimeout(700);await p.mouse.move(40,200);await p.mouse.down();await p.mouse.move(900,700,{steps:10});await p.mouse.up();ok((await p.evaluate(()=>getSelection().toString().length))===0,'index: dragging across the titles highlights nothing');
   await p.goto(U('/contact/'));ok(await p.evaluate(()=>{const m=document.querySelector('[data-mail]');return getComputedStyle(m).userSelect!=='none'||m.closest('.sel')!==null}),'contact: the address stays copyable (Copy button + selectable)');
   await ctx.close();}
  // 9. links
- {const ctx=await b.newContext();const p=await ctx.newPage();const set=new Map();
+ {const ctx=await context();const p=await ctx.newPage();const set=new Map();
   for(const r of routes){await p.goto(U(r));(await p.$$eval('a[href]',a=>a.map(x=>({h:x.href,t:x.target,rel:x.rel})))).forEach(x=>set.set(x.h,x));}
   const bad=[];for(const [h,x] of set){if(h.startsWith(BASE)){const rs=await fetch(h.split('#')[0]+(SHARE&&!h.includes('?')?SHARE:''));if(rs.status!==200)bad.push(h+' '+rs.status);}else if(h.startsWith('http')&&x.t==='_blank'&&!/noreferrer/.test(x.rel))bad.push('rel '+h);}
   ok(bad.length===0,`internal links resolve & external links safe (${set.size} unique) ${JSON.stringify(bad)}`);await ctx.close();}
  // 10. experiments
- {const ctx=await b.newContext({viewport:{width:1440,height:900}});const p=await ctx.newPage();await p.goto(U('/work/experiments/'));
+ {const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();await p.goto(U('/work/experiments/'));
   ok((await p.$$('iframe')).length===0,'experiments: no iframe loaded by default');
   await p.evaluate(()=>document.querySelector('[data-live]').click());await p.waitForSelector('iframe');ok(true,'experiments: Try it here loads on demand');
   await p.keyboard.press('Escape');await p.waitForTimeout(300);ok((await p.$$('iframe')).length===0,'experiments: Escape unloads it');
