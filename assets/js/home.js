@@ -19,9 +19,14 @@
     if (!slide || scenes.has(slide) || !window.SV) return;
     const chartEl = slide.querySelector('[data-chart-env]');
     const bedEl = slide.querySelector('[data-bed]');
+    const noteEl = slide.querySelector('[data-note]');
     if (chartEl) {
       const c = window.SV.chart(chartEl, { start: 1 });
       scenes.set(slide, { play: () => c.play(1, 2800, 0), settle: () => c.set(1) });
+    } else if (noteEl && window.SV) {
+      const n = window.SV.note(noteEl, { start: 58 });
+      if (matchMedia('(hover:hover) and (pointer:fine)').matches) n.follow(slide);
+      scenes.set(slide, { play: () => n.play(58, 3200, 0), settle: () => n.set(58) });
     } else if (bedEl) {
       const rec = { play: () => {}, settle: () => {}, ready: null };
       scenes.set(slide, rec);

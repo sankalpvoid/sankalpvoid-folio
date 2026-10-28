@@ -194,5 +194,41 @@
     };
   }
 
-  window.SV = Object.assign(window.SV || {}, { chart, bed, ease, easeOut, clamp });
+
+  /* ------------------------------------------------------------------ note
+     The AureLedger banknote and its engraved line version share one crop box, so a single split position
+     (--split, 0-100%) reveals the lines over the paper. Pure function of that value; reverses exactly. */
+  function note(root, opts = {}) {
+    let v = opts.start ?? 58, raf = 0;
+    const apply = (x) => { v = clamp(x, 0, 100); root.style.setProperty('--split', v.toFixed(2) + '%'); };
+    apply(v);
+    const api = {
+      get v() { return v; },
+      set: (x) => { cancelAnimationFrame(raf); apply(x); },
+      play(to = 58, ms = 3200, from = 0) {
+        cancelAnimationFrame(raf);
+        if (reduce() || !ms) { apply(to); return Promise.resolve(); }
+        apply(from);
+        const t0 = performance.now();
+        return new Promise((res) => {
+          const tick = (now) => { const k = clamp((now - t0) / ms); apply(from + (to - from) * ease(k)); if (k < 1) raf = requestAnimationFrame(tick); else res(); };
+          raf = requestAnimationFrame(tick);
+        });
+      },
+      /* follow a fine pointer (and, if asked, touch) across the note */
+      follow(target, { touch = false } = {}) {
+        const move = (e) => {
+          if (e.pointerType !== 'mouse' && !touch) return;
+          const r = root.getBoundingClientRect();
+          if (e.clientX < r.left - 60 || e.clientX > r.right + 60) return;
+          cancelAnimationFrame(raf); apply(((e.clientX - r.left) / r.width) * 100);
+        };
+        target.addEventListener('pointermove', move, { passive: true });
+        return () => target.removeEventListener('pointermove', move);
+      }
+    };
+    return api;
+  }
+
+  window.SV = Object.assign(window.SV || {}, { chart, bed, note, ease, easeOut, clamp });
 })();

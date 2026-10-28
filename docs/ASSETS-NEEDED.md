@@ -27,12 +27,13 @@
 - **"Worked for you before".** The page describes it as a plain rule (three rated cravings, a tool used at least twice with a positive feedback score, best average first). I read this from `cravingRecommendation()` in the app; confirm it is still how the live build behaves.
 - **Reclaim sample data.** The "Sample" profile, 14-day run and four seeded cravings are test data I created for the captures, labelled as sample on the page.
 
-## Aureledger (added after pass 2)
+## Aureledger (rebuilt for the wallet redesign)
 
-- **Sources.** Facts come from the local repo's README, `docs/MOTION.md`, `docs/VERIFICATION.md` and `docs/SECURITY.md`. Screens are captures of the public landing intro at https://aureledger.vercel.app (synthetic data only). The private workspace, real mail and real figures are not shown.
-- **Banks and card names.** The page says "bank, card and SIP alerts" and never names the issuers, to avoid publishing which accounts you use. The live demo itself does name them in small text (for example in its Wealth and Cards views). Those views are not used here.
-- **Status wording.** "71 tests at the last verification report" and the deployed concurrency result come from `docs/VERIFICATION.md`. Re-check the figure after the recent atlas and workspace commits. The repo also has uncommitted changes and sits one commit behind its remote, so the live site may not match the latest local code.
-- **Not verified, as in the repo's own report.** Gmail has only run against a simulated API; nothing has been imported from a real mailbox; Safari, Firefox and physical phones were not tested. If that has changed, update the Status section.
-- **Role.** The page says "Concept, design and build". Confirm, and decide whether to mention AI assistance.
-- **Source link.** The repository is private, so there is no "View source" action. The live-site links are the landing page and the synthetic demo.
-- **Quiz amounts** (₹1,200, ₹12,000, ₹20,000) are illustrative. The SIP 5,000 / 4,999.75 example is the repo's own.
+- **Sources.** The product facts come from the repository's `main`: `docs/RELEASE_REPORT.md` (26 Oct), `docs/INTRO_BRIEFING.md`, `docs/MOTION.md`, `src/lib/theme.ts` and the README. Imagery is captured from the public site at https://aureledger.vercel.app with example data only. Nothing from a signed-in workspace appears.
+- **Redaction.** The example data names real banks and a card issuer in small text (for example in the balance line and on the cards). The captures were taken with those names replaced by "Bank" so the portfolio doesn't publish which accounts you use. The live site itself still shows them. The same redaction is applied to the scrub frames, so a frame may differ in wording from the live page.
+- **What the images are.** 32 desktop and 10 phone frames captured at set scroll positions, plus two clean canvas-only frames of the note. They are stills, not a recording and not the live scene. The live introduction uses Three.js and is not embedded.
+- **Status wording to confirm.** The page quotes the 26 Oct release report: 170 tests, identical frames scrolling forward and in reverse, static versions for reduced motion / WebGL off / JavaScript off, and not tested: real GPU, Safari, Firefox, phones, screen readers, and Google sign-in with Gmail sync end to end. Later commits (sign-in error handling, parsers for observed alert layouts, a personal briefing for signed-in users) suggest real use since then. Please confirm or update the "Not verified" sentence.
+- **Role.** "Concept, design and build" is my wording. Confirm it, and decide whether to mention AI assistance.
+- **No source link.** The repository is private. The live-site links are the public introduction and the synthetic demo.
+- **Quiz amounts** (₹1,200, ₹12,000, ₹20,000) are illustrative. The SIP 5,000 / 4,999.75 example is the repository's own.
+- **Missing.** A screen recording of the introduction would show the 3-D wallet motion that stills can't. The cards and workspace frames are shown as stills of an example.

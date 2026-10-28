@@ -60,6 +60,23 @@ Shared foundations (unchanged): routes, header, `Projects / About / Contact`, Al
 | **Narrative rhythm** | Three full-width study bands, one question each, a line of what it taught, links, and a click-to-load live preview. |
 | **Gallery transition (in)** | The three strips slide in from different directions on staggered delays. |
 
+## 04 · Aureledger — "A note becomes lines" (updated for the wallet redesign)
+
+The first version of this exhibition used the product's earlier receipt-and-atlas introduction. Aureledger has since been redesigned (leather wallet, a banknote traced into contour lines, one-scale graph), so this exhibition was rebuilt from the new work.
+
+| | |
+|---|---|
+| **Central idea** | Money arriving as paper, then read as lines. The product's own introduction is the exhibit: a wallet opens, a note leaves its sleeve, the note's engraving becomes contour lines, and the lines become a graph. |
+| **Typography** | The product's own: **Instrument Serif** (title and statements), **Hanken Grotesk** (text), **IBM Plex Mono** (labels). |
+| **Palette** | The product's own tokens: espresso `#191410`, ivory `#efe4d2`, leather `#30261e`, one ember `#ff985f`. |
+| **Image treatment** | Real captures of the live introduction. The gallery scene uses two clean frames of the note (canvas only, no interface text) that share one crop box. Staged captures redact issuer names (see ASSETS-NEEDED). |
+| **Composition** | Gallery: the note bleeds off the right edge on espresso; the left half of it is drawn as lines, with an ember divider at the split. Title on the left. |
+| **Signature interaction** | Two, one per surface. In the hero, move across the note (or use the labelled Paper/Lines control) to draw the lines over the paper. On the page, scrub the whole introduction: a pinned stage driven by native scroll, with a seven-chapter rail and a slider that move the scroll position, so there is only one source of progress. |
+| **Narrative rhythm** | Scrubbed introduction (seven chapters, each captioned from the product's own briefing copy) → "Does it count as spending?" quiz built from the app's accounting rules → three decisions → plain status. |
+| **Gallery transition (in)** | The wallet opens along its fold: the slide is revealed outward from the centre line, then the note unfolds. |
+| **Position in the gallery** | Fourth, after the three exhibitions that are websites and apps with human-facing interfaces and before the archive. It is the most recent substantial piece of work and the one with the strongest visual identity, so it sits near the end, ahead of the experiments that it grew out of. |
+| **Fallbacks** | Reduced motion and no JavaScript get seven fixed stages instead of the pinned stage; the note rests at its midpoint. Phones get portrait captures. Frames are fetched only when the section approaches. |
+
 ---
 
 ## Pacing rules applied to every page
