@@ -14,7 +14,7 @@ The home page is a gallery entrance, not an introduction: it opens on a featured
 | 04 Aureledger | the banknote from the live intro bleeding off the right edge on espresso, drawn as lines on its left half | move across the note to draw its lines; scrub the whole wallet-to-graph introduction | scrubbed introduction in seven chapters, the accounting quiz, three decisions, plain status |
 | 05 Experiments | three tall strips of the real studies at different crops | strips drift at different rates with the pointer | three bands, each composed differently |
 
-Shared: the `sankalpvoid` wordmark top-left, `Projects / About / Contact` top-right, hairline rules, mono captions.
+Shared: the `sankalpvoid` wordmark top-left, `Projects / Archive / Profile / Contact` top-right, hairline rules, mono captions.
 
 References studied: edoardosmerilli.com (full-bleed project-led entrance, restrained corner navigation, circular enter action, "all projects" control) and the two project sites. Composition, type, palette, transition choreography and copy are original; nothing was reused from the reference.
 

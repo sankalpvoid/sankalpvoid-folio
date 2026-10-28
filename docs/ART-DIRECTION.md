@@ -4,7 +4,7 @@ Pass 1 produced a polished editorial portfolio: a text-left hero, then a convent
 
 Reference lesson (edoardosmerilli.com, inspected in a browser): one full-bleed piece of the work owns the whole viewport; the title is large and sits *in* the image; chrome is tiny; "All projects" is a typographic list. Nothing explains the work before showing it.
 
-Shared foundations (unchanged): routes, header, `Projects / About / Contact`, All projects overlay, gallery controls (prev / next / ticks / counter), focus management, reduced-motion and no-JS fallbacks, motion tokens.
+Shared foundations (unchanged): routes, header, `Projects / Archive / Profile / Contact`, All projects overlay, gallery controls (prev / next / ticks / counter), focus management, reduced-motion and no-JS fallbacks, motion tokens.
 
 ---
 
@@ -86,3 +86,13 @@ The first version of this exhibition used the product's earlier receipt-and-atla
 - Evidence first: screens, crops, recordings, before/after, process artifacts. Captions beside the image, one line.
 - Status and qualifiers (prototype, sample data, studio renders, health and finance caveats) appear once, compactly, near the material they qualify.
 - No repeated "premise / challenge / concept / decisions / reflection" prose.
+
+## Cinematic Profile, Archive, index, unroll and horizontal stories (this branch)
+
+One visual world, five connected experiences. See REFERENCE-NOTES.md for which reference behaviours were observed and how each was adapted.
+
+- **Profile** (`/profile/`): one pinned stage; document scroll is the only input. Oversized type sits on a different plane from an abstract replaceable portrait; the music line emerges from the type (line to string to waveform) with no sound.
+- **Archive** (`/archive/`): bounded 3600x2500 canvas of real project fragments; pointer and touch drag with a 6px click threshold and inertia, recentre, arrow-key panning, and a list view. Experiments live at `/work/experiments/`.
+- **All projects**: full-screen index, background follows hover and keyboard focus (token-guarded, so rapid switching never leaves a stale image); on touch the first tap previews, the second opens.
+- **Unroll**: press and drag the Enter handle (or a story's final panel) to reveal the next page; release early and it springs back; click, tap and Enter do the same as a short automatic unroll.
+- **Horizontal stories**: sticky stage height = track travel + viewport; vertical scroll maps 1:1 to horizontal travel. Held stages (Furnishers drawing, Aureledger intro) report progress to their panel. Phones (<=860px), reduced motion and no-JS get an ordinary vertical document.

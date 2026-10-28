@@ -15,7 +15,10 @@ Static site, no build step, no runtime dependencies. Fonts come from Google Font
 | `/work/sankalp-shristi-furnishers/` | Exhibition 03: Sankalp & Shristi Furnishers |
 | `/work/aureledger/` | Exhibition 04: Aureledger |
 | `/archive/` | Exhibition 05: Experiments (CyberPunk, Parallax, GSAP Motion) |
-| `/about/`, `/contact/` | About (with music) and contact |
+| `/profile/`, `/contact/` | Profile (scroll-choreographed, with music) and contact; `/about/` redirects to `/profile/` |
+| `/archive/` | Draggable spatial archive of project fragments (list view for keyboard / screen readers) |
+| `/projects/` | Full-screen typographic project index (also opens as an overlay from the header) |
+| `/work/<slug>/` | Horizontal project stories (vertical scroll drives a horizontal track; flat fallback on phones, reduced motion, no JS); `/work/experiments/` holds the motion studies |
 
 ## Run locally
 
@@ -24,7 +27,7 @@ python3 -m http.server 4173
 # open http://localhost:4173
 ```
 
-Any static server works. Use trailing-slash URLs (`/about/`), as Vercel does with the included `vercel.json`.
+Any static server works. Use trailing-slash URLs (`/profile/`), as Vercel does with the included `vercel.json`.
 
 ## Checks
 
@@ -41,7 +44,7 @@ npm run axe      # axe-core WCAG A/AA + best-practice on every route at 1440px a
 
 ```
 index.html            gallery entrance
-projects/ about/ contact/ archive/ work/<slug>/index.html
+projects/ profile/ about/(redirect) contact/ archive/ work/<slug>/index.html
 assets/css/           base.css (tokens, motion system, chrome, overlay), scenes.css (the four full-viewport scenes shared by gallery and project heroes), one stylesheet per exhibition
 assets/js/            site.js (shared), scenes.js (SVG chart + traced-bed builders), home.js, one small script per exhibition
 assets/data/          bed-trace.json: traced bed geometry from the Furnishers hero prototype

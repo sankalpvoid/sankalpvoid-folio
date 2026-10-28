@@ -1,11 +1,11 @@
 # Portrait: where the photo goes
 
-Today the homepage and About page show an **illustrative sketch** (an abstract head-and-shoulders outline inside contour lines, with a small orbit). It does not depict anyone's face. When a real photograph is ready, it replaces the sketch with no layout change.
+Today the Profile page shows an **illustrative sketch** (an abstract head-and-shoulders outline inside contour lines, with a small orbit). It does not depict anyone's face. When a real photograph is ready, it replaces the sketch with no layout change.
 
 ## To add the photo
 
 1. Export the photograph and save it as `assets/img/portrait/portrait.jpg` (create the folder if it is missing).
-2. In `index.html` **and** `about/index.html`, set the `data-photo` attribute on the `.portrait` element:
+2. In `profile/index.html`, set the `data-photo` attribute on `.pf__portrait` (it is empty now):
 
    ```html
    <figure class="portrait" data-portrait data-photo="/assets/img/portrait/portrait.jpg">
@@ -35,7 +35,7 @@ The `alt` text on `.portrait__photo` already reads "Sankalp Kushwaha". Adjust it
 | File | Role |
 |---|---|
 | `assets/img/portrait/portrait.jpg` | the photograph (to be added) |
-| `index.html`, `about/index.html` | the `.portrait` element and its `data-photo` attribute |
+| `profile/index.html` | the `.pf__portrait` element and its `data-photo` attribute |
 | `assets/css/portrait.css` | frame, sketch drawing, photo reveal |
 | `assets/js/portrait.js` | pointer response, orbit dot, photo loading and reveal |
 

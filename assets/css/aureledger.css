@@ -94,3 +94,4 @@ input[type=range]:focus-visible{outline:2px solid var(--focus);outline-offset:3p
 html:not(.js) .al-hold,html:not(.js) .hold{display:none!important}
 html:not(.js) .seq-static{display:grid}
 .hero .al-note{pointer-events:auto}
+html:not(.js) .qz{display:block}html:not(.js) .qz>li{width:auto;max-width:36rem;margin-bottom:12px}
