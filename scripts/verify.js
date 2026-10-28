@@ -5,7 +5,10 @@ const pw=require('playwright');
 const ENGINE=process.env.ENGINE||'chromium';
 const BASE=process.env.BASE||'http://127.0.0.1:4195';
 const SHARE=process.env.SHARE_QS||'';           /* "?_vercel_share=..." when run against a protected preview */
-const U=(p)=>BASE+p+(SHARE&&!p.includes('?')?SHARE:'');
+const U=(p)=>{
+ const [pathname,hash]=p.split('#');
+ return BASE+pathname+(SHARE&&!pathname.includes('?')?SHARE:'')+(hash?'#'+hash:'');
+};
 const ORDER=['reclaim','wealthwithsg','sankalp-shristi-furnishers','aureledger','experiments'];
 const STORIES=ORDER.map(s=>`/work/${s}/`);
 const routes=['/','/projects/',...STORIES,'/archive/','/profile/','/about/','/contact/'];
@@ -23,11 +26,12 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
    const resp=await p.goto(U(r),{waitUntil:'load'});
    // /about/ has both meta and JS redirects on a plain static server; Firefox
    // may finish that navigation without a Response. Verify the destination's
-   // actual HTTP response separately rather than dereferencing null or passing it.
+   // actual HTTP response separately rather than dereferencing null or treating a
+   // cached redirect (304 on Vercel/Firefox) as the destination response.
    let status=resp?.status();
    if(r==='/about/'){
     await p.waitForURL('**/profile/');
-    if(status==null)status=(await ctx.request.get(U('/profile/'))).status();
+    status=(await ctx.request.get(U('/profile/'))).status();
    }
    await p.waitForTimeout(700);
    const H=await p.evaluate(()=>document.documentElement.scrollHeight);

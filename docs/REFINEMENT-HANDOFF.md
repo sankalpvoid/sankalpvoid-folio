@@ -51,3 +51,5 @@ The existing Profile wording remains for owner confirmation: the engineering/bui
 - Visual evidence: every scene from all five projects at 390/768/1440, comparison captures against `9efac04`, and six WebM recordings. Phone/tablet copy columns were corrected after visual inspection.
 
 Deployment-specific results belong in the delivered review report; the local results above do not imply deployed verification.
+
+Protected-deployment harness follow-up: share queries are inserted before URL fragments (so `#archive` stays intact), and `/about/` verifies Profile with an actual destination request even when Firefox reports a cached 304 during Vercel's redirect. Neither issue changes the application itself.
