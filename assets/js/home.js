@@ -99,6 +99,12 @@
   const go = (n, dir) => { if (busy && settle) settle(); if (n !== index) apply(n, dir ?? (n > index ? 1 : -1)); };
   const step = (d) => { if (busy && settle) settle(); apply(index + d, d); };
 
+  /* the Enter handle can be pressed and dragged: the destination unrolls under the finger (see unroll.js) */
+  if (window.SVUnroll) slides.forEach((s) => {
+    const slug = s.dataset.slug === 'archive' ? 'experiments' : s.dataset.slug;
+    SVUnroll.attach(s.querySelector('.enter'), { bg: `/assets/img/idx/${slug}.jpg`, name: () => s.querySelector('.t').textContent.replace(/\s+/g, ' ').trim() });
+  });
+
   stage.querySelector('[data-next]').addEventListener('click', () => step(1));
   stage.querySelector('[data-prev]').addEventListener('click', () => step(-1));
   ticks.forEach((t) => t.addEventListener('click', () => go(+t.dataset.go)));

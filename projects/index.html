@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>All projects — sankalpvoid</title>
-<meta name="description" content="Every exhibition at a glance: Reclaim, WealthWithSG, Sankalp & Shristi Furnishers, Aureledger and the experiments archive.">
+<meta name="description" content="Every exhibition as a full-screen index: Reclaim, WealthWithSG, Sankalp & Shristi Furnishers, Aureledger and the experiments. Hover or focus a title to see it.">
 <link rel="canonical" href="https://sankalpvoid-folio.vercel.app/projects/">
-<meta property="og:title" content="All projects — sankalpvoid">
-<meta property="og:description" content="Every exhibition at a glance.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="sankalpvoid">
+<meta property="og:title" content="All projects — sankalpvoid">
+<meta property="og:description" content="Five exhibitions, one index.">
 <meta property="og:url" content="https://sankalpvoid-folio.vercel.app/projects/">
 <meta property="og:image" content="https://sankalpvoid-folio.vercel.app/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -18,45 +19,42 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/base.css">
-<style>
-body{--page-bg:#0b0b0c;--page-fg:#f1ede4;--chrome:#f1ede4;--chrome-dim:rgba(241,237,228,.6)}
-.pg{padding-top:96px;min-height:70vh}
-.pg__h{padding:0 var(--gutter);margin:0 0 18px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;opacity:.6;font-weight:400}
-.pg .index__list{padding-bottom:0}
-</style>
 <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>
-<body>
-<a class="skip" href="#main">Skip to content</a>
+<body class="idx-page">
+<a class="skip" href="#main">Skip to the project list</a>
 <header class="chrome">
-  <a class="wordmark" href="/" aria-label="sankalpvoid — home"><b>sankalpvoid</b><span>Sankalp Kushwaha</span></a>
-  <nav aria-label="Primary"><a href="/projects/" aria-current="page">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>
+  <a class="wordmark" href="/" aria-label="sankalpvoid — gallery"><b>sankalpvoid</b><span>← Gallery</span></a>
+  <nav aria-label="Primary">
+    <a href="/projects/" data-open-index aria-current="page">Projects</a>
+    <a href="/archive/">Archive</a>
+    <a href="/profile/">Profile</a>
+    <a href="/contact/">Contact</a>
+  </nav>
 </header>
-<main id="main" class="pg">
-  <h1 class="pg__h">All projects</h1>
-  <div class="index__list" data-index-source>
-    <a class="index__item" href="/work/reclaim/">
-      <span class="index__num">01</span><span class="index__title">Reclaim</span><span class="index__kind">Product · behaviour change · live prototype</span>
-      <img class="index__thumb" src="/assets/img/rc/light-home-390.jpg" width="390" height="844" alt="" loading="lazy" style="object-fit:cover;object-position:top">
-    </a>
-    <a class="index__item" href="/work/wealthwithsg/">
-      <span class="index__num">02</span><span class="index__title">WealthWithSG</span><span class="index__kind">Website · trading education · sample content</span>
-      <img class="index__thumb" src="/assets/img/wsg/hero-4-720.jpg" width="720" height="450" alt="" loading="lazy">
-    </a>
-    <a class="index__item" href="/work/sankalp-shristi-furnishers/">
-      <span class="index__num">03</span><span class="index__title">Sankalp &amp; Shristi Furnishers</span><span class="index__kind">Showroom concept · configurators · demonstration build</span>
-      <img class="index__thumb" src="/assets/img/ssf/hero-sm.webp" width="800" height="667" alt="" loading="lazy">
-    </a>
-    <a class="index__item" href="/work/aureledger/">
-      <span class="index__num">04</span><span class="index__title">Aureledger</span><span class="index__kind">Product · personal finance · working prototype, synthetic demo</span>
-      <img class="index__thumb" src="/assets/img/al/note-curl-640.jpg" width="640" height="382" alt="" loading="lazy">
-    </a>
-    <div class="index__item" style="grid-template-columns:3.2rem 1fr auto">
-      <span class="index__num">05</span><a class="index__title" href="/archive/" style="text-decoration:none">Experiments</a><span class="index__kind">Archive · three motion studies</span>
-      <span class="index__sub"><a href="/archive/#cyberpunk">CyberPunk</a><a href="/archive/#parallax">Parallax</a><a href="/archive/#gsap-motion">GSAP Motion</a></span>
-    </div>
-  </div>
-  <p class="index__foot"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="https://github.com/sankalpvoid" target="_blank" rel="noreferrer">GitHub ↗</a></p>
+<main id="main" class="idx idx--page" data-idx-page>
+  <h1 class="sr-only">All projects</h1>
+  <div class="idx__bgs" aria-hidden="true"><span class="idx__bg is-on" data-layer="a"></span><span class="idx__bg" data-layer="b"></span><span class="idx__scrim"></span></div>
+  <p class="idx__label mono">All projects · hover, or focus with the keyboard</p>
+  <ol class="idx__list" data-index-source>
+      <li class="idx__item" data-slug="reclaim" data-bg="/assets/img/idx/reclaim.jpg">
+        <a class="idx__a" href="/work/reclaim/"><span class="idx__n mono">01</span><span class="idx__t">Reclaim</span><span class="idx__c mono">Product · Live prototype</span></a>
+      </li>
+      <li class="idx__item" data-slug="wealthwithsg" data-bg="/assets/img/idx/wealthwithsg.jpg">
+        <a class="idx__a" href="/work/wealthwithsg/"><span class="idx__n mono">02</span><span class="idx__t">WealthWithSG</span><span class="idx__c mono">Website · Prototype · sample content</span></a>
+      </li>
+      <li class="idx__item" data-slug="sankalp-shristi-furnishers" data-bg="/assets/img/idx/sankalp-shristi-furnishers.jpg">
+        <a class="idx__a" href="/work/sankalp-shristi-furnishers/"><span class="idx__n mono">03</span><span class="idx__t">Sankalp &amp; Shristi Furnishers</span><span class="idx__c mono">Showroom · Demonstration · studio renders</span></a>
+      </li>
+      <li class="idx__item" data-slug="aureledger" data-bg="/assets/img/idx/aureledger.jpg">
+        <a class="idx__a" href="/work/aureledger/"><span class="idx__n mono">04</span><span class="idx__t">Aureledger</span><span class="idx__c mono">Product · Working prototype · example data</span></a>
+      </li>
+      <li class="idx__item" data-slug="experiments" data-bg="/assets/img/idx/experiments.jpg">
+        <a class="idx__a" href="/work/experiments/"><span class="idx__n mono">05</span><span class="idx__t">Experiments</span><span class="idx__c mono">Motion studies · 3 live studies</span></a>
+      </li>
+  </ol>
+  <p class="idx__enter" data-idx-enter hidden><span class="mono">Selected</span><a href="#" class="idx__go"><b data-idx-name></b> <i aria-hidden="true">↗</i></a></p>
+  <p class="idx__foot"><a href="/archive/">Archive</a><a href="/profile/">Profile</a><a href="/contact/">Contact</a><a href="https://github.com/sankalpvoid" target="_blank" rel="noreferrer">GitHub ↗</a></p>
 </main>
 <script src="/assets/js/site.js" defer></script>
 </body>
