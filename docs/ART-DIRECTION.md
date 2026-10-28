@@ -1,3 +1,38 @@
+# The homepage and the personal pages (pass 4)
+
+The site used to open straight on the first exhibition. It now opens on a **foyer**: a page about the person, with the collection one step further in. Journey: *meet me → discover what I build → enter an exhibition → explore further or get in touch.*
+
+## Homepage `/` · "The foyer"
+
+| | |
+|---|---|
+| **Central idea** | Contour lines around a figure: a silhouette surrounded by ripples, like a topographic map or a signal. It ties the engineering (terrain, water, signals) to the portrait without drawing a face, and it is the one piece of imagery the page owns. |
+| **Typography** | **Instrument Serif** for statements, with the second half of the anchor in italic orange; **Inter Tight** for text; **JetBrains Mono** for small labels. |
+| **Palette** | A lobby, not an exhibition: warm bone `#efeae0` ground, ink `#0d0d0f` type, and one signal orange (`#ff5b2e` for graphics, `#b5340f` for text so it passes contrast). Side B inverts to ink, the other side of the record. |
+| **Image treatment** | The portrait is an illustrative sketch (placeholder, no likeness). Exhibition imagery is real, cropped hard into an uneven mosaic rather than a row of identical cards. |
+| **Composition** | Identity first: the anchor statement and one primary action beside the portrait. Then *Now showing* (a tall Reclaim tile, a wide Aureledger tile, two mid tiles, a strip of experiments), *Different disciplines. Same impulse.* (five threads with an orbit that follows the reading), *Side B* (dark), and an open-channel footer. |
+| **Hierarchy of actions** | One solid button, "Explore the work". "Meet me", "Hear the music" and "Say hello" are quiet underlined links. Each exhibition is also reachable straight from its tile. |
+| **Signature interaction** | The portrait: the sketch draws itself once, and responds to the pointer (rings drift, the orbit dot travels). When a photograph is supplied the sketch becomes a reveal into the photo. |
+| **Motion** | A small number of moments: the sketch drawing in, content easing up as it enters, the orbit lighting the thread being read, and a clicked tile's picture becoming the opening of its exhibition (a view transition). All of it stops under reduced motion. |
+| **What it avoids** | Faint text, empty space, repeated statements about curiosity (the anchor appears once on the homepage and the About page opens differently), abstract graphics that delay the work, purple glow. |
+
+## About `/about/` · "Meeting me"
+
+- **Opening:** "Hello. I'm Sankalp." with the portrait and three short paragraphs in the first person.
+- **A pattern in the work:** four exhibitions, each with the single habit that is visible in it (saying what a number, chart or image is and isn't), linked to the exhibition. This is the evidence for the claim that the threads connect, in place of a list of skills.
+- **Right now:** four short lines taken from the earlier portfolio and the GitHub profile.
+- **Side B (`#music`):** the dark half of the record: vocals, guitar, production, the two verified channels, and a deliberately player-free section.
+- **Onward:** two large routes, to the work and to contact.
+
+## Navigation conventions
+
+- **Header, every page:** wordmark → Home; *Work* opens the All-projects overlay (and links to `/projects/` without JavaScript); *About*; *Music* → `/about/#music`; *Contact*.
+- **Exhibitions** add a "← Collection" crumb that returns to that exhibition's slide in `/projects/#slug`.
+- **`/projects/`** is the immersive collection (the former homepage). Its list of all projects sits below it and feeds the overlay.
+- **Old links:** `/#reclaim` and the other exhibition hashes redirect to `/projects/#…`; `#about` and `#lab` go to the About page (`#lab` to "Right now"); `#work` and `#side-b` still land on the matching homepage sections.
+
+---
+
 # Art direction, pass 2
 
 Pass 1 produced a polished editorial portfolio: a text-left hero, then a conventional case study. Pass 2 makes the work the environment. Each gallery slide is a full-viewport **scene**; the project page opens on the *same scene* (shared-element transition), then the story unfolds in that project's own language.

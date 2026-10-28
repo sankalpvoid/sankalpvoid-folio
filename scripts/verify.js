@@ -22,7 +22,7 @@ const out=[];const ok=(c,m)=>{out.push((c?'PASS ':'FAIL ')+m);};
      noalt:[...document.images].filter(i=>!i.hasAttribute('alt')).length,
      hidden:[...document.querySelectorAll('.rv')].filter(e=>getComputedStyle(e).opacity<0.5).length}));
    ok(resp.status()===200&&errs.length===0,`${w}px ${r}  status=${resp.status()} errors=${JSON.stringify(errs)}`);
-   ok(info.sw<=info.iw+1,`${w}px ${r}  no horizontal overflow (scrollWidth ${info.sw}/${info.iw})`);
+   ok(info.sw<=w+1&&info.iw<=w+1,`${w}px ${r}  no horizontal overflow (scrollWidth ${info.sw}, viewport ${info.iw}, device ${w})`);
    if(w===1440){ok(info.title.length>5&&info.desc&&info.og&&info.h1===1,`${r} meta ok title="${info.title}" h1=${info.h1}`);}
    ok(info.broken.length===0&&info.noalt===0,`${w}px ${r}  images ok broken=${info.broken.length} noalt=${info.noalt}`);
    ok(info.hidden===0,`${w}px ${r}  no reveal content stuck hidden (${info.hidden})`);
@@ -32,9 +32,9 @@ const out=[];const ok=(c,m)=>{out.push((c?'PASS ':'FAIL ')+m);};
  }
  // 2. home interactions
  {const ctx=await b.newContext({viewport:{width:1440,height:900}});const p=await ctx.newPage();
-  await p.goto(BASE+'/');await p.waitForTimeout(800);
+  await p.goto(BASE+'/projects/');await p.waitForTimeout(800);
   const slug=()=>p.evaluate(()=>document.querySelector('.slide.is-active').dataset.slug);
-  ok(await slug()==='reclaim','home opens on Reclaim');
+  ok(await slug()==='reclaim','collection (/projects/) opens on Reclaim');
   await p.keyboard.press('ArrowRight');await p.waitForTimeout(1300);ok(await slug()==='wealthwithsg','ArrowRight → WealthWithSG');
   ok((await p.evaluate(()=>location.hash))==='#wealthwithsg','hash updates for sharing');
   await p.keyboard.press('ArrowLeft');await p.waitForTimeout(1300);ok(await slug()==='reclaim','ArrowLeft → Reclaim');
@@ -51,15 +51,15 @@ const out=[];const ok=(c,m)=>{out.push((c?'PASS ':'FAIL ')+m);};
   // enter project, back/forward
   await p.click('.slide.is-active .enter');await p.waitForURL('**/work/reclaim/');await p.waitForTimeout(600);
   ok(p.url().endsWith('/work/reclaim/'),'Enter opens /work/reclaim/');
-  await p.goBack();await p.waitForTimeout(900);ok(new URL(p.url()).pathname==='/','Back returns to gallery');ok(await slug()==='reclaim','…on the same exhibition');
+  await p.goBack();await p.waitForTimeout(900);ok(new URL(p.url()).pathname==='/projects/','Back returns to the collection');ok(await slug()==='reclaim','…on the same exhibition');
   await p.goForward();await p.waitForTimeout(700);ok(p.url().endsWith('/work/reclaim/'),'Forward returns to project');
-  // gallery link from project returns to its slide
-  await p.click('.wordmark');await p.waitForURL(u=>new URL(u).pathname==='/');await p.waitForTimeout(800);
-  ok(await slug()==='reclaim'&&p.url().includes('#reclaim'),'Gallery link restores Reclaim slide');
+  // collection crumb from a project returns to its slide
+  await p.click('.crumb');await p.waitForURL(u=>new URL(u).pathname==='/projects/');await p.waitForTimeout(800);
+  ok(await slug()==='reclaim'&&p.url().includes('#reclaim'),'"← Collection" restores the Reclaim slide');
   // deep link slide
-  await p.goto(BASE+'/#sankalp-shristi-furnishers');await p.waitForTimeout(900);ok(await slug()==='sankalp-shristi-furnishers','deep link /#slug opens that slide');
+  await p.goto(BASE+'/projects/#sankalp-shristi-furnishers');await p.waitForTimeout(900);ok(await slug()==='sankalp-shristi-furnishers','deep link /projects/#slug opens that slide');
   // overlay
-  await p.goto(BASE+'/');await p.waitForTimeout(600);
+  await p.goto(BASE+'/projects/');await p.waitForTimeout(600);
   await p.click('.controls .all');await p.waitForSelector('dialog.index[open]');ok(true,'All projects overlay opens');
   const items=await p.$$eval('dialog.index .index__item',e=>e.length);ok(items===5,`overlay lists 5 exhibitions (${items})`);
   await p.keyboard.press('Escape');await p.waitForTimeout(500);ok(!(await p.$('dialog.index[open]')),'Esc closes overlay');
@@ -67,9 +67,68 @@ const out=[];const ok=(c,m)=>{out.push((c?'PASS ':'FAIL ')+m);};
   await p.keyboard.press('p');await p.waitForSelector('dialog.index[open]');ok(true,'"P" shortcut opens overlay');
   await p.click('dialog.index a[href="/archive/"]');await p.waitForURL('**/archive/');ok(true,'overlay link navigates');
   // keyboard: tab order starts at skip link and focus is visible
-  await p.goto(BASE+'/');await p.keyboard.press('Tab');
+  await p.goto(BASE+'/projects/');await p.keyboard.press('Tab');
   ok(await p.evaluate(()=>document.activeElement.classList.contains('skip')),'first Tab stop = skip link');
   const outline=await p.evaluate(()=>{for(let i=0;i<4;i++)document.activeElement&&0;return 1});
+  await ctx.close();}
+ // 2b. homepage and personal journey
+ {const ctx=await b.newContext({viewport:{width:1440,height:900}});const p=await ctx.newPage();const bad=[];
+  p.on('requestfailed',q=>bad.push(q.url()));p.on('response',r=>{if(r.status()>=400)bad.push(r.status()+' '+r.url())});
+  await p.goto(BASE+'/');await p.waitForTimeout(1200);
+  ok(/Sankalp Kushwaha/.test(await p.title()),'home: title names me');
+  ok((await p.textContent('h1')).replace(/\s+/g,' ').trim()==='Curious across disciplines. Building across them.','home: opens on the identity statement');
+  ok(await p.evaluate(()=>!document.querySelector('.slide,.stage,[data-next],[data-go]')&&![...document.scripts].some(s=>/home\.js|scenes\.js/.test(s.src))),'home: no gallery stage or gallery scripts');
+  ok(await p.evaluate(()=>document.querySelectorAll('.foyer .btn--solid').length===1&&document.querySelector('.foyer .btn--solid').getAttribute('href')==='/projects/'),'home: exactly one primary action, into the collection');
+  ok(await p.evaluate(()=>[...document.querySelectorAll('.foyer .paths a')].map(a=>a.getAttribute('href')).join()==='/about/,/about/#music,/contact/'),'home: Meet / Music / Contact are quiet secondary paths');
+  ok(await p.evaluate(()=>['/projects/','/about/','/about/#music','/contact/'].every(h=>document.querySelector(`.chrome nav a[href="${h}"]`))),'home: header offers Work, About, Music, Contact');
+  ok(await p.evaluate(()=>document.querySelectorAll('audio,video').length===0),'home: no audio or video element, so nothing can autoplay');
+  ok(await p.evaluate(()=>!/upload|your photo|placeholder|todo|replace with/i.test(document.body.innerText)),'home: no development or upload wording is visible');
+  ok(await p.evaluate(()=>document.querySelector('.portrait svg')&&!document.querySelector('.portrait__photo').getAttribute('src')),'portrait: complete illustration, no photo request');
+  const tiles=await p.$$eval('.t a',a=>a.map(x=>x.getAttribute('href')));
+  ok(JSON.stringify(tiles)===JSON.stringify(['/work/reclaim/','/work/aureledger/','/work/wealthwithsg/','/work/sankalp-shristi-furnishers/','/archive/']),'home: the five exhibitions are all reachable from "Now showing"');
+  ok(await p.evaluate(()=>[...document.querySelectorAll('a[href^="https://www.youtube"],a[href^="https://www.instagram"]')].every(a=>/@sankalp\.mussic|sankalp\.singss/.test(a.href))&&document.querySelectorAll('a[href*="@sankalp.mussic"]').length>=1),'home: music links point at the verified channels');
+  // primary action → collection, then back
+  await p.click('.foyer .btn--solid');await p.waitForURL('**/projects/');await p.waitForTimeout(700);
+  ok(await p.evaluate(()=>document.querySelector('.slide.is-active')?.dataset.slug)==='reclaim','Explore the work opens the collection');
+  await p.goBack();await p.waitForTimeout(800);ok(new URL(p.url()).pathname==='/'&&/Curious across/.test(await p.textContent('h1')),'back from the collection returns to the homepage');
+  // a tile opens its exhibition; back returns here
+  await p.evaluate(()=>document.querySelector('.t--al').scrollIntoView({block:'center'}));await p.click('.t--al a');await p.waitForURL('**/work/aureledger/');
+  ok(true,'home: Aureledger tile opens the exhibition');await p.goBack();await p.waitForTimeout(900);ok(new URL(p.url()).pathname==='/','back from an exhibition returns to the homepage');
+  // exhibition navigation: Home + Collection
+  await p.goto(BASE+'/work/wealthwithsg/');await p.waitForTimeout(500);
+  ok(await p.evaluate(()=>document.querySelector('.wordmark').getAttribute('href')==='/'&&document.querySelector('.crumb').getAttribute('href')==='/projects/#wealthwithsg'),'exhibition: wordmark goes Home and the crumb goes to its place in the collection');
+  await p.click('.crumb');await p.waitForURL(u=>new URL(u).pathname==='/projects/');await p.waitForTimeout(800);ok(await p.evaluate(()=>document.querySelector('.slide.is-active').dataset.slug)==='wealthwithsg','crumb lands on the right exhibition');
+  await p.goto(BASE+'/work/wealthwithsg/');await p.click('.wordmark');await p.waitForURL(u=>new URL(u).pathname==='/');ok(true,'wordmark goes Home');
+  // old links
+  const land=async(u)=>{await p.goto(BASE+u);await p.waitForTimeout(900);return new URL(p.url())};
+  let L=await land('/#wealthwithsg');ok(L.pathname==='/projects/'&&L.hash==='#wealthwithsg'&&await p.evaluate(()=>document.querySelector('.slide.is-active').dataset.slug)==='wealthwithsg','old link /#wealthwithsg lands on that exhibition, not another');
+  L=await land('/#aureledger');ok(L.pathname==='/projects/'&&await p.evaluate(()=>document.querySelector('.slide.is-active').dataset.slug)==='aureledger','old link /#aureledger lands on Aureledger');
+  L=await land('/#about');ok(L.pathname==='/about/','old anchor #about reaches the About page');
+  L=await land('/#lab');ok(L.pathname==='/about/'&&L.hash==='#now'&&!!(await p.$('#now')),'old anchor #lab reaches "Right now"');
+  L=await land('/#side-b');ok(L.pathname==='/'&&!!(await p.$('#side-b')),'old anchor #side-b reaches the Side B section on the homepage');
+  L=await land('/#work');ok(L.pathname==='/'&&!!(await p.$('#work')),'old anchor #work reaches "Now showing"');
+  // overlay from the homepage
+  await p.goto(BASE+'/');await p.waitForTimeout(500);await p.focus('.chrome [data-open-index]');await p.keyboard.press('Enter');await p.waitForSelector('dialog.index[open]');
+  ok(await p.evaluate(()=>document.querySelector('dialog.index').contains(document.activeElement)&&document.querySelectorAll('dialog.index .index__item').length===5&&!!document.querySelector('dialog.index .index__foot a[href="/"]')),'home: overlay opens with focus inside, five exhibitions and a Home link');
+  await p.keyboard.press('Escape');await p.waitForTimeout(400);ok(await p.evaluate(()=>document.activeElement.hasAttribute('data-open-index')),'home: overlay returns focus to the Work link');
+  // About and music
+  await p.goto(BASE+'/');await p.click('.foyer .paths a[href="/about/#music"]');await p.waitForURL('**/about/#music');await p.waitForTimeout(700);
+  ok(await p.evaluate(()=>{const r=document.querySelector('#music').getBoundingClientRect();return r.top<innerHeight*0.5&&r.bottom>0}),'Hear the music scrolls the About page to the music section');
+  await p.goto(BASE+'/about/');await p.waitForTimeout(800);
+  ok(await p.evaluate(()=>document.querySelectorAll('audio,video,[role="slider"]:not(input)').length===0&&document.querySelectorAll('#music button').length===0&&!/play(?!s)/i.test(document.querySelector('#music').innerText.replace(/Nothing on this site plays by itself\./,''))),'about: the music section has no player, no controls and no fake playback');
+  ok(await p.evaluate(()=>{const a=[...document.querySelectorAll('#music .channels a')].map(x=>x.href);return a.includes('https://www.youtube.com/@sankalp.mussic')&&a.includes('https://www.instagram.com/sankalp.singss/')}),'about: the two verified channels are linked from Side B');
+  ok(await p.evaluate(()=>/Hello\. I’m Sankalp\./.test(document.querySelector('h1').innerText)&&document.querySelector('.portrait svg')),'about: opens with a personal greeting and the portrait');
+  ok(await p.evaluate(()=>!document.querySelector('[data-recordings]')&&!/TODO|TBD|lorem|\[.*\]/.test(document.body.innerText)),'about: no placeholder text or development markers');
+  // portrait photo support (exercised with an existing image so the final photo can be dropped in)
+  await p.goto(BASE+'/about/');await p.waitForTimeout(500);
+  await p.evaluate(()=>{const el=document.querySelector('[data-portrait]');el.dataset.photo='/assets/img/exp/gsap-1-720.jpg';window.SVPortrait.refresh()});await p.waitForTimeout(2600);
+  ok(await p.evaluate(()=>{const el=document.querySelector('[data-portrait]');return el.classList.contains('has-photo')&&getComputedStyle(el.querySelector('.portrait__photo')).display==='block'&&parseFloat(el.style.getPropertyValue('--split'))>=99}),'portrait: a supplied photograph appears and the reveal completes');
+  // sitemap + robots + internal docs not served
+  const sm=await (await fetch(BASE+'/sitemap.xml')).text();
+  ok(['/','/projects/','/work/reclaim/','/work/wealthwithsg/','/work/sankalp-shristi-furnishers/','/work/aureledger/','/archive/','/about/','/contact/'].every(u=>sm.includes('https://sankalpvoid-folio.vercel.app'+u+'<')),'sitemap lists all nine routes');
+  ok((await fetch(BASE+'/robots.txt')).status===200,'robots.txt present');
+  if(BASE.startsWith('https://')){const r=await fetch(BASE+'/docs/ASSETS-NEEDED.md');ok(r.status===404,'internal docs are not served publicly ('+r.status+')');const r2=await fetch(BASE+'/scripts/verify.js');ok(r2.status===404,'scripts are not served publicly ('+r2.status+')');}
+  ok(bad.filter(x=>!/_vercel|favicon/.test(x)).length===0,'home/about journey: no failed or error requests '+JSON.stringify(bad.slice(0,3)));
   await ctx.close();}
  // 3. exhibition interactions
  {const ctx=await b.newContext({viewport:{width:1440,height:900}});const p=await ctx.newPage();
@@ -157,11 +216,14 @@ const out=[];const ok=(c,m)=>{out.push((c?'PASS ':'FAIL ')+m);};
   await ctx.close();}
  // 4. reduced motion
  {const ctx=await b.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'});const p=await ctx.newPage();
-  await p.goto(BASE+'/');await p.waitForTimeout(500);await p.keyboard.press('ArrowRight');await p.waitForTimeout(300);
+  await p.goto(BASE+'/projects/');await p.waitForTimeout(500);await p.keyboard.press('ArrowRight');await p.waitForTimeout(300);
   const anim=await p.evaluate(()=>document.getAnimations().filter(a=>a.playState==='running'&&a.effect.getTiming().duration>20).length);
   ok(anim===0,`reduced motion: home has no running long animations (${anim})`);
   ok((await p.evaluate(()=>document.querySelector('.slide.is-active').dataset.slug))==='wealthwithsg','reduced motion: slide still changes (instant)');
   ok(await p.evaluate(()=>[...document.querySelectorAll('.s-wsg .cd')].every(e=>+e.style.opacity>0.9)),'reduced motion: gallery chart is already structured');
+  await p.goto(BASE+'/');await p.waitForTimeout(900);
+  ok(await p.evaluate(()=>getComputedStyle(document.querySelector('.p-main')).animationName==='none'&&getComputedStyle(document.querySelector('.p-ring')).strokeDasharray==='none'&&document.getAnimations().filter(a=>a.playState==='running'&&a.effect.getTiming().duration>20).length===0),'reduced motion: homepage portrait is a still, fully drawn sketch with no running animation');
+  ok(await p.evaluate(()=>[...document.querySelectorAll('.rv')].every(e=>getComputedStyle(e).opacity==='1')),'reduced motion: homepage content is all visible');
   await p.goto(BASE+'/work/sankalp-shristi-furnishers/');await p.waitForTimeout(1200);
   ok(await p.evaluate(()=>document.documentElement.classList.contains('rm')&&getComputedStyle(document.querySelector('.draw__pin')).position==='static'&&document.querySelectorAll('[data-static] figure').length===4),'reduced motion: SSF becomes four fixed moments, no pin');
   await p.goto(BASE+'/work/wealthwithsg/');await p.waitForTimeout(600);
@@ -175,7 +237,7 @@ const out=[];const ok=(c,m)=>{out.push((c?'PASS ':'FAIL ')+m);};
   await ctx.close();}
  // 5. JS disabled
  {const ctx=await b.newContext({viewport:{width:1440,height:900},javaScriptEnabled:false});const p=await ctx.newPage();
-  for(const r of ['/','/work/reclaim/','/work/wealthwithsg/','/work/sankalp-shristi-furnishers/','/work/aureledger/','/archive/','/about/']){await p.goto(BASE+r);
+  for(const r of ['/','/about/','/projects/','/work/reclaim/','/work/wealthwithsg/','/work/sankalp-shristi-furnishers/','/work/aureledger/','/archive/','/about/']){await p.goto(BASE+r);
    const t=await p.evaluate(()=>({h1:document.querySelector('h1')?.innerText?.slice(0,30),vis:[...document.querySelectorAll('.rv')].filter(e=>getComputedStyle(e).opacity==='0').length}));
    ok(t.h1&&t.vis===0,`no-JS ${r}: content visible (h1="${t.h1}", hidden reveals ${t.vis})`);}
   await ctx.close();}

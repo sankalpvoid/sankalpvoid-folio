@@ -4,174 +4,163 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>sankalpvoid — Sankalp Kushwaha</title>
-<meta name="description" content="A gallery of things Sankalp Kushwaha has built: Reclaim, WealthWithSG, Sankalp & Shristi Furnishers, Aureledger and a set of motion experiments.">
+<meta name="description" content="Sankalp Kushwaha, engineering student at IIT Bombay who builds software and products and makes music. Curious across disciplines, building across them. Explore the work, meet the person, hear the music.">
 <link rel="canonical" href="https://sankalpvoid-folio.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="sankalpvoid">
 <meta property="og:title" content="sankalpvoid — Sankalp Kushwaha">
-<meta property="og:description" content="Each project is an exhibition. Together, they reveal the person who made them.">
+<meta property="og:description" content="Sankalp Kushwaha, engineering student at IIT Bombay who builds software and products and makes music. Curious across disciplines, building across them. Explore the work, meet the person, hear the music.">
 <meta property="og:url" content="https://sankalpvoid-folio.vercel.app/">
-<meta property="og:image" content="https://sankalpvoid-folio.vercel.app/assets/img/og.jpg">
+<meta property="og:image" content="https://sankalpvoid-folio.vercel.app/assets/img/og-home.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0d0d0f">
+<meta name="theme-color" content="#efeae0">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&family=DM+Serif+Display&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&text=RECLAIM&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&text=WEALTHISG&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&text=Sankalp%20%26Shristi%20Furnishers&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/base.css">
-<link rel="stylesheet" href="/assets/css/scenes.css">
-<link rel="stylesheet" href="/assets/css/home.css">
-<link rel="preload" as="image" href="/assets/img/rc/bloom.webp" fetchpriority="high">
-<link rel="preload" as="image" href="/assets/img/rc2/support-585.jpg" imagesrcset="/assets/img/rc2/support-585.jpg 585w, /assets/img/rc2/support.jpg 1170w" imagesizes="30vw">
+<link rel="stylesheet" href="/assets/css/portrait.css">
+<link rel="stylesheet" href="/assets/css/foyer.css">
+<link rel="preload" as="image" href="/assets/img/rc2/support-585.jpg" imagesrcset="/assets/img/rc2/support-585.jpg 585w" imagesizes="30vw">
+<script>
+/* Old gallery links (/#reclaim and friends) and old section anchors land where they used to point, not on the wrong page. */
+(function(){var h=location.hash.slice(1);if(!h)return;var ex={reclaim:1,wealthwithsg:1,'sankalp-shristi-furnishers':1,aureledger:1,archive:1};
+if(ex[h]){location.replace('/projects/#'+h);return}
+var o={about:'/about/',lab:'/about/#now'};if(o[h])location.replace(o[h])})();
+</script>
 <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>
-<body data-tone="light">
-<a class="skip" href="#contents">Skip to project list</a>
-
+<body class="home">
+<a class="skip" href="#work">Skip to the work</a>
 <header class="chrome">
-  <a class="wordmark" href="/" aria-label="sankalpvoid — home"><b>sankalpvoid</b><span>Sankalp Kushwaha</span></a>
+  <div class="brand">
+    <a class="wordmark" href="/" aria-label="sankalpvoid — home"><b>sankalpvoid</b><span>Sankalp Kushwaha</span></a>
+  </div>
   <nav aria-label="Primary">
-    <a href="/projects/" data-open-index>Projects</a>
+    <a href="/projects/" data-open-index>Work</a>
     <a href="/about/">About</a>
+    <a href="/about/#music">Music</a>
     <a href="/contact/">Contact</a>
   </nav>
 </header>
 
-<main>
-  <h1 class="sr-only">sankalpvoid — Sankalp Kushwaha. Featured exhibitions</h1>
-
-  <section class="stage" id="stage" aria-roledescription="carousel" aria-label="Featured exhibitions">
-
-    <!-- 01 RECLAIM -->
-    <article class="slide s-rc is-active" data-slug="reclaim" data-tone="dark" aria-roledescription="slide" aria-label="1 of 5: Reclaim">
-      <div class="sc sc-rc" data-exhibit aria-hidden="true">
-        <img class="rc-art" src="/assets/img/rc/bloom.webp" width="720" height="592" alt="" decoding="async" fetchpriority="high">
-        <div class="rc-veil"></div>
-        <span class="rc-ring r3"></span><span class="rc-ring"></span><span class="rc-ring r2"></span>
-        <div class="rc-screen"><img src="/assets/img/rc2/support-585.jpg" srcset="/assets/img/rc2/support-585.jpg 585w, /assets/img/rc2/support.jpg 1170w" sizes="(min-width:821px) 30vw, 50vw" width="1170" height="2532" alt="" decoding="async"></div>
+<main id="main">
+  <!-- A · identity -->
+  <section class="foyer" aria-labelledby="t" data-portrait-host>
+    <div class="foyer__copy">
+      <p class="mono eyebrow rv">Sankalp Kushwaha · sankalpvoid · Mumbai</p>
+      <h1 id="t" class="rv" style="--i:1">Curious across disciplines. <em>Building across them.</em></h1>
+      <p class="sub rv" style="--i:2">Engineering systems, building products, making noise.</p>
+      <p class="intro rv" style="--i:3">I’m an engineering student at IIT Bombay who builds software and products, and sings and plays guitar. Here is what came out of it, and the person behind it.</p>
+      <div class="foyer__act rv" style="--i:4">
+        <a class="btn btn--solid" href="/projects/">Explore the work <span class="arr" aria-hidden="true">↗</span></a>
+        <nav class="paths" aria-label="More ways in">
+          <a href="/about/">Meet me</a>
+          <a href="/about/#music">Hear the music</a>
+          <a href="/contact/">Say hello</a>
+        </nav>
       </div>
-      <div class="sc-copy" data-copy="rc">
-        <span class="eyebrow mono">01 · Product</span>
-        <h2 class="t">Reclaim</h2>
-        <p class="premise">Support for the moment a craving arrives.</p>
-        <p class="status mono">Live prototype</p>
-      </div>
-      <a class="enter" href="/work/reclaim/" tabindex="-1"><span>Enter</span><i aria-hidden="true">↗</i><span class="sr-only"> the Reclaim exhibition</span></a>
-    </article>
-
-    <!-- 02 WEALTHWITHSG -->
-    <article class="slide s-wsg" data-slug="wealthwithsg" data-tone="dark" aria-roledescription="slide" aria-label="2 of 5: WealthWithSG">
-      <div class="sc sc-wsg" data-exhibit aria-hidden="true">
-        <div class="grid"></div>
-        <div class="chart-env" data-chart-env><svg preserveAspectRatio="none"></svg></div>
-        <div class="shade"></div>
-        <span class="chart-cap">Illustrative data · not market data</span>
-      </div>
-      <div class="sc-copy" data-copy="wsg">
-        <span class="eyebrow mono">02 · Website</span>
-        <h2 class="t">WEALTH<span>WITH</span>SG</h2>
-        <p class="premise">A chart that teaches before the lesson begins.</p>
-        <p class="status mono">Prototype · sample content</p>
-      </div>
-      <a class="enter" href="/work/wealthwithsg/" tabindex="-1"><span>Enter</span><i aria-hidden="true">↗</i><span class="sr-only"> the WealthWithSG exhibition</span></a>
-    </article>
-
-    <!-- 03 SANKALP & SHRISTI FURNISHERS -->
-    <article class="slide s-ssf" data-slug="sankalp-shristi-furnishers" data-tone="light" aria-roledescription="slide" aria-label="3 of 5: Sankalp &amp; Shristi Furnishers">
-      <div class="sc sc-ssf" data-exhibit aria-hidden="true">
-        <div class="ssf-arch"></div>
-        <div class="bed" data-bed><svg preserveAspectRatio="xMidYMid slice"></svg><img class="bed-fallback" data-src="/assets/img/ssf/bed.webp" width="1500" height="1200" alt=""></div>
-        <span class="tag">Studio render · placeholder</span>
-      </div>
-      <div class="sc-copy" data-copy="ssf">
-        <span class="eyebrow mono">03 · Showroom</span>
-        <h2 class="t">Sankalp <em>&amp;</em> Shristi Furnishers</h2>
-        <p class="premise">Bringing the workshop’s craft into a digital showroom.</p>
-        <p class="status mono">Demonstration · studio renders</p>
-      </div>
-      <a class="enter" href="/work/sankalp-shristi-furnishers/" tabindex="-1"><span>Enter</span><i aria-hidden="true">↗</i><span class="sr-only"> the Sankalp &amp; Shristi Furnishers exhibition</span></a>
-    </article>
-
-    <!-- 04 AURELEDGER -->
-    <article class="slide s-al" data-slug="aureledger" data-tone="dark" aria-roledescription="slide" aria-label="4 of 5: Aureledger">
-      <div class="sc sc-al" data-exhibit aria-hidden="true">
-        <div class="al-note" data-note>
-          <img class="paper" data-src="/assets/img/al/note-curl.jpg" data-srcset="/assets/img/al/note-curl-640.jpg 640w, /assets/img/al/note-curl.jpg 1002w" sizes="(min-width:821px) 68vw, 132vw" width="1002" height="598" alt="" decoding="async">
-          <img class="lines" data-src="/assets/img/al/note-lines.jpg" data-srcset="/assets/img/al/note-lines-640.jpg 640w, /assets/img/al/note-lines.jpg 1002w" sizes="(min-width:821px) 68vw, 132vw" width="1002" height="598" alt="" decoding="async">
-          <span class="al-split"></span>
-        </div>
-        <span class="al-veil"></span>
-      </div>
-      <div class="sc-copy" data-copy="al">
-        <span class="eyebrow mono">04 · Product</span>
-        <h2 class="t">Aure<i>ledger</i></h2>
-        <p class="premise">Your money, read from your own mail.</p>
-        <p class="status mono">Working prototype · example data</p>
-      </div>
-      <a class="enter" href="/work/aureledger/" tabindex="-1"><span>Enter</span><i aria-hidden="true">↗</i><span class="sr-only"> the Aureledger exhibition</span></a>
-    </article>
-
-    <!-- 05 EXPERIMENTS -->
-    <article class="slide s-arch" data-slug="archive" data-tone="dark" aria-roledescription="slide" aria-label="5 of 5: Experiments">
-      <div class="sc sc-arch" data-exhibit aria-hidden="true">
-        <div class="strips">
-          <div class="strip s1"><img data-src="/assets/img/exp/cyber-1.jpg" data-srcset="/assets/img/exp/cyber-1-720.jpg 720w, /assets/img/exp/cyber-1.jpg 1440w" sizes="55vw" width="1440" height="900" alt=""><span class="cap">A · scroll → canvas</span></div>
-          <div class="strip s2"><img data-src="/assets/img/exp/parallax-1.jpg" data-srcset="/assets/img/exp/parallax-1-720.jpg 720w, /assets/img/exp/parallax-1.jpg 1440w" sizes="45vw" width="1440" height="900" alt=""><span class="cap">B · pointer → depth</span></div>
-          <div class="strip s3"><img data-src="/assets/img/exp/gsap-1.jpg" data-srcset="/assets/img/exp/gsap-1-720.jpg 720w, /assets/img/exp/gsap-1.jpg 1440w" sizes="35vw" width="1440" height="900" alt=""><span class="cap">C · timeline → rhythm</span></div>
-        </div>
-      </div>
-      <div class="sc-copy" data-copy="arch">
-        <span class="eyebrow mono">05 · Archive</span>
-        <h2 class="t">Experiments</h2>
-        <p class="premise">Three questions about motion.</p>
-        <p class="status mono">3 live studies</p>
-      </div>
-      <a class="enter" href="/archive/" tabindex="-1"><span>Enter</span><i aria-hidden="true">↗</i><span class="sr-only"> the Experiments archive</span></a>
-    </article>
-
-    <div class="controls" role="group" aria-label="Exhibition controls">
-      <div class="controls__nav">
-        <button type="button" class="ctl" data-prev aria-label="Previous exhibition"><span aria-hidden="true">←</span></button>
-        <p class="mono counter" aria-hidden="true"><b data-cur>01</b> / 05</p>
-        <button type="button" class="ctl" data-next aria-label="Next exhibition"><span aria-hidden="true">→</span></button>
-      </div>
-      <ol class="ticks" aria-label="Choose exhibition">
-        <li><button type="button" data-go="0" aria-label="Reclaim" aria-current="true"></button></li>
-        <li><button type="button" data-go="1" aria-label="WealthWithSG"></button></li>
-        <li><button type="button" data-go="2" aria-label="Sankalp &amp; Shristi Furnishers"></button></li>
-        <li><button type="button" data-go="3" aria-label="Aureledger"></button></li>
-        <li><button type="button" data-go="4" aria-label="Experiments"></button></li>
-      </ol>
-      <a class="all" href="/projects/" data-open-index>All projects</a>
-      <p class="hint mono" aria-hidden="true">← → keys · swipe</p>
     </div>
-    <p class="sr-only" aria-live="polite" data-live></p>
+    <figure class="portrait" data-portrait data-photo="">
+      <div class="portrait__frame">
+        <svg class="portrait__sketch" viewBox="0 0 400 500" role="img" aria-label="Illustrative portrait sketch: an abstract head-and-shoulders outline inside rippling contour lines" focusable="false">
+        <defs>
+          <path id="p-open" d="M30 500C30 410 62 372 128 346C150 338 156 326 156 300C118 292 108 250 114 205C120 140 156 96 200 96C244 96 280 140 286 205C292 250 282 292 244 300C244 326 250 338 272 346C338 372 370 410 370 500" pathLength="1"/>
+          <pattern id="p-hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(38)"><line x1="0" y1="0" x2="0" y2="7" stroke="currentColor" stroke-width="1"/></pattern>
+          <clipPath id="p-clip"><path d="M30 500C30 410 62 372 128 346C150 338 156 326 156 300C118 292 108 250 114 205C120 140 156 96 200 96C244 96 280 140 286 205C292 250 282 292 244 300C244 326 250 338 272 346C338 372 370 410 370 500Z"/></clipPath>
+          <clipPath id="p-ringclip"><rect x="-260" y="-80" width="920" height="580"/></clipPath>
+        </defs>
+        <g class="p-rings" clip-path="url(#p-ringclip)"><g class="p-r" style="--d:1.7;--i:0"><use href="#p-open" class="p-ring" style="--o:0.62" transform="translate(200 340) scale(1.100) translate(-200 -340)"/></g><g class="p-r" style="--d:3.4;--i:1"><use href="#p-open" class="p-ring" style="--o:0.56" transform="translate(200 340) scale(1.175) translate(-200 -340)"/></g><g class="p-r" style="--d:5.1;--i:2"><use href="#p-open" class="p-ring" style="--o:0.50" transform="translate(200 340) scale(1.250) translate(-200 -340)"/></g><g class="p-r" style="--d:6.8;--i:3"><use href="#p-open" class="p-ring" style="--o:0.45" transform="translate(200 340) scale(1.325) translate(-200 -340)"/></g><g class="p-r" style="--d:8.5;--i:4"><use href="#p-open" class="p-ring" style="--o:0.39" transform="translate(200 340) scale(1.400) translate(-200 -340)"/></g><g class="p-r" style="--d:10.2;--i:5"><use href="#p-open" class="p-ring" style="--o:0.33" transform="translate(200 340) scale(1.475) translate(-200 -340)"/></g><g class="p-r" style="--d:11.9;--i:6"><use href="#p-open" class="p-ring" style="--o:0.27" transform="translate(200 340) scale(1.550) translate(-200 -340)"/></g><g class="p-r" style="--d:13.6;--i:7"><use href="#p-open" class="p-ring" style="--o:0.21" transform="translate(200 340) scale(1.625) translate(-200 -340)"/></g></g>
+        <path d="M30 500C30 410 62 372 128 346C150 338 156 326 156 300C118 292 108 250 114 205C120 140 156 96 200 96C244 96 280 140 286 205C292 250 282 292 244 300C244 326 250 338 272 346C338 372 370 410 370 500Z" fill="var(--paper-fill,#efeae0)"/>
+        <rect class="p-hatch" x="0" y="80" width="400" height="430" fill="url(#p-hatch)" clip-path="url(#p-clip)"/>
+        <use href="#p-open" class="p-main"/>
+        <g class="p-orbit" transform="rotate(-16 200 250)">
+          <ellipse cx="200" cy="250" rx="228" ry="74" fill="none"/>
+          <circle class="p-dot" cx="200" cy="250" r="7" data-rx="228" data-ry="74" data-cx="200" data-cy="250" data-rot="-16"/>
+        </g>
+      </svg>
+        <img class="portrait__photo" alt="Sankalp Kushwaha" width="1200" height="1500" decoding="async">
+      </div>
+    </figure>
   </section>
 
-  <section class="contents" id="contents" aria-labelledby="contents-h">
-    <h2 id="contents-h" class="mono contents__h">The collection</h2>
-    <ol class="contents__list">
-      <li><a href="/work/reclaim/"><span class="mono">01</span><b>Reclaim</b><em>Product · behaviour change</em><span class="mono">Live prototype</span></a></li>
-      <li><a href="/work/wealthwithsg/"><span class="mono">02</span><b>WealthWithSG</b><em>Website · trading education</em><span class="mono">Sample content</span></a></li>
-      <li><a href="/work/sankalp-shristi-furnishers/"><span class="mono">03</span><b>Sankalp &amp; Shristi Furnishers</b><em>Showroom concept · configurators</em><span class="mono">Demonstration</span></a></li>
-      <li><a href="/work/aureledger/"><span class="mono">04</span><b>Aureledger</b><em>Product · personal finance</em><span class="mono">Working prototype</span></a></li>
-      <li><a href="/archive/"><span class="mono">05</span><b>Experiments</b><em>CyberPunk · Parallax · GSAP Motion</em><span class="mono">3 studies</span></a></li>
-    </ol>
+  <!-- B · selected work -->
+  <section class="work" id="work" aria-labelledby="w-h">
+    <header class="sec-h">
+      <h2 id="w-h" class="rv">Now showing.</h2>
+      <p class="rv" style="--i:1">Five exhibitions, each with its own world. Pick one, or <a class="tlink" href="/projects/">enter the whole collection</a>.</p>
+    </header>
+    <ul class="mosaic">
+      <li class="t t--rc rv"><a href="/work/reclaim/" data-tile>
+        <span class="t__img"><img src="/assets/img/rc2/support-585.jpg" srcset="/assets/img/rc2/support-585.jpg 585w, /assets/img/rc2/support.jpg 1170w" sizes="(min-width:900px) 30vw, 92vw" width="1170" height="2532" alt="Reclaim craving-support screen with four small actions" loading="lazy"></span>
+        <span class="t__cap"><span class="mono">01 · Product</span><b>Reclaim</b><span>Support for the moment a craving arrives.</span><span class="mono st">Live prototype</span></span></a></li>
+      <li class="t t--al rv" style="--i:1"><a href="/work/aureledger/" data-tile>
+        <span class="t__img"><img src="/assets/img/al/note-curl.jpg" srcset="/assets/img/al/note-curl-640.jpg 640w, /assets/img/al/note-curl.jpg 1002w" sizes="(min-width:900px) 62vw, 92vw" width="1002" height="598" alt="A banknote drawn as lines on its left half, from the Aureledger introduction" loading="lazy"></span>
+        <span class="t__cap"><span class="mono">04 · Product</span><b>Aureledger</b><span>Your money, read from your own mail.</span><span class="mono st">Working prototype · example data</span></span></a></li>
+      <li class="t t--ws rv"><a href="/work/wealthwithsg/" data-tile>
+        <span class="t__img"><img src="/assets/img/wsg/hero-4-720.jpg" srcset="/assets/img/wsg/hero-4-720.jpg 720w, /assets/img/wsg/hero-4.jpg 1440w" sizes="(min-width:900px) 31vw, 92vw" width="1440" height="900" alt="Candlestick chart settling out of noise" loading="lazy"></span>
+        <span class="t__cap"><span class="mono">02 · Website</span><b>WealthWithSG</b><span>A chart that teaches before the lesson begins.</span><span class="mono st">Prototype · sample content</span></span></a></li>
+      <li class="t t--ss rv" style="--i:1"><a href="/work/sankalp-shristi-furnishers/" data-tile>
+        <span class="t__img"><img src="/assets/img/ssf/bed-sm.webp" srcset="/assets/img/ssf/bed-sm.webp 800w, /assets/img/ssf/bed.webp 1500w" sizes="(min-width:900px) 31vw, 92vw" width="1500" height="1200" alt="Studio render of a slatted teak bed" loading="lazy"></span>
+        <span class="t__cap"><span class="mono">03 · Showroom</span><b>Sankalp &amp; Shristi Furnishers</b><span>Bringing the workshop’s craft into a digital showroom.</span><span class="mono st">Demonstration · studio renders</span></span></a></li>
+      <li class="t t--ex rv"><a href="/archive/" data-tile>
+        <span class="t__img t__img--strips"><img src="/assets/img/exp/cyber-1-720.jpg" width="720" height="450" alt="" loading="lazy"><img src="/assets/img/exp/parallax-1-720.jpg" width="720" height="450" alt="" loading="lazy"><img src="/assets/img/exp/gsap-1-720.jpg" width="720" height="450" alt="" loading="lazy"></span>
+        <span class="t__cap"><span class="mono">05 · Archive</span><b>Experiments</b><span>Three questions about motion.</span><span class="mono st">3 live studies</span></span></a></li>
+    </ul>
+  </section>
+
+  <!-- C · across disciplines -->
+  <section class="threads" id="orbit" aria-labelledby="th-h">
+    <div class="threads__ring" aria-hidden="true" data-ring>
+      <svg viewBox="0 0 320 320" focusable="false"><circle cx="160" cy="160" r="128" class="r1"/><circle cx="160" cy="160" r="84" class="r2"/><circle cx="160" cy="160" r="4" class="core"/>
+        <g class="dots"><circle class="d" data-i="0" r="7" cx="160.0" cy="32.0"/><circle class="d" data-i="1" r="7" cx="281.7" cy="120.4"/><circle class="d" data-i="2" r="7" cx="235.2" cy="263.6"/><circle class="d" data-i="3" r="7" cx="84.8" cy="263.6"/><circle class="d" data-i="4" r="7" cx="38.3" cy="120.4"/></g></svg>
+    </div>
+    <div class="threads__body">
+      <header class="sec-h">
+        <h2 id="th-h" class="rv">Different disciplines. <em>Same impulse.</em></h2>
+        <p class="rv" style="--i:1">Understand the system, find the interesting edge, build something from it. Here is where each thread shows up.</p>
+      </header>
+      <ol class="threads__list" id="threads">
+        <li data-i="0" class="rv"><span class="mono">01</span><div><h3>Environmental systems</h3><p>Studying Environmental Sciences &amp; Engineering at IIT Bombay. Water, wastewater, modelling, treatment and life-cycle assessment are the interests I’m researching. Not in a project here yet: this is the part I study rather than ship.</p></div></li>
+        <li data-i="1" class="rv"><span class="mono">02</span><div><h3>Product and behaviour</h3><p>Reclaim began as one question: what can an app do in the moment a craving arrives? <a class="tlink" href="/work/reclaim/">See the exhibition</a>.</p></div></li>
+        <li data-i="2" class="rv"><span class="mono">03</span><div><h3>Software and interaction</h3><p>Small studies in scroll, depth and timing, and a showroom where traced lines become a bed. <a class="tlink" href="/archive/">The experiments</a> · <a class="tlink" href="/work/sankalp-shristi-furnishers/">The showroom</a>.</p></div></li>
+        <li data-i="3" class="rv"><span class="mono">04</span><div><h3>Markets and money</h3><p>A trading-education concept where a chart teaches, and a private ledger that builds itself from your own mail. <a class="tlink" href="/work/wealthwithsg/">WealthWithSG</a> · <a class="tlink" href="/work/aureledger/">Aureledger</a>.</p></div></li>
+        <li data-i="4" class="rv"><span class="mono">05</span><div><h3>Music</h3><p>Vocals, guitar and production: the side of me that isn’t building software. <a class="tlink" href="#side-b">Side B</a> is below.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- D · side B -->
+  <section class="sideb" id="side-b" aria-labelledby="sb-h">
+    <div class="sideb__copy">
+      <p class="mono eyebrow rv">Side B</p>
+      <h2 id="sb-h" class="rv" style="--i:1">Vocals. Guitar. <em>Noise.</em></h2>
+      <p class="rv" style="--i:2">Turning questionable ideas into slightly less questionable sounds.</p>
+      <div class="sideb__act rv" style="--i:3">
+        <a class="btn btn--solid" href="/about/#music">Meet the music <span class="arr" aria-hidden="true">↗</span></a>
+        <a class="tlink" href="https://www.youtube.com/@sankalp.mussic" target="_blank" rel="noreferrer">YouTube ↗</a>
+        <a class="tlink" href="https://www.instagram.com/sankalp.singss/" target="_blank" rel="noreferrer">Instagram ↗</a>
+      </div>
+    </div>
+    <div class="sideb__art" aria-hidden="true"><svg class="vinyl" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+  <circle cx="200" cy="200" r="198" class="v-disc"/>
+  <g class="v-grooves" fill="none"><circle cx="200" cy="200" r="78" /><circle cx="200" cy="200" r="87" /><circle cx="200" cy="200" r="96" /><circle cx="200" cy="200" r="105" /><circle cx="200" cy="200" r="114" /><circle cx="200" cy="200" r="123" /><circle cx="200" cy="200" r="132" /><circle cx="200" cy="200" r="141" /><circle cx="200" cy="200" r="150" /><circle cx="200" cy="200" r="159" /><circle cx="200" cy="200" r="168" /><circle cx="200" cy="200" r="177" /><circle cx="200" cy="200" r="186" /><circle cx="200" cy="200" r="195" /></g>
+  <circle cx="200" cy="200" r="62" class="v-label"/>
+  <text x="200" y="180" text-anchor="middle" class="v-t1">SIDE B</text>
+  <text x="200" y="232" text-anchor="middle" class="v-t2">SV / B</text>
+  <circle cx="200" cy="200" r="5" class="v-hole"/>
+</svg><svg class="wave" viewBox="0 0 576 100" aria-hidden="true" focusable="false" preserveAspectRatio="none"><rect x="1" y="20.4" width="4" height="59.3" rx="2"/><rect x="9" y="16.5" width="4" height="67.0" rx="2"/><rect x="17" y="10.8" width="4" height="78.4" rx="2"/><rect x="25" y="12.1" width="4" height="75.9" rx="2"/><rect x="33" y="9.7" width="4" height="80.6" rx="2"/><rect x="41" y="7.4" width="4" height="85.1" rx="2"/><rect x="49" y="9.5" width="4" height="81.0" rx="2"/><rect x="57" y="6.2" width="4" height="87.6" rx="2"/><rect x="65" y="5.1" width="4" height="89.8" rx="2"/><rect x="73" y="4.1" width="4" height="91.7" rx="2"/><rect x="81" y="10.6" width="4" height="78.9" rx="2"/><rect x="89" y="10.2" width="4" height="79.6" rx="2"/><rect x="97" y="13.7" width="4" height="72.6" rx="2"/><rect x="105" y="10.2" width="4" height="79.6" rx="2"/><rect x="113" y="13.7" width="4" height="72.5" rx="2"/><rect x="121" y="21.9" width="4" height="56.2" rx="2"/><rect x="129" y="17.6" width="4" height="64.8" rx="2"/><rect x="137" y="21.2" width="4" height="57.6" rx="2"/><rect x="145" y="27.2" width="4" height="45.5" rx="2"/><rect x="153" y="31.2" width="4" height="37.6" rx="2"/><rect x="161" y="38.6" width="4" height="22.9" rx="2"/><rect x="169" y="36.5" width="4" height="27.1" rx="2"/><rect x="177" y="28.9" width="4" height="42.3" rx="2"/><rect x="185" y="29.3" width="4" height="41.3" rx="2"/><rect x="193" y="25.2" width="4" height="49.5" rx="2"/><rect x="201" y="22.1" width="4" height="55.8" rx="2"/><rect x="209" y="21.4" width="4" height="57.2" rx="2"/><rect x="217" y="15.9" width="4" height="68.1" rx="2"/><rect x="225" y="14.5" width="4" height="70.9" rx="2"/><rect x="233" y="10.1" width="4" height="79.7" rx="2"/><rect x="241" y="12.0" width="4" height="76.0" rx="2"/><rect x="249" y="10.8" width="4" height="78.5" rx="2"/><rect x="257" y="12.0" width="4" height="75.9" rx="2"/><rect x="265" y="11.3" width="4" height="77.4" rx="2"/><rect x="273" y="13.9" width="4" height="72.3" rx="2"/><rect x="281" y="16.6" width="4" height="66.9" rx="2"/><rect x="289" y="12.4" width="4" height="75.2" rx="2"/><rect x="297" y="14.3" width="4" height="71.4" rx="2"/><rect x="305" y="17.6" width="4" height="64.8" rx="2"/><rect x="313" y="20.9" width="4" height="58.3" rx="2"/><rect x="321" y="26.3" width="4" height="47.3" rx="2"/><rect x="329" y="29.4" width="4" height="41.2" rx="2"/><rect x="337" y="31.3" width="4" height="37.3" rx="2"/><rect x="345" y="35.4" width="4" height="29.2" rx="2"/><rect x="353" y="32.1" width="4" height="35.8" rx="2"/><rect x="361" y="36.5" width="4" height="27.1" rx="2"/><rect x="369" y="30.9" width="4" height="38.1" rx="2"/><rect x="377" y="32.9" width="4" height="34.2" rx="2"/><rect x="385" y="26.8" width="4" height="46.4" rx="2"/><rect x="393" y="26.4" width="4" height="47.2" rx="2"/><rect x="401" y="32.1" width="4" height="35.7" rx="2"/><rect x="409" y="29.7" width="4" height="40.6" rx="2"/><rect x="417" y="23.6" width="4" height="52.9" rx="2"/><rect x="425" y="26.8" width="4" height="46.4" rx="2"/><rect x="433" y="22.7" width="4" height="54.7" rx="2"/><rect x="441" y="27.5" width="4" height="45.0" rx="2"/><rect x="449" y="30.4" width="4" height="39.2" rx="2"/><rect x="457" y="26.5" width="4" height="47.1" rx="2"/><rect x="465" y="25.9" width="4" height="48.2" rx="2"/><rect x="473" y="30.7" width="4" height="38.7" rx="2"/><rect x="481" y="32.9" width="4" height="34.2" rx="2"/><rect x="489" y="31.8" width="4" height="36.4" rx="2"/><rect x="497" y="27.6" width="4" height="44.9" rx="2"/><rect x="505" y="30.0" width="4" height="39.9" rx="2"/><rect x="513" y="36.0" width="4" height="28.1" rx="2"/><rect x="521" y="35.7" width="4" height="28.7" rx="2"/><rect x="529" y="37.5" width="4" height="25.0" rx="2"/><rect x="537" y="38.4" width="4" height="23.2" rx="2"/><rect x="545" y="33.0" width="4" height="34.0" rx="2"/><rect x="553" y="38.4" width="4" height="23.3" rx="2"/><rect x="561" y="35.4" width="4" height="29.2" rx="2"/><rect x="569" y="36.1" width="4" height="27.8" rx="2"/></svg></div>
   </section>
 </main>
 
 <footer class="foot">
-  <p class="foot__cta">Building something? <a href="/contact/">Say hello.</a></p>
-  <p class="foot__row"><a href="/about/">About</a><a href="mailto:sankalp.kushwaha.18@gmail.com">Email</a><a href="https://github.com/sankalpvoid" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.instagram.com/sankalp.singss/" target="_blank" rel="noreferrer">Instagram ↗</a><a href="https://www.youtube.com/@sankalp.mussic" target="_blank" rel="noreferrer">YouTube ↗</a></p>
+  <p class="foot__cta">Make something interesting? <a href="/contact/">Say hello.</a></p>
+  <p class="foot__row"><a href="/projects/">Work</a><a href="/about/">About</a><a href="/about/#music">Music</a><a href="mailto:sankalp.kushwaha.18@gmail.com">Email</a><a href="https://github.com/sankalpvoid" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.instagram.com/sankalp.singss/" target="_blank" rel="noreferrer">Instagram ↗</a><a href="https://www.youtube.com/@sankalp.mussic" target="_blank" rel="noreferrer">YouTube ↗</a></p>
   <p class="foot__fine"><span>© 2026 Sankalp Kushwaha</span><span>Mumbai · IIT Bombay</span></p>
 </footer>
 
 <script src="/assets/js/site.js" defer></script>
-<script src="/assets/js/scenes.js" defer></script>
-<script src="/assets/js/home.js" defer></script>
+<script src="/assets/js/portrait.js" defer></script>
+<script src="/assets/js/foyer.js" defer></script>
 </body>
 </html>

@@ -23,6 +23,7 @@
   --page-fg:var(--bone);
 }
 *,*::before,*::after{box-sizing:border-box}
+[id]{scroll-margin-top:76px}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--page-bg)}
 body{margin:0;min-height:100vh;background:var(--page-bg);color:var(--page-fg);font-family:var(--f-ui);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 img,video,svg{display:block;max-width:100%}
@@ -43,14 +44,17 @@ ul,ol{padding:0;list-style:none}
 .chrome>*{pointer-events:auto}
 .chrome-light{--chrome:#f1ece0;--chrome-dim:rgba(241,236,224,.66);--chrome-bg:var(--dark-bg,#0d0d0f)}
 .chrome{transition:color var(--t-ui) linear}
+.brand{display:flex;flex-direction:column;align-items:flex-start;gap:0}
 .wordmark{display:block;text-decoration:none;line-height:1.1;padding:4px 0;margin:-4px 0}
+.crumb{display:inline-block;font-size:.74rem;color:var(--chrome-dim);text-decoration:none;letter-spacing:.02em;padding:6px 0 4px;margin:-2px 0 -4px}
+.crumb:hover{color:var(--chrome);text-decoration:underline;text-underline-offset:.22em}
 .wordmark b{display:block;font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
 .wordmark span{display:block;font-size:.72rem;color:var(--chrome-dim);letter-spacing:.02em;margin-top:2px}
-.chrome nav{display:flex;gap:clamp(14px,2.4vw,30px);align-items:center}
+.chrome nav{display:flex;gap:clamp(8px,2.2vw,28px);align-items:center}
 .chrome nav a,.chrome nav button{font-size:.82rem;font-weight:500;letter-spacing:.01em;text-decoration:none;padding:13px 4px;margin:-5px 0;position:relative}
 .chrome nav a::after,.chrome nav button::after{content:"";position:absolute;left:4px;right:4px;bottom:9px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform var(--t-ui) var(--ease-out)}
 .chrome nav a:hover::after,.chrome nav button:hover::after,.chrome nav [aria-current="page"]::after{transform:scaleX(1)}
-@media (max-width:420px){.wordmark span{display:none}}
+@media (max-width:480px){.wordmark span{display:none}.chrome nav a,.chrome nav button{font-size:.78rem;padding:13px 3px}}
 
 /* ---------- Buttons / links ---------- */
 .btn{display:inline-flex;align-items:center;gap:.6em;min-height:46px;padding:0 22px;border-radius:999px;border:1px solid currentColor;text-decoration:none;font-weight:500;font-size:.92rem;letter-spacing:.01em;transition:background var(--t-micro) linear,color var(--t-micro) linear,transform var(--t-micro) var(--ease-out)}

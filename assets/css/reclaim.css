@@ -124,3 +124,5 @@ h1,h2,h3{font-weight:400;margin:0}
 .next em{font-style:normal;opacity:.8}
 .foot{background:#050507}
 @media (prefers-reduced-motion:reduce){.pin i{animation:none}.orb{transition:none}}
+
+.pin--lab-l em{left:auto;right:22px}

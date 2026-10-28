@@ -56,7 +56,7 @@
       dlg.appendChild(clone);
       const foot = document.createElement('div');
       foot.className = 'index__foot';
-      foot.innerHTML = '<a href="/about/">About</a><a href="/contact/">Contact</a><a href="https://github.com/sankalpvoid" rel="noreferrer" target="_blank">GitHub ↗</a>';
+      foot.innerHTML = '<a href="/">Home</a><a href="/about/">About</a><a href="/about/#music">Music</a><a href="/contact/">Contact</a><a href="https://github.com/sankalpvoid" rel="noreferrer" target="_blank">GitHub ↗</a>';
       dlg.appendChild(foot);
       document.body.appendChild(dlg);
       dlg.querySelector('.index__close').addEventListener('click', () => dlg.close());

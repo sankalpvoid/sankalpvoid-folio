@@ -1,0 +1,45 @@
+/* About: meeting me. Bone page, with Side B as the dark half of the record. */
+.meet{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,6vw,100px);align-items:center;padding:clamp(100px,14vh,150px) var(--gutter) clamp(40px,6vw,80px);max-width:1440px;margin:0 auto}
+.meet h1{font-size:clamp(3.4rem,9vw,8.6rem);line-height:.9;letter-spacing:-.03em;margin:12px 0 26px -.03em}
+.meet h1 em{color:var(--sigt)}
+.meet__text{max-width:46ch}
+.meet__text p+p{margin-top:14px}
+.meet__text .lead{font-family:var(--f-display);font-size:clamp(1.5rem,2.6vw,2.3rem);line-height:1.18;letter-spacing:-.01em}
+.meet__text p:not(.lead){color:rgba(13,13,15,.82)}
+.meet__act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:28px}
+.meet__act .tlink{font-weight:500;padding:12px 0}
+.meet .portrait{justify-self:center;width:min(100%,500px)}
+@media (max-width:900px){.meet{grid-template-columns:1fr;padding-top:96px}.meet .portrait{order:2;width:min(76%,340px);margin:20px auto 0}}
+
+.evidence,.now{max-width:1440px;margin:0 auto;padding:clamp(56px,9vw,130px) var(--gutter) 0}
+.ev{margin-top:clamp(28px,4vw,52px);border-top:1px solid var(--rule)}
+.ev li{display:grid;grid-template-columns:8rem minmax(0,1fr);gap:8px 24px;padding:clamp(20px,2.8vw,36px) 0;border-bottom:1px solid var(--rule)}
+.ev .mono{color:var(--sigt);padding-top:10px}
+.ev h3{font-size:clamp(1.9rem,3.4vw,3rem);line-height:1;letter-spacing:-.015em;margin-bottom:8px}
+.ev p{max-width:56ch;color:rgba(13,13,15,.82)}
+.ev a{display:inline-block;margin-top:10px;font-weight:500;font-size:.95rem}
+@media (max-width:700px){.ev li{grid-template-columns:1fr}.ev .mono{padding-top:0}}
+.nowlist{margin-top:clamp(20px,3vw,40px);border-top:1px solid var(--rule);max-width:52rem}
+.nowlist li{display:grid;grid-template-columns:9rem minmax(0,1fr);gap:6px 20px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.nowlist .st{color:var(--sigt);padding-top:3px}
+@media (max-width:560px){.nowlist li{grid-template-columns:1fr}}
+
+/* music, as a page section */
+.sideb--page{margin-top:clamp(64px,10vw,140px)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tags li{border:1px solid rgba(239,234,224,.45);border-radius:999px;padding:6px 14px;font-size:.88rem}
+.channels{margin-top:26px;max-width:30rem;border-top:1px solid rgba(239,234,224,.22)}
+.channels a{display:grid;grid-template-columns:6.5rem 1fr auto;gap:12px;align-items:baseline;padding:16px 0;border-bottom:1px solid rgba(239,234,224,.22);text-decoration:none;transition:padding var(--t-ui) var(--ease-out)}
+.channels a:hover{padding-left:12px}
+.channels b{font-family:var(--f-display);font-weight:400;font-size:clamp(1.5rem,2.6vw,2.2rem)}
+.channels .mono{opacity:.65}
+.sideb .note{margin-top:18px;font-size:.88rem;opacity:.7}
+
+.onward{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,28px);max-width:1440px;margin:0 auto;padding:clamp(48px,7vw,100px) var(--gutter)}
+.onward__a{display:grid;gap:4px;padding:clamp(24px,3.4vw,48px);border:1px solid var(--rule);text-decoration:none;position:relative;transition:background var(--t-ui),color var(--t-ui)}
+.onward__a b{font-family:var(--f-display);font-weight:400;font-size:clamp(2rem,4.6vw,4.4rem);line-height:.95;letter-spacing:-.02em}
+.onward__a .mono{color:var(--sigt);font-size:.68rem}
+.onward__a i{position:absolute;right:clamp(18px,2.6vw,36px);top:50%;transform:translateY(-50%);font-style:normal;font-size:1.8rem;transition:transform var(--t-ui) var(--ease-out)}
+.onward__a:hover{background:#0d0d0f;color:#efeae0}.onward__a:hover .mono{color:#ff8a63}
+.onward__a:hover i{transform:translate(8px,-50%)}
+@media (max-width:700px){.onward{grid-template-columns:1fr}}

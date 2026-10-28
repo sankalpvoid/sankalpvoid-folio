@@ -4,7 +4,7 @@
 
 *Each project is an exhibition. Together, they reveal the person who made them.*
 
-The home page is a gallery entrance, not an introduction: it opens on a featured project with the maker's name kept small. Pass 2 turned each slide into a full-viewport **scene** built from the project's own material, and the project page opens on the same scene (shared-element transition). The full per-exhibition spec is in `ART-DIRECTION.md`.
+The homepage is now a foyer (see `ART-DIRECTION.md`); the gallery entrance described below lives at `/projects/`. The gallery is an entrance to the work: it opens on a featured project with the maker's name kept small. Pass 2 turned each slide into a full-viewport **scene** built from the project's own material, and the project page opens on the same scene (shared-element transition). The full per-exhibition spec is in `ART-DIRECTION.md`.
 
 | Exhibition | Scene | Signature | Story rhythm |
 |---|---|---|---|

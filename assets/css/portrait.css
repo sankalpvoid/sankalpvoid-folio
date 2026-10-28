@@ -1,0 +1,26 @@
+/* Portrait: an illustrative sketch today, a photograph later. Same box, same crop (4:5). */
+.portrait{position:relative;margin:0;width:100%;aspect-ratio:4/5;--px:0;--py:0;--split:100%;color:#0d0d0f}
+.portrait__frame{position:absolute;inset:0;overflow:visible}
+.portrait__sketch{position:absolute;inset:0;width:100%;height:100%;overflow:visible;display:block}
+.portrait__photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:none}
+.portrait.has-photo .portrait__photo{display:block;clip-path:inset(0 calc(100% - var(--split)) 0 0)}
+.portrait.has-photo .portrait__sketch{opacity:.9}
+.p-ring{fill:none;stroke:currentColor;stroke-width:1;stroke-opacity:var(--o,.4);stroke-linejoin:round}
+.p-r{transform:translate(calc(var(--px) * var(--d) * 1px),calc(var(--py) * var(--d) * .7px))}
+.p-main{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round}
+.p-hatch{color:#0d0d0f;opacity:.5}
+.p-orbit ellipse{stroke:currentColor;stroke-width:1;stroke-opacity:.38;stroke-dasharray:2 6}
+.p-dot{fill:#ff5b2e}
+@media (prefers-reduced-motion:no-preference){
+  .p-ring{stroke-dasharray:1;stroke-dashoffset:1;animation:p-draw 1.5s var(--ease-out) forwards;animation-delay:calc(var(--i) * 75ms + .15s)}
+  .p-main{stroke-dasharray:1;stroke-dashoffset:1;animation:p-draw 1.3s var(--ease-out) forwards}
+  .p-hatch{opacity:0;animation:p-fade 1s var(--ease-out) .7s forwards}
+  .p-orbit{opacity:0;animation:p-fade 1s var(--ease-out) 1.1s forwards}
+  .p-r{transition:transform .5s var(--ease-out)}
+}
+@keyframes p-draw{to{stroke-dashoffset:0}}
+@keyframes p-fade{to{opacity:.5}}
+@media (prefers-reduced-motion:no-preference){.p-orbit{animation-name:p-fade-o}@keyframes p-fade-o{to{opacity:1}}}
+/* dark surface variant */
+.portrait--dark{color:#efeae0}
+.portrait--dark .p-hatch{color:#efeae0}

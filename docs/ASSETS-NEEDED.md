@@ -1,5 +1,30 @@
 # Assets still needed, and things to confirm
 
+## Homepage and About (pass 4): needed from you
+
+- **The portrait.** See `PORTRAIT.md` for the file, the 4:5 crop and how to switch it on. Until then the sketch is a complete placeholder and shows no instructions to visitors.
+- **Recordings, if you want any on the site.** None exist in the repositories. See `MUSIC.md`.
+
+### Personal wording to confirm (exact text, and where it is)
+
+Nothing below is invented, but several lines are my phrasing of facts that already appeared on your earlier site or GitHub profile. Please confirm or change each.
+
+| Wording | Where | Source |
+|---|---|---|
+| "I'm an engineering student at IIT Bombay, studying Environmental Sciences & Engineering, and I live in Mumbai." | About, opening | Earlier site's About ("engineering student at IIT Bombay", "Environmental Sciences & Engineering", "Mumbai, India"). "I live in Mumbai" is my first-person form of "Based in Mumbai". |
+| "Outside coursework I build software and products, make small interaction experiments, and sing and play guitar." | About, opening | Earlier site (software, product, interaction studies, "Vocals. Guitar."). "Sing and play guitar" is my reading of "Vocals. Guitar." |
+| "Different disciplines, same impulse: understand the system, find the interesting edge, build something from it. Most of it starts with curiosity. Some of it eventually becomes useful." | About, opening; homepage, threads (first sentence) | Earlier site, verbatim in two places ("Different disciplines. Same impulse: …" and "Most of it starts with curiosity. Some of it eventually becomes useful."). |
+| "Engineering systems, building products, making noise." | Homepage hero | Earlier site's hero line. |
+| "I'm an engineering student at IIT Bombay who builds software and products, and sings and plays guitar." | Homepage hero | As above. |
+| "Studying Environmental Sciences & Engineering at IIT Bombay. Water, wastewater, modelling, treatment and life-cycle assessment are the interests I'm researching. Not in a project here yet: this is the part I study rather than ship." | Homepage, thread 01 | The research interests are from the earlier site's "Lab". "Not in a project here yet" is my addition and is true of the current projects. |
+| "A pattern in the work" and its one-line observations (a half-recorded day is never counted as clean; a balance is the last one observed; candles are outlines labelled in text; every render is labelled) | About | My editorial observation, built from the four exhibition pages. It is an interpretation of the work, not a statement you have made. Confirm that you are happy to be described this way. |
+| "Right now: Building (Reclaim) · Researching (environmental systems) · Learning (markets and equity) · Experimenting (AI in product interfaces)" | About | Earlier site's "Lab" (RESEARCHING / LEARNING / EXPERIMENTING / BUILDING) and your GitHub profile's NOW line. These may be out of date. |
+| "Turning questionable ideas into slightly less questionable sounds." and "Vocals. Guitar. Noise." | Homepage and About, Side B | Earlier site's Side B, verbatim. |
+| "Make something interesting? Say hello." | Homepage, closing | Earlier site's closing line. |
+
+Everything above is public on the deployed site except this file and the other files in `docs/`, which `.vercelignore` keeps out of the deployment.
+
+
 ## Missing assets (nothing was invented to cover these)
 
 - **Music.** No audio or video of a performance was available in any repository, so the site has no embedded audio (and never autoplays). About links to the YouTube and Instagram channels. To add a listening moment: pick one recording you own, then add a click-to-load embed or a self-hosted `<audio controls preload="none">` to `about/index.html`.
