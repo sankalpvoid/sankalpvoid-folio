@@ -65,7 +65,7 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   ok(await slug()==='reclaim'&&(await p.evaluate(()=>history.length))===hist0&&new URL(p.url()).pathname==='/','peel: cancelled gesture returns to the current project, no history entry');
   await p.waitForFunction(()=>!document.querySelector('.peel.is-on'),null,{timeout:6000}).catch(()=>{});
   ok(await p.evaluate(()=>!document.querySelector('.peel.is-on')),'peel: layer removed after cancel');
-  await p.mouse.move(x,y);await p.mouse.down();for(let i=1;i<=40;i++){await p.mouse.move(Math.max(5,x-i*40),Math.max(5,y-i*26));await p.waitForTimeout(12);}await p.mouse.up();await p.waitForTimeout(1500);
+  await p.mouse.move(x,y);await p.mouse.down();for(let i=1;i<=40;i++){await p.mouse.move(Math.max(5,x-i*40),Math.max(5,y-i*26));await p.waitForTimeout(12);}await p.mouse.up();await p.waitForFunction(()=>document.querySelector('.slide.is-active')?.dataset.slug==='wealthwithsg',null,{timeout:6000});
   ok(await slug()==='wealthwithsg'&&new URL(p.url()).pathname==='/','peel: completed drag brings in the NEXT project (WealthWithSG), not the current project\'s page');
   ok(/Furnishers/.test(await p.textContent('[data-peel]')),'peel: handle now names the following project');
   await p.click('.slide.is-active .enter');await p.waitForURL('**/work/wealthwithsg/');ok(true,'Enter project opens the selected project');
@@ -74,7 +74,7 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await p.goto(U('/#archive'));await p.waitForTimeout(900);ok(/Reclaim/.test(await p.textContent('[data-peel]')),'last project wraps: Experiments hands off to Reclaim');
   await p.goto(U('/#archive'));await p.waitForTimeout(600);
   // click / keyboard alternatives
-  await p.goto(U('/'));await p.waitForTimeout(700);await p.focus('[data-peel]');await p.keyboard.press('Enter');await p.waitForTimeout(1900);
+  await p.goto(U('/'));await p.waitForTimeout(700);await p.focus('[data-peel]');await p.keyboard.press('Enter');await p.waitForFunction(()=>document.querySelector('.slide.is-active')?.dataset.slug==='wealthwithsg',null,{timeout:6000});
   ok(await slug()==='wealthwithsg','peel: keyboard Enter on the handle brings in the next project');
   await p.goto(U('/about/'));await p.waitForURL('**/profile/');ok(true,'/about/ redirects to /profile/');
   await ctx.close();}
