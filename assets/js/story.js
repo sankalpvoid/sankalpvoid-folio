@@ -108,13 +108,15 @@
   const onFocusIn = (e) => {
     const pn = e.target.closest && e.target.closest('.hs__p');
     if (!pn || !active) return;
+    // Native focus can scroll an overflow:hidden pin; the track owns horizontal travel.
+    pin.scrollLeft = 0;
     const r = e.target.getBoundingClientRect(), pr = pin.getBoundingClientRect();
     if (r.left < pr.left || r.right > pr.right) jump(panelStart(pn));
   };
   const hash = () => {
     const id = location.hash.slice(1); if (!id) return;
     const pn = panels.find((p) => p.id === id);
-    if (pn) { if (active) jump(panelStart(pn), false); else pn.scrollIntoView(); }
+    if (pn) { if (active) { pin.scrollLeft = 0; jump(panelStart(pn), false); } else pn.scrollIntoView(); }
   };
 
   const attach = () => {

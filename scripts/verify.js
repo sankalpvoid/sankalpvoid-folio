@@ -9,7 +9,7 @@ const U=(p)=>{
  const [pathname,hash]=p.split('#');
  return BASE+pathname+(SHARE&&!pathname.includes('?')?SHARE:'')+(hash?'#'+hash:'');
 };
-const ORDER=['reclaim','wealthwithsg','sankalp-shristi-furnishers','aureledger','experiments'];
+const ORDER=['reclaim','wealthwithsg','sankalp-shristi-furnishers','aureledger','kaal','experiments'];
 const STORIES=ORDER.map(s=>`/work/${s}/`);
 const routes=['/','/projects/',...STORIES,'/archive/','/profile/','/about/','/contact/'];
 const out=[];const ok=(c,m)=>{const line=(c?'PASS ':'FAIL ')+m;out.push(line);console.log(line);};const skip=(m)=>out.push('SKIP '+m);
@@ -97,7 +97,7 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();
   await p.goto(U(`/work/${s}/`));await p.waitForTimeout(1200);
   const rail=await p.evaluate(()=>{const r=document.querySelector('.rail');const rr=r.getBoundingClientRect();const hero=document.querySelector('.hero').getBoundingClientRect();const pin=document.querySelector('.hs__pin').getBoundingClientRect();return {pos:getComputedStyle(r).position,left:rr.left,w:rr.width,pinR:pin.right,heroR:hero.right,close:r.querySelector('.rail__close').getAttribute('href'),name:r.querySelector('.rail__name').textContent,act:r.querySelector('.rail__act').textContent.trim(),next:r.querySelector('[data-peel]').getAttribute('href'),lab:r.querySelector('.peel-h__lab b').textContent}});
-  const nx=ORDER[(i+1)%5];
+  const nx=ORDER[(i+1)%ORDER.length];
   ok(rail.pos==='fixed'&&rail.pinR<=rail.left+1&&rail.heroR<=rail.left+1,`${s}: rail is fixed and its space is reserved (story right ${Math.round(rail.pinR)} <= rail ${Math.round(rail.left)})`);
   ok(rail.next===`/work/${nx}/`&&rail.close.startsWith('/#'),`${s}: rail close -> gallery, next -> /work/${nx}/ (shared order)`);
   ok(rail.act.length>3&&!/film/i.test(rail.act),`${s}: rail primary action is a real action ("${rail.act}")`);
@@ -203,13 +203,13 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
  {const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();
   await p.goto(U('/work/reclaim/'));await p.waitForTimeout(600);
   await p.click('[data-open-index]');await p.waitForSelector('dialog[open]');
-  ok((await p.$$eval('dialog[open] .idx__item',e=>e.length))===5,'index overlay lists 5 projects');
+  ok((await p.$$eval('dialog[open] .idx__item',e=>e.length))===ORDER.length,'index overlay lists all projects');
   ok(await p.evaluate(()=>document.documentElement.classList.contains('is-locked')),'index: page scroll is locked while open');
   const bgOf=()=>p.evaluate(()=>[...document.querySelectorAll('dialog[open] .idx__bg.is-on')].map(e=>(e.style.backgroundImage.match(/idx\/([^.")]+)/)||[])[1]).join(','));
   await p.hover('dialog[open] .idx__item:nth-child(3) a');await p.waitForTimeout(800);const hov=await bgOf();
   await p.focus('dialog[open] .idx__item:nth-child(4) a');await p.waitForTimeout(800);const foc=await bgOf();
   ok(hov&&foc&&hov!==foc,`index: background follows hover (${hov}) and keyboard focus (${foc})`);
-  for(let i=0;i<30;i++){await p.hover(`dialog[open] .idx__item:nth-child(${1+i%5}) a`);}await p.hover('dialog[open] .idx__item:nth-child(2) a');await p.waitForTimeout(1000);
+  for(let i=0;i<30;i++){await p.hover(`dialog[open] .idx__item:nth-child(${1+i%ORDER.length}) a`);}await p.hover('dialog[open] .idx__item:nth-child(2) a');await p.waitForTimeout(1000);
   ok((await p.evaluate(()=>[...document.querySelectorAll('dialog[open] .idx__bg')].filter(e=>getComputedStyle(e).opacity>0.5).length))===1&&/wealth/.test(await bgOf()),'index: rapid switching settles on the last hover with one background');
   await p.keyboard.press('Escape');await p.waitForTimeout(400);ok(!(await p.$('dialog[open]'))&&await p.evaluate(()=>!document.documentElement.classList.contains('is-locked')),'index: Escape closes and unlocks scroll');
   await ctx.close();
@@ -240,5 +240,13 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await p.evaluate(()=>document.querySelector('[data-live]').click());await p.waitForSelector('iframe');ok(true,'experiments: Try it here loads on demand');
   await p.keyboard.press('Escape');await p.waitForTimeout(300);ok((await p.$$('iframe')).length===0,'experiments: Escape unloads it');
   await p.evaluate(()=>document.querySelector('[data-swap-to="1"]').click());ok(await p.evaluate(()=>!document.querySelector('.swap__i:nth-child(2)').hidden),'experiments: state buttons swap the study image');await ctx.close();}
+ // 11. Kaal: real anchor geometry and labelled artwork controls, no audio.
+ {const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();await p.goto(U('/work/kaal/'));await p.waitForTimeout(700);
+  await p.click('.hero a[href="#presence"]');await p.waitForTimeout(700);
+  const anchor=await p.evaluate(()=>{const r=document.querySelector('#presence').getBoundingClientRect();return {left:r.left,pin:document.querySelector('.hs__pin').scrollLeft}});
+  ok(anchor.pin===0&&anchor.left>=0&&anchor.left<100,'Kaal: Meet the crow lands on Presence without native pin scroll');
+  await p.click('[data-kaal-state-to="listening"]');ok(await p.locator('[data-kaal-state-to="listening"]').getAttribute('aria-pressed')==='true'&&(await p.textContent('[data-kaal-state]')).startsWith('Listening'),'Kaal: original crow artwork switches to the labelled listening state');
+  await p.click('[data-kaal-state-to="thinking"]');ok((await p.textContent('[data-kaal-state]')).startsWith('Attentive'),'Kaal: attentive state switches correctly');
+  ok(await p.locator('audio,video,iframe').count()===0,'Kaal: artwork preview loads no audio, recorder or embedded app');await ctx.close();}
  console.log('\nSUMMARY engine='+ENGINE+' pass='+out.filter(l=>l.startsWith('PASS')).length+' fail='+out.filter(l=>l.startsWith('FAIL')).length+' skip='+out.filter(l=>l.startsWith('SKIP')).length);
  await b.close();process.exitCode=out.some(l=>l.startsWith('FAIL'))?1:0;})().catch(e=>{console.error(e);process.exitCode=1;});

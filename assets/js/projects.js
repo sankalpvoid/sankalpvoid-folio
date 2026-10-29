@@ -1,4 +1,4 @@
-/* One source of truth for the five exhibitions: order, names, routes, preview art and the primary action of each story.
+/* One source of truth for the six exhibitions: order, names, routes, preview art and the primary action of each story.
    The gallery, the project rail, the drag-to-next-project peel and the story hand-offs all read this list.
    Order is the gallery's order; after the last project the collection wraps to the first. */
 (() => {
@@ -7,7 +7,8 @@
     { slug: 'wealthwithsg', gallery: 'wealthwithsg', name: 'WealthWithSG', no: '02', href: '/work/wealthwithsg/', art: '/assets/img/idx/wealthwithsg.jpg', action: { label: 'View live experience', href: 'https://wealthwithsg.vercel.app/', external: true } },
     { slug: 'sankalp-shristi-furnishers', gallery: 'sankalp-shristi-furnishers', name: 'Furnishers', full: 'Sankalp & Shristi Furnishers', no: '03', href: '/work/sankalp-shristi-furnishers/', art: '/assets/img/idx/sankalp-shristi-furnishers.jpg', action: { label: 'View hero prototype', href: 'https://sankalp-shristi-furnishers-git-claude-hero-p-2877d3-sankalpvoid.vercel.app/lab/hero', external: true } },
     { slug: 'aureledger', gallery: 'aureledger', name: 'Aureledger', no: '04', href: '/work/aureledger/', art: '/assets/img/idx/aureledger.jpg', action: { label: 'View live experience', href: 'https://aureledger.vercel.app/', external: true } },
-    { slug: 'experiments', gallery: 'archive', name: 'Experiments', no: '05', href: '/work/experiments/', art: '/assets/img/idx/experiments.jpg', action: { label: 'Try a study', href: '#cyberpunk', external: false } }
+    { slug: 'kaal', gallery: 'kaal', name: 'Kaal', no: '05', href: '/work/kaal/', art: '/assets/img/idx/kaal.jpg', action: { label: 'Explore presence', href: '#presence', external: false } },
+    { slug: 'experiments', gallery: 'archive', name: 'Experiments', no: '06', href: '/work/experiments/', art: '/assets/img/idx/experiments.jpg', action: { label: 'Try a study', href: '#cyberpunk', external: false } }
   ];
   const at = (slug) => list.findIndex((p) => p.slug === slug || p.gallery === slug);
   window.SVProjects = {

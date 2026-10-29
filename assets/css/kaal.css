@@ -1,0 +1,52 @@
+/* Kaal: ink, parchment and aged metal. Shared by gallery and exhibition. */
+.sc-kaal{background:#080909;color:#eae5d9}
+.kaal-orbit{position:absolute;inset:9% -4% 4% 38%;width:66%;height:87%;object-fit:contain;filter:saturate(.45);opacity:.9;transform:translate(calc(var(--px,0)*-12px),calc(var(--py,0)*-8px))}
+.kaal-sc-veil{position:absolute;inset:0;background:linear-gradient(90deg,#080909 3%,rgba(8,9,9,.8) 24%,transparent 66%),linear-gradient(0deg,#080909,transparent 38%)}
+[data-copy="kaal"]{color:#eae5d9;max-width:50rem}
+[data-copy="kaal"] .t{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(7rem,18vw,19rem);font-weight:400;letter-spacing:-.045em;line-height:.8}
+[data-copy="kaal"] .premise{max-width:19ch;font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.8rem,3.2vw,3rem);line-height:1.05}
+.s-kaal.is-entering .kaal-orbit{animation:kaal-emerge 1.5s var(--ease-out) both}
+@keyframes kaal-emerge{from{opacity:0;transform:translateY(6%) scale(1.04)}to{opacity:.9;transform:none}}
+body[data-project="kaal"]{--page-bg:#080909;--page-fg:#eae5d9;--chrome:#eae5d9;--chrome-dim:#bdb6a8;--chrome-bg:#080909;--sig:#d2c29e;--rule:rgba(234,229,217,.2);--f-display:"Instrument Serif",Georgia,serif;background:#080909;color:#eae5d9}
+body[data-project="kaal"] .hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden}
+body[data-project="kaal"] .hero .sc-copy{bottom:8vh}
+body[data-project="kaal"] .hero .actions{margin-top:24px}
+body[data-project="kaal"] .hs{--hs-ac:#d2c29e;--hs-mute:#bdb6a8;--hs-font:"Instrument Serif",Georgia,serif}
+.kaal-land{background:linear-gradient(90deg,rgba(8,9,9,.9),rgba(8,9,9,.35)),url('/assets/img/kaal/landscape.webp') center/cover}
+.kaal-land .pn-big{max-width:11ch}
+.kaal-presence{flex:none;width:min(48vw,660px);display:grid;gap:20px}
+.kaal-window{height:min(43vh,370px);min-height:230px;position:relative;border:1px solid #625c50;background:radial-gradient(ellipse at 70% 0,#343028 0,transparent 65%),#121313}
+.kaal-window::before{content:"";position:absolute;inset:32px 0 auto;height:1px;background:#625c50}
+.kaal-window::after{content:"· · ·";position:absolute;left:16px;top:0;color:#c8bca5;letter-spacing:6px}
+.kaal-sprite{position:absolute;width:256px;height:256px;right:2%;bottom:15%;background:url('/assets/img/kaal/crow-sheet.png') 0 0/1024px 1280px no-repeat;filter:drop-shadow(0 14px 14px #0008)}
+.kaal-perch{position:absolute;left:18%;right:8%;bottom:19%;height:1px;background:#8f8776}
+.kaal-state{position:absolute;left:24px;bottom:26px;color:#eae5d9;font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em}
+.kaal-states{display:flex;gap:8px;flex-wrap:wrap}
+.kaal-states button{border:1px solid #8f8776;border-radius:30px;padding:10px 18px;min-height:44px;color:#eae5d9}
+.kaal-states button[aria-pressed="true"]{background:#eae5d9;color:#080909;border-color:#eae5d9}
+.kaal-presence figcaption{font-size:.8rem;line-height:1.5;color:#bdb6a8;max-width:49ch}
+.kaal-memory{position:relative;isolation:isolate}
+.kaal-tree{position:absolute;right:0;top:0;height:100%;width:62%;object-fit:cover;opacity:.18;z-index:-1;mask-image:linear-gradient(90deg,transparent,#000 70%)}
+.kaal-kinds{width:min(46vw,650px);margin:0;flex:none}
+.kaal-kinds>div{display:grid;grid-template-columns:8rem 1fr;gap:22px;border-top:1px solid var(--rule);padding:17px 0}
+.kaal-kinds dt{font-family:var(--f-display);font-size:1.8rem;line-height:1}
+.kaal-kinds dd{font-size:.95rem;line-height:1.5;color:#c9c3b8;margin:0;max-width:33ch}
+.kaal-path{display:grid;gap:0;flex:none;width:min(44vw,620px);counter-reset:step}
+.kaal-path li{position:relative;border-top:1px solid var(--rule);padding:16px 0 16px 44px;counter-increment:step}
+.kaal-path li::before{content:"0" counter(step);position:absolute;left:0;top:23px;font: .65rem var(--f-mono);color:#d2c29e}
+.kaal-path b{display:block;font:clamp(2rem,3.8vw,4rem)/1 var(--f-display);font-weight:400}
+.kaal-path p{margin:10px 0 0;color:#c9c3b8;max-width:39ch}
+.kaal-choices{gap:clamp(24px,5vw,80px)}
+.kaal-choices .pn-col{width:min(23rem,27vw)}
+.kaal-choices .pn-col h3{font-size:clamp(2rem,3vw,3rem)}
+@media(max-width:860px),(prefers-reduced-motion:reduce){.kaal-presence,.kaal-kinds,.kaal-path{width:100%;margin:32px 0 0}.kaal-choices .pn-col{width:100%;margin-top:32px}.kaal-kinds>div{grid-template-columns:6rem 1fr;gap:14px}.kaal-orbit{left:18%;width:90%;top:9%;height:63%}.kaal-sc-veil{background:linear-gradient(0deg,#080909 3%,rgba(8,9,9,.7) 30%,transparent 75%)}body[data-project="kaal"] .hero .sc-copy{bottom:5vh}.kaal-tree{width:100%}.kaal-land{background-position:72% center}}
+html.no-js .kaal-presence,html.no-js .kaal-kinds,html.no-js .kaal-path{width:100%;max-width:660px;margin:32px 0}
+@media(prefers-reduced-motion:reduce){.s-kaal.is-entering .kaal-orbit{animation:none}}
+
+html.no-js .kaal-states{display:none}
+@media(max-width:860px){
+ .kaal-kinds>div{grid-template-columns:1fr;gap:9px}
+ .kaal-kinds dt{font-size:2rem}
+ body[data-project="kaal"] .hero .sc-copy{bottom:calc(5vh + 54px)}
+}
+@media(max-width:860px){body[data-project="kaal"] .hs__p{scroll-margin-top:80px}}
