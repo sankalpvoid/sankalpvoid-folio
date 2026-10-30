@@ -143,12 +143,12 @@ dialog .idx__bgs{position:fixed}
 @media (prefers-reduced-motion:reduce){.idx__bg{transition:none;transform:none}.idx__t{transition:none}}
 
 /* ---------- Footer ---------- */
-.foot{padding:clamp(48px,8vw,110px) var(--gutter) 32px;border-top:1px solid color-mix(in srgb,currentColor 16%,transparent)}
-.foot__cta{font-family:var(--f-display);font-size:clamp(2.4rem,7.5vw,6.5rem);line-height:.98;letter-spacing:-.015em;max-width:14ch}
+.foot{padding:clamp(36px,5vw,72px) var(--gutter) 28px;border-top:1px solid color-mix(in srgb,currentColor 16%,transparent)}
+.foot__cta{font-family:var(--f-display);font-size:clamp(1.8rem,3.6vw,3.2rem);line-height:1.02;letter-spacing:-.015em;max-width:22ch}
 .foot__cta a{text-decoration:none;border-bottom:1px solid currentColor}
-.foot__row{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:34px;font-size:.95rem}
+.foot__row{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:20px;font-size:.95rem}
 .foot__row a{text-decoration:underline;text-underline-offset:.22em}
-.foot__fine{margin-top:56px;font-size:.78rem;opacity:.76;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}
+.foot__fine{margin-top:32px;font-size:.78rem;opacity:.76;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}
 
 /* ---------- Media states ---------- */
 .media{position:relative;overflow:hidden;background:color-mix(in srgb,currentColor 8%,transparent)}

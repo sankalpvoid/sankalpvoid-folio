@@ -54,31 +54,31 @@
 .strips::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0e0e11 4%,rgba(14,14,17,.55) 34%,rgba(14,14,17,0) 62%);pointer-events:none}
 
 /* ------------------------------------------------------------ copy blocks */
-.sc-copy{position:absolute;left:var(--gutter);bottom:clamp(104px,15vh,150px);z-index:4;max-width:min(56rem,calc(100% - 2 * var(--gutter)));color:var(--fg)}
+.sc-copy{position:absolute;left:var(--gutter);bottom:clamp(104px,15vh,150px);z-index:4;max-width:min(78rem,calc(100% - 2 * var(--gutter)));color:var(--fg)}
 .sc-copy .eyebrow{display:block;margin-bottom:10px;opacity:.78}
-.sc-copy .t{font-weight:400;margin:0;line-height:.86}
+.sc-copy .t{font-weight:400;margin:0;line-height:.86;overflow-wrap:normal;word-break:normal;hyphens:none}
 .sc-copy .premise{margin-top:18px;max-width:30ch;font-size:clamp(1.02rem,1.5vw,1.22rem);line-height:1.38}
 .sc-copy .status{margin-top:16px;opacity:.78;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
 .sc-copy .status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sig);flex:none}
 
 /* Reclaim */
 [data-copy="rc"]{--fg:#f3eeff}
-[data-copy="rc"] .t{font-family:var(--f-display);letter-spacing:.02em;font-size:clamp(5.2rem,13.2vw,13rem);line-height:.8;margin-left:-.03em}
+[data-copy="rc"] .t{font-family:var(--f-display);letter-spacing:-.02em;font-size:clamp(4rem,min(11.2vw,21vh),11rem);line-height:.84;margin-left:-.03em}
 [data-copy="rc"] .eyebrow{color:#f4a67f}
 [data-copy="rc"] .premise{font-family:var(--f-display);font-size:clamp(1.25rem,2vw,1.8rem);line-height:1.15;max-width:19ch}
 /* WealthWithSG */
 [data-copy="wsg"]{--fg:#f1ece0}
-[data-copy="wsg"] .t{font-family:var(--f-display);font-weight:500;font-size:clamp(2.5rem,9.4vw,9rem);letter-spacing:.015em;line-height:.9}
+[data-copy="wsg"] .t{font-family:var(--f-display);font-weight:500;font-size:clamp(2.4rem,min(8.2vw,16vh),8rem);letter-spacing:.01em;line-height:.9}
 [data-copy="wsg"] .t span{color:#c8a45c}
 [data-copy="wsg"] .eyebrow{color:#c8a45c}
 /* Furnishers */
 [data-copy="ssf"]{--fg:#1c1711}
-[data-copy="ssf"] .t{font-family:var(--f-display);font-style:italic;font-size:clamp(2.6rem,6.2vw,5.8rem);line-height:.94;letter-spacing:-.02em;max-width:11em}
+[data-copy="ssf"] .t{font-family:var(--f-display);font-style:italic;font-size:clamp(2.4rem,min(5.2vw,11vh),5rem);line-height:.98;letter-spacing:-.02em;max-width:14em}
 [data-copy="ssf"] .t em{font-style:normal;color:#7a5416}
 [data-copy="ssf"] .eyebrow{color:#7a5416}
 /* Experiments */
 [data-copy="arch"]{--fg:#efeae0}
-[data-copy="arch"] .t{font-family:var(--f-display);font-size:clamp(3.4rem,11vw,10.4rem)}
+[data-copy="arch"] .t{font-family:var(--f-display);font-size:clamp(3rem,min(9.4vw,18vh),9rem)}
 [data-copy="arch"] .eyebrow{color:#ff7a52}
 
 /* ------------------------------------------------------------ phones */
@@ -87,10 +87,10 @@
   .rc-veil{background:linear-gradient(0deg,#050507 40%,rgba(5,5,7,.55) 56%,rgba(5,5,7,0) 72%)}
   .rc-ring{--rx:50%;--ry:25%;--rs:min(100vw,46vh)}
   .rc-screen{--rx:50%;--sy:10vh;width:min(44vw,176px)}
-  [data-copy="rc"] .t{font-size:clamp(5rem,27vw,8.6rem)}
+  [data-copy="rc"] .t{font-size:clamp(3.6rem,21vw,6.6rem)!important}
   [data-copy="rc"] .premise{max-width:17ch}
   .sc-wsg .shade{background:linear-gradient(0deg,rgba(8,9,11,.92) 12%,rgba(8,9,11,.55) 40%,rgba(8,9,11,.1) 62%,rgba(8,9,11,.5) 100%)}
-  [data-copy="wsg"] .t{font-size:clamp(2.3rem,11.4vw,4.4rem)}
+  [data-copy="wsg"] .t{font-size:clamp(2.1rem,10.4vw,4.2rem)!important}
   .bed{height:auto;width:170%;right:auto;left:-38.5%;top:7vh;-webkit-mask-image:linear-gradient(180deg,#000 66%,transparent 100%);mask-image:linear-gradient(180deg,#000 66%,transparent 100%)}
   .ssf-arch{-webkit-mask-image:linear-gradient(0deg,#000 10%,transparent 70%);mask-image:linear-gradient(0deg,#000 10%,transparent 70%)}
   [data-copy="ssf"] .t{font-size:clamp(2.3rem,10vw,3.6rem)}
@@ -99,7 +99,7 @@
   .strips::after{background:linear-gradient(0deg,#0e0e11 2%,rgba(14,14,17,0) 40%)}
   .strip .cap{top:10px;left:10px}
   .strip:first-child .cap{top:84px}
-  [data-copy="arch"] .t{font-size:clamp(3.2rem,18vw,6.4rem)}
+  [data-copy="arch"] .t{font-size:clamp(2.6rem,13.4vw,5rem)!important}
 }
 @media (max-height:560px) and (orientation:landscape){.sc-copy .premise{display:none}[data-copy="rc"] .t{font-size:clamp(3rem,11vw,6rem)}}
 @media (prefers-reduced-motion:reduce){.rc-ring{animation:none;transform:translate(-50%,-50%) scale(.95)}}
