@@ -32,7 +32,7 @@ body[data-project="kaal"] .hs{--hs-ac:#d2c29e;--hs-mute:#bdb6a8;--hs-font:var(--
 .kaal-memory{position:relative;isolation:isolate}
 .kaal-tree{position:absolute;right:0;top:0;height:100%;width:62%;object-fit:cover;opacity:.18;z-index:-1;mask-image:linear-gradient(90deg,transparent,#000 70%)}
 .kaal-kinds{width:min(46vw,650px);margin:0;flex:none}
-.kaal-kinds>div{display:grid;grid-template-columns:8rem 1fr;gap:22px;border-top:1px solid var(--rule);padding:17px 0}
+.kaal-kinds>div{display:grid;grid-template-columns:11rem 1fr;gap:22px;border-top:1px solid var(--rule);padding:17px 0}
 .kaal-kinds dt{font-family:var(--f-display);font-size:1.8rem;line-height:1}
 .kaal-kinds dd{font-size:.95rem;line-height:1.5;color:#c9c3b8;margin:0;max-width:33ch}
 .kaal-path{display:grid;gap:0;flex:none;width:min(44vw,620px);counter-reset:step}
