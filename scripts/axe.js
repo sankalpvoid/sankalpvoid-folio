@@ -12,6 +12,8 @@ for(const [w,h] of [[1440,900],[390,844]]){const ctx=await b.newContext({viewpor
   const res=await run(p);const f=fmt(res);if(f!=='none')bad++;console.log(w+'px',r,'violations:',f);
   /* each scene of a story */
   if(w>860&&r.startsWith('/work/')){const n=await p.evaluate(()=>HS.panels.length);for(let i=0;i<n;i++){await p.evaluate(i=>HS.scrollToX(Math.max(0,HS.panels[i].__start-40),false),i);await p.waitForTimeout(500);const rs=await run(p);const g=fmt(rs);if(g!=='none')bad++;console.log('   scene',i+1,g);}}
+  if(r==='/'){for(let i=0;i<5;i++){await p.click('[data-next]');await p.waitForTimeout(1800);const g=fmt(await run(p));if(g!=='none')bad++;console.log('   gallery slide',i+2,g);}}
+  if(r==='/projects/'&&w>800){await p.hover('.idx__item:nth-child(3) .idx__t');await p.waitForTimeout(900);const g=fmt(await run(p));if(g!=='none')bad++;console.log('   index hover state',g);await p.focus('.idx__item:nth-child(5) a');await p.waitForTimeout(700);const g2=fmt(await run(p));if(g2!=='none')bad++;console.log('   index focus state',g2);}
   if(r==='/profile/'){for(const t of [2,5,8,10.5]){await p.evaluate(t=>scrollTo(0,t*innerHeight),t);await p.waitForTimeout(1800);const g=fmt(await run(p));if(g!=='none')bad++;console.log('   profile scene @',t,g);}}
   if(r==='/archive/'){await p.click('[data-listbtn]');await p.waitForTimeout(300);const g=fmt(await run(p));if(g!=='none')bad++;console.log('   archive list view',g);}
   if(r==='/work/reclaim/'){await p.evaluate(()=>scrollTo(0,0));await p.click('[data-open-index]');await p.waitForSelector('dialog[open]');await p.waitForTimeout(900);const g=fmt(await run(p));if(g!=='none')bad++;console.log('   index overlay',g);}
