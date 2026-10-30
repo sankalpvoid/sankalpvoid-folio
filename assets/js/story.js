@@ -20,7 +20,7 @@
   const subs = [];                                       /* [panel, fn(localProgress, x)] */
   let travel = 0, vw = innerWidth, vh = innerHeight, raf = 0, active = false, curIdx = -1, ro = null;
   let x = 0, target = 0, last = 0, boost = 0;
-  let nav = null, bar = null, count = null, railCount = null;
+  let nav = null, chap = null;
 
   const top = () => hs.getBoundingClientRect().top + scrollY;
   const yOf = (px) => top() + clamp(px, 0, travel) * K;
@@ -35,13 +35,16 @@
 
   const buildNav = () => {
     nav = document.createElement('nav');
-    nav.className = 'hs__nav';
-    nav.setAttribute('aria-label', 'Scenes in this project');
-    nav.innerHTML = '<ol>' + panels.map((p, i) => `<li><button type="button" data-go="${i}"><span class="mono">${String(i + 1).padStart(2, '0')}</span><span class="hs__t">${p.dataset.title || 'Scene ' + (i + 1)}</span></button></li>`).join('') + '</ol><span class="hs__bar" aria-hidden="true"><i></i></span><span class="hs__count mono" aria-hidden="true"></span>';
-    pin.appendChild(nav);
-    bar = nav.querySelector('.hs__bar i');
-    count = nav.querySelector('.hs__count');
-    nav.addEventListener('click', (e) => { const b = e.target.closest('[data-go]'); if (b) jump(panelStart(panels[+b.dataset.go])); });
+    nav.className = 'hs__nav'; nav.id = 'hs-chapters';
+    nav.setAttribute('aria-label', 'Chapters');
+    nav.innerHTML = '<ol>' + panels.map((p, i) => `<li><button type="button" data-go="${i}">${p.dataset.title || 'Scene ' + (i + 1)}</button></li>`).join('') + '</ol>';
+    document.body.appendChild(nav);
+    chap = document.querySelector('[data-chapters]');
+    const setOpen = (on) => { nav.classList.toggle('is-open', on); if (chap) chap.setAttribute('aria-expanded', String(on)); };
+    if (chap) { chap.hidden = false; chap.setAttribute('aria-controls', 'hs-chapters'); chap.addEventListener('click', () => setOpen(!nav.classList.contains('is-open'))); }
+    nav.addEventListener('click', (e) => { const b = e.target.closest('[data-go]'); if (b) { jump(panelStart(panels[+b.dataset.go])); setOpen(false); } });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('is-open')) { setOpen(false); chap && chap.focus(); } });
+    document.addEventListener('pointerdown', (e) => { if (nav.classList.contains('is-open') && !nav.contains(e.target) && !(chap && chap.contains(e.target))) setOpen(false); });
   };
 
   const measure = () => {
@@ -67,16 +70,11 @@
     if (!active) return;
     track.style.transform = `translate3d(${(-x).toFixed(1)}px,0,0)`;
     const p = travel ? x / travel : 0;
-    if (bar) bar.style.transform = `scaleX(${p.toFixed(4)})`;
-    document.documentElement.style.setProperty('--hsp', p.toFixed(4));
     let idx = 0;
     panels.forEach((pn, i) => { if (pn.__start <= x + vw * 0.42) idx = i; });
     if (idx !== curIdx) {
       curIdx = idx;
       nav.querySelectorAll('[data-go]').forEach((b, i) => (i === idx ? b.setAttribute('aria-current', 'true') : b.removeAttribute('aria-current')));
-      const txt = `${String(idx + 1).padStart(2, '0')} / ${String(panels.length).padStart(2, '0')}`;
-      count.textContent = txt;
-      if (railCount) railCount.textContent = String(idx + 1).padStart(2, '0');
       hs.dataset.scene = String(idx + 1);
     }
     panels.forEach((pn) => {
@@ -124,8 +122,7 @@
     active = true;
     hs.classList.add('is-hs');
     if (!nav) buildNav();
-    railCount = document.querySelector('[data-rail-count]');
-    nav.hidden = false;
+    if (chap) chap.hidden = false;
     measure.first = true;
     measure();
     addEventListener('scroll', onScroll, { passive: true });
@@ -146,7 +143,8 @@
     hs.classList.remove('is-hs');
     hs.style.height = ''; track.style.transform = '';
     panels.forEach((p) => { const h = p.querySelector('.hold'); if (h) h.style.transform = ''; });
-    if (nav) nav.hidden = true;
+    if (nav) nav.classList.remove('is-open');
+    if (chap) chap.hidden = true;
     curIdx = -1;
   };
   const sync = () => (flat.matches ? detach() : attach());

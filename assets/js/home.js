@@ -3,7 +3,6 @@
   const stage = document.getElementById('stage');
   if (!stage) return;
   const slides = [...stage.querySelectorAll('.slide')];
-  const ticks = [...stage.querySelectorAll('[data-go]')];
   const cur = stage.querySelector('[data-cur]');
   const live = stage.querySelector('[data-live]');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
@@ -76,7 +75,7 @@
     slides.forEach((s, i) => {
       s.classList.toggle('is-active', i === index);
       s.setAttribute('aria-hidden', i === index ? 'false' : 'true');
-      s.querySelector('.enter').tabIndex = i === index ? 0 : -1;
+      s.querySelectorAll('.enter,[data-enter]').forEach((a) => { a.tabIndex = i === index ? 0 : -1; });
     });
     if (prev !== slide && !reduce.matches && !instant) {
       prev.classList.add('is-leaving');
@@ -89,33 +88,52 @@
       timer = setTimeout(done, 1500);
     }
     document.body.dataset.tone = slide.dataset.tone;
-    ticks.forEach((t, i) => (i === index ? t.setAttribute('aria-current', 'true') : t.removeAttribute('aria-current')));
     if (cur) cur.textContent = String(index + 1).padStart(2, '0');
     if (live) live.textContent = slide.getAttribute('aria-label');
     nameActive();
-    labelPeel();
     try { history.replaceState(null, '', index === 0 ? location.pathname : '#' + slugs[index]); } catch {}
     hydrateAround(index);
   };
   const go = (n, dir) => { if (busy && settle) settle(); if (n !== index) apply(n, dir ?? (n > index ? 1 : -1)); };
   const step = (d, instant) => { if (busy && settle) settle(); apply(index + d, d, instant); };
 
-  /* the corner handle moves to the NEXT exhibition (shared order in projects.js; wraps after the last). "Enter project" is a separate action. */
-  const peelBtn = stage.querySelector('[data-peel]');
-  const nextOf = () => window.SVProjects.next(slugs[index]);
-  const labelPeel = () => { if (!peelBtn || !window.SVProjects) return; const n = nextOf(); peelBtn.querySelector('b').textContent = n.name; peelBtn.setAttribute('aria-label', `Next exhibition: ${n.name}. Drag up and to the left, or press, to bring it in.`); };
-  if (peelBtn && window.SVPeel && window.SVProjects) {
-    SVPeel.attach(peelBtn, {
-      target: () => { const n = nextOf(); return { name: n.name, art: n.art, href: n.href }; },
-      page: () => slides[index],
-      commit: () => { step(1, true); }
-    });
-    labelPeel();
-  }
+  /* ---- entry to the CURRENT project ----
+     Click / tap / Enter on the title or the Enter action runs the lens transition by itself; a deliberate hold on the artwork does the same
+     under the finger (lens.js). Arrows change which project is selected; nothing here ever moves to the next project by itself. */
+  const proj = () => window.SVProjects && window.SVProjects.get(slugs[index]);
+  const enterNow = (x, y) => {
+    const p = proj(); if (!p || !window.SVLens) return false;
+    SVLens.go({ art: p.art, href: p.href, mode: 'host', host: slides[index], x, y });
+    return true;
+  };
+  stage.addEventListener('click', (e) => {
+    const a = e.target.closest('a[data-enter], a.enter');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0) return;
+    if (!a.closest('.slide.is-active')) return;
+    if (window.SVLens && !reduce.matches) { e.preventDefault(); const r = a.getBoundingClientRect(); enterNow(e.clientX || r.left + r.width / 2, e.clientY || r.top + r.height / 2); }
+  });
+  let holdCtl = null, hx = 0, hy = 0, hid = null;
+  const stopHold = () => { if (holdCtl) { holdCtl.cancel(); holdCtl = null; } hid = null; };
+  stage.addEventListener('pointerdown', (e) => {
+    if (e.button > 0 || !e.isPrimary || reduce.matches || !window.SVLens || SVLens.busy) return;
+    if (e.target.closest('a,button,.controls,.chrome')) return;
+    const p = proj(); if (!p) return;
+    hx = e.clientX; hy = e.clientY; hid = e.pointerId;
+    holdCtl = SVLens.hold({ art: p.art, href: p.href, mode: 'host', host: slides[index], x: hx, y: hy });
+  });
+  stage.addEventListener('pointermove', (e) => {
+    if (!holdCtl || e.pointerId !== hid) return;
+    if (e.pointerType === 'mouse' && e.buttons === 0) { stopHold(); return; }
+    if (Math.hypot(e.clientX - hx, e.clientY - hy) > 14) { stopHold(); return; }   /* a swipe, not a hold */
+    holdCtl.move(e.clientX, e.clientY);
+  });
+  ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((t) => stage.addEventListener(t, stopHold));
+  addEventListener('blur', stopHold);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stopHold(); });
+  stage.addEventListener('contextmenu', (e) => { if (holdCtl) e.preventDefault(); });
 
   stage.querySelector('[data-next]').addEventListener('click', () => step(1));
   stage.querySelector('[data-prev]').addEventListener('click', () => step(-1));
-  ticks.forEach((t) => t.addEventListener('click', () => go(+t.dataset.go)));
 
   /* keyboard (skipped while the project index is open) */
   document.addEventListener('keydown', (e) => {
@@ -157,7 +175,7 @@
   };
   window.addEventListener('hashchange', fromHash);
   window.addEventListener('pageshow', (e) => { if (e.persisted) nameActive(); });
-  slides.forEach((s, i) => { s.setAttribute('aria-hidden', i === 0 ? 'false' : 'true'); if (i) s.querySelector('.enter').tabIndex = -1; else s.querySelector('.enter').tabIndex = 0; });
+  slides.forEach((s, i) => { s.setAttribute('aria-hidden', i === 0 ? 'false' : 'true'); s.querySelectorAll('.enter,[data-enter]').forEach((a) => { a.tabIndex = i === 0 ? 0 : -1; }); });
   document.body.dataset.tone = slides[0].dataset.tone;
   fromHash();
   nameActive();

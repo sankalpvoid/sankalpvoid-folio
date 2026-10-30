@@ -4,7 +4,7 @@
   --chrome:#efe4d2;--chrome-dim:rgba(239,228,210,.7);--chrome-bg:#191410;--dark-bg:#191410;
   --ember:#ff985f;--mute:#b5a38c;--rule:rgba(239,228,210,.2);--leather:#30261e;
   --btn-bg:#efe4d2;--btn-fg:#191410;--focus:#ffc9a0;
-  --f-serif:"Instrument Serif",Georgia,serif;--f-ui:"Hanken Grotesk",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace;
+  
 }
 body{font-family:var(--f-ui);font-size:clamp(1rem,.9vw + .6rem,1.08rem)}
 h1,h2,h3{font-weight:400;margin:0;font-family:var(--f-serif)}
@@ -37,7 +37,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 input[type=range]:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
 
 /* ---- story panels ---- */
-.hs{--hs-bg:#191410;--hs-fg:#efe4d2;--hs-ac:#ff985f;--hs-mute:#b5a38c;--hs-rule:rgba(239,228,210,.22);--hs-font:"Instrument Serif",Georgia,serif}
+.hs{--hs-bg:#191410;--hs-fg:#efe4d2;--hs-ac:#ff985f;--hs-mute:#b5a38c;--hs-rule:rgba(239,228,210,.22);--hs-font:var(--f-display)}
 .hs .pn-big{font-weight:400}
 .al-hold{display:flex;align-items:center;gap:clamp(24px,3vw,56px);width:100%;height:100%}
 .seq__txt{flex:none;width:min(24rem,28vw);display:grid;gap:12px;align-content:center}

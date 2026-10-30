@@ -25,6 +25,21 @@
   const cur = { x: 0, y: 0 }, tgt = { x: 0, y: 0 }, vel = { x: 0, y: 0 };
   const tilt = { rx: 0, ry: 0, sk: 0 };
   let raf = 0, last = 0, dragging = false, coasting = false, prev = { x: 0, y: 0 };
+  /* local lens: pressing the field swells the fragments around the pointer and pushes their neighbours away; it relaxes on release.
+     It is DOM transforms on the fragments only (no title, header or control is touched) and is removed completely at rest. */
+  const tiles = [...host.querySelectorAll('.ar__t')].map((el) => ({ el, on: false }));
+  const lens = { x: 0, y: 0, tx: 0, ty: 0, s: 0, press: false };
+  const paintLens = () => {
+    const R = Math.max(240, Math.min(vw, vh) * 0.42);
+    tiles.forEach((t) => {
+      if (lens.s < 0.004) { if (t.on) { t.el.style.transform = ''; t.on = false; } return; }
+      const r = t.el.getBoundingClientRect(); const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      if (r.right < -R || r.left > vw + R || r.bottom < -R || r.top > vh + R) { if (t.on) { t.el.style.transform = ''; t.on = false; } return; }
+      const dx = cx - lens.x, dy = cy - lens.y, d = Math.hypot(dx, dy) || 1, f = Math.exp(-Math.pow(d / R, 2) * 1.3) * lens.s;
+      t.on = true;
+      t.el.style.transform = `translate3d(${((dx / d) * f * 46).toFixed(2)}px,${((dy / d) * f * 46).toFixed(2)}px,0) scale(${(1 + f * 0.2).toFixed(3)})`;
+    });
+  };
 
   const scaleFor = () => clamp(innerWidth / 1300, 0.62, 1);
   const limits = () => ({ x: Math.max(0, (CW * s - vw) / 2 + PAD), y: Math.max(0, (CH * s - vh) / 2 + PAD) });
@@ -48,7 +63,9 @@
   const frame = (now) => {
     raf = 0;
     const dt = Math.min(0.05, (now - last) / 1000 || 0.016); last = now;
-    if (reduce.matches) { cur.x = tgt.x; cur.y = tgt.y; vel.x = vel.y = 0; coasting = false; tilt.rx = tilt.ry = tilt.sk = 0; paint(); return; }
+    if (reduce.matches) { cur.x = tgt.x; cur.y = tgt.y; vel.x = vel.y = 0; coasting = false; tilt.rx = tilt.ry = tilt.sk = 0; lens.s = 0; paint(); paintLens(); return; }
+    const kl = 1 - Math.exp(-dt / (lens.press ? 0.11 : 0.2)); lens.s += ((lens.press ? 1 : 0) - lens.s) * kl; if (!lens.press && lens.s < 0.004) lens.s = 0;
+    lens.x += (lens.tx - lens.x) * (1 - Math.exp(-dt / 0.06)); lens.y += (lens.ty - lens.y) * (1 - Math.exp(-dt / 0.06));
     if (coasting) {
       tgt.x += vel.x * dt; tgt.y += vel.y * dt;
       const f = Math.exp(-dt / 0.55); vel.x *= f; vel.y *= f;
@@ -67,9 +84,9 @@
     /* Stop once the remaining movement is subpixel and rendered speed is
        imperceptible. Do not wait for a tilt accumulator driven by that same
        residual velocity to independently converge (frame cadence varies). */
-    const still = !dragging && !coasting && Math.hypot(tgt.x - cur.x, tgt.y - cur.y) < 0.15 && Math.hypot(rvx, rvy) < 2;
-    if (still) { cur.x = tgt.x; cur.y = tgt.y; prev = { x: cur.x, y: cur.y }; vel.x = vel.y = 0; tilt.rx = tilt.ry = tilt.sk = 0; paint(); return; }
-    paint();
+    const still = !dragging && !coasting && Math.hypot(tgt.x - cur.x, tgt.y - cur.y) < 0.15 && Math.hypot(rvx, rvy) < 2 && lens.s === 0;
+    if (still) { cur.x = tgt.x; cur.y = tgt.y; prev = { x: cur.x, y: cur.y }; vel.x = vel.y = 0; tilt.rx = tilt.ry = tilt.sk = 0; paint(); paintLens(); return; }
+    paint(); paintLens();
     raf = requestAnimationFrame(frame);
   };
   const go = () => { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } };
@@ -82,6 +99,7 @@
   view.addEventListener('pointerdown', (e) => {
     if (e.button > 0 || !e.isPrimary) return;
     coasting = false; vel.x = vel.y = 0; tgt.x = cur.x; tgt.y = cur.y;
+    if (!reduce.matches) { lens.press = true; lens.x = lens.tx = e.clientX; lens.y = lens.ty = e.clientY; go(); }
     down = { id: e.pointerId, x: e.clientX, y: e.clientY, px: tgt.x, py: tgt.y };
     samples = [{ x: e.clientX, y: e.clientY, t: performance.now() }];
     dragging = false;
@@ -100,12 +118,14 @@
     }
     const now = performance.now(); samples.push({ x: e.clientX, y: e.clientY, t: now });
     while (samples.length > 2 && now - samples[0].t > 90) samples.shift();
+    lens.tx = e.clientX; lens.ty = e.clientY;
     tgt.x = down.px + dx; tgt.y = down.py + dy; clampT(); go();
     e.preventDefault();
   });
   const release = (e, cancelled) => {
     if (!down || (e && e.pointerId !== down.id)) return;
     const pointerId = down.id;
+    lens.press = false; go();
     const was = dragging; down = null; dragging = false;
     // A release outside the window may be inferred from buttons===0 instead of
     // pointerup. Explicitly relinquish capture before the next control press.

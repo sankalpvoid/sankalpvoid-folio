@@ -96,6 +96,7 @@
     let k = -1; PLUCKS.forEach((p, j) => { if (t >= p) k = j; });
     if (k >= 0) { A = Math.max(A, 4 + 58 * Math.exp(-3.4 * ((t - PLUCKS[k]) / 0.32))); phase = t * 40; }
     drawString(A, phase);
+    words.forEach((w, i) => { const pk = PLUCKS[i]; const pulse = pk !== undefined && t >= pk ? Math.exp(-4.2 * ((t - pk) / 0.32)) : 0; w.style.setProperty('--ws', (1 + 0.045 * pulse).toFixed(4)); });
     words.forEach((w, i) => w.style.setProperty('--wy', (disp(wordX[i] || 0.5, A, phase) / 200 * stringH * 0.7 * win(t, 9.9, 10.1)).toFixed(1) + 'px'));
   };
 

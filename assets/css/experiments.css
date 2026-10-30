@@ -1,6 +1,6 @@
 /* Experiments: three motion studies as a horizontal story. */
 :root{--page-bg:#0e0e11;--page-fg:#efeae0;--chrome:#efeae0;--chrome-dim:rgba(239,234,224,.68);--chrome-bg:#0e0e11;--rule:rgba(239,234,224,.2);--focus:#ff8a63}
-.hs{--hs-bg:#0e0e11;--hs-fg:#efeae0;--hs-ac:#ff8a63;--hs-mute:#b9b2a3;--hs-rule:rgba(239,234,224,.22);--hs-font:"Instrument Serif",Georgia,serif}
+.hs{--hs-bg:#0e0e11;--hs-fg:#efeae0;--hs-ac:#ff8a63;--hs-mute:#b9b2a3;--hs-rule:rgba(239,234,224,.22);--hs-font:var(--f-display)}
 .hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;--fg:#efeae0}
 .hero .jump{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px}
 .hero .jump a{display:inline-flex;gap:8px;align-items:baseline;min-height:44px;align-items:center}

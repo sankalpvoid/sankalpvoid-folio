@@ -1,13 +1,13 @@
 /* Exhibition 01 — Reclaim: night, the product's own type, one breath as the metronome. */
 :root{
-  --hs-ac:#f4a67f;--hs-mute:#cfc6f3;--hs-font:"DM Serif Display",Georgia,serif;
+  --hs-ac:#f4a67f;--hs-mute:#cfc6f3;--hs-font:var(--f-display);
   --page-bg:#050507;--page-fg:#f3eeff;
   --chrome:#f3eeff;--chrome-dim:rgba(243,238,255,.66);--chrome-bg:#050507;--dark-bg:#050507;
   --violet:#7a4dff;--peach:#f4a67f;--lilac:#cfc6f3;
   --rule:rgba(207,198,243,.2);
   --btn-bg:#7a4dff;--btn-fg:#fff;
   --focus:#cfc6f3;
-  --f-body:"Inter",system-ui,sans-serif;
+  
 }
 body{font-family:var(--f-body);font-size:clamp(1rem,.9vw + .6rem,1.08rem)}
 h1,h2,h3{font-weight:400;margin:0}
@@ -29,7 +29,7 @@ h1,h2,h3{font-weight:400;margin:0}
 /* ---- story panels ---- */
 .hs{--hs-bg:#050507;--hs-fg:#f3eeff;--hs-ac:#f4a67f;--hs-mute:#cfc6f3;--hs-rule:rgba(207,198,243,.22)}
 .hs .pn-k{color:var(--peach)}
-.rc-title{font-family:"Bebas Neue",Impact,sans-serif;font-size:clamp(4.4rem,11vw,11rem);letter-spacing:.02em;line-height:.88;margin:0}
+.rc-title{font-family:var(--f-display);font-size:clamp(4.4rem,11vw,11rem);letter-spacing:.02em;line-height:.88;margin:0}
 .rc-line{position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(122,77,255,.55),transparent);pointer-events:none}
 .pn-fig .shot{position:relative;border-radius:26px;overflow:visible;background:#0d0b14;box-shadow:0 0 0 1px rgba(207,198,243,.26),0 30px 90px -30px rgba(122,77,255,.5)}
 .pn-fig .shot img{display:block;border-radius:26px;height:min(66vh,640px);width:auto;max-width:none;aspect-ratio:1170/2532}
@@ -50,7 +50,7 @@ h1,h2,h3{font-weight:400;margin:0}
 .orb-demo{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;flex:none;width:170px}
 .orb{width:140px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#a58bff,#7a4dff 60%,#4326b8);display:grid;place-items:center;transform:scale(.7);transition:transform 4s cubic-bezier(.45,0,.35,1);box-shadow:0 0 60px -6px rgba(122,77,255,.7)}
 .orb.expand{transform:scale(1)}
-.orb span{font-family:"Bebas Neue",sans-serif;letter-spacing:.08em;font-size:1.3rem}
+.orb span{font-family:var(--f-display);letter-spacing:.08em;font-size:1.3rem}
 .orb-demo .mono{opacity:.8;font-size:.64rem}
 .pair{display:flex;gap:clamp(14px,2vw,28px)}
 .shot--modal img{height:min(52vh,500px)!important;object-fit:cover;object-position:50% 74%;aspect-ratio:1170/1100!important}

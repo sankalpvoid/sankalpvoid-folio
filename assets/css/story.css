@@ -1,7 +1,6 @@
 /* Horizontal story: structure shared by every project. Each page sets --hs-* colours and its heading font. */
 .hs{position:relative;--hs-bg:var(--page-bg);--hs-fg:var(--page-fg);--hs-ac:var(--sig);--hs-mute:rgba(255,255,255,.65);--hs-rule:var(--rule);--hs-font:var(--f-display);background:var(--hs-bg);color:var(--hs-fg)}
 .hs__pin{position:relative}
-.hs__track{display:block}
 .hs__p{padding:clamp(48px,8vw,100px) var(--gutter)}
 /* pinned, horizontal presentation */
 .hs.is-hs{height:200vh}
@@ -10,19 +9,6 @@
 .hs.is-hs .hs__p{flex:0 0 auto;height:100%;display:flex;align-items:center;gap:clamp(28px,4vw,72px);padding:clamp(88px,13vh,124px) clamp(36px,5vw,96px) clamp(76px,11vh,104px);position:relative}
 .hs.is-hs .hs__p[data-span]{width:calc(var(--span,2) * var(--hsw,100vw));padding:0;display:block}
 .hs.is-hs .hold{position:relative;width:var(--hsw,100vw);height:100%;padding:clamp(88px,13vh,124px) clamp(36px,5vw,96px) clamp(76px,11vh,104px);will-change:transform;display:flex;align-items:center;gap:clamp(28px,4vw,72px)}
-.hs__nav{position:absolute;left:0;right:0;bottom:0;z-index:20;display:flex;align-items:center;gap:clamp(12px,2vw,28px);padding:0 clamp(24px,3vw,48px) clamp(14px,2.4vh,24px);background:linear-gradient(0deg,var(--hs-bg) 40%,transparent);pointer-events:none}
-.hs__nav>*{pointer-events:auto}
-.hs__nav ol{display:flex;gap:2px;margin:0;padding:0;list-style:none;overflow:hidden}
-.hs__nav button{display:flex;align-items:baseline;gap:7px;padding:10px 9px;min-height:44px;font-size:.74rem;font-weight:500;color:var(--hs-mute);transition:color var(--t-micro);white-space:nowrap}
-.hs__nav button .mono{font-size:.58rem;opacity:.8}
-.hs__nav button:hover{color:var(--hs-fg)}
-.hs__nav button[aria-current="true"]{color:var(--hs-ac)}
-.hs__t{display:none}
-.hs__nav button[aria-current="true"] .hs__t{display:inline}
-@media (min-width:1180px){.hs__t{display:inline}}
-.hs__bar{flex:1;height:2px;background:var(--hs-rule);position:relative;min-width:60px}
-.hs__bar i{position:absolute;inset:0;background:var(--hs-ac);transform-origin:left;transform:scaleX(0)}
-.hs__count{font-size:.64rem;color:var(--hs-mute)}
 /* flat presentation: phones, reduced motion, no JavaScript. Same panels, ordinary vertical page. */
 @media (max-width:860px),(prefers-reduced-motion:reduce){
   .hs{height:auto!important}

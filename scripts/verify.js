@@ -15,7 +15,7 @@ const routes=['/','/projects/',...STORIES,'/archive/','/profile/','/about/','/co
 const out=[];const ok=(c,m)=>{const line=(c?'PASS ':'FAIL ')+m;out.push(line);console.log(line);};const skip=(m)=>out.push('SKIP '+m);
 const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-track]')).transform).m41;
 (async()=>{
- const b=await pw[ENGINE].launch();
+ const b=await pw[ENGINE].launch(ENGINE==='chromium'?{args:['--use-gl=swiftshader','--enable-unsafe-swiftshader']}:{});
  // Keep authorized preview access across internal links even where an engine
  // does not retain Vercel's bypass cookie. Never send the share to other hosts.
  const context=async options=>{
@@ -58,48 +58,66 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
    if(w===1440&&r!=='/about/')ok(info.title.length>5&&info.og&&info.h1>=1,`${r} meta ok`);
    await p.close();}
   await ctx.close();}
- // 2. gallery: next-project peel vs Enter project
- {const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();
-  await p.goto(U('/'));await p.waitForTimeout(900);
+ // 2. gallery: one composed viewport; hold / click / keyboard enter the CURRENT project; arrows change the selection
+ {const ctx=await context({viewport:{width:1440,height:900}});
+  await ctx.addInitScript(()=>{window.__arr=[];const push=()=>{if(document.documentElement)__arr.push(document.documentElement.className)};push();new MutationObserver(push).observe(document,{subtree:true,attributes:true,attributeFilter:['class']});});
+  const p=await ctx.newPage();
+  await p.goto(U('/'));await p.waitForTimeout(1000);
   const slug=()=>p.evaluate(()=>document.querySelector('.slide.is-active').dataset.slug);
   ok(await slug()==='reclaim','root opens on the Reclaim gallery scene');
-  ok(/WealthWithSG/.test(await p.textContent('[data-peel]')),'gallery handle is labelled with the NEXT project ("Drag to WealthWithSG")');
-  ok(/Enter\s*project/i.test(await p.textContent('.slide.is-active .enter')),'"Enter project" is a separate, labelled action');
+  const clutter=await p.evaluate(()=>({ticks:!!document.querySelector('.ticks'),peel:!!document.querySelector('.peel-h,.peel'),contents:!!document.querySelector('.contents'),all:!!document.querySelector('.controls .all'),hint:!!document.querySelector('.hint'),dragTo:/drag to/i.test(document.body.innerText),keys:/keys\s*·\s*swipe/i.test(document.body.innerText)}));
+  ok(Object.values(clutter).every(v=>!v),`gallery: ticks, corner handle, duplicate collection, All-projects link, hints and "Drag to" are gone ${JSON.stringify(clutter)}`);
+  ok(await p.evaluate(()=>document.documentElement.scrollHeight<=innerHeight+2),'gallery: one composed viewport (no second directory beneath)');
+  ok(await p.evaluate(()=>/Playfair/.test(getComputedStyle(document.querySelector('.slide.is-active .t')).fontFamily)),'gallery: display type uses the unified display family');
+  ok(/06/.test(await p.textContent('.counter')),'gallery: counter shows the six projects');
+  ok(await p.evaluate(()=>document.querySelector('.slide.is-active .t a').getAttribute('href')==='/work/reclaim/')&&/Enter\s*project/i.test(await p.textContent('.slide.is-active .enter')),'gallery: title and the labelled Enter action both open the CURRENT project');
+  const seen=[await slug()];for(let i=0;i<6;i++){await p.click('[data-next]');await p.waitForFunction((n)=>document.querySelector('.slide.is-active')?.dataset.slug!==n,seen[seen.length-1],{timeout:4000}).catch(()=>{});seen.push(await slug());}
+  ok(seen.join()==='reclaim,wealthwithsg,sankalp-shristi-furnishers,aureledger,kaal,archive,reclaim','gallery: arrows cycle all six projects and wrap');
+  await p.goto(U('/'));await p.waitForTimeout(900);
+  // hold: immediate feedback, cancel returns, completion enters the CURRENT project
   const hist0=await p.evaluate(()=>history.length);
-  const bx=await (await p.$('[data-peel]')).boundingBox();const x=bx.x+bx.width-24,y=bx.y+bx.height-24;
-  await p.mouse.move(x,y);await p.mouse.down();
-  for(let i=1;i<=8;i++){await p.mouse.move(x-i*28,y-i*18);await p.waitForTimeout(16);}
-  const mid=await p.evaluate(()=>({on:document.querySelector('.peel')?.classList.contains('is-on'),clip:getComputedStyle(document.querySelector('.peel__under')).clipPath,sel:getSelection().toString().length,g:document.documentElement.classList.contains('is-gesturing')}));
-  const a1=mid.clip;
-  for(let i=9;i<=12;i++){await p.mouse.move(x-i*28,y-i*18);await p.waitForTimeout(16);}
-  const clip2=await p.evaluate(()=>getComputedStyle(document.querySelector('.peel__under')).clipPath);
-  ok(mid.on&&/polygon/.test(a1)&&a1!==clip2,'peel: diagonal fold polygon follows the pointer continuously');
-  ok(mid.sel===0&&mid.g,'peel: selection suppressed while the gesture is active');
-  await p.mouse.up();await p.waitForTimeout(1200);
-  ok(await slug()==='reclaim'&&(await p.evaluate(()=>history.length))===hist0&&new URL(p.url()).pathname==='/','peel: cancelled gesture returns to the current project, no history entry');
-  await p.waitForFunction(()=>!document.querySelector('.peel.is-on'),null,{timeout:6000}).catch(()=>{});
-  ok(await p.evaluate(()=>!document.querySelector('.peel.is-on')),'peel: layer removed after cancel');
-  await p.mouse.move(x,y);await p.mouse.down();for(let i=1;i<=40;i++){await p.mouse.move(Math.max(5,x-i*40),Math.max(5,y-i*26));await p.waitForTimeout(12);}await p.mouse.up();await p.waitForFunction(()=>document.querySelector('.slide.is-active')?.dataset.slug==='wealthwithsg',null,{timeout:6000});
-  ok(await slug()==='wealthwithsg'&&new URL(p.url()).pathname==='/','peel: completed drag brings in the NEXT project (WealthWithSG), not the current project\'s page');
-  ok(/Furnishers/.test(await p.textContent('[data-peel]')),'peel: handle now names the following project');
-  await p.click('.slide.is-active .enter');await p.waitForURL('**/work/wealthwithsg/');ok(true,'Enter project opens the selected project');
-  await p.goBack();await p.waitForTimeout(900);ok(new URL(p.url()).pathname==='/','back returns to the gallery');
-  // wraparound
-  await p.goto(U('/#archive'));await p.waitForTimeout(900);ok(/Reclaim/.test(await p.textContent('[data-peel]')),'last project wraps: Experiments hands off to Reclaim');
-  await p.goto(U('/#archive'));await p.waitForTimeout(600);
-  // click / keyboard alternatives
-  await p.goto(U('/'));await p.waitForTimeout(700);await p.focus('[data-peel]');await p.keyboard.press('Enter');await p.waitForFunction(()=>document.querySelector('.slide.is-active')?.dataset.slug==='wealthwithsg',null,{timeout:6000});
-  ok(await slug()==='wealthwithsg','peel: keyboard Enter on the handle brings in the next project');
+  await p.mouse.move(900,330);await p.mouse.down();await p.waitForTimeout(160);
+  const early=await p.evaluate(()=>({lens:!!document.querySelector('.slide.is-active .lens'),sel:getSelection().toString().length}));
+  ok(early.lens&&early.sel===0,'hold: feedback (a lens surface) appears immediately and nothing is selected');
+  await p.mouse.up();await p.waitForFunction(()=>!document.querySelector('.lens'),null,{timeout:4000}).catch(()=>{});
+  ok(await p.evaluate(()=>!document.querySelector('.lens'))&&new URL(p.url()).pathname==='/'&&(await p.evaluate(()=>history.length))===hist0,'hold: early release relaxes back to rest, no navigation and no history entry');
+  ok(await slug()==='reclaim','hold: cancel leaves the selection unchanged');
+  await p.click('[data-next]');await p.waitForTimeout(1400);
+  await p.mouse.move(900,330);await p.mouse.down();
+  await p.waitForURL('**/work/wealthwithsg/',{timeout:7000}).catch(()=>{});
+  ok(new URL(p.url()).pathname==='/work/wealthwithsg/','hold: completing on the selected project opens THAT project (WealthWithSG), never the next one');
+  const arr=await p.evaluate(()=>window.__arr.join('|'));
+  ok(/is-arriving/.test(arr),'transition: the destination begins on the lens end-frame (arrival overlay present before first paint)');
+  await p.waitForFunction(()=>!document.documentElement.classList.contains('is-arriving'),null,{timeout:6000}).catch(()=>{});
+  ok(await p.evaluate(()=>!document.documentElement.classList.contains('is-arriving')&&!document.documentElement.classList.contains('is-settling')),'transition: the arrival overlay always clears');
+  await p.goBack();await p.waitForTimeout(1200);
+  ok(new URL(p.url()).pathname==='/'&&await slug()==='wealthwithsg'&&!(await p.evaluate(()=>!!document.querySelector('.lens'))),'back: returns to the gallery on the same project, without a stuck overlay');
+  // title click and keyboard
+  await p.goto(U('/'));await p.waitForTimeout(900);await p.click('.slide.is-active .t a');await p.waitForURL('**/work/reclaim/',{timeout:7000}).catch(()=>{});
+  ok(new URL(p.url()).pathname==='/work/reclaim/','click on the title enters the current project through the lens');
+  await p.goto(U('/'));await p.waitForTimeout(900);await p.focus('.slide.is-active .enter');await p.keyboard.press('Enter');await p.waitForURL('**/work/reclaim/',{timeout:7000}).catch(()=>{});
+  ok(new URL(p.url()).pathname==='/work/reclaim/','keyboard Enter on the Enter action enters the current project');
   await p.goto(U('/about/'));await p.waitForURL('**/profile/');ok(true,'/about/ redirects to /profile/');
-  await ctx.close();}
+  await ctx.close();
+  // WebGL unavailable: the same states run on a plain scaled still, and navigation still works
+  const nc=await context({viewport:{width:1440,height:900}});await nc.addInitScript(()=>{const g=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(t,...r){return /webgl/.test(t)?null:g.call(this,t,...r)}});
+  const q=await nc.newPage();await q.goto(U('/'));await q.waitForTimeout(900);await q.mouse.move(900,330);await q.mouse.down();await q.waitForTimeout(250);
+  ok(await q.evaluate(()=>!!document.querySelector('.lens--css')),'no WebGL: hold falls back to a CSS surface');
+  await q.mouse.up();await q.waitForTimeout(600);await q.click('.slide.is-active .t a');await q.waitForURL('**/work/reclaim/',{timeout:7000}).catch(()=>{});ok(new URL(q.url()).pathname==='/work/reclaim/','no WebGL: entry still navigates');
+  await nc.close();
+  // reduced motion: no hold surface, direct navigation
+  const rm=await context({viewport:{width:1440,height:900},reducedMotion:'reduce'});const r2=await rm.newPage();await r2.goto(U('/'));await r2.waitForTimeout(700);await r2.mouse.move(900,330);await r2.mouse.down();await r2.waitForTimeout(700);
+  ok(await r2.evaluate(()=>!document.querySelector('.lens'))&&new URL(r2.url()).pathname==='/','reduced motion: holding does nothing; the title link enters directly');
+  await r2.mouse.up();await r2.click('.slide.is-active .t a');await r2.waitForURL('**/work/reclaim/',{timeout:5000}).catch(()=>{});ok(new URL(r2.url()).pathname==='/work/reclaim/','reduced motion: title link navigates immediately');await rm.close();}
  // 3. project pages: rail, peel to next project, never an internal section
  for(const [i,s] of ORDER.entries()){
   const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();
   await p.goto(U(`/work/${s}/`));await p.waitForTimeout(1200);
-  const rail=await p.evaluate(()=>{const r=document.querySelector('.rail');const rr=r.getBoundingClientRect();const hero=document.querySelector('.hero').getBoundingClientRect();const pin=document.querySelector('.hs__pin').getBoundingClientRect();return {pos:getComputedStyle(r).position,left:rr.left,w:rr.width,pinR:pin.right,heroR:hero.right,close:r.querySelector('.rail__close').getAttribute('href'),name:r.querySelector('.rail__name').textContent,act:r.querySelector('.rail__act').textContent.trim(),next:r.querySelector('[data-peel]').getAttribute('href'),lab:r.querySelector('.peel-h__lab b').textContent}});
+  const rail=await p.evaluate(()=>{const r=document.querySelector('.rail');const rr=r.getBoundingClientRect();const hero=document.querySelector('.hero').getBoundingClientRect();const pin=document.querySelector('.hs__pin').getBoundingClientRect();const nav=document.querySelector('.hs__nav');return {pos:getComputedStyle(r).position,left:rr.left,w:rr.width,pinR:pin.right,heroR:hero.right,close:r.querySelector('.rail__close').getAttribute('href'),name:r.querySelector('.rail__title').textContent.trim(),act:r.querySelector('.rail__act').textContent.trim(),next:r.querySelector('.rail__next').getAttribute('href'),extras:!!r.querySelector('.rail__no,.rail__prog,.peel-h,.peel-h__tri'),dragTo:/drag to/i.test(document.body.innerText),tri:!!document.querySelector('.peel-h,.peel-h__tri'),strip:nav?getComputedStyle(nav).visibility:'none',counters:/\d\d\s*\/\s*\d\d/.test(r.innerText+(nav?nav.innerText:''))}});
   const nx=ORDER[(i+1)%ORDER.length];
   ok(rail.pos==='fixed'&&rail.pinR<=rail.left+1&&rail.heroR<=rail.left+1,`${s}: rail is fixed and its space is reserved (story right ${Math.round(rail.pinR)} <= rail ${Math.round(rail.left)})`);
   ok(rail.next===`/work/${nx}/`&&rail.close.startsWith('/#'),`${s}: rail close -> gallery, next -> /work/${nx}/ (shared order)`);
+  ok(!rail.extras&&!rail.dragTo&&!rail.tri&&rail.strip!=='visible'&&!rail.counters,`${s}: rail is quiet (no numbers, counters, corner triangle, resting next name or chapter strip)`);
   ok(rail.act.length>3&&!/film/i.test(rail.act),`${s}: rail primary action is a real action ("${rail.act}")`);
   const g=await p.evaluate(()=>{const hs=document.querySelector('.hs');return {t:hs.getBoundingClientRect().top+scrollY,h:hs.offsetHeight,tv:HS.travel,K:HS.K,pin:document.querySelector('.hs__pin').clientWidth,panels:HS.panels.length}});
   ok(Math.abs(g.h-(g.tv*g.K+900))<=2,`${s}: document height = travel x K + viewport (${g.h})`);
@@ -113,14 +131,14 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await p.evaluate(y=>scrollTo(0,y),g.t+g.tv*g.K*0.5);await p.waitForTimeout(300);await p.waitForFunction(()=>Math.abs(HS.x-HS.target)<2,null,{timeout:12000}).catch(()=>{});
   const x0=await p.evaluate(()=>HS.x);await p.evaluate(y=>scrollTo(0,y),g.t+g.tv*g.K*0.5-600);await p.waitForTimeout(220);const x1=await p.evaluate(()=>HS.x);
   ok(x1<x0-20,`${s}: reversing direction responds promptly (${Math.round(x0)} -> ${Math.round(x1)} in 220ms)`);
-  // scene indicator follows what is displayed
+  // chapters are discreet: a popover opened from the rail, listing the chapters; choosing one settles on it
   await p.evaluate(()=>HS.scrollToX(HS.panels[2].__start-40,false));await p.waitForTimeout(400);
-  const cur=await p.evaluate(()=>document.querySelector('.hs__nav [aria-current=true] .mono').textContent);ok(cur==='03',`${s}: scene indicator matches the visible scene (${cur})`);
-  // chapter jump settles exactly
-  await p.evaluate(y=>scrollTo(0,y),g.t);await p.waitForTimeout(300);
-  await p.click('.hs__nav [data-go="3"]');await p.waitForTimeout(2600);
-  const j=await p.evaluate(()=>({x:HS.x,want:Math.max(0,HS.panels[3].offsetLeft-Math.min(80,document.querySelector('.hs__pin').clientWidth*0.04))}));
-  ok(Math.abs(j.x-j.want)<3,`${s}: chapter jump settles on the scene (x=${Math.round(j.x)}, wanted ${Math.round(j.want)})`);
+  await p.evaluate(y=>scrollTo(0,y),g.t);await p.waitForTimeout(600);
+  await p.click('[data-chapters]');await p.waitForTimeout(400);
+  ok(await p.evaluate(()=>getComputedStyle(document.querySelector('.hs__nav')).visibility==='visible'&&document.querySelectorAll('.hs__nav [data-go]').length===HS.panels.length&&document.querySelector('[data-chapters]').getAttribute('aria-expanded')==='true'),`${s}: chapters popover lists every chapter on request`);
+  await p.click('.hs__nav [data-go="3"]');await p.waitForTimeout(2800);
+  const j=await p.evaluate(()=>({x:HS.x,want:Math.max(0,HS.panels[3].offsetLeft-Math.min(80,document.querySelector('.hs__pin').clientWidth*0.04)),open:document.querySelector('.hs__nav').classList.contains('is-open')}));
+  ok(Math.abs(j.x-j.want)<3&&!j.open,`${s}: chapter jump settles on the scene and the popover closes (x=${Math.round(j.x)}, wanted ${Math.round(j.want)})`);
   // selection: drag across headings/images leaves nothing highlighted
   await p.evaluate(y=>scrollTo(0,y),g.t);await p.waitForTimeout(500);
   await p.mouse.move(100,300);await p.mouse.down();await p.mouse.move(1000,700,{steps:12});await p.mouse.up();
@@ -128,16 +146,15 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   const hl=await p.evaluate(()=>{const r=getSelection();const els=[...document.querySelectorAll('.hs h1,.hs h2,.hs h3,.pn-big,.pn-h,.rc-title,.hs img,.rail *,.chrome *')];return els.filter(e=>r.rangeCount&&!r.isCollapsed&&r.containsNode(e,true)).length});
   ok(hl===0,`${s}: dragging leaves no headings, images or controls highlighted (${hl})`);
   ok(await p.evaluate(()=>[...document.querySelectorAll('.hs img')].every(i=>i.getAttribute('draggable')==='false'||getComputedStyle(i).webkitUserDrag==='none')),`${s}: images are not natively draggable`);
-  // Regression: the rail must work immediately after an unrelated content drag, without reloading.
-  const hbx=await (await p.$('.rail [data-peel]')).boundingBox();const hx=hbx.x+hbx.width-12,hy=hbx.y+hbx.height-12;
+  // Next project: the rail control runs the lens transition to the NEXT project; internal sections are never opened
+  await p.reload();await p.waitForTimeout(1200);
   const url0=p.url();
-  await p.mouse.move(hx,hy);await p.mouse.down();for(let k=1;k<=7;k++){await p.mouse.move(hx-k*30,hy-k*22);await p.waitForTimeout(14);}
-  const clipA=await p.evaluate(()=>{const e=document.querySelector('.peel__under');return e?getComputedStyle(e).clipPath:''});await p.mouse.up();await p.waitForFunction(()=>!document.querySelector('.peel.is-on'),null,{timeout:6000}).catch(()=>{});
-  ok(/polygon/.test(clipA)&&p.url()===url0,`${s}: cancelled peel stays on the current project (${new URL(p.url()).pathname})`);
-  await p.mouse.move(hx,hy);await p.mouse.down();for(let k=1;k<=40;k++){await p.mouse.move(Math.max(5,hx-k*40),Math.max(5,hy-k*26));await p.waitForTimeout(10);}await p.mouse.up();
-  await p.waitForURL(`**/work/${nx}/`,{timeout:6000}).catch(()=>{});
-  ok(new URL(p.url()).pathname===`/work/${nx}/`,`${s}: completed peel opens the NEXT project /work/${nx}/ (got ${new URL(p.url()).pathname})`);
-  await p.goBack();await p.waitForTimeout(1000);ok(new URL(p.url()).pathname===`/work/${s}/`&&await p.evaluate(()=>!document.querySelector('.peel.is-on')),`${s}: back returns without a stuck overlay`);
+  await p.click('.rail__next');
+  await p.waitForURL(`**/work/${nx}/`,{timeout:8000}).catch(()=>{});
+  ok(new URL(p.url()).pathname===`/work/${nx}/`&&new URL(p.url()).pathname!==new URL(url0).pathname,`${s}: the rail's Next opens the NEXT project /work/${nx}/ (got ${new URL(p.url()).pathname})`);
+  await p.waitForFunction(()=>!document.documentElement.classList.contains('is-arriving'),null,{timeout:6000}).catch(()=>{});
+  ok(await p.evaluate(()=>!document.documentElement.classList.contains('is-arriving')&&!document.querySelector('.lens')),`${s}: the destination settles with no overlay left behind`);
+  await p.goBack();await p.waitForTimeout(1000);ok(new URL(p.url()).pathname===`/work/${s}/`&&await p.evaluate(()=>!document.querySelector('.lens')),`${s}: back returns without a stuck overlay`);
   await ctx.close();}
  // 4. flat fallbacks
  for(const [name,opt] of [['reduced motion',{viewport:{width:1440,height:900},reducedMotion:'reduce'}],['phone',{viewport:{width:390,height:844},hasTouch:true}],['no JS',{viewport:{width:1440,height:900},javaScriptEnabled:false}]]){
@@ -199,27 +216,38 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await ctx.close();
   const rm=await context({viewport:{width:1440,height:900},reducedMotion:'reduce'});const q=await rm.newPage();await q.goto(U('/profile/'));await q.waitForTimeout(600);
   ok(await q.evaluate(()=>getComputedStyle(document.querySelector('.pf__portrait')).visibility==='visible'&&document.documentElement.classList.contains('rm')&&getComputedStyle(document.querySelector('.pf__pin')).position==='static'),'profile: reduced motion shows the portrait and a flat reading order');await rm.close();}
- // 7. project index: hover, focus, rapid switching, explicit touch Open
+ // 7. project index: neutral idle (outline titles), hover/focus fill + image, rest again, explicit touch Open
  {const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();
+  await p.goto(U('/projects/'));await p.waitForTimeout(1000);
+  const idle=await p.evaluate(()=>{const t=document.querySelector('.idx__t');const cs=getComputedStyle(t);return {on:document.querySelectorAll('.idx__bg.is-on').length,stroke:parseFloat(cs.webkitTextStrokeWidth),fill:cs.color,items:document.querySelectorAll('.idx__item').length,active:document.querySelectorAll('.idx__item.is-active').length,bg:getComputedStyle(document.querySelector('.idx__bgs')).backgroundColor}});
+  ok(idle.on===0&&idle.active===0&&idle.items===ORDER.length,`index idle: solid neutral background, no automatic preview, all ${idle.items} titles listed`);
+  ok(idle.stroke>0&&/rgba\(0, 0, 0, 0\)|transparent/.test(idle.fill),`index idle: titles are outlined (stroke ${idle.stroke}px, fill ${idle.fill})`);
+  ok(await p.evaluate(()=>[...document.querySelectorAll('.idx__t')].every(t=>{const r=t.getBoundingClientRect();return r.bottom<=innerHeight&&r.top>=0})),'index: all six titles fit inside a 1440x900 viewport');
+  const bgOf=()=>p.evaluate(()=>[...document.querySelectorAll('.idx__bg.is-on')].map(e=>(e.style.backgroundImage.match(/idx\/([^.")]+)/)||[])[1]).join(',')) ;
+  await p.hover('.idx__item:nth-child(3) .idx__t');await p.waitForTimeout(900);
+  const hov=await p.evaluate(()=>({fill:getComputedStyle(document.querySelector('.idx__item:nth-child(3) .idx__t')).color,other:getComputedStyle(document.querySelector('.idx__item:nth-child(2) .idx__t')).color,bg:[...document.querySelectorAll('.idx__bg.is-on')].length}));
+  ok(!/rgba\(0, 0, 0, 0\)/.test(hov.fill)&&/rgba\(0, 0, 0, 0\)/.test(hov.other)&&hov.bg===1&&/furnishers/.test(await bgOf()),'index hover: the active title fills, others stay outlined, its image fills the viewport');
+  await p.mouse.move(20,520);await p.waitForTimeout(900);
+  ok(await p.evaluate(()=>document.querySelectorAll('.idx__bg.is-on').length===0&&!document.querySelector('.idx__item.is-active')),'index: leaving the titles restores the neutral state');
+  await p.focus('.idx__item:nth-child(5) a');await p.waitForTimeout(800);const foc=await bgOf();
+  await p.mouse.move(20,520);await p.waitForTimeout(500);
+  ok(/kaal/.test(foc)&&/kaal/.test(await bgOf()),'index focus: keyboard focus shows its image and survives pointer movement over empty space');
+  for(let i=0;i<30;i++){await p.hover(`.idx__item:nth-child(${1+i%ORDER.length}) .idx__t`);}await p.hover('.idx__item:nth-child(2) .idx__t');await p.waitForTimeout(1000);
+  ok((await p.evaluate(()=>[...document.querySelectorAll('.idx__bg')].filter(e=>getComputedStyle(e).opacity>0.5).length))===1&&/wealth/.test(await bgOf()),'index: rapid switching settles on the last hover with one background');
   await p.goto(U('/work/reclaim/'));await p.waitForTimeout(600);
   await p.click('[data-open-index]');await p.waitForSelector('dialog[open]');
-  ok((await p.$$eval('dialog[open] .idx__item',e=>e.length))===ORDER.length,'index overlay lists all projects');
-  ok(await p.evaluate(()=>document.documentElement.classList.contains('is-locked')),'index: page scroll is locked while open');
-  const bgOf=()=>p.evaluate(()=>[...document.querySelectorAll('dialog[open] .idx__bg.is-on')].map(e=>(e.style.backgroundImage.match(/idx\/([^.")]+)/)||[])[1]).join(','));
-  await p.hover('dialog[open] .idx__item:nth-child(3) a');await p.waitForTimeout(800);const hov=await bgOf();
-  await p.focus('dialog[open] .idx__item:nth-child(4) a');await p.waitForTimeout(800);const foc=await bgOf();
-  ok(hov&&foc&&hov!==foc,`index: background follows hover (${hov}) and keyboard focus (${foc})`);
-  for(let i=0;i<30;i++){await p.hover(`dialog[open] .idx__item:nth-child(${1+i%ORDER.length}) a`);}await p.hover('dialog[open] .idx__item:nth-child(2) a');await p.waitForTimeout(1000);
-  ok((await p.evaluate(()=>[...document.querySelectorAll('dialog[open] .idx__bg')].filter(e=>getComputedStyle(e).opacity>0.5).length))===1&&/wealth/.test(await bgOf()),'index: rapid switching settles on the last hover with one background');
-  await p.keyboard.press('Escape');await p.waitForTimeout(400);ok(!(await p.$('dialog[open]'))&&await p.evaluate(()=>!document.documentElement.classList.contains('is-locked')),'index: Escape closes and unlocks scroll');
+  ok((await p.$$eval('dialog[open] .idx__item',e=>e.length))===ORDER.length&&await p.evaluate(()=>document.querySelectorAll('dialog[open] .idx__bg.is-on').length===0),'index overlay: lists all projects and opens neutral');
+  ok(await p.evaluate(()=>document.documentElement.classList.contains('is-locked')),'index overlay: page scroll is locked while open');
+  await p.keyboard.press('Escape');await p.waitForTimeout(400);ok(!(await p.$('dialog[open]'))&&await p.evaluate(()=>!document.documentElement.classList.contains('is-locked')),'index overlay: Escape closes and unlocks scroll');
+  ok(await p.evaluate(()=>document.activeElement&&document.activeElement.hasAttribute('data-open-index')),'index overlay: focus returns to the trigger');
   await ctx.close();
   const t=await context({viewport:{width:390,height:844},hasTouch:true,...(ENGINE==='chromium'?{isMobile:true}:{})});const q=await t.newPage();
   await q.goto(U('/projects/'));await q.waitForTimeout(900);
-  const bar0=await q.evaluate(()=>{const e=document.querySelector('[data-idx-enter]');return {hidden:e.hidden,txt:e.textContent.replace(/\s+/g,' ').trim()}});
-  ok(!bar0.hidden&&/Open\s+Reclaim/.test(bar0.txt),`touch: an explicit "Open Reclaim" action is visible before any tap (${bar0.txt})`);
-  await q.tap('.idx__item:nth-child(2) a');await q.waitForTimeout(700);
-  const bar1=await q.evaluate(()=>document.querySelector('[data-idx-enter]').textContent.replace(/\s+/g,' ').trim());
-  ok(new URL(q.url()).pathname==='/projects/'&&/Open\s+WealthWithSG/.test(bar1),`touch: tapping a title only previews it; the Open button now names it (${bar1})`);
+  const bar0=await q.evaluate(()=>({op:getComputedStyle(document.querySelector('[data-idx-enter]')).opacity,lab:document.querySelector('.idx__label').innerText}));
+  ok(+bar0.op===0&&/tap a title/i.test(bar0.lab),`touch: before any selection the screen says what to do (${bar0.lab.trim()}) and shows no stale Open`);
+  await q.tap('.idx__item:nth-child(2) a');await q.waitForTimeout(800);
+  const bar1=await q.evaluate(()=>({txt:document.querySelector('[data-idx-enter]').textContent.replace(/\s+/g,' ').trim(),op:getComputedStyle(document.querySelector('[data-idx-enter]')).opacity}));
+  ok(new URL(q.url()).pathname==='/projects/'&&/Open\s+WealthWithSG/.test(bar1.txt)&&+bar1.op>0.9,`touch: tapping a title only previews it; an explicit Open names it (${bar1.txt})`);
   await q.tap('[data-idx-enter] a');await q.waitForURL('**/work/wealthwithsg/').catch(()=>{});ok(new URL(q.url()).pathname==='/work/wealthwithsg/','touch: the Open button navigates');
   await t.close();}
  // 8. selection and ghost-drag on gallery / index
@@ -240,13 +268,39 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await p.evaluate(()=>document.querySelector('[data-live]').click());await p.waitForSelector('iframe');ok(true,'experiments: Try it here loads on demand');
   await p.keyboard.press('Escape');await p.waitForTimeout(300);ok((await p.$$('iframe')).length===0,'experiments: Escape unloads it');
   await p.evaluate(()=>document.querySelector('[data-swap-to="1"]').click());ok(await p.evaluate(()=>!document.querySelector('.swap__i:nth-child(2)').hidden),'experiments: state buttons swap the study image');await ctx.close();}
- // 11. Kaal: real anchor geometry and labelled artwork controls, no audio.
+ // 11. Kaal: the crow encounter, real strips, anchor geometry, bounded, no audio
  {const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();await p.goto(U('/work/kaal/'));await p.waitForTimeout(700);
-  await p.click('.hero a[href="#presence"]');await p.waitForTimeout(700);
+  await p.click('.hero a[href="#presence"]');await p.waitForTimeout(900);
   const anchor=await p.evaluate(()=>{const r=document.querySelector('#presence').getBoundingClientRect();return {left:r.left,pin:document.querySelector('.hs__pin').scrollLeft}});
-  ok(anchor.pin===0&&anchor.left>=0&&anchor.left<100,'Kaal: Meet the crow lands on Presence without native pin scroll');
-  await p.click('[data-kaal-state-to="listening"]');ok(await p.locator('[data-kaal-state-to="listening"]').getAttribute('aria-pressed')==='true'&&(await p.textContent('[data-kaal-state]')).startsWith('Listening'),'Kaal: original crow artwork switches to the labelled listening state');
-  await p.click('[data-kaal-state-to="thinking"]');ok((await p.textContent('[data-kaal-state]')).startsWith('Attentive'),'Kaal: attentive state switches correctly');
-  ok(await p.locator('audio,video,iframe').count()===0,'Kaal: artwork preview loads no audio, recorder or embedded app');await ctx.close();}
+  ok(anchor.pin===0&&anchor.left>=0&&anchor.left<100,'Kaal: the Presence link lands on the chapter without native pin scroll');
+  await p.waitForFunction(()=>window.__crow&&__crow().loaded,null,{timeout:8000}).catch(()=>{});
+  const box=await (await p.$('[data-crow-stage]')).boundingBox();const bx=box.x+box.width*0.62,by=box.y+box.height*0.81-60;
+  ok((await p.evaluate(()=>__crow())).cell===0&&!(await p.evaluate(()=>__crow().strip)),'crow: quiet idle pose on arrival');
+  await p.mouse.move(bx-220,by);await p.mouse.move(bx-80,by);await p.waitForTimeout(300);
+  ok((await p.evaluate(()=>__crow())).cell===5,'crow: the pointer approaching only makes it attentive');
+  await p.mouse.click(bx,by);await p.waitForTimeout(200);ok((await p.evaluate(()=>__crow())).cell===6,'crow: a click makes it notice');
+  await p.waitForFunction(()=>__crow().strip==='ruffle'||__crow().strip==='preen',null,{timeout:2500}).catch(()=>{});
+  ok(['ruffle','preen'].includes(await p.evaluate(()=>__crow().strip)),'crow: a single click plays a real strip (ruffle/preen)');
+  await p.waitForFunction(()=>!__crow().strip&&__crow().cell===0,null,{timeout:6000}).catch(()=>{});
+  ok((await p.evaluate(()=>__crow())).cell===0,'crow: returns to the idle pose');
+  for(let i=0;i<3;i++){await p.mouse.click(bx,by);await p.waitForTimeout(110);}
+  await p.waitForFunction(()=>__crow().flying,null,{timeout:2500}).catch(()=>{});
+  ok(await p.evaluate(()=>__crow().flying&&__crow().strip==='flap'),'crow: three quick clicks make it fly (the full wing-beat strip)');
+  await p.waitForFunction(()=>!__crow().flying,null,{timeout:5000}).catch(()=>{});
+  const end=await p.evaluate(()=>__crow());ok(!end.flying&&end.cell===0&&!end.strip,'crow: lands and returns to the same idle pose');
+  await p.mouse.move(20,20);await p.evaluate(()=>HS.scrollToX(HS.panels[HS.panels.length-1].__start,false));await p.waitForTimeout(1500);
+  const off=await p.evaluate(()=>__crow());ok(!off.visible&&off.timers===0&&!off.raf,'crow: pauses (no timers or animation loop) when scrolled away');
+  ok(await p.locator('audio,video,iframe').count()===0,'Kaal: no audio, recorder or embedded app');await ctx.close();
+  const rm=await context({viewport:{width:1440,height:900},reducedMotion:'reduce'});const r=await rm.newPage();await r.goto(U('/work/kaal/'));await r.waitForTimeout(800);
+  await r.evaluate(()=>document.getElementById('presence').scrollIntoView());await r.waitForTimeout(1200);
+  await r.waitForFunction(()=>window.__crow&&__crow().loaded,null,{timeout:8000}).catch(()=>{});
+  const a=await r.evaluate(()=>__crow());ok(a.timers===0&&!a.raf,'crow, reduced motion: no idle timers and no animation loop');
+  await r.click('[data-crow-prompt]');await r.waitForTimeout(300);ok(!(await r.evaluate(()=>__crow().raf))&&/still pose/.test(await r.textContent('[data-crow-hint]')),'crow, reduced motion: the button gives a still pose, no motion');await rm.close();}
+ // 12. email, fonts and copy
+ {const ctx=await context();const p=await ctx.newPage();let bad=[];
+  for(const r of routes){await p.goto(U(r));const html=await p.content();if(/kushwaha\.18/.test(html))bad.push(r);}
+  ok(bad.length===0,`the old email address appears nowhere (${JSON.stringify(bad)})`);
+  await p.goto(U('/contact/'));ok(await p.evaluate(()=>document.querySelector('[data-mail]').textContent.trim()==='sankalp.direct@gmail.com'&&document.querySelector('a[data-mail]').getAttribute('href')==='mailto:sankalp.direct@gmail.com'),'contact: the new address is shown and linked');
+  await p.goto(U('/profile/'));ok(await p.evaluate(()=>!!document.querySelector('a[href="mailto:sankalp.direct@gmail.com"]')),'profile: the new address is linked');await ctx.close();}
  console.log('\nSUMMARY engine='+ENGINE+' pass='+out.filter(l=>l.startsWith('PASS')).length+' fail='+out.filter(l=>l.startsWith('FAIL')).length+' skip='+out.filter(l=>l.startsWith('SKIP')).length);
  await b.close();process.exitCode=out.some(l=>l.startsWith('FAIL'))?1:0;})().catch(e=>{console.error(e);process.exitCode=1;});

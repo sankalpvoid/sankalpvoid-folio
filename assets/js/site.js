@@ -59,6 +59,18 @@
     tinted.forEach((el) => cio.observe(el));
   }
 
+  /* ---- arrival: settle the lens hand-off overlay once the page's own hero is ready (see lens.js / arrive.js) ---- */
+  if (document.documentElement.classList.contains('is-arriving')) {
+    const root = document.documentElement;
+    const hero = document.querySelector('.hero img, .hero .sc img');
+    const ready = (hero && hero.decode ? hero.decode().catch(() => {}) : Promise.resolve());
+    const fonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    Promise.race([Promise.all([ready, fonts]), new Promise((r) => setTimeout(r, 1800))]).then(() => requestAnimationFrame(() => {
+      root.classList.add('is-settling');
+      setTimeout(() => root.classList.remove('is-arriving', 'is-settling'), 1100);
+    }));
+  }
+
   /* ---- image load state ---- */
   document.querySelectorAll('.media img').forEach((img) => {
     const done = () => img.classList.add('loaded');
@@ -80,16 +92,20 @@
       if (!cache.has(url)) cache.set(url, new Promise((res) => { const i = new Image(); i.decoding = 'async'; i.onload = i.onerror = () => res(); i.src = url; }));
       return cache.get(url);
     };
-    let token = 0, shown = null, front = 0;
+    let token = 0, shown = null, front = 0, pointerIn = false;
+    const list = host.querySelector('.idx__list');
+    host.dataset.active = '';
     const activate = (li) => {
       if (!li || li === shown) return;
       const mine = ++token;
       shown = li;
       items.forEach((x) => x.classList.toggle('is-active', x === li));
+      host.classList.add('has-active');
       if (enter) {
         const a = li.querySelector('.idx__a');
         enter.querySelector('[data-idx-name]').textContent = li.querySelector('.idx__t').textContent.replace('Sankalp & Shristi ', '');
         enter.querySelector('a').href = a.href;
+        enter.classList.add('is-ready');
       }
       load(li.dataset.bg).then(() => {
         if (mine !== token || !layers.length) return;         /* stale: a newer preview was requested */
@@ -99,13 +115,27 @@
         front = 1 - front; host.dataset.active = li.dataset.slug;
       });
     };
+    /* back to the neutral state: solid background, every title outlined */
+    const rest = () => {
+      if (!shown) return;
+      token++; shown = null;
+      items.forEach((x) => x.classList.remove('is-active'));
+      layers.forEach((l) => l.classList.remove('is-on'));
+      host.classList.remove('has-active'); host.dataset.active = '';
+      if (enter) enter.classList.remove('is-ready');
+    };
     const handlers = [];
     const on = (el, ev, fn, opt) => { el.addEventListener(ev, fn, opt); handlers.push(() => el.removeEventListener(ev, fn, opt)); };
+    const focusInside = () => list.contains(document.activeElement) && document.activeElement.matches(':focus-visible, .idx__a');
+    on(list, 'pointerleave', (e) => { if (e.pointerType !== 'mouse') return; pointerIn = false; if (!focusInside()) rest(); });
+    on(list, 'pointerenter', (e) => { if (e.pointerType === 'mouse') pointerIn = true; });
+    /* the pointer previews only while it is over a title; in the gaps (or the margins) the list rests, unless a title holds keyboard focus */
+    on(list, 'pointermove', (e) => { if (e.pointerType !== 'mouse') return; const a = e.target.closest('.idx__a'); if (a) activate(a.closest('.idx__item')); else if (!focusInside()) rest(); });
+    on(list, 'focusout', (e) => { if (coarse.matches) return; if (!list.contains(e.relatedTarget) && !pointerIn) rest(); });
     items.forEach((li, i) => {
       const a = li.querySelector('.idx__a');
-      on(li, 'pointerenter', (e) => { if (e.pointerType === 'mouse') activate(li); });
       on(a, 'focus', () => activate(li));
-      on(a, 'click', (e) => { if (coarse.matches) { e.preventDefault(); activate(li); a.focus({ preventScroll: true }); } });
+      on(a, 'click', (e) => { if (coarse.matches) { e.preventDefault(); activate(li); } });
       on(a, 'keydown', (e) => {
         const d = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0;
         if (!d) return;
@@ -118,7 +148,6 @@
     /* warm the first previews quietly */
     const warm = () => items.slice(0, 3).forEach((li) => load(li.dataset.bg));
     'requestIdleCallback' in window ? requestIdleCallback(warm, { timeout: 800 }) : setTimeout(warm, 400);
-    activate(items[0]);
     return () => { handlers.forEach((h) => h()); token++; };
   };
 
@@ -138,11 +167,11 @@
       dlg.className = 'idx idx--dialog';
       dlg.setAttribute('aria-label', 'All projects');
       dlg.innerHTML =
-        '<div class="idx__bgs" aria-hidden="true"><span class="idx__bg is-on" data-layer="a"></span><span class="idx__bg" data-layer="b"></span><span class="idx__scrim"></span></div>' +
+        '<div class="idx__bgs" aria-hidden="true"><span class="idx__bg" data-layer="a"></span><span class="idx__bg" data-layer="b"></span><span class="idx__scrim"></span></div>' +
         '<div class="idx__top"><a class="wordmark" href="/" aria-label="sankalpvoid — gallery"><b>sankalpvoid</b><span>← Gallery</span></a><nav aria-label="More"><a href="/archive/">Archive</a><a href="/profile/">Profile</a><a href="/contact/">Contact</a></nav></div>' +
-        '<p class="idx__label mono">All projects · hover or focus a title to preview it</p>' +
+        '<p class="idx__label mono">All projects · <span class="fine">hover or focus a title to preview it</span><span class="coarse">tap a title to preview, then Open</span></p>' +
         '<p class="idx__enter" data-idx-enter hidden><span class="mono">Tap a title to preview it</span><a href="#" class="idx__go"><span>Open</span> <b data-idx-name></b> <i aria-hidden="true">↗</i></a></p>' +
-        '<button class="idx__close" type="button"><span class="idx__ring" aria-hidden="true"></span>Close<span class="sr-only"> project index</span></button>';
+        '<button class="idx__close" type="button" autofocus><span class="idx__ring" aria-hidden="true"></span>Close<span class="sr-only"> project index</span></button>';
       dlg.insertBefore(list.cloneNode(true), dlg.querySelector('.idx__enter'));
       document.body.appendChild(dlg);
       dlg.querySelector('.idx__close').addEventListener('click', () => dlg.close());
@@ -167,7 +196,7 @@
         d.showModal();
         if (!unmount) unmount = mountIndex(d);
         lastTrigger.setAttribute('aria-expanded', 'true');
-        d.querySelector('.idx__a').focus({ preventScroll: true });
+        d.querySelector('.idx__close').focus({ preventScroll: true });   /* the overlay opens neutral: nothing is previewed until a title is hovered or focused */
       } catch { location.href = '/projects/'; }
     };
     triggers.forEach((t) => {
