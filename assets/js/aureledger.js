@@ -53,7 +53,7 @@
       if (loading) return; loading = true;
       let next = 0, active = 0;
       const pump = () => {
-        while (active < 4 && next < N) {
+        while (active < 2 && next < N) {
           const i = next++; active++;
           const im = new Image(); im.decoding = 'async';
           im.onload = im.onerror = () => { flags[i] = im.complete && im.naturalWidth > 0; active--; if (cur !== null) show(cur, true); pump(); };
@@ -79,7 +79,7 @@
     if (window.HS) HS.on(sec, (p) => { show(Math.min(N - 1, Math.round(p * (N - 1)))); if (document.activeElement !== scrub) scrub.value = Math.round(p * 100); });
     chips.forEach((b, k) => b.addEventListener('click', () => HS.scrollToPanelProgress(sec, (starts[k] + 0.01) / (N - 1), true)));
     scrub.addEventListener('input', () => HS.scrollToPanelProgress(sec, +scrub.value / 100, true));
-    const near = new IntersectionObserver(([e]) => { if (e.isIntersecting) preload(); }, { rootMargin: '0px 120% 0px 120%' });
+    const near = new IntersectionObserver(([e]) => { if (e.isIntersecting) preload(); }, { rootMargin: '0px 40% 0px 40%' });
     near.observe(sec);
     show(0, true);
   }
