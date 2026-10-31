@@ -73,3 +73,12 @@ code{font-family:var(--f-mono);font-size:.82em;background:rgba(28,23,17,.08);pad
   .cfgs{display:block}.cfgs figure{margin-bottom:18px}.cfgs .c1 .media{width:100%}.cfgs .ph .media{height:auto;width:min(50%,220px)}
   .draw__static{grid-template-columns:1fr 1fr}
 }
+
+/* ---- designing it: the configurator as the picture, three decisions beside it ---- */
+.ssf-design{gap:clamp(32px,5vw,80px)}
+.ssf-design__txt{flex:none;width:min(30rem,38%)}
+.ssf-design__list{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:16px}
+.ssf-design__list li{border-top:1px solid var(--hs-rule);padding-top:12px;font-size:.95rem;color:var(--hs-fg);max-width:44ch}
+.ssf-design__list b{display:block;font-family:var(--hs-font);font-weight:500;font-size:1.25rem;margin-bottom:4px}
+.ssf-design .wsg-big img{height:min(52vh,500px)}
+@media (max-width:860px),(prefers-reduced-motion:reduce){.ssf-design__txt{width:auto}}

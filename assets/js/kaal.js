@@ -13,8 +13,8 @@
   const stage = host.querySelector('[data-crow-stage]');
   const cv = host.querySelector('.kaal-canvas');
   const sprite = host.querySelector('.kaal-sprite');
-  const hint = host.querySelector('[data-crow-hint]');
-  const btn = host.querySelector('[data-crow-prompt]');
+  const hint = document.querySelector('[data-crow-hint]');
+  const btn = document.querySelector('[data-crow-prompt]');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const CELL = 256, ANCHOR = { x: 128, y: 243 }, CLICK_GAP = 450, SETTLE = 2500;
   const BASE = '/assets/img/kaal/crow/';
@@ -154,7 +154,7 @@
   });
   stage.addEventListener('pointerleave', () => { if (hover) { hover = false; if (!strip && !flight) pose(SHEET.idle); } });
   stage.addEventListener('click', (e) => { if (ctx && hit(e)) click(e); });
-  if (btn) btn.addEventListener('click', () => { if (!loaded) { load().then(() => click({})); return; } if (reduce.matches) { still(['ruffle', 'preen', 'scratch', 'stretch'][rotation++ % 4]); return; } click({}); });
+  if (btn) btn.addEventListener('click', () => { const go = () => { if (reduce.matches) { still(['ruffle', 'preen', 'scratch', 'stretch'][rotation++ % 4]); return; } click({}); }; if (!loaded) { load().then(go); return; } go(); });
 
   const io = new IntersectionObserver((es) => {
     visible = es.some((e) => e.isIntersecting) && !document.hidden;

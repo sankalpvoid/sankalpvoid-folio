@@ -103,7 +103,7 @@
       host.classList.add('has-active');
       if (enter) {
         const a = li.querySelector('.idx__a');
-        enter.querySelector('[data-idx-name]').textContent = li.querySelector('.idx__t').textContent.replace('Sankalp & Shristi ', '');
+        enter.querySelector('[data-idx-name]').textContent = li.dataset.name || li.querySelector('.idx__t').textContent;
         enter.querySelector('a').href = a.href;
         enter.classList.add('is-ready');
       }
@@ -132,6 +132,7 @@
     /* the pointer previews only while it is over a title; in the gaps (or the margins) the list rests, unless a title holds keyboard focus */
     on(list, 'pointermove', (e) => { if (e.pointerType !== 'mouse') return; const a = e.target.closest('.idx__a'); if (a) activate(a.closest('.idx__item')); else if (!focusInside()) rest(); });
     on(list, 'focusout', (e) => { if (coarse.matches) return; if (!list.contains(e.relatedTarget) && !pointerIn) rest(); });
+    if (window.SVTitleFX) items.forEach((li) => SVTitleFX.attach(li.querySelector('.idx__t')));
     items.forEach((li, i) => {
       const a = li.querySelector('.idx__a');
       on(a, 'focus', () => activate(li));

@@ -77,3 +77,24 @@ h1,h2,h3{font-weight:400;margin:0}
   .pin{display:none}
 }
 @media (prefers-reduced-motion:reduce){.pin i{animation:none}.orb{transition:none}}
+
+/* ---- the evening: one phone, five beats, driven by the story's own scroll ---- */
+.rc-open__art{position:absolute;right:0;top:50%;transform:translateY(-50%);height:78%;width:auto;max-width:56%;object-fit:contain;opacity:.55;-webkit-mask-image:linear-gradient(270deg,#000 40%,transparent);mask-image:linear-gradient(270deg,#000 40%,transparent);pointer-events:none}
+.rc-open .sn-type__in{position:relative;z-index:1}
+.rcs{display:flex;align-items:center;gap:clamp(32px,5vw,96px);width:100%;height:100%}
+.rcs__txt{flex:none;width:min(32rem,36%)}
+.rcs__txt .pn-h{font-size:clamp(2.6rem,4.8vw,5rem);min-height:2.05em}
+.rcs__txt .pn-p{min-height:7.5em}
+.rcs__phone{position:relative;flex:none;height:min(74vh,740px);aspect-ratio:1170/2532;margin-left:auto;margin-right:clamp(0px,6%,90px)}
+.rcs__frame{position:absolute;inset:0;border-radius:30px;overflow:hidden;background:#0d0b14;box-shadow:0 0 0 1px rgba(207,198,243,.26),0 40px 120px -30px rgba(122,77,255,.55)}
+.rcs__frame img{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .5s var(--ease-out);border-radius:0}
+.rcs__frame img.is-on{opacity:1}
+.rcs__frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;visibility:hidden;transition:opacity .4s}
+.rcs__phone.is-rec video{opacity:1;visibility:visible}
+.rcs__phone .pin{opacity:0;transition:opacity .4s;z-index:3}
+.rcs__phone .pin.is-on{opacity:1}
+.rcs-static li{display:grid;grid-template-columns:minmax(0,200px) 1fr;gap:20px;align-items:start}
+.rcs-static figure{margin:0}.rcs-static img{width:100%;height:auto;border-radius:18px;box-shadow:0 0 0 1px rgba(207,198,243,.26)}
+.rcs-static h3{font-family:var(--hs-font);font-weight:500;font-size:clamp(1.5rem,6vw,2.1rem);margin:6px 0 8px}
+.rcs-static p{margin:0;max-width:40ch;opacity:.9}
+@media (prefers-reduced-motion:reduce){.rcs__frame img{transition:none}}

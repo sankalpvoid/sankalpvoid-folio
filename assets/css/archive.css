@@ -9,8 +9,8 @@ body.ar-page{--page-bg:#0b0b0c;--page-fg:#efeae0;--chrome:#efeae0;--chrome-dim:r
 .ar__t{pointer-events:auto}
 /* the title never moves with the field and never blocks a fragment */
 .ar__title{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;text-align:center;display:grid;gap:10px;pointer-events:none;color:#fff;mix-blend-mode:difference;white-space:nowrap}
-.ar__title b{font-family:var(--f-display);font-weight:400;font-size:clamp(4.6rem,15vw,15rem);line-height:.82;letter-spacing:-.03em}
-.ar__title .mono{font-size:clamp(.6rem,1vw,.9rem);letter-spacing:.5em}
+.ar__title b{font-family:var(--f-display);font-weight:400;font-size:clamp(3.4rem,9.4vw,9.4rem);line-height:.84;letter-spacing:-.03em}
+.ar__title .mono{font-size:clamp(.56rem,.8vw,.78rem);letter-spacing:.5em}
 .ar__t{position:absolute;left:var(--x);top:var(--y);width:var(--w);display:block;background:#000;text-decoration:none;color:inherit;transition:box-shadow .5s var(--ease-out)}
 .ar__t img{display:block;width:100%;height:auto;pointer-events:none;-webkit-user-drag:none}
 .ar__t:hover,.ar__t:focus-visible{box-shadow:0 30px 70px -30px #000;z-index:2;outline:none}

@@ -140,3 +140,25 @@ html:not(.js) .sn-stack{width:auto}
 html:not(.js) .hs__p .pn-txt,html:not(.js) .hs__p .pn-col{width:100%!important;max-width:36rem}
 html:not(.js) .pn-cols{display:block}
 html:not(.js) .pn-fig img,html:not(.js) .pn-fig video{max-width:100%}
+
+/* ---- held stage + static fallback (shared) ---- */
+.sn-static{display:none;list-style:none;margin:0;padding:0}
+@media (max-width:860px),(prefers-reduced-motion:reduce){.hs__p[data-span] .hold{display:none!important}.hs__p[data-span] .sn-static{display:grid;gap:clamp(28px,6vw,48px)}}
+html:not(.js) .hs__p[data-span] .hold{display:none!important}
+html:not(.js) .hs__p[data-span] .sn-static{display:grid;gap:36px}
+/* ---- composed ending: honest status, one primary action, a discreet next-project link ---- */
+.hs.is-hs .sn-end{width:var(--hsw,100vw);display:flex;align-items:stretch;justify-content:space-between;gap:clamp(24px,5vw,80px)}
+.sn-end__in{align-self:center;max-width:min(34rem,46%)}
+.sn-end__in .pn-h{font-size:clamp(2.2rem,3.8vw,3.8rem)}
+.sn-end__act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:22px}
+.sn-end__next{position:relative;flex:none;align-self:stretch;width:min(30vw,26rem);margin:calc(-1 * clamp(88px,13vh,124px)) calc(-1 * clamp(36px,5vw,96px)) calc(-1 * clamp(76px,11vh,104px)) 0;display:grid;align-content:end;gap:8px;padding:clamp(24px,3vw,44px);padding-bottom:clamp(90px,14vh,150px);background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,.1) 60%),var(--art) center/cover;color:#f4f0e8;text-decoration:none;overflow:hidden}
+.sn-end__next b{font-family:var(--hs-font);font-weight:500;font-size:clamp(1.8rem,2.8vw,2.8rem);line-height:1}
+.sn-end__next i{font-style:normal;font-size:1.4rem;transition:transform var(--t-ui) var(--ease-out)}
+.sn-end__next:hover i{transform:translateX(6px)}
+@media (max-width:860px),(prefers-reduced-motion:reduce){
+  .sn-end{display:block}.sn-end__in{max-width:36rem}
+  .sn-end__next{margin:36px calc(-1 * var(--gutter)) 0;width:auto;min-height:220px;padding-bottom:28px}
+}
+html:not(.js) .sn-end__next{margin:36px 0 0;width:auto;min-height:200px}
+.sn-type.rc-open{position:relative}
+.pn-pill[hidden],.btn[hidden]{display:none!important}

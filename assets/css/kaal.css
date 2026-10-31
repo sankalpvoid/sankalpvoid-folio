@@ -54,3 +54,19 @@ html.no-js .kaal-states{display:none}
  body[data-project="kaal"] .hero .sc-copy{bottom:calc(5vh + 54px)}
 }
 @media(max-width:860px){body[data-project="kaal"] .hs__p{scroll-margin-top:80px}}
+
+/* ---- presence: the crow's stage is the scene, not a widget ---- */
+.kaal-pres{gap:clamp(24px,4vw,64px)}
+.kaal-pres__txt{flex:none;width:min(26rem,32%)}
+.kaal-pres .kaal-presence{flex:1;min-width:0;width:auto;margin:0 -6% 0 0}
+.kaal-pres .kaal-window{height:min(66vh,620px);border:0;background:radial-gradient(ellipse at 60% 20%,#2b2820 0,transparent 62%),radial-gradient(ellipse at 50% 100%,#1b1a17 0,transparent 70%)}
+.kaal-pres .kaal-window::before,.kaal-pres .kaal-window::after{display:none}
+.kaal-pres .kaal-sprite{right:30%;bottom:15%}
+.kaal-pres .kaal-presence figcaption{max-width:44ch}
+.kaal-ctl{margin-top:22px}
+.kaal-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,48px);margin:0;padding:0;list-style:none;width:100%}
+.kaal-flow li{border-top:1px solid var(--hs-rule);padding-top:12px;font-size:.98rem;color:var(--hs-fg);max-width:34ch;opacity:.92}
+.kaal-flow b{font-family:var(--hs-font);font-weight:500;font-size:1.6rem;display:block}
+.kaal-rules .pn-h{font-size:clamp(2.2rem,3.8vw,3.8rem);max-width:22ch}
+.kaal-rules .kaal-choices{gap:clamp(18px,3vw,48px);width:100%}.kaal-rules .pn-col{width:auto;flex:1}
+@media (max-width:860px),(prefers-reduced-motion:reduce){.kaal-pres__txt{width:auto}.kaal-pres .kaal-presence{margin:24px 0 0}.kaal-flow{grid-template-columns:1fr}}

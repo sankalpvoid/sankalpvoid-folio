@@ -15,9 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#08090b">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/scenes.css">
 <link rel="stylesheet" href="/assets/css/story.css">
@@ -56,11 +54,8 @@
       <span class="eyebrow mono">Website · trading education</span>
       <h1 id="t" class="t">WEALTH<span>WITH</span>SG</h1>
       <p class="premise">Can a chart teach before a lesson does?</p>
-      <div class="actions">
-        <a class="btn btn--solid" href="https://wealthwithsg.vercel.app/" target="_blank" rel="noreferrer">View live experience <span class="arr" aria-hidden="true">↗</span></a>
-        <a class="btn" href="#story">Read the story <span aria-hidden="true">↓</span></a>
-      </div>
-      <p class="status mono">Prototype · sample content · private source</p>
+      <div class="actions"><a class="btn btn--solid" href="#story">Read the story <span aria-hidden="true">↓</span></a></div>
+      <p class="status mono">Prototype · sample content</p>
     </div>
     <div class="hero-ctl">
       <label for="noise" class="mono">Noise <span aria-hidden="true">⟷</span> Structure</label>
@@ -72,34 +67,27 @@
 
   <section class="hs" id="story" data-hs aria-label="The story, in chapters">
     <div class="hs__pin"><div class="hs__track" data-track>
-
-      <section class="hs__p sn-frame" id="c-unknown" data-title="The Unknown" aria-label="Frame 01: The Unknown">
-        <div class="sn-frame__img"><img src="/assets/img/wsg/hero-1.jpg" srcset="/assets/img/wsg/hero-1-720.jpg 720w, /assets/img/wsg/hero-1.jpg 1440w" sizes="(min-width:861px) 1300px, 100vw" width="1440" height="900" alt="The live homepage’s first frame: a noisy price chart under the line ‘Understand the market. Not just the movement.’" loading="lazy"></div>
-        <div class="sn-frame__cap sn-frame__cap--tag"><span class="pn-k mono">Frame 01 of six · The Unknown</span></div>
-      </section>
-
-      <section class="hs__p sn-frame" id="c-conflict" data-title="Conflict" aria-label="Frame 03: Conflict">
-        <div class="sn-frame__img"><img src="/assets/img/wsg/hero-3.jpg" srcset="/assets/img/wsg/hero-3-720.jpg 720w, /assets/img/wsg/hero-3.jpg 1440w" sizes="(min-width:861px) 1300px, 100vw" width="1440" height="900" alt="Third frame of the live homepage: the chart up close, where noise and information look alike" loading="lazy"></div>
-        <div class="sn-frame__cap sn-frame__cap--tag"><span class="pn-k mono">Frame 03 of six · Conflict</span></div>
-      </section>
-
-      <section class="hs__p sn-frame" id="c-breakdown" data-title="Breakdown" aria-label="Frame 04: Breakdown">
-        <div class="sn-frame__img"><img src="/assets/img/wsg/hero-4.jpg" srcset="/assets/img/wsg/hero-4-720.jpg 720w, /assets/img/wsg/hero-4.jpg 1440w" sizes="(min-width:861px) 1300px, 100vw" width="1440" height="900" alt="Fourth frame of the live homepage: the noise stripped away so the candle structure remains" loading="lazy"></div>
-        <div class="sn-frame__cap sn-frame__cap--tag"><span class="pn-k mono">Frame 04 of six · Breakdown</span></div>
-      </section>
-
-      <section class="hs__p sn-type" id="c-frames" data-title="Six frames" aria-labelledby="w1">
-        <div class="sn-type__in"><span class="pn-k mono">The live homepage</span><h2 class="pn-h" id="w1" style="max-width:14ch">Six frames, one scroll.</h2>
-          <p class="pn-p" style="max-width:44ch">Three are shown here. Each frame changes what the same chart is for; the others are <em style="font-style:normal">Recognition</em> (shapes begin to repeat), <em style="font-style:normal">Human Meaning</em> (a placeholder portrait) and <em style="font-style:normal">Open Exploration</em> (the way into the learning pages). Captures of the prototype.</p></div>
-      </section>
-
-      <section class="hs__p sn-stack" id="c-decisions" data-title="Decisions" aria-labelledby="w2">
-        <div class="pn-txt" style="width:min(18rem,22vw)"><span class="pn-k mono">Three decisions</span><h2 class="pn-h" id="w2">What I chose.</h2></div>
-        <div class="pn-cols">
-          <div class="pn-col"><span class="n">01</span><h3>SVG, not WebGL.</h3><p>The hero is hand-composed SVG driven by one scroll value, so it stays sharp and light. It has separate compositions for desktop (64 small candles) and phones (26). The chart on this page rebuilds itself to the viewport the same way.</p></div>
-          <div class="pn-col"><span class="n">02</span><h3>Colour never carries meaning alone.</h3><p>Candles are hollow outlines, green for up and red for down, and each is also labelled in text. Every chart is stamped “Illustrative data · not market data”, and a risk-disclaimer page exists.</p></div>
-          <div class="pn-col"><span class="n">03</span><h3>A story with a way out.</h3><p>The journey is long, so “Explore learning” is available from the first frame and the navigation never leaves. One tool is genuinely interactive: a risk-per-trade calculator that turns account size, risk and stop distance into a position size.</p></div>
+      <section class="hs__p sn-type" id="c-premise" data-title="Premise" aria-labelledby="w0">
+        <div class="sn-type__in">
+          <span class="pn-k mono">The idea</span>
+          <h2 class="pn-big pn-big--s" id="w0" style="max-width:15ch">A chart is <em>noise</em> until someone shows you what to look for.</h2>
+          <p class="pn-p" style="margin-top:22px;max-width:40ch">WealthWithSG is a trading-education concept whose homepage tells that story as six frames. I designed it and built the prototype in Next.js, with sample content throughout.</p>
         </div>
+      </section>
+
+      <section class="hs__p" id="c-clarity" data-title="Noise to structure" data-span="3.6" aria-labelledby="wc-h" data-wsg-stage>
+        <div class="hold"><div class="wsgs">
+          <div class="sc-wsg wsgs__bg" aria-hidden="true"><div class="grid"></div><div class="chart-env" data-chart-env><svg preserveAspectRatio="none"></svg></div><div class="shade"></div></div>
+          <div class="wsgs__txt" aria-live="polite">
+            <span class="pn-k mono" data-wsg-k>Frame 03 · Conflict</span>
+            <h2 class="pn-big pn-big--s" id="wc-h" data-wsg-t>Up close, noise and information look exactly alike.</h2>
+          </div>
+          <p class="wsgs__tag mono">Illustrative data · not market data</p>
+        </div></div>
+        <ol class="sn-static wsgs-static" aria-label="From noise to structure">
+          <li><figure><img src="/assets/img/wsg/hero-3-720.jpg" width="720" height="450" alt="The chart up close, where noise and information look alike" loading="lazy"></figure><p>Up close, noise and information look exactly alike.</p></li>
+          <li><figure><img src="/assets/img/wsg/hero-4-720.jpg" width="720" height="450" alt="The noise stripped away so the candle structure remains" loading="lazy"></figure><p>Strip the noise away and structure is what remains.</p></li>
+        </ol>
       </section>
 
       <section class="hs__p" id="c-site" data-title="The working tool" aria-labelledby="w3">
@@ -107,18 +95,25 @@
         <figure class="pn-fig wsg-big"><div class="media"><img src="/assets/img/wsg/risk.jpg" srcset="/assets/img/wsg/risk-720.jpg 720w, /assets/img/wsg/risk.jpg 1440w" sizes="(min-width:861px) 820px, 100vw" width="1440" height="900" alt="The risk-per-trade calculator page of the prototype" loading="lazy"></div></figure>
       </section>
 
-      <section class="hs__p" id="c-status" data-title="Status" aria-labelledby="w4">
-        <div class="pn-txt" style="width:min(30rem,34vw)"><span class="pn-k mono">Status</span><h2 class="pn-h" id="w4">Where it stands.</h2>
-          <p class="pn-p">A working prototype built in Next.js 15, React 19 and TypeScript. The chart narrative, calculator and glossary work. Learning tracks, articles, the checklist and guides are sample or pending, and social links aren’t connected. There is no market data: every chart is illustrative. Nothing here is financial advice. The source is private.</p>
-          <div class="pn-links"><a class="pn-pill pn-pill--solid" href="https://wealthwithsg.vercel.app/" target="_blank" rel="noreferrer">View live experience ↗</a></div></div>
+      <section class="hs__p sn-stack" id="c-decisions" data-title="Decisions" aria-labelledby="w2">
+        <div class="pn-txt"><span class="pn-k mono">Three decisions</span><h2 class="pn-h" id="w2">What I chose.</h2></div>
+        <div class="pn-cols">
+          <div class="pn-col"><span class="n">01</span><h3>SVG, not WebGL.</h3><p>The hero is hand-composed SVG driven by one scroll value, so it stays sharp and light, with separate compositions for desktop (64 small candles) and phones (26).</p></div>
+          <div class="pn-col"><span class="n">02</span><h3>Colour never carries meaning alone.</h3><p>Candles are hollow outlines, green for up and red for down, each also labelled in text. Every chart is stamped “Illustrative data · not market data”.</p></div>
+          <div class="pn-col"><span class="n">03</span><h3>A story with a way out.</h3><p>“Explore learning” is available from the first frame and the navigation never leaves. One tool is genuinely interactive: the risk calculator.</p></div>
+        </div>
       </section>
 
-      <section class="hs__p" id="c-next" data-title="Next project" aria-label="Next project">
-        <a class="pn-next" data-next-end href="/work/sankalp-shristi-furnishers/" style="background-image:url(/assets/img/idx/sankalp-shristi-furnishers.jpg)">
-          <span class="mono">Next project · 03</span><b>Furnishers</b><span class="go">Open Furnishers <i aria-hidden="true">↗</i></span>
-        </a>
+      <section class="hs__p sn-end" id="c-next" data-title="Status and next" aria-labelledby="w4">
+        <div class="sn-end__in">
+          <span class="pn-k mono">Where it stands</span>
+          <h2 class="pn-h" id="w4">A working prototype.</h2>
+          <p class="pn-p">Built in Next.js 15, React 19 and TypeScript. The chart narrative, calculator and glossary work; learning tracks, articles and guides are sample or pending, and social links aren’t connected.</p>
+          <p class="pn-note">There is no market data: every chart is illustrative, and nothing here is financial advice. The source is private.</p>
+          <div class="sn-end__act"><a class="btn btn--solid" href="https://wealthwithsg.vercel.app/" target="_blank" rel="noreferrer">View live experience <span class="arr" aria-hidden="true">↗</span></a></div>
+        </div>
+        <a class="sn-end__next" data-next-end href="/work/sankalp-shristi-furnishers/" style="--art:url(/assets/img/idx/sankalp-shristi-furnishers.jpg)"><span class="mono">Next project</span><b>Furnishers</b><i aria-hidden="true">→</i></a>
       </section>
-
     </div></div>
   </section>
 </main>
@@ -129,7 +124,7 @@
   <p class="foot__fine"><span>© 2026 Sankalp Kushwaha</span><span>Educational prototype · nothing here is financial advice</span></p>
 </footer>
 
-<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/site.js" defer></script><script src="/assets/js/title-fx.js" defer></script>
 <script src="/assets/js/scenes.js" defer></script>
 <script src="/assets/js/projects.js" defer></script>
 <script src="/assets/js/lens.js" defer></script>

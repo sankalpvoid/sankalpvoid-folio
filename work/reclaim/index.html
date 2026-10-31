@@ -15,9 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#050507">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/scenes.css">
 <link rel="stylesheet" href="/assets/css/story.css">
@@ -57,64 +55,40 @@
       <span class="eyebrow mono">Product · quitting smoking</span>
       <h1 id="t" class="t">Reclaim</h1>
       <p class="premise">What can a quitting app do in the moment a craving arrives?</p>
-      <div class="actions">
-        <a class="btn btn--solid" href="https://reclaim-app-tawny.vercel.app/" target="_blank" rel="noreferrer">View live prototype <span class="arr" aria-hidden="true">↗</span></a>
-        <a class="btn" href="#story">Read the story <span aria-hidden="true">↓</span></a>
-        <a class="btn" href="https://github.com/sankalpvoid/reclaim-showcase" target="_blank" rel="noreferrer">Case-study repo <span class="arr" aria-hidden="true">↗</span></a>
-      </div>
-      <p class="status mono">Live prototype · screens use sample data · private source</p>
+      <div class="actions"><a class="btn btn--solid" href="#story">Read the story <span aria-hidden="true">↓</span></a></div>
+      <p class="status mono">Live prototype · sample data</p>
     </div>
   </section>
 
   <section class="hs" id="story" data-hs aria-label="One evening, in chapters">
     <div class="hs__pin"><div class="hs__track" data-track>
-
-      <section class="hs__p sn-type" id="c-premise" data-title="Premise" aria-labelledby="p0">
+      <section class="hs__p sn-type rc-open" id="c-premise" data-title="Premise" aria-labelledby="p0">
+        <img class="rc-open__art" src="/assets/img/rc/bloom.webp" width="720" height="592" alt="" loading="lazy">
         <div class="sn-type__in">
           <span class="pn-k mono">One evening</span>
-          <h2 class="rc-title" id="p0">A craving arrives.</h2>
-          <p class="pn-p" style="margin-top:22px;max-width:34ch">What can a quitting app do in that moment? Five scenes from the real prototype, running locally with sample data.</p>
+          <h2 class="pn-big" id="p0">A craving <em>arrives.</em></h2>
+          <p class="pn-p" style="margin-top:22px;max-width:34ch">What can a quitting app do in that moment? Five beats from the real prototype, running locally with sample data.</p>
         </div>
       </section>
 
-      <section class="hs__p" id="c-urge" data-title="An urge" aria-labelledby="p1">
-        <div class="pn-txt" style="width:min(26rem,34%)"><span class="pn-k mono">01</span><h2 class="pn-h" id="p1">An urge arrives.</h2><p class="pn-p">The home screen leads with one question and one button, ahead of any counter.</p></div>
-        <figure class="pn-fig sn-big"><div class="shot"><img src="/assets/img/rc2/home.jpg" width="1170" height="2532" alt="Reclaim home screen: ‘One small shift’, the question ‘What would help right now?’ and a ‘Get craving support’ button" loading="lazy">
-          <span class="pin" style="--x:50%;--y:41%"><i></i><em>One tap to support</em></span>
-          <span class="pin pin--l" style="--x:30%;--y:20%"><i></i><em>The question comes first</em></span></div></figure>
+      <section class="hs__p" id="c-evening" data-title="The evening" data-span="4.4" aria-labelledby="ev-h" data-rc-stage>
+        <div class="hold"><div class="rcs">
+          <div class="rcs__txt" aria-live="polite">
+            <span class="pn-k mono" data-beat-k>An urge</span>
+            <h2 class="pn-h" id="ev-h" data-beat-title>An urge arrives.</h2>
+            <p class="pn-p" data-beat-text>The home screen leads with one question and one button, ahead of any counter.</p>
+            <button type="button" class="pn-pill" data-vid-btn aria-pressed="false" hidden>Play the recording</button>
+          </div>
+          <div class="rcs__phone">
+            <div class="rcs__frame"><img data-screen class="is-on" src="/assets/img/rc2/home.jpg" srcset="/assets/img/rc2/home-585.jpg 585w, /assets/img/rc2/home.jpg 1170w" sizes="(min-width:861px) 360px, 70vw" width="1170" height="2532" alt="Reclaim home screen: ‘One small shift’, the question ‘What would help right now?’ and a ‘Get craving support’ button" loading="lazy"><img data-screen class="" src="/assets/img/rc2/support.jpg" srcset="/assets/img/rc2/support-585.jpg 585w, /assets/img/rc2/support.jpg 1170w" sizes="(min-width:861px) 360px, 70vw" width="1170" height="2532" alt="Craving support: four small actions as cards" loading="lazy"><img data-screen class="" src="/assets/img/rc2/inhale.jpg" srcset="/assets/img/rc2/inhale-585.jpg 585w, /assets/img/rc2/inhale.jpg 1170w" sizes="(min-width:861px) 360px, 70vw" width="1170" height="2532" alt="Breathing exercise at the start of the inhale" loading="lazy"><img data-screen class="" src="/assets/img/rc2/hold.jpg" srcset="/assets/img/rc2/hold-585.jpg 585w, /assets/img/rc2/hold.jpg 1170w" sizes="(min-width:861px) 360px, 70vw" width="1170" height="2532" alt="Breathing orb labelled HOLD" loading="lazy"><img data-screen class="" src="/assets/img/rc2/exhale.jpg" srcset="/assets/img/rc2/exhale-585.jpg 585w, /assets/img/rc2/exhale.jpg 1170w" sizes="(min-width:861px) 360px, 70vw" width="1170" height="2532" alt="Smaller breathing orb labelled EXHALE" loading="lazy"><img data-screen class="" src="/assets/img/rc2/feedback.jpg" srcset="/assets/img/rc2/feedback-585.jpg 585w, /assets/img/rc2/feedback.jpg 1170w" sizes="(min-width:861px) 360px, 70vw" width="1170" height="2532" alt="Prompt ‘Did that help?’ with Yes, A little and Not really" loading="lazy"><img data-screen class="" src="/assets/img/rc2/support-later.jpg" srcset="/assets/img/rc2/support-later-585.jpg 585w, /assets/img/rc2/support-later.jpg 1170w" sizes="(min-width:861px) 360px, 70vw" width="1170" height="2532" alt="Craving support where Box breathing is labelled ‘Worked for you before’" loading="lazy">
+              <video muted playsinline preload="none" poster="/assets/img/rc2/poster.jpg" width="390" height="844" aria-label="Screen recording of the box-breathing exercise in the Reclaim prototype"><source src="/assets/video/reclaim-craving.webm" type="video/webm"></video>
+            </div><span class="pin" data-pin="0" style="--x:50%;--y:41%"><i></i><em>One tap to support</em></span><span class="pin pin--l" data-pin="0" style="--x:30%;--y:20%"><i></i><em>The question comes first</em></span><span class="pin pin--l" data-pin="1" style="--x:78%;--y:56%"><i></i><em>1 to 5 minutes each</em></span><span class="pin pin--l" data-pin="6" style="--x:22%;--y:34%"><i></i><em>Worked for you before</em></span>
+          </div>
+        </div></div>
+        <ol class="sn-static rcs-static" aria-label="One evening, in five beats"><li><figure><img src="/assets/img/rc2/home-585.jpg" width="585" height="1266" alt="Reclaim home screen: ‘One small shift’, the question ‘What would help right now?’ and a ‘Get craving support’ button" loading="lazy"></figure><div><span class="mono">01</span><h3>An urge arrives.</h3><p>The home screen leads with one question and one button, ahead of any counter.</p></div></li><li><figure><img src="/assets/img/rc2/support-585.jpg" width="585" height="1266" alt="Craving support: four small actions as cards" loading="lazy"></figure><div><span class="mono">02</span><h3>A small choice.</h3><p>Four small actions, no decision tree: box breathing, a five-minute wave, a water reset, a short walk. Or log the craving without an exercise.</p></div></li><li><figure><img src="/assets/img/rc2/inhale-585.jpg" width="585" height="1266" alt="Breathing exercise at the start of the inhale" loading="lazy"></figure><div><span class="mono">03</span><h3>A small action.</h3><p>Box breathing: inhale, hold, exhale, hold, four seconds each. The recording below is the prototype itself.</p></div></li><li><figure><img src="/assets/img/rc2/feedback-585.jpg" width="585" height="1266" alt="Prompt ‘Did that help?’ with Yes, A little and Not really" loading="lazy"></figure><div><span class="mono">04</span><h3>It’s recorded.</h3><p>Finishing logs the craving with the tool used. A one-tap “Did that help?” is optional and skippable. Everything is saved on the device and synced when you’re signed in.</p></div></li><li><figure><img src="/assets/img/rc2/support-later-585.jpg" width="585" height="1266" alt="Craving support where Box breathing is labelled ‘Worked for you before’" loading="lazy"></figure><div><span class="mono">05</span><h3>You come back.</h3><p>After a few rated cravings, a tool can be marked “Worked for you before”: a plain rule over the feedback you gave, not a validated or intelligent model. Sample data: four seeded cravings.</p></div></li></ol>
       </section>
 
-      <section class="hs__p" id="c-support" data-title="Support" aria-labelledby="p2">
-        <figure class="pn-fig sn-crop"><div class="shot"><img src="/assets/img/rc2/support.jpg" width="1170" height="2532" alt="Reclaim craving support: ‘One urge. One small step.’ with cards for box breathing, ride the wave and water reset" loading="lazy">
-          <span class="pin pin--l" style="--x:78%;--y:56%"><i></i><em>1 to 5 minutes each</em></span></div></figure>
-        <div class="pn-txt" style="width:min(28rem,36%)"><span class="pn-k mono">02</span><h2 class="pn-h" id="p2">Support is one tap away.</h2><p class="pn-p">Four small actions, no decision tree: box breathing, a five-minute wave, a water reset, a short walk. Or log the craving without an exercise.</p></div>
-      </section>
-
-      <section class="hs__p" id="c-action" data-title="A small action" aria-labelledby="p3">
-        <div class="pn-txt" style="width:min(24rem,30%)"><span class="pn-k mono">03</span><h2 class="pn-h" id="p3">A small action.</h2><p class="pn-p">Box breathing: inhale, hold, exhale, hold, four seconds each, with a paced orb. The recording is the prototype itself.</p></div>
-        <div class="rc-vid" data-vid>
-          <video muted playsinline loop preload="none" poster="/assets/img/rc2/poster.jpg" width="390" height="844" aria-label="Screen recording of the box-breathing exercise in the Reclaim prototype"><source src="/assets/video/reclaim-craving.webm" type="video/webm"></video>
-          <button type="button" class="vid__btn" data-vid-btn aria-pressed="false">Play recording</button>
-        </div>
-        <div class="orb-demo"><div class="orb" data-orb aria-hidden="true"><span data-orb-label>Ready</span></div><button type="button" class="pn-pill" data-orb-btn aria-pressed="false">Follow the rhythm</button><p class="mono" data-orb-live role="status">4 · 4 · 4 · 4 seconds</p></div>
-      </section>
-
-      <section class="hs__p" id="c-recorded" data-title="Recorded" aria-labelledby="p4">
-        <div class="pn-txt" style="width:min(30rem,40%)"><span class="pn-k mono">04</span><h2 class="pn-h" id="p4">It’s recorded.</h2><p class="pn-p">Finishing logs the craving with the tool used. A one-tap “Did that help?” is optional and skippable. Everything is saved on the device and synced when you’re signed in.</p><p class="pn-note">Shown here: the on-device behaviour. Sign-in and sync run on Supabase in the private app and aren’t demonstrated on this page.</p></div>
-        <figure class="pn-fig"><div class="shot shot--modal shot--lg"><img src="/assets/img/rc2/feedback.jpg" width="1170" height="2532" alt="Prompt ‘Did that help?’ with Yes, A little and Not really buttons and a Skip link" loading="lazy"></div><figcaption class="mono">Optional feedback</figcaption></figure>
-      </section>
-
-      <section class="hs__p sn-type" id="c-return" data-title="You come back" aria-labelledby="p5">
-        <div class="sn-type__in">
-          <span class="pn-k mono">05</span>
-          <h2 class="pn-big" id="p5" style="max-width:12ch">You come <em>back.</em></h2>
-          <p class="pn-p" style="margin-top:22px;max-width:46ch">After a few rated cravings, a tool can be marked <em style="font-style:normal;color:var(--peach)">Worked for you before</em>. It is a plain rule over the feedback you gave: once three cravings are rated, the tool with the best average feedback (and at least two uses) moves to the top and gets the label. Not a validated or intelligent model.</p>
-          <p class="pn-note">Sample data: four seeded cravings.</p>
-        </div>
-        <figure class="pn-fig sn-crop sn-crop--s"><div class="shot"><img src="/assets/img/rc2/support-later.jpg" width="1170" height="2532" alt="Craving support screen where the Box breathing card is labelled ‘Worked for you before’" loading="lazy"></div></figure>
-      </section>
-
-      <section class="hs__p sn-type" id="c-context" data-title="Context" aria-labelledby="p6">
+      <section class="hs__p sn-type" id="c-context" data-title="Beyond the moment" aria-labelledby="p6">
         <div class="sn-type__in">
           <span class="pn-k mono">Progress, as context</span>
           <h2 class="pn-h" id="p6" style="max-width:14ch;font-size:clamp(2.6rem,5.4vw,5.6rem)">Beyond the moment.</h2>
@@ -127,27 +101,24 @@
       </section>
 
       <section class="hs__p sn-stack" id="c-decisions" data-title="Decisions" aria-labelledby="p7">
-        <div class="pn-txt" style="width:min(18rem,22vw)"><span class="pn-k mono">Three decisions</span><h2 class="pn-h" id="p7">What shaped it.</h2></div>
+        <div class="pn-txt"><span class="pn-k mono">Three decisions</span><h2 class="pn-h" id="p7">What shaped it.</h2></div>
         <div class="decs">
-          <div class="dec"><span class="n">01</span><h3>Reduce is a route, not a failed quit.</h3><p>Reduction has its own targets, recorded days and periodic reviews, so people who aren’t ready to quit aren’t pushed through a quit-only interface. The consequence: each journey carries its own progress logic.</p></div>
-          <div class="dec"><span class="n">02</span><h3>A half-recorded day isn’t a clean day.</h3><p>Reduction reviews separate confirmed days from incomplete or untracked ones, so the product doesn’t reward or punish someone on data that isn’t there.</p></div>
-          <div class="dec"><span class="n">03</span><h3>Local first, synced when possible.</h3><p>Core interactions work on the device; supported records sync when an account is available. The home screen says plainly that progress lives on the device until you log in.</p></div>
+          <div class="dec"><span class="n">01</span><h3>Reduce is a route, not a failed quit.</h3><p>Reduction has its own targets, recorded days and reviews, so people who aren’t ready to quit aren’t pushed through a quit-only interface.</p></div>
+          <div class="dec"><span class="n">02</span><h3>A half-recorded day isn’t a clean day.</h3><p>Reviews separate confirmed days from incomplete or untracked ones, so the product doesn’t reward or punish data that isn’t there.</p></div>
+          <div class="dec"><span class="n">03</span><h3>Local first, synced when possible.</h3><p>Core interactions work on the device; supported records sync when an account exists. The home screen says plainly that progress lives on the device until you log in.</p></div>
         </div>
       </section>
 
-      <section class="hs__p" id="c-status" data-title="Status" aria-labelledby="p8">
-        <div class="pn-txt" style="width:min(30rem,34vw)"><span class="pn-k mono">Status and notes</span><h2 class="pn-h" id="p8">Where it stands.</h2>
-          <p class="pn-p"><b>A live prototype in active development.</b> Working: three journeys, check-ins, the craving toolkit, recovery milestones, savings goals, stage-based community circles. Being improved: dashboard personalisation, insight quality, accessibility and privacy UX.</p>
-          <p class="pn-p">Reclaim is a support tool, not medical treatment. The recovery timeline is general guidance and estimates. This page makes no claims about effectiveness or adoption. Screens use sample data. The source is private.</p>
-          <div class="pn-links"><a class="pn-pill pn-pill--solid" href="https://reclaim-app-tawny.vercel.app/" target="_blank" rel="noreferrer">View live prototype ↗</a><a class="pn-pill" href="https://github.com/sankalpvoid/reclaim-showcase" target="_blank" rel="noreferrer">Case-study repo ↗</a></div></div>
+      <section class="hs__p sn-end" id="c-next" data-title="Status and next" aria-labelledby="p8">
+        <div class="sn-end__in">
+          <span class="pn-k mono">Where it stands</span>
+          <h2 class="pn-h" id="p8">A live prototype, still in development.</h2>
+          <p class="pn-p">Working: three journeys, check-ins, the craving toolkit, recovery milestones, savings goals and community circles. Being improved: personalisation, insight quality, accessibility and privacy UX.</p>
+          <p class="pn-note">Reclaim is a support tool, not medical treatment, and the recovery timeline is general guidance. Screens use sample data; the source is private; nothing here claims effectiveness or adoption.</p>
+          <div class="sn-end__act"><a class="btn btn--solid" href="https://reclaim-app-tawny.vercel.app/" target="_blank" rel="noreferrer">View live prototype <span class="arr" aria-hidden="true">↗</span></a><a class="tlink" href="https://github.com/sankalpvoid/reclaim-showcase" target="_blank" rel="noreferrer">Case-study repo ↗</a></div>
+        </div>
+        <a class="sn-end__next" data-next-end href="/work/wealthwithsg/" style="--art:url(/assets/img/idx/wealthwithsg.jpg)"><span class="mono">Next project</span><b>WealthWithSG</b><i aria-hidden="true">→</i></a>
       </section>
-
-      <section class="hs__p" id="c-next" data-title="Next project" aria-label="Next project">
-        <a class="pn-next" data-next-end href="/work/wealthwithsg/" style="background-image:url(/assets/img/idx/wealthwithsg.jpg)">
-          <span class="mono">Next project · 02</span><b>WealthWithSG</b><span class="go">Open WealthWithSG <i aria-hidden="true">↗</i></span>
-        </a>
-      </section>
-
     </div></div>
   </section>
 </main>
@@ -158,7 +129,7 @@
   <p class="foot__fine"><span>© 2026 Sankalp Kushwaha</span><span>Reclaim screens: local prototype, sample data</span></p>
 </footer>
 
-<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/site.js" defer></script><script src="/assets/js/title-fx.js" defer></script>
 <script src="/assets/js/projects.js" defer></script>
 <script src="/assets/js/lens.js" defer></script>
 <script src="/assets/js/rail.js" defer></script>

@@ -99,3 +99,9 @@ html:not(.js) .qz{display:block}html:not(.js) .qz>li{width:auto;max-width:36rem;
 .hs.is-hs .qz{display:grid;grid-template-columns:repeat(2,minmax(0,22rem));gap:6px clamp(20px,3vw,48px);align-self:center}
 .hs.is-hs .qz>li{width:auto;padding:12px 0}
 .hs.is-hs #c-rules{gap:clamp(28px,5vw,80px)}
+
+/* the introduction is the exhibit: chapters live behind the slider, the stage takes the room */
+.seq__chapters{display:none}
+.seq__txt{width:min(20rem,24vw)}
+.seq__stage{max-height:min(74vh,700px)}
+.seq__cap p{min-height:6em}

@@ -15,9 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#191410">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/scenes.css">
 <link rel="stylesheet" href="/assets/css/story.css">
@@ -60,12 +58,8 @@
       <h1 id="t" class="t">Aure<i>ledger</i></h1>
       <p class="premise">Your money, read from your own mail.</p>
       <p class="lede">A private ledger that assembles itself from the bank, card and SIP alerts already in Gmail.</p>
-      <div class="actions">
-        <a class="btn btn--solid" href="https://aureledger.vercel.app/" target="_blank" rel="noreferrer">View live experience <span class="arr" aria-hidden="true">↗</span></a>
-        <a class="btn" href="https://aureledger.vercel.app/demo" target="_blank" rel="noreferrer">Try the demo <span class="arr" aria-hidden="true">↗</span></a>
-        <a class="btn" href="#story">Read the story <span aria-hidden="true">↓</span></a>
-      </div>
-      <p class="status mono">Working prototype · example data · private source</p>
+      <div class="actions"><a class="btn btn--solid" href="#story">Read the story <span aria-hidden="true">↓</span></a></div>
+      <p class="status mono">Working prototype · example data</p>
     </div>
     <div class="hero-ctl">
       <label for="note-split" class="mono">Paper <span aria-hidden="true">⟷</span> Lines</label>
@@ -104,28 +98,25 @@
         <ul class="qz" data-quiz><li data-ans="counts"><p class="quiz__q"><b>A card purchase</b><span>₹1,200 at a restaurant, on the credit card</span></p><div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div><p class="quiz__a" hidden><strong>Counts, on the day it happens.</strong> Cash only moves when the bill is paid, so card spending is shown as real spending whose bill is still to come.</p></li><li data-ans="no"><p class="quiz__q"><b>Paying the card bill</b><span>₹12,000 from the bank account</span></p><div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div><p class="quiz__a" hidden><strong>Doesn’t count.</strong> It settles purchases already counted. Counting it again would double the expense, so it is shown as a card bill paid.</p></li><li data-ans="no"><p class="quiz__q"><b>Moving money between your own accounts</b><span>₹20,000, savings to current</span></p><div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div><p class="quiz__a" hidden><strong>Doesn’t count.</strong> Own-account transfers, investments and income are not consumption.</p></li><li data-ans="no"><p class="quiz__q"><b>A reminder that a SIP is due in two days</b><span>₹5,000 instalment</span></p><div class="quiz__btns"><button type="button" data-guess="counts">Counts</button><button type="button" data-guess="no">Doesn’t count</button></div><p class="quiz__a" hidden><strong>Not yet.</strong> A scheduled SIP is a commitment, and it counts only once money has moved. The reminder, the bank debit and the allocation stay linked but each keeps its own amount, so 5,000 and 4,999.75 are shown as they are, not smoothed.</p></li></ul>
       </section>
 
-      <section class="hs__p sn-stack" id="c-decisions" data-title="Decisions" aria-labelledby="a3">
-        <div class="pn-txt" style="width:min(16rem,20vw)"><span class="pn-k mono">Three decisions</span><h2 class="pn-h" id="a3">What it refuses to guess.</h2></div>
+      <section class="hs__p sn-stack" id="c-decisions" data-title="What it refuses to guess" aria-labelledby="a3">
+        <div class="pn-txt"><span class="pn-k mono">Three decisions</span><h2 class="pn-h" id="a3">What it refuses to guess.</h2></div>
         <div class="pn-cols">
-          <div class="pn-col"><span class="n">01</span><h3>Say how old a number is.</h3><p>The balance is the last one observed, labelled with its date and “Not a live balance”. A card’s amount due is not card spending, and a fund contribution is not portfolio value. Partial months are drawn hollow, and months before the ledger began are left out rather than shown as zero.</p></div>
-          <div class="pn-col"><span class="n">02</span><h3>One scale for every category.</h3><p>The graph uses a single shared scale, so a taller curve always means a larger amount. Categories are never rescaled to fill the space. With fewer than five categories, only the real ones are drawn.</p></div>
-          <div class="pn-col"><span class="n">03</span><h3>Fixed parsers, not an LLM.</h3><p>The alert formats are known and fixed, so each has a deterministic parser. Nothing is sent to an AI provider and results are reproducible. A message that doesn’t match is marked unreadable and put in front of you for review.</p></div>
+          <div class="pn-col"><span class="n">01</span><h3>Say how old a number is.</h3><p>The balance is the last one observed, labelled with its date and “Not a live balance”. Partial months are drawn hollow; months before the ledger began are left out rather than shown as zero.</p></div>
+          <div class="pn-col"><span class="n">02</span><h3>One scale for every category.</h3><p>A single shared scale, so a taller curve always means a larger amount. With fewer than five categories, only the real ones are drawn.</p></div>
+          <div class="pn-col"><span class="n">03</span><h3>Fixed parsers, not an LLM.</h3><p>The alert formats are known, so each has a deterministic parser. Nothing goes to an AI provider; a message that doesn’t match is marked unreadable and put in front of you.</p></div>
         </div>
       </section>
 
-      <section class="hs__p" id="c-status" data-title="Status" aria-labelledby="a4">
-        <div class="pn-txt" style="width:min(32rem,36vw)"><span class="pn-k mono">Status</span><h2 class="pn-h" id="a4">Where it stands.</h2>
-          <p class="pn-p"><b>Concept, design and build.</b> The introduction and a synthetic demo are public; the private workspace sits behind Google sign-in with per-user row-level security on Postgres. At the last release report (26 Oct) there were 170 tests, scrolling the intro forward and in reverse gave identical frames, and reduced motion, WebGL off and JavaScript off each get a static version of the same story.</p>
-          <p class="pn-p"><b>Not verified.</b> That report lists a real GPU, Safari, Firefox, physical phones, screen readers, and Google sign-in with Gmail sync end to end as not tested. The introduction is built with Three.js and this page shows captures of it, not the live scene. The source is private and every figure here is example data.</p>
-          <div class="pn-links"><a class="pn-pill pn-pill--solid" href="https://aureledger.vercel.app/" target="_blank" rel="noreferrer">View live experience ↗</a><a class="pn-pill" href="https://aureledger.vercel.app/demo" target="_blank" rel="noreferrer">Try the demo ↗</a></div></div>
+      <section class="hs__p sn-end" id="c-next" data-title="Status and next" aria-labelledby="a4">
+        <div class="sn-end__in">
+          <span class="pn-k mono">Where it stands</span>
+          <h2 class="pn-h" id="a4">A working prototype, with example data.</h2>
+          <p class="pn-p">The introduction and a synthetic demo are public; the private workspace sits behind Google sign-in with per-user row-level security on Postgres. At the last release report (26 Oct): 170 tests, identical frames scrolling the intro forward and in reverse, and static versions for reduced motion, WebGL off and JavaScript off.</p>
+          <p class="pn-note">Not tested, per that report: a real GPU, Safari, Firefox, physical phones, screen readers and Google sign-in with Gmail sync end to end. The intro is built with Three.js and this page shows captures, not the live scene. The source is private; every figure is example data.</p>
+          <div class="sn-end__act"><a class="btn btn--solid" href="https://aureledger.vercel.app/" target="_blank" rel="noreferrer">View live experience <span class="arr" aria-hidden="true">↗</span></a><a class="tlink" href="https://aureledger.vercel.app/demo" target="_blank" rel="noreferrer">Try the demo ↗</a></div>
+        </div>
+        <a class="sn-end__next" data-next-end href="/work/kaal/" style="--art:url(/assets/img/idx/kaal.jpg)"><span class="mono">Next project</span><b>Kaal</b><i aria-hidden="true">→</i></a>
       </section>
-
-      <section class="hs__p" id="c-next" data-title="Next project" aria-label="Next project">
-        <a class="pn-next" data-next-end href="/work/kaal/" style="background-image:url(/assets/img/idx/kaal.jpg)">
-          <span class="mono">Next project · 05</span><b>Kaal</b><span class="go">Open Kaal <i aria-hidden="true">↗</i></span>
-        </a>
-      </section>
-
     </div></div>
   </section>
 </main>
@@ -136,7 +127,7 @@
   <p class="foot__fine"><span>© 2026 Sankalp Kushwaha</span><span>Aureledger screens: example data, issuer names redacted</span></p>
 </footer>
 
-<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/site.js" defer></script><script src="/assets/js/title-fx.js" defer></script>
 <script src="/assets/js/scenes.js" defer></script>
 <script src="/assets/js/projects.js" defer></script>
 <script src="/assets/js/lens.js" defer></script>

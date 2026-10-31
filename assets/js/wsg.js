@@ -35,3 +35,20 @@
     hero.addEventListener('pointerleave', () => { if (touched) { chart.play(1, 1200); setTimeout(() => show(1), 1250); } });
   }
 })();
+
+/* Story stage: the same illustrative chart, scrubbed by the story's own progress (noise at the start, structure at the end). */
+(() => {
+  const panel = document.querySelector('[data-wsg-stage]');
+  const env = panel && panel.querySelector('[data-chart-env]');
+  if (!env || !window.SV || !window.HS) return;
+  const chart = window.SV.chart(env, { start: 0 });
+  const k = panel.querySelector('[data-wsg-k]'), t = panel.querySelector('[data-wsg-t]');
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const COPY = [['Frame 03 · Conflict', 'Up close, noise and information look exactly alike.'], ['Frame 04 · Breakdown', 'Strip the noise away and structure is what remains.']];
+  let cur = -1;
+  HS.on(panel, (p) => {
+    chart.stop(); chart.set(clamp((p - 0.12) / 0.7));
+    const i = p < 0.45 ? 0 : 1;
+    if (i !== cur) { cur = i; k.textContent = COPY[i][0]; t.textContent = COPY[i][1]; }
+  });
+})();

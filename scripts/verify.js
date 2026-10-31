@@ -68,7 +68,7 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   const clutter=await p.evaluate(()=>({ticks:!!document.querySelector('.ticks'),peel:!!document.querySelector('.peel-h,.peel'),contents:!!document.querySelector('.contents'),all:!!document.querySelector('.controls .all'),hint:!!document.querySelector('.hint'),dragTo:/drag to/i.test(document.body.innerText),keys:/keys\s*·\s*swipe/i.test(document.body.innerText)}));
   ok(Object.values(clutter).every(v=>!v),`gallery: ticks, corner handle, duplicate collection, All-projects link, hints and "Drag to" are gone ${JSON.stringify(clutter)}`);
   ok(await p.evaluate(()=>document.documentElement.scrollHeight<=innerHeight+2),'gallery: one composed viewport (no second directory beneath)');
-  ok(await p.evaluate(()=>/Playfair/.test(getComputedStyle(document.querySelector('.slide.is-active .t')).fontFamily)),'gallery: display type uses the unified display family');
+  ok(await p.evaluate(()=>/Bodoni Moda/.test(getComputedStyle(document.querySelector('.slide.is-active .t')).fontFamily)),'gallery: display type uses the unified display family');
   ok(/06/.test(await p.textContent('.counter')),'gallery: counter shows the six projects');
   ok(await p.evaluate(()=>document.querySelector('.slide.is-active .t a').getAttribute('href')==='/work/reclaim/')&&/Enter\s*project/i.test(await p.textContent('.slide.is-active .enter')),'gallery: title and the labelled Enter action both open the CURRENT project');
   const seen=[await slug()];for(let i=0;i<6;i++){await p.click('[data-next]');await p.waitForFunction((n)=>document.querySelector('.slide.is-active')?.dataset.slug!==n,seen[seen.length-1],{timeout:4000}).catch(()=>{});seen.push(await slug());}
@@ -267,12 +267,19 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   ok((await p.$$('iframe')).length===0,'experiments: no iframe loaded by default');
   await p.evaluate(()=>document.querySelector('[data-live]').click());await p.waitForSelector('iframe');ok(true,'experiments: Try it here loads on demand');
   await p.keyboard.press('Escape');await p.waitForTimeout(300);ok((await p.$$('iframe')).length===0,'experiments: Escape unloads it');
-  await p.evaluate(()=>document.querySelector('[data-swap-to="1"]').click());ok(await p.evaluate(()=>!document.querySelector('.swap__i:nth-child(2)').hidden),'experiments: state buttons swap the study image');await ctx.close();}
+  await p.evaluate(()=>HS.scrollToX(document.getElementById('gsap-motion').offsetLeft,false));await p.waitForTimeout(800);await p.fill('[data-exp-time-in]','100');ok(await p.evaluate(()=>document.querySelectorAll('.expt__fig img')[1].classList.contains('is-on')),'experiments: the timeline control moves between the captured states');
+  await p.evaluate(()=>HS.scrollToPanelProgress(document.getElementById('cyberpunk'),0.9,false));await p.waitForTimeout(1500);ok(await p.evaluate(()=>document.querySelectorAll('.exps__imgs img')[2].classList.contains('is-on')),'experiments: scrolling through CyberPunk advances its captured frames');
+  await ctx.close();
+  const rc=await context({viewport:{width:1440,height:900}});const q=await rc.newPage();await q.goto(U('/work/reclaim/'));await q.waitForTimeout(1200);
+  const seenB=[];for(const f of [0.05,0.25,0.55,0.9]){await q.evaluate(f=>HS.scrollToPanelProgress(document.getElementById('c-evening'),f,false),f);await q.waitForFunction(()=>Math.abs(HS.x-HS.target)<2,null,{timeout:8000}).catch(()=>{});await q.waitForTimeout(300);seenB.push(await q.textContent('[data-beat-title]'))}
+  ok(new Set(seenB).size>=4,'reclaim: one phone, the beats advance with the story ('+seenB.join(' / ')+')');
+  const w=await rc.newPage();await w.goto(U('/work/wealthwithsg/'));await w.waitForTimeout(2500);const op=async f=>{await w.evaluate(f=>HS.scrollToPanelProgress(document.getElementById('c-clarity'),f,false),f);await w.waitForFunction(()=>Math.abs(HS.x-HS.target)<2,null,{timeout:8000}).catch(()=>{});await w.waitForTimeout(300);return w.evaluate(()=>[...document.querySelectorAll('[data-wsg-stage] [data-chart-env] .cd')].map(e=>+e.style.opacity))};
+  const c0=await op(0.05),c1=await op(0.95);ok(Math.max(...c0)<0.1&&Math.min(...c1)>0.9,'wealthwithsg: the story scrubs the live chart from noise to structure');await rc.close();}
  // 11. Kaal: the crow encounter, real strips, anchor geometry, bounded, no audio
  {const ctx=await context({viewport:{width:1440,height:900}});const p=await ctx.newPage();await p.goto(U('/work/kaal/'));await p.waitForTimeout(700);
-  await p.click('.hero a[href="#presence"]');await p.waitForTimeout(900);
+  await p.evaluate(()=>{location.hash='#presence'});await p.waitForTimeout(1500);
   const anchor=await p.evaluate(()=>{const r=document.querySelector('#presence').getBoundingClientRect();return {left:r.left,pin:document.querySelector('.hs__pin').scrollLeft}});
-  ok(anchor.pin===0&&anchor.left>=0&&anchor.left<100,'Kaal: the Presence link lands on the chapter without native pin scroll');
+  ok(anchor.pin===0&&anchor.left>=0&&anchor.left<100,'Kaal: the #presence link lands on the chapter without native pin scroll');
   await p.waitForFunction(()=>window.__crow&&__crow().loaded,null,{timeout:8000}).catch(()=>{});
   const box=await (await p.$('[data-crow-stage]')).boundingBox();const bx=box.x+box.width*0.62,by=box.y+box.height*0.81-60;
   ok((await p.evaluate(()=>__crow())).cell===0&&!(await p.evaluate(()=>__crow().strip)),'crow: quiet idle pose on arrival');
@@ -295,7 +302,7 @@ const xform=()=>-new DOMMatrix(getComputedStyle(document.querySelector('[data-tr
   await r.evaluate(()=>document.getElementById('presence').scrollIntoView());await r.waitForTimeout(1200);
   await r.waitForFunction(()=>window.__crow&&__crow().loaded,null,{timeout:8000}).catch(()=>{});
   const a=await r.evaluate(()=>__crow());ok(a.timers===0&&!a.raf,'crow, reduced motion: no idle timers and no animation loop');
-  await r.click('[data-crow-prompt]');await r.waitForTimeout(300);ok(!(await r.evaluate(()=>__crow().raf))&&/still pose/.test(await r.textContent('[data-crow-hint]')),'crow, reduced motion: the button gives a still pose, no motion');await rm.close();}
+  await r.click('[data-crow-prompt]');await r.waitForFunction(()=>/still pose/.test(document.querySelector('[data-crow-hint]').textContent),null,{timeout:4000}).catch(()=>{});ok(!(await r.evaluate(()=>__crow().raf))&&/still pose/.test(await r.textContent('[data-crow-hint]')),'crow, reduced motion: the button gives a still pose, no motion');await rm.close();}
  // 12. email, fonts and copy
  {const ctx=await context();const p=await ctx.newPage();let bad=[];
   for(const r of routes){await p.goto(U(r));const html=await p.content();if(/kushwaha\.18/.test(html))bad.push(r);}

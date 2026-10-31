@@ -57,3 +57,13 @@ html:not(.js) .wf,html:not(.js) .we{display:block}
 html:not(.js) .wf figure,html:not(.js) .we figure{width:auto;max-width:560px;margin:0 0 26px}
 html:not(.js) .we .w1 .media,html:not(.js) .we .w2 .media{width:100%}
 html:not(.js) .we .ph .media{height:auto;width:min(60%,240px)}
+
+/* ---- clarity stage: a live chart whose noise is driven by the story's own progress ---- */
+.wsgs{position:relative;width:100%;height:100%;margin:calc(-1 * clamp(88px,13vh,124px)) calc(-1 * clamp(36px,5vw,96px)) 0;height:calc(100% + clamp(88px,13vh,124px) + clamp(76px,11vh,104px));width:calc(100% + 2 * clamp(36px,5vw,96px));margin-bottom:calc(-1 * clamp(76px,11vh,104px))}
+.wsgs__bg{position:absolute;inset:0}
+.wsgs__txt{position:absolute;left:clamp(40px,6vw,110px);bottom:clamp(100px,16vh,170px);max-width:min(46rem,58%);z-index:2}
+.wsgs__txt .pn-big{min-height:3.9em}
+.wsgs__tag{position:absolute;right:clamp(28px,4vw,64px);top:clamp(96px,14vh,130px);margin:0;opacity:.62}
+.wsgs-static li{display:grid;gap:10px;max-width:560px}.wsgs-static img{width:100%;height:auto;border:1px solid var(--hs-rule)}
+.wsgs-static p{font-family:var(--hs-font);font-size:1.5rem;line-height:1.1;margin:0}
+.wsgs__bg .shade{background:linear-gradient(90deg,rgba(8,9,11,.9) 0%,rgba(8,9,11,.62) 42%,rgba(8,9,11,.05) 78%),linear-gradient(0deg,rgba(8,9,11,.7),transparent 40%)!important}

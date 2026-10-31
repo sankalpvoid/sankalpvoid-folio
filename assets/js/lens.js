@@ -149,6 +149,19 @@
     location.href = href;
   };
 
+  /* Entry: the destination's artwork opens as a circular reveal from the pointer, at full-bleed scale (no zoom), and the next page begins on that
+     same full frame (arrive.js) and simply fades into the hero. */
+  let irisEl = null;
+  const iris = (art, x, y, ms = 760) => new Promise((res) => {
+    if (irisEl) irisEl.remove();
+    irisEl = document.createElement('div'); irisEl.className = 'iris'; irisEl.setAttribute('aria-hidden', 'true');
+    irisEl.style.backgroundImage = `url(${art})`; document.body.appendChild(irisEl);
+    const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 4;
+    const a = irisEl.animate([{ clipPath: `circle(0px at ${x}px ${y}px)` }, { clipPath: `circle(${r}px at ${x}px ${y}px)` }], { duration: ms, easing: 'cubic-bezier(.65,0,.2,1)', fill: 'forwards' });
+    a.onfinish = () => res(); a.oncancel = () => res();
+  });
+  const clearIris = () => { if (irisEl) { irisEl.remove(); irisEl = null; } };
+
   /* A gesture: hold on the artwork. begin() shows feedback at once; progress follows the hold; release returns; completion navigates. */
   const hold = (o) => {
     if (busy) return null;
@@ -168,10 +181,10 @@
       busy = true; alive = false;
       await opened;
       if (!running) { busy = false; return; }
-      await Promise.all([to('z', 1, 520), to('s', 0, 520)]);
+      await Promise.all([iris(o.art, o.x, o.y), to('s', 0, 520)]);
       await Promise.race([prep, new Promise((r) => setTimeout(r, 1200))]);
       handOff(o.href, o.art, o.x, o.y);
-      setTimeout(() => { busy = false; close(); }, 3000);   /* if navigation is blocked the visitor is released */
+      setTimeout(() => { busy = false; close(); clearIris(); }, 3000);   /* if navigation is blocked the visitor is released */
     };
     return {
       move(x, y) { const r = mode === 'fixed' ? { left: 0, top: 0, width: innerWidth, height: innerHeight } : host.getBoundingClientRect(); st.tx = clamp((x - r.left) / r.width); st.ty = clamp((y - r.top) / r.height); },
@@ -186,16 +199,14 @@
     busy = true;
     if (reduce()) { location.href = o.href; setTimeout(() => { busy = false; }, 2000); return true; }
     const prep = prepare(o.href, 2500);
-    const ok = await open({ art: o.art, mode: o.mode, host: o.host, x: o.x, y: o.y });
-    if (!ok || !running) { busy = false; location.href = o.href; return true; }
-    await to('s', 1, 460);
-    await Promise.all([to('z', 1, 520), to('s', 0, 520)]);
+    await load(o.art);
+    await iris(o.art, o.x ?? innerWidth / 2, o.y ?? innerHeight / 2);
     await Promise.race([prep, new Promise((r) => setTimeout(r, 1200))]);
     handOff(o.href, o.art, o.x ?? innerWidth / 2, o.y ?? innerHeight / 2);
-    setTimeout(() => { busy = false; close(); }, 3000);
+    setTimeout(() => { busy = false; clearIris(); }, 3000);
     return true;
   };
 
-  addEventListener('pageshow', () => { busy = false; close(); });
+  addEventListener('pageshow', () => { busy = false; close(); clearIris(); });
   window.SVLens = { hold, go, preload: load, HOLD_MS, get busy() { return busy; }, supported: () => initGL() };
 })();
